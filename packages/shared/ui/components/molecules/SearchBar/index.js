@@ -1,21 +1,21 @@
-import Button from '@/components/atoms/Button';
-import TextInput from '@/components/atoms/TextInput';
-import { setSearchValue } from '@/store/example/actions';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import Button from "ui/components/atoms/Button";
+import TextInput from "ui/components/atoms/TextInput";
+import { setSearchValue } from "@/store/example/actions";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 const SearchBar = () => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   const dispatch = useDispatch();
 
   const handleOnSubmit = () => {
-    console.log('onSUBMIT', search);
+    console.log("onSUBMIT", search);
     dispatch(setSearchValue(search));
   };
 
   const handleOnChange = (v) => {
-    console.log('ONCHANGE', v.target.value);
+    console.log("ONCHANGE", v.target.value);
     setSearch(v.target.value);
   };
 
