@@ -1,18 +1,26 @@
-import {SearchBar} from 'ui';
-import {Navbar} from 'ui';
-import {Layout} from 'ui';
 import { useSelector } from 'react-redux';
+import { Button } from 'ui/components/atoms';
+// import * as Atoms from 'ui';
+// import * as Molecules from 'ui';
+// import * as Organisms from 'ui';
+// import * as Templates from 'ui';
+import Layout from 'ui/components/templates/Layout';
 
 export default function Home() {
   const { searchValue } = useSelector((state) => state.example);
 
   return (
-    <main className={`flex min-h-screen flex-col`}>
+    <>
       <Layout>
-        <div className="flex flex-1 items-center justify-center text-center h-full">
-          <div className=" text-8xl my-auto">{searchValue ? searchValue : 'The Boilerplate'}</div>
+        <div className="flex flex-col justify-center items-center gap-4">
+          <div className=" text-8xl my-auto font-bold text-slate-900">
+            {searchValue ? searchValue : 'The Boilerplate'}
+          </div>
+          <Button>Test</Button>
         </div>
+        {/* <Templates.Button>clik me</Templates.Button>
+          <Button>Login</Button> */}
       </Layout>
-    </main>
+    </>
   );
 }
