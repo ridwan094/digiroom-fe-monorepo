@@ -9,9 +9,30 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      screens: {
+        xs: '320px',
+        desktop: '1440px',
+        'min-desktop': { min: '768px' },
+        'md-max-w': { max: '767px' },
+        'md-min-max-w': { max: '820px', min: '768px' },
+        'wider-screen': '1600px',
+      },
+      colors: {
+        hyperLink: '#036EBC',
+        shadeRed: '#B50A0F',
+        supportiveRed: '#CE181E',
+        white: '#FFFEFE',
+        reliableBlack3: '#F8F8F8',
+        reliableBlack5: '#F4F4F4',
+        reliableBlack310: '#E9E9E9',
+        reliableBlack20: '#D3D2D2',
+        reliableBlack30: '#BDBCBC',
+        reliableBlack50: '#918F8F',
+        reliableBlack60: '#7B7979',
+        reliableBlack70: '#656263',
+        reliableBlack80: '#4F4C4D',
+        reliableBlack90: '#393536',
+        reliableBlack: '#231F20',
       },
     },
   },
