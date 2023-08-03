@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useState } from "react";
-import { FaPlus, FaMinus } from "react-icons/fa";
+import { MdAdd, MdRemove } from "react-icons/md";
 
 const Accordion = ({ data }) => {
 	const [activeIndex, setActiveIndex] = useState(null);
@@ -30,15 +30,19 @@ const Accordion = ({ data }) => {
 			}}
 		>
 			<div className="flex justify-between items-center">
-				<p className="text-xl font-medium text-reliableBlack">
+				<p className="text-xs font-medium text-reliableBlack">
 					{item.title}
 				</p>
 
-				{activeIndex === index ? <FaMinus /> : <FaPlus />}
+				{activeIndex === index ? (
+					<MdRemove size={24} />
+				) : (
+					<MdAdd size={24} />
+				)}
 			</div>
 
 			<p
-				className={`text-start h-0 overflow-hidden transition-all duration-300 ${
+				className={`text-start text-xs leading-relaxed h-0 overflow-hidden transition-all duration-300 ${
 					activeIndex === index && "h-auto overflow-auto mt-4"
 				}`}
 				ref={accordionContent}
