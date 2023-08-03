@@ -23,6 +23,7 @@
   "dependencies": {
     "@splidejs/react-splide": "^0.7.12",
     "next-transpile-modules": "^10.0.1",
+    "react-icons": "^4.10.1",
     "turbo": "^1.10.12"
   }
 }
