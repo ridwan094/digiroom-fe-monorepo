@@ -1,4 +1,7 @@
 // export the components
+export { default as Article } from "./Article";
+export { default as ButtonConfirm } from "./ButtonConfirm";
+export { default as ButtonInquiry } from "./ButtonInquiry";
 export { default as Button } from "./Button";
 export { default as Dropdown } from "./Dropdown";
 export { default as Input } from "./Input";
