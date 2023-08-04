@@ -8,6 +8,9 @@ module.exports = {
     '../../packages/shared/ui/components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    container: {
+      center: true,
+    },
     extend: {
       screens: {
         xs: '320px',
