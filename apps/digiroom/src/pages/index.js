@@ -67,7 +67,6 @@ export default function Home() {
 
         {/* Promo section */}
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 mt-8">Card Promo</h2>
           <div className="grid grid-cols-2">
             <CardPromo
               title="Cicilan Ringan Toyota Raize"
@@ -113,7 +112,7 @@ export default function Home() {
         <section className="mb-8">
           <div className="container">
             <h2 className="text-base font-bold uppercase mb-4">Informasi Promo Toyota</h2>
-            <p>
+            <p className="leading-relaxed">
               Selamat datang di dealer dan bengkel Toyota cabang resmi Auto2000. Tersedia beragam
               kebutuhan Toyota di dealer dan bengkel Toyota meliputi layanan purna jual seperti
               servis mobil dan penjualan part Toyota. Pilih berbagai tipe maupun varian mobil baru
