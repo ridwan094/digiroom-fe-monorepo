@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import constants from "@/constants";
-import { AskCsIcon, BtnContactUs, CarIcon, GeoPosition, Input, NavHomeIcon, NavLogo, ServiceCarIcon } from "../../atoms";
+import { AskCsIcon, BtnContactUs, CarIcon, Dropdown, GeoPosition, Input, NavHomeIcon, NavLogo, ServiceCarIcon } from "../../atoms";
 import { MdOutlineCall, MdOutlineShoppingCart, MdPersonOutline, MdSearch } from "react-icons/md";
 
 const Navbar = () => {
@@ -51,12 +51,8 @@ const Navbar = () => {
             >
               <MdOutlineShoppingCart />
             </a>
-            <a
-              className="flex justify-center items-center gap-1 text-reliableBlack px-5 hover:text-reliableBlack70"
-              href="#"
-            >
-              <img src="/images/usflag.png" alt="en-us" style={{ height: "14px" }} />
-            </a>
+            <Dropdown icon={<img src="/images/usflag.png" alt="en-us" style={{ height: "14px" }} />}  options={[<img src="/images/idflag.png" alt="en-us" style={{ height: "14px" }} />]} size="auto"/>
+       
           </div>
         </div>
       </div>
