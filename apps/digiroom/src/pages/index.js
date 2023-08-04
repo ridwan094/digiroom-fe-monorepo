@@ -16,7 +16,7 @@ export default function Home() {
 
   const handleChange = (e) => {
     const newValue = e.target.value;
-    setInputValues(newValue); // Update nilai input menggunakan state
+    setInputValues(newValue);
     console.log(inputValues);
   };
 
@@ -24,7 +24,7 @@ export default function Home() {
     <>
       <Layout>
         <div className="flex flex-col justify-center items-center gap-4">
-          
+            <TabBarPromo/>
           <div className=" text-4xl md:text-8xl my-auto font-bold text-slate-900">
             {searchValue ? searchValue : 'The Boilerplate'}
           </div>
