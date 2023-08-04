@@ -10,6 +10,8 @@ import { useState } from 'react';
 import Layout from 'ui/components/templates/Layout';
 import { FiArrowRight } from 'react-icons/fi';
 import Text from 'ui/components/atoms/Text';
+import { FormGroup } from 'ui/components/atoms';
+import { OtherPromo } from 'ui/components/molecules';
 
 const MOCK_DATA_ARTICLE = `
 <div style="background-color: red; margin: auto; width: 70%">
@@ -22,151 +24,86 @@ const MOCK_DATA_ARTICLE = `
 </div>
 `;
 
-import { Article, Input } from 'ui/components/atoms';
+import { Article } from 'ui/components/atoms';
+import { InquiryForm } from 'ui/components/molecules';
 
 export default function Home() {
-  const [inputValues, setInputValues] = useState('');
-  const [inputValuesNumber, setInputValuesNumber] = useState('');
-  const [inputValuesEmail, setInputValuesEmail] = useState('');
-  const [selectedOption, setSelectedOption] = useState('');
   const { searchValue } = useSelector((state) => state.example);
+  const [modalForm, setModalForm] = useState(false);
 
-  const handleChange = (e) => {
-    const newValue = e.target.value;
-    setInputValues(newValue); // Update nilai input menggunakan state
-    console.log(inputValues);
+  const handleInquiry = () => {
+    setModalForm(!modalForm);
   };
 
-  const handleChangeNumber = (e) => {
-    const newValue = e.target.value;
-    setInputValuesNumber(newValue); // Update nilai input menggunakan state
-    console.log(inputValues);
+  const handleSubmit = (value) => {
+    console.log('VALUE =>', value);
+    setModalForm(!modalForm);
   };
 
-  const handleChangeEmail = (e) => {
-    const newValue = e.target.value;
-    setInputValuesEmail(newValue); // Update nilai input menggunakan state
-    console.log(inputValues);
-  };
+  function generateSlides(length = 10, sig = 0) {
+    return Array.from({ length }).map((value, index) => {
+      index = sig || index;
 
-  const handleOptionSelect = (option) => {
-    setSelectedOption(option);
-  };
+      return {
+        src: `https://source.unsplash.com/random/800x450?sig=${index}`,
+        alt: `Image ${index + 1}`,
+      };
+    });
+  }
 
   return (
     <>
       <Layout>
         <div className="flex flex-col justify-center items-center gap-4">
+          {/* Article */}
           <Article data={MOCK_DATA_ARTICLE} />
 
-          {/* <div className=" text-8xl my-auto font-bold text-slate-900"> */}
-          {/* {searchValue ? searchValue : 'The Boilerplate'} */}
-
-          {/* <p className="text-black">TEXT INPUT</p>
-          <Input
-            type="text"
-            labelClassName="text-black font-semibold p-4"
-            onChange={handleChange}
-            value={inputValues}
-            label="Full Name"
-            placeholder="First Name, Last Name"
-            inputClassName="text-black bg-whiteRealible8 h-20"
-            size="large"
-            containerClassName="w-full"
+          {/* Other Promo */}
+          <OtherPromo
+            perPage={2.2}
+            arrows={false}
+            type="loop"
+            pagination={true}
+            items={generateSlides()}
           />
 
-          <p className="text-black">TEXT INPUT NUMBER</p>
-          <Input
-            type="text"
-            labelClassName="text-black font-semibold p-4"
-            onChange={handleChangeNumber}
-            value={inputValuesNumber}
-            label="Phone"
-            onKeyPress={(event) => {
-              if (!/[0-9]/.test(event.key)) {
-                event.preventDefault();
-              }
-            }}
-            placeholder="+62 XXX-XXX-XXX"
-            inputClassName="text-black whiteRealible8 h-20"
-            size="large"
-            containerClassName="w-full"
-          />
-
-          <p className="text-black">TEXT INPUT EMAIL</p>
-          <Input
-            type="email"
-            labelClassName="text-black font-semibold p-4"
-            onChange={handleChangeEmail}
-            value={inputValuesEmail}
-            label="Email"
-            placeholder="Email@abc.com"
-            inputClassName="text-black bg-whiteRealible8 h-20"
-            size="large"
-            containerClassName="w-full"
-          /> */}
-
-          {/* <p className="text-black">ARTICLE</p>
-          <Article data={MOCK_DATA_ARTICLE} />
-
-          <p className="text-black">Disabled</p>
-          <ButtonConfirm
-            block={true}
-            className="bg-reliableBlack10"
-            size="large"
-            variant={true}
-            iconType="icon"
-            disabled={true}
-          >
-            <div className="flex justify-end items-center gap-x-2">
-              <Text.Head4>SUBMIT</Text.Head4>
-              <FiArrowRight size={20} />
-            </div>
-          </ButtonConfirm>
-
-          <p className="text-black">Disabled False</p>
-          <ButtonConfirm
-            block={true}
-            className="bg-redPrimary"
-            size="large"
-            variant={true}
-            iconType="icon"
-          >
-            <div className="flex justify-end items-center gap-x-2">
-              <Text.Head4>SUBMIT</Text.Head4>
-              <FiArrowRight size={20} />
-            </div>
-          </ButtonConfirm>
-
-          <p className="text-black">Button Inquiry</p>
+          {/* Button Inquiry */}
           <ButtonInquiry
-            block={true}
-            className="bg-redPrimary"
-            size="large"
-            variant={true}
-            iconType="icon"
-          >
-            <div className="flex justify-end items-center gap-x-2">
-              <Text.Head4>INQUIRY</Text.Head4>
-              <FiArrowRight size={20} />
-            </div>
-          </ButtonInquiry> */}
-          {/* </div> */}
-          {/* <ButtonInquiry
             block={true}
             className="bg-supportiveRed"
             size="large"
             variant={true}
             iconType="icon"
+            onClick={handleInquiry}
           >
             <div className="flex justify-end items-center gap-x-2">
               <Text.Head4>INQUIRY</Text.Head4>
               <FiArrowRight size={20} />
             </div>
-          </ButtonInquiry> */}
+          </ButtonInquiry>
         </div>
-        {/* <Templates.Button>clik me</Templates.Button>
-          <Button>Login</Button> */}
+
+        {/* Modal */}
+        {modalForm ? (
+          <div
+            class="z-40 fixed top-0 left-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+            id="exampleModalScrollable"
+            tabindex="-1"
+            aria-labelledby="exampleModalScrollableLabel"
+            aria-hidden="true"
+          >
+            <div class="sm:h-[calc(100%-3rem)] max-w-lg my-6 mx-auto relative w-auto pointer-events-none ">
+              <div class="max-h-full overflow-hidden border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                <FormGroup title="INQUIRY" onClose={handleInquiry} colorCloseIcons="bg-black" />
+                <div class="flex-auto overflow-y-auto relative">
+                  <InquiryForm onSubmit={handleSubmit} />
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null}
+
+        {/* Notification Success */}
       </Layout>
     </>
   );
