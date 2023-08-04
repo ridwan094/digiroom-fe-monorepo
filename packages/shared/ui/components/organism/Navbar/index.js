@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import constants from "@/constants";
 import { AskCsIcon, BtnContactUs, CarIcon, GeoPosition, Input, NavHomeIcon, NavLogo, ServiceCarIcon } from "../../atoms";
-import { MdOutlineCall, MdOutlineShoppingCart, MdPersonOutline } from "react-icons/md";
+import { MdOutlineCall, MdOutlineShoppingCart, MdPersonOutline, MdSearch } from "react-icons/md";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -124,6 +124,8 @@ const Navbar = () => {
 
           <Input
             type="text"
+            icon={<MdSearch size={24} />}
+            iconPosition="right"
             labelClassName="text-reliableBlack70 font-semibold"
             onChange={handleChange}
             value={inputValues}

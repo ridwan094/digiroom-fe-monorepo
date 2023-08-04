@@ -4,6 +4,7 @@ const Input = ({
   type,
   error,
   icon,
+  iconPosition,
   focus,
   value,
   containerClassName,
@@ -35,7 +36,7 @@ const Input = ({
         {label && <label className={labelClassName}>{label}</label>}
 
         {/* -- icon --- */}
-        {icon && <div className="absolute inset-y-0 left-0 flex items-center">{icon}</div>}
+        {icon && <div className={`absolute inset-y-0 ${iconPosition === 'right' ? 'right-0' : 'left-0'} flex items-center`}>{icon}</div>}
 
         {/* --- input --- */}
         <div className={formatText ? `flex items-center gap-2` : ``}>
@@ -44,7 +45,7 @@ const Input = ({
             type={type}
             value={value}
             disabled={disabled}
-            className={`${inputClassName} ${dafaultStyling} ${sizeClassName[size]} ${icon ? "pl-11" : "pl-4"} ${
+            className={`${inputClassName} ${dafaultStyling} ${sizeClassName[size]} ${iconPosition === 'left' ? "pl-11" : "pl-4"} ${
               danger && "!border-supportiveRed"
             } ${error && "!border-shadeRed"} focus:${focus || "border-reliableBlack5"}`}
             {...register}
