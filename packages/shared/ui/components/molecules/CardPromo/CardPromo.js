@@ -6,16 +6,16 @@ const CardPromo = ({ title, coverImg, startDate, endDate, tag }) => {
 			{/* Tag */}
 			<div className={`${!tag && "pb-8"}`}>{tag}</div>
 
-			<div className="p-2">
+			<div className="p-2 lg:px-[10px] lg:pb-[10px]">
 				<img
 					className="w-full object-cover mb-[10px]"
 					src={coverImg}
 					alt="Auto2000 promo image"
 				/>
-				<p className="text-xs font-medium text-reliableBlack mb-6">
+				<p className="text-xs font-medium text-reliableBlack mb-6 lg:text-base">
 					{title}
 				</p>
-				<p className="text-xs text-reliableBlack70">
+				<p className="text-xs text-reliableBlack70 lg:text-base">
 					<span>{startDate}</span>
 					<span> - </span>
 					<span>{endDate}</span>
