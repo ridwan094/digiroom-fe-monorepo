@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import Layout from 'ui/components/templates/Layout';
 import { Button, Dropdown, Input, Tag, Accordion } from 'ui/components/atoms';
-import { CardPromo } from 'ui/components/molecules';
+import { CardPromo, QuickLink } from 'ui/components/molecules';
 
 const options = ['Option 1', 'Option 2', 'Option 3'];
 
@@ -60,6 +60,7 @@ export default function Home() {
   return (
     <>
       <Layout>
+        <QuickLink/>
         <div className="flex flex-col justify-center items-center gap-4">
           <div className=" text-4xl md:text-8xl my-auto font-bold text-slate-900">
             {searchValue ? searchValue : 'The Boilerplate'}
