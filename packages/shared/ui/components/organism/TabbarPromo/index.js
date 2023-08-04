@@ -11,58 +11,112 @@ const TabBarPromo = () => {
         {
           title : 'ALL',
           content : 
-          <div>
-            Photo Please
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
-              <Card className="mb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <Card className="mb-4 transition-all ease-in-out duration-300 hover:scale-105">
                 {/* Title*/}
-                <h2 className="text-xl font-bold mb-2">Foot lover</h2>
+                <div className="w-full h-40 overflow-hidden">
+                    <img className="w-full h-full object-cover" src="https://awsimages.detik.net.id/community/media/visual/2023/02/10/toyota-grand-highlander-2024-6_169.jpeg?w=650&q=80" alt="Title Image" />
+                </div>
                 {/* Content go here */}
-                <p className="text-gray-600 mb-4">
-                  This is the content.
-                </p>
+                <div className="p4">
+                    <p className="text-reliableBlack font-medium text-2xl mb-4 font-Montserrat">
+                        Promo Toyota Highlander
+                    </p>
+                </div>
                 {/* Footer (Yummy) */}
-                <div className="border-t border-gray-300 pt-4">
-                  <p className="text-sm text-gray-400">Try foot its good</p>
+                <div className="pt-4">
+                  <p className="text-sm text-reliableBlack70-400">01 Juli 2023 - 1 Januari 2023</p>
                 </div>
               </Card>
-              <Card className="mb-4">
-                <h2 className="text-xl font-bold mb-2">Is you Tall?</h2>
-                <p className="text-gray-600 mb-4">
-                  i am 5 foot and a half in a good day.
-                </p>
-                <div className="border-t border-gray-300 pt-4">
-                  <p className="text-sm text-gray-400">I am 5 foot</p>
+              <Card className="mb-4 transition-all ease-in-out duration-300 hover:scale-105">
+                <div className="w-full h-40 overflow-hidden">
+                    <img className="w-full h-full object-cover" src="https://www.toyota.astra.co.id/sites/default/files/2022-11/NEWS%2011%20NOVEMBER%20-%20LAUNCHING%20RAV4%20GR%20SPORT%201.jpg" alt="Toyota Highlander" />  
+                </div>
+                <div className="p4">
+                    <p className="text-reliableBlack font-medium text-2xl mb-4 font-Montserrat">
+                    Launching Rav 4
+                    </p>
+                </div>
+                <div className="pt-4">
+                    <p className="text-sm text-reliableBlack70-400">Coming Soon....</p>
                 </div>
               </Card>
-              <Card className="mb-4">
-              <h2 className="text-xl font-bold mb-2">Obamna</h2>
-                <p className="text-gray-600 mb-4">
-                  SODA!!!!!
-                </p>
-                <div className="border-t border-gray-300 pt-4">
-                  <p className="text-sm text-gray-400">HMMMMM</p>
+              <Card className="mb-4 transition-all ease-in-out duration-300 hover:scale-105">
+                <div className="w-full h-40 overflow-hidden">
+                    <img className="w-full h-full object-cover" src="https://www.toyota.astra.co.id/sites/default/files/2023-06/Home%20Banner%20Yaris%20Cross%20Gasoline%201293x820_0.jpg" alt="Toyota Highlander" />  
+                </div>
+                <div className="p4">
+                    <p className="text-reliableBlack font-medium text-2xl mb-4 font-Montserrat">
+                        Toyota Yaris Cross Resmi Debut!
+                    </p>
+                </div>
+                <div className="pt-4">
+                    <p className="text-sm text-reliableBlack70-400">15 Mei 2023</p>
                 </div>
               </Card>
-              <Card className="mb-4">
-              <h2 className="text-xl font-bold mb-2">Sometimes</h2>
-                <p className="text-gray-600 mb-4">
-                  The urge keep coming
-                </p>
-                <div className="border-t border-gray-300 pt-4">
-                  <p className="text-sm text-gray-400">Help</p>
+              <Card className="mb-4 transition-all ease-in-out duration-300 hover:scale-105">
+                <div className="w-full h-40 overflow-hidden">
+                    <img className="w-full h-full object-cover" src="https://www.toyota.astra.co.id/sites/default/files/2021-11/1-avanza-purplish-silver.png" alt="Toyota Highlander" />  
+                </div>
+                <div className="p4">
+                    <p className="text-reliableBlack font-medium text-2xl mb-4 font-Montserrat">
+                        Promo Avanza Akhir Tahun
+                    </p>
+                </div>
+                <div className="pt-4">
+                    <p className="text-sm text-reliableBlack70-400">25 Desember 2022 - 11 Januari 2023</p>
                 </div>
               </Card>
             </div>
-          </div>
         },
         {
           title : 'MOBIL BARU',
-          content : <div>hellooooooooo</div>
+          content : 
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Card className="mb-4 transition-all ease-in-out duration-300 hover:scale-105">
+                {/* Title*/}
+                <div className="w-full h-40 overflow-hidden">
+                    <img className="w-full h-full object-contain rounded-t-md" src="https://awsimages.detik.net.id/community/media/visual/2023/02/10/toyota-grand-highlander-2024-6_169.jpeg?w=650&q=80" alt="Foot Lover" />
+                </div>
+                {/* Content go here */}
+                <div className="p4">
+                    <p className="text-gray-600 mb-4">
+                    This is the content.
+                    </p>
+                </div>
+                {/* Footer (Yummy) */}
+                <div className="border-t border-gray-300 pt-4">
+                    <p className="text-sm text-reliableBlack70-400">Coming Soon....</p>
+                </div>
+            </Card>
+            <Card className="mb-4 transition-all ease-in-out duration-300 hover:scale-105">
+                <div className="w-full h-40 overflow-hidden">
+                    <img className="w-full h-full object-contain rounded-t-md" src="https://www.toyota.astra.co.id/sites/default/files/2022-11/NEWS%2011%20NOVEMBER%20-%20LAUNCHING%20RAV4%20GR%20SPORT%201.jpg" alt="Toyota Highlander" />  
+                </div>
+                <div className="p4">
+                    <p className="text-reliableBlack font-medium text-2xl mb-4 font-Montserrat">
+                    Launching Rav 4
+                    </p>
+                </div>
+                <div className="border-t border-gray-300 pt-4">
+                    <p className="text-sm text-reliableBlack70-400">Coming Soon....</p>
+                </div>
+              </Card>
+            </div>
         },
         {
           title : 'SERVIS',
-          content : <div>hellooooooooo</div>
+          content : <div>
+            <Card className="mb-4 transition-all ease-in-out duration-300 hover:scale-105">
+            <h2 className="text-xl font-bold mb-2">Under Maintenance</h2>
+                <p className="text-gray-600 mb-4">
+                Feel free to ask the Admin
+                </p>
+                <div className="border-t border-gray-300 pt-4">
+                <p className="text-sm text-gray-400">Sorry for the inconvenience</p>
+                </div>
+            </Card>
+          </div>
         },
         {
           title : 'LAINNYA',
