@@ -30,7 +30,7 @@ const Accordion = ({ data }) => {
 			}}
 		>
 			<div className="flex justify-between items-center">
-				<p className="text-xs font-medium text-reliableBlack">
+				<p className="text-xs text-start font-medium text-reliableBlack">
 					{item.title}
 				</p>
 
