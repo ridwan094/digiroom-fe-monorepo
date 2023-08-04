@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import Layout from 'ui/components/templates/Layout';
-import { Button, Dropdown, Input, Tag, Accordion } from 'ui/components/atoms';
-import { CardPromo, QuickLink } from 'ui/components/molecules';
+import { TabBarPromo, QuickLink, Accordion, Button, Dropdown, Input, Tag, Layout} from 'ui';
 
 const options = ['Option 1', 'Option 2', 'Option 3'];
 
@@ -53,7 +51,7 @@ export default function Home() {
 
   const handleChange = (e) => {
     const newValue = e.target.value;
-    setInputValues(newValue); // Update nilai input menggunakan state
+    setInputValues(newValue);
     console.log(inputValues);
   };
 
@@ -62,28 +60,8 @@ export default function Home() {
       <Layout>
         <QuickLink/>
         <div className="flex flex-col justify-center items-center gap-4">
-          <div className=" text-4xl md:text-8xl my-auto font-bold text-slate-900">
-            {searchValue ? searchValue : 'The Boilerplate'}
-          </div>
-          <Button>Test</Button>
-          <Dropdown
-            label="Dropdown"
-            placeholder="Select an Option"
-            options={options}
-            onSelect={handleOptionSelect}
-            selectedOption={selectedOption}
-          />
-        </div>
-        <Input
-          type="text"
-          label="Nama"
-          labelClassName="text-reliableBlack70 font-semibold"
-          onChange={handleChange}
-          value={inputValues}
-        />
-
-        {/* Hero section promo page */}
-        <section className="py-4 lg:py-8">
+          {/* Hero section promo page */}
+        <section className="py-4 lg:py-8 w-full">
           <div className="container">
             <h2 className="text-base font-bold uppercase text-reliableBlack mb-2 mt-8 lg:text-2xl">
               Promo Toyota Terbaru 2023
@@ -104,61 +82,30 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Promo section */}
-        <section className="py-4 lg:py-8">
-          <div className="grid grid-cols-2 lg:container lg:grid-cols-4 lg:gap-6">
-            <CardPromo
-              title="Cicilan Ringan Toyota Raize"
-              startDate="21 Nov 22"
-              endDate="30 Jun 23"
-              coverImg="http://localhost:3002/images/promo-car-example.png"
-              tag={<Tag className="rounded-br">Trending</Tag>}
-            />
-            <CardPromo
-              title="Cicilan Ringan Toyota Raize"
-              startDate="21 Nov 22"
-              endDate="30 Jun 23"
-              coverImg="http://localhost:3002/images/promo-car-example.png"
-            />
-            <CardPromo
-              title="Cicilan Ringan Toyota Raize"
-              startDate="21 Nov 22"
-              endDate="30 Jun 23"
-              coverImg="http://localhost:3002/images/promo-car-example.png"
-              tag={<Tag className="rounded-br">Trending</Tag>}
-            />
-            <CardPromo
-              title="Cicilan Ringan Toyota Raize"
-              startDate="21 Nov 22"
-              endDate="30 Jun 23"
-              coverImg="http://localhost:3002/images/promo-car-example.png"
-            />
-            <CardPromo
-              title="Cicilan Ringan Toyota Raize"
-              startDate="21 Nov 22"
-              endDate="30 Jun 23"
-              coverImg="http://localhost:3002/images/promo-car-example.png"
-            />
-            <CardPromo
-              title="Cicilan Ringan Toyota Raize"
-              startDate="21 Nov 22"
-              endDate="30 Jun 23"
-              coverImg="http://localhost:3002/images/promo-car-example.png"
-            />
-            <CardPromo
-              title="Cicilan Ringan Toyota Raize"
-              startDate="21 Nov 22"
-              endDate="30 Jun 23"
-              coverImg="http://localhost:3002/images/promo-car-example.png"
-            />
-            <CardPromo
-              title="Cicilan Ringan Toyota Raize"
-              startDate="21 Nov 22"
-              endDate="30 Jun 23"
-              coverImg="http://localhost:3002/images/promo-car-example.png"
-            />
+        {/* Tab Bar Promo */}
+        <div className='lg:container'>
+            <TabBarPromo/>
+        </div>
+
+          {/* <div className=" text-4xl md:text-8xl my-auto font-bold text-slate-900">
+            {searchValue ? searchValue : 'The Boilerplate'}
           </div>
-        </section>
+          <Button>Test</Button> */}
+          {/* <Dropdown
+            label="Dropdown"
+            placeholder="Select an Option"
+            options={options}
+            onSelect={handleOptionSelect}
+            selectedOption={selectedOption}
+          /> */}
+        </div>
+        {/* <Input
+          type="text"
+          label="Nama"
+          labelClassName="text-reliableBlack70 font-semibold"
+          onChange={handleChange}
+          value={inputValues}
+        /> */}
 
         {/* Info promo section */}
         <section className="py-4 lg:py-8">
@@ -166,7 +113,7 @@ export default function Home() {
             <h2 className="text-base font-bold uppercase mb-4 lg:text-2xl">
               Informasi Promo Toyota
             </h2>
-            <p className="leading-relaxed">
+            <p className="leading-relaxed lg:max-w-7xl ">
               Selamat datang di dealer dan bengkel Toyota cabang resmi Auto2000. Tersedia beragam
               kebutuhan Toyota di dealer dan bengkel Toyota meliputi layanan purna jual seperti
               servis mobil dan penjualan part Toyota. Pilih berbagai tipe maupun varian mobil baru

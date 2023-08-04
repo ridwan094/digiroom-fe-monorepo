@@ -1,5 +1,9 @@
 // export the components
 export { default as Button } from "./Button";
+// export { default as AppLogo } from "./AppLogo";
+export { default as TextInput } from "./Input";
+export { default as CheckBox } from "./CheckBox";
+export { default as Tooltip } from "./Tooltip"
 export { default as Dropdown } from "./Dropdown";
 export { default as Input } from "./Input";
 export { default as Tag } from "./Tag";
