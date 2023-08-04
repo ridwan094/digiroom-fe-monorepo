@@ -24,6 +24,7 @@ export default function Home() {
     <>
       <Layout>
         <div className="flex flex-col justify-center items-center gap-4">
+          
           <div className=" text-4xl md:text-8xl my-auto font-bold text-slate-900">
             {searchValue ? searchValue : 'The Boilerplate'}
           </div>
