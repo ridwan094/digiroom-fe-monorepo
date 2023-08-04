@@ -19,3 +19,4 @@ export { default as NavHomeIcon } from "./Icons/NavHomeIcon";
 export { default as AskCsIcon } from "./Icons/AskCsIcon";
 export { default as NavLogo } from "./Icons/NavLogo";
 export { default as GeoPosition } from "./GeoPosition";
+export { default as BtnContactUs } from "./BtnContactUs";
