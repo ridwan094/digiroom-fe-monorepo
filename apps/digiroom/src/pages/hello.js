@@ -65,47 +65,45 @@ const Hello = () => {
         />
       </div>
 
-      <div className="container mx-auto">
-        <h2 className="text-2xl font-semibold mb-4 mt-8">Card Promo</h2>
-        <div className="grid grid-cols-2">
-          <CardPromo
-            title="Cicilan Ringan Toyota Raize"
-            startDate="21 Nov 22"
-            endDate="30 Jun 23"
-            coverImg="http://localhost:3002/promo-car-example.png"
-            tag={<Tag className="rounded-br">Trending</Tag>}
-          />
-          <CardPromo
-            title="Cicilan Ringan Toyota Raize"
-            startDate="21 Nov 22"
-            endDate="30 Jun 23"
-            coverImg="http://localhost:3002/promo-car-example.png"
-          />
-          <CardPromo
-            title="Cicilan Ringan Toyota Raize"
-            startDate="21 Nov 22"
-            endDate="30 Jun 23"
-            coverImg="http://localhost:3002/promo-car-example.png"
-          />
-          <CardPromo
-            title="Cicilan Ringan Toyota Raize"
-            startDate="21 Nov 22"
-            endDate="30 Jun 23"
-            coverImg="http://localhost:3002/promo-car-example.png"
-          />
-          <CardPromo
-            title="Cicilan Ringan Toyota Raize"
-            startDate="21 Nov 22"
-            endDate="30 Jun 23"
-            coverImg="http://localhost:3002/promo-car-example.png"
-          />
-          <CardPromo
-            title="Cicilan Ringan Toyota Raize"
-            startDate="21 Nov 22"
-            endDate="30 Jun 23"
-            coverImg="http://localhost:3002/promo-car-example.png"
-          />
-        </div>
+      <h2 className="text-2xl font-semibold mb-4 mt-8">Card Promo</h2>
+      <div className="grid grid-cols-2">
+        <CardPromo
+          title="Cicilan Ringan Toyota Raize"
+          startDate="21 Nov 22"
+          endDate="30 Jun 23"
+          coverImg="http://localhost:3002/promo-car-example.png"
+          tag={<Tag className="rounded-br">Trending</Tag>}
+        />
+        <CardPromo
+          title="Cicilan Ringan Toyota Raize"
+          startDate="21 Nov 22"
+          endDate="30 Jun 23"
+          coverImg="http://localhost:3002/promo-car-example.png"
+        />
+        <CardPromo
+          title="Cicilan Ringan Toyota Raize"
+          startDate="21 Nov 22"
+          endDate="30 Jun 23"
+          coverImg="http://localhost:3002/promo-car-example.png"
+        />
+        <CardPromo
+          title="Cicilan Ringan Toyota Raize"
+          startDate="21 Nov 22"
+          endDate="30 Jun 23"
+          coverImg="http://localhost:3002/promo-car-example.png"
+        />
+        <CardPromo
+          title="Cicilan Ringan Toyota Raize"
+          startDate="21 Nov 22"
+          endDate="30 Jun 23"
+          coverImg="http://localhost:3002/promo-car-example.png"
+        />
+        <CardPromo
+          title="Cicilan Ringan Toyota Raize"
+          startDate="21 Nov 22"
+          endDate="30 Jun 23"
+          coverImg="http://localhost:3002/promo-car-example.png"
+        />
       </div>
 
       <div className="container mx-auto">
