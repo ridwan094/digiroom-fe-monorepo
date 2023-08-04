@@ -99,7 +99,7 @@ const Dropdown = ({
               className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
               onClick={() => handleOptionSelect(option)}
             >
-              {option}
+              {icon ? <img src={option} alt="id" style={{ height: "14px" }}/> : option}
             </li>
           ))}
         </ul>

@@ -7,6 +7,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [inputValues, setInputValues] = useState("");
   const [location, setLocation] = useState("Jakarta Pusat");
+  const [defaultFlag, setDefaultFlag] = useState("/images/usflag.png")
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -51,7 +52,7 @@ const Navbar = () => {
             >
               <MdOutlineShoppingCart />
             </a>
-            <Dropdown icon={<img src="/images/usflag.png" alt="en-us" style={{ height: "14px" }} />}  options={[<img src="/images/idflag.png" alt="en-us" style={{ height: "14px" }} />]} size="auto"/>
+            <Dropdown onSelect={setDefaultFlag} icon={<img src={defaultFlag} alt="en-us" style={{ height: "14px" }} />}  options={["/images/usflag.png", "/images/idflag.png"]} size="auto"/>
        
           </div>
         </div>
