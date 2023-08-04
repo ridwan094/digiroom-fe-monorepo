@@ -1,6 +1,4 @@
-import Navbar from "ui/components/organism/Navbar";
-import constants from "@/constants";
-import { Footer } from "../../organism";
+import { Footer, Navbar } from "../../organism";
 
 const Layout = ({ children }) => {
   return (
