@@ -56,11 +56,13 @@ export default function Home() {
   return (
     <>
       <Layout>
-        <div className="flex flex-col justify-center items-center gap-4 mb-10">
-          <div className=" text-8xl my-auto font-bold text-slate-900">
-            {searchValue ? searchValue : 'The Boilerplate'}
+        <div className="flex flex-col justify-center items-center gap-4">
+          <Article data={MOCK_DATA_ARTICLE} />
 
-            {/* <p className="text-black">TEXT INPUT</p>
+          {/* <div className=" text-8xl my-auto font-bold text-slate-900"> */}
+          {/* {searchValue ? searchValue : 'The Boilerplate'} */}
+
+          {/* <p className="text-black">TEXT INPUT</p>
           <Input
             type="text"
             labelClassName="text-black font-semibold p-4"
@@ -104,7 +106,7 @@ export default function Home() {
             containerClassName="w-full"
           /> */}
 
-            {/* <p className="text-black">ARTICLE</p>
+          {/* <p className="text-black">ARTICLE</p>
           <Article data={MOCK_DATA_ARTICLE} />
 
           <p className="text-black">Disabled</p>
@@ -149,7 +151,19 @@ export default function Home() {
               <FiArrowRight size={20} />
             </div>
           </ButtonInquiry> */}
-          </div>
+          {/* </div> */}
+          {/* <ButtonInquiry
+            block={true}
+            className="bg-supportiveRed"
+            size="large"
+            variant={true}
+            iconType="icon"
+          >
+            <div className="flex justify-end items-center gap-x-2">
+              <Text.Head4>INQUIRY</Text.Head4>
+              <FiArrowRight size={20} />
+            </div>
+          </ButtonInquiry> */}
         </div>
         {/* <Templates.Button>clik me</Templates.Button>
           <Button>Login</Button> */}
