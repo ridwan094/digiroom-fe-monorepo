@@ -2,7 +2,7 @@ import Card from "../../atoms/Card";
 
 const CardPromo = ({ title, coverImg, startDate, endDate, tag }) => {
   return (
-    <Card className="border md:border-b-2 md:border-t-0 md:border-r-0 md:border-l-0 border-reliableBlack20 md:mb-4 transition-all ease-in-out duration-300 hover:scale-105">
+    <Card className="border md:border-b-2 md:border-t-0 md:border-r-0 md:border-l-0 border-reliableBlack20 md:mb-4 transition-all ease-in-out duration-300 hover:border-reliableBlack60 md:hover:scale-[1.02]">
       {/* Tag */}
       <div className={`${!tag && "pb-8"}`}>{tag}</div>
 
