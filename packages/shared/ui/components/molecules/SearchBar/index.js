@@ -1,7 +1,8 @@
-import Button from "ui/components/atoms/Button";
 import { setSearchValue } from "@/store/example/actions";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Input } from "../../atoms";
+import { MdSearch } from "react-icons/md";
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
@@ -19,9 +20,9 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="flex gap-2 p-8 ">
-      <Button onClick={handleOnSubmit} />
-    </div>
+    <>
+      <Input type="text" onChange={handleOnChange} value={search} icon={MdSearch} />
+    </>
   );
 };
 

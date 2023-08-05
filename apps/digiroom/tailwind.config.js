@@ -8,6 +8,9 @@ module.exports = {
     '../../packages/shared/ui/components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    container: {
+      center: true,
+    },
     extend: {
       screens: {
         xs: '320px',
@@ -24,7 +27,7 @@ module.exports = {
         white: '#FFFEFE',
         reliableBlack3: '#F8F8F8',
         reliableBlack5: '#F4F4F4',
-        reliableBlack310: '#E9E9E9',
+        reliableBlack10: '#E9E9E9',
         reliableBlack20: '#D3D2D2',
         reliableBlack30: '#BDBCBC',
         reliableBlack50: '#918F8F',

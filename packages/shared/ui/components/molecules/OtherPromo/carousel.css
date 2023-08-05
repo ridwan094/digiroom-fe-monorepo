@@ -1,0 +1,29 @@
+.splide__pagination {
+  display: flex;
+  gap: 10px;
+}
+
+.splide__pagination__page {
+  width: 8px;
+  height: 8px;
+  border-radius: 0;
+  background: #333;
+  opacity: 0; /* Remove pagination */
+}
+
+.splide__pagination__page.is-active {
+  width: 40px;
+  background: #333;
+  opacity: 0; /* Remove pagination */
+}
+
+.splide__arrows .splide__arrow {
+  width: 19px;
+  height: 19px;
+  background: #ce181e;
+  font-size: 8px;
+}
+
+.splide__arrows .splide__arrow svg {
+  fill: white;
+}
