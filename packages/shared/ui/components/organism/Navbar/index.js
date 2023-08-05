@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import constants from "@/constants";
 import { AskCsIcon, BtnContactUs, BtnLoginSignup, Button, CarIcon, Dropdown, GeoPosition, Input, NavHomeIcon, NavLogo, ServiceCarIcon } from "../../atoms";
 import { MdOutlineCall, MdOutlineShoppingCart, MdPersonOutline, MdSearch } from "react-icons/md";
+import { idFlag, usFlag } from "../../../assets/images";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [inputValues, setInputValues] = useState("");
   const [location, setLocation] = useState("Jakarta Pusat");
-  const [defaultFlag, setDefaultFlag] = useState("/images/usflag.png")
+  const [defaultFlag, setDefaultFlag] = useState(usFlag)
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -22,6 +23,8 @@ const Navbar = () => {
   const handleChangeLocation = (e) => {
     setLocation(e);
   };
+
+
 
   return (
     <>
@@ -44,7 +47,7 @@ const Navbar = () => {
             <Button variant="bg-transparent" size="small">
               <MdOutlineShoppingCart className="w-5 h-5" />
             </Button>
-            <Dropdown onSelect={setDefaultFlag} icon={<img src={defaultFlag} alt="en-us" style={{ height: "14px" }} />}  options={["/images/usflag.png", "/images/idflag.png"]} size="auto"/>
+            <Dropdown onSelect={setDefaultFlag} icon={<img src={defaultFlag.src} alt="en-us" style={{ height: "14px" }} />}  options={[usFlag, idFlag]} size="auto"/>
        
           </div>
         </div>
