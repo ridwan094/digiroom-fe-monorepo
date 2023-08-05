@@ -3,8 +3,15 @@ import { ButtonConfirm, Dropdown } from "../../atoms";
 import { Input } from "../../atoms";
 import Text from "../../atoms/Text";
 import { FiArrowRight } from "react-icons/fi";
+import Checkbox from "../../atoms/CheckBox";
 
-const InquiryForm = ({ onSubmit }) => {
+const InquiryForm = ({
+  containerClassForm,
+  containerInputClassName,
+  containerDropdown,
+  inputClassName,
+  onSubmit,
+}) => {
   const [submit, setSubmit] = useState({
     fullName: "",
     phoneNumber: "",
@@ -12,6 +19,7 @@ const InquiryForm = ({ onSubmit }) => {
     province: "",
     city: "",
     branchOptional: "",
+    checked: false,
   });
 
   const handleChange = (e, category) => {
@@ -59,6 +67,13 @@ const InquiryForm = ({ onSubmit }) => {
         branchOptional: e,
       }));
     }
+
+    if (category === "checkbox") {
+      setSubmit((prevState) => ({
+        ...prevState,
+        checked: e.target.checked,
+      }));
+    }
   };
 
   const handleSubmit = (e) => {
@@ -79,54 +94,52 @@ const InquiryForm = ({ onSubmit }) => {
   };
 
   return (
-    <form class="bg-white shadow-md rounded pt-6" onSubmit={handleSubmit}>
-      <div class="mb-4 px-8">
-        <Input
-          type="text"
-          labelClassName="text-black font-semibold p-4"
-          onChange={(e) => handleChange(e, "fullname")}
-          value={submit.fullName}
-          label="Full Name"
-          placeholder="First Name, Last Name"
-          inputClassName="text-black bg-whiteRealible8 h-20"
-          size="large"
-          containerClassName="w-full"
-        />
-      </div>
-      <div class="mb-6 px-8">
-        <Input
-          type="email"
-          labelClassName="text-black font-semibold p-4"
-          onChange={(e) => handleChange(e, "email")}
-          value={submit.email}
-          label="Email"
-          placeholder="Email@abc.com"
-          inputClassName="text-black bg-whiteRealible8 h-20"
-          size="large"
-          containerClassName="w-full"
-        />
-      </div>
-      <div class="mb-6 px-8">
-        <Input
-          type="text"
-          labelClassName="text-black font-semibold p-4"
-          onChange={(e) => handleChange(e, "number")}
-          value={submit.phoneNumber}
-          label="Phone"
-          onKeyPress={(event) => {
-            if (!/[0-9]/.test(event.key)) {
-              event.preventDefault();
-            }
-          }}
-          placeholder="+62 XXX-XXX-XXX"
-          inputClassName="text-black whiteRealible8 h-20"
-          size="large"
-          containerClassName="w-full"
-        />
-      </div>
-      <div class="mb-6 px-8">
-        {/* DROPDOWN PROVINCE */}
+    <form class={containerClassForm} onSubmit={handleSubmit}>
+      <Input
+        type="text"
+        labelClassName="text-black font-semibold"
+        onChange={(e) => handleChange(e, "fullname")}
+        value={submit.fullName}
+        label="Full Name"
+        placeholder="First Name, Last Name"
+        size="large"
+        inputClassName={inputClassName}
+        containerClassName={containerInputClassName}
+      />
+
+      <Input
+        type="email"
+        labelClassName="text-black font-semibold"
+        onChange={(e) => handleChange(e, "email")}
+        value={submit.email}
+        label="Email"
+        placeholder="Email@abc.com"
+        size="large"
+        inputClassName={inputClassName}
+        containerClassName={containerInputClassName}
+      />
+
+      <Input
+        type="text"
+        labelClassName="text-black font-semibold"
+        onChange={(e) => handleChange(e, "number")}
+        value={submit.phoneNumber}
+        label="Phone"
+        onKeyPress={(event) => {
+          if (!/[0-9]/.test(event.key)) {
+            event.preventDefault();
+          }
+        }}
+        placeholder="+62 XXX-XXX-XXX"
+        size="large"
+        inputClassName={inputClassName}
+        containerClassName={containerInputClassName}
+      />
+
+      {/* DROPDOWN PROVINCE */}
+      <div className={containerDropdown ? containerDropdown : ""}>
         <Dropdown
+          withInput={true}
           label="Province"
           options={[
             "Jakarta",
@@ -140,9 +153,11 @@ const InquiryForm = ({ onSubmit }) => {
           placeholder="Choose Province"
         />
       </div>
-      <div class="mb-6 px-8">
-        {/* DROPDOWN CITY */}
+
+      {/* DROPDOWN CITY */}
+      <div className={containerDropdown ? containerDropdown : ""}>
         <Dropdown
+          withInput={true}
           label="City"
           options={[
             "Jakarta",
@@ -157,9 +172,11 @@ const InquiryForm = ({ onSubmit }) => {
           placeholder="Choose City"
         />
       </div>
-      <div class="mb-6 px-8">
-        {/* BRANCH OPTIONAL */}
+
+      {/* BRANCH OPTIONAL */}
+      <div className={containerDropdown ? containerDropdown : ""}>
         <Dropdown
+          withInput={true}
           label="Branch Optional"
           options={[
             "Auto 2000 Daan Magot",
@@ -174,7 +191,17 @@ const InquiryForm = ({ onSubmit }) => {
           placeholder="Choose Branch"
         />
       </div>
-      <div class="flex items-center justify-between">
+
+      {/* CheckBox */}
+      <div className={containerDropdown ? containerDropdown : ""}>
+        <Checkbox
+          label="Saya telah membaca dan menyetujui Syarat dan Ketentuan Auto 2000"
+          checked={submit.checked}
+          onChange={(e) => handleChange(e, "checkbox")}
+        />
+      </div>
+
+      <div class="flex items-center justify-between mt-4">
         <ButtonConfirm
           block={true}
           className={checkFormInquiry() ? "bg-gray-500" : "bg-supportiveRed"}
@@ -191,6 +218,14 @@ const InquiryForm = ({ onSubmit }) => {
       </div>
     </form>
   );
+};
+
+InquiryForm.defaultProps = {
+  containerClassForm: "",
+  containerInputClassName: "",
+  inputClassName: "",
+  containerDropdown: "",
+  onSubmit: () => {},
 };
 
 export default InquiryForm;
