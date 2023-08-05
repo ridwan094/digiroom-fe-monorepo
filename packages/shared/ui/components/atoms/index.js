@@ -1,4 +1,8 @@
 // export the components
+export { default as Article } from "./Article";
+export { default as FormGroup } from "./FormGroup";
+export { default as ButtonConfirm } from "./ButtonConfirm";
+export { default as ButtonInquiry } from "./ButtonInquiry";
 export { default as Button } from "./Button";
 // export { default as AppLogo } from "./AppLogo";
 export { default as TextInput } from "./Input";

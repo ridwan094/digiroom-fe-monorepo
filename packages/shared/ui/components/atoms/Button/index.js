@@ -45,8 +45,17 @@ const Button = ({
   ];
 
   return (
-    <button className={classNameAssigned.join(" ")} disabled={disabled} style={style} {...props}>
-      {children ? <span className={`text-center`}>{children}</span> : <Fragment />}
+    <button
+      className={classNameAssigned.join(" ")}
+      disabled={disabled}
+      style={style}
+      {...props}
+    >
+      {children ? (
+        <span className={`text-center`}>{children}</span>
+      ) : (
+        <Fragment />
+      )}
     </button>
   );
 };
