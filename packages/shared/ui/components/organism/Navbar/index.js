@@ -1,13 +1,23 @@
 import React, { useState } from "react";
 import constants from "@/constants";
-import { AskCsIcon, BtnContactUs, CarIcon, Dropdown, GeoPosition, Input, NavHomeIcon, NavLogo, ServiceCarIcon } from "../../atoms";
+import {
+  AskCsIcon,
+  BtnContactUs,
+  CarIcon,
+  Dropdown,
+  GeoPosition,
+  Input,
+  NavHomeIcon,
+  NavLogo,
+  ServiceCarIcon,
+} from "../../atoms";
 import { MdOutlineCall, MdOutlineShoppingCart, MdPersonOutline, MdSearch } from "react-icons/md";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [inputValues, setInputValues] = useState("");
   const [location, setLocation] = useState("Jakarta Pusat");
-  const [defaultFlag, setDefaultFlag] = useState("/images/usflag.png")
+  const [defaultFlag, setDefaultFlag] = useState("/images/usflag.png");
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -25,39 +35,38 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="bg-white border-b-2 border-reliableBlack30 px-8 md:px-16 md:py-3 hidden md:block">
+      <div className="bg-white border-b-2 border-reliableBlack30 px-8 md:px-4 md:py-3 hidden md:block">
         {/* Top Navbar */}
         <div className="flex items-center justify-end">
           <div className="flex">
             <BtnContactUs />
             <GeoPosition
               value={location}
-              options={[
-                "Jakarta Pusat",
-                "Bandung",
-                "Yogyakarta",
-                "Nanggroe Aceh Darussalam",
-              ]}
+              options={["Jakarta Pusat", "Bandung", "Yogyakarta", "Nanggroe Aceh Darussalam"]}
               onChange={handleChangeLocation}
             />
             <a
-              className="flex justify-center items-center gap-1 text-reliableBlack px-5 hover:text-reliableBlack70"
+              className="flex justify-center items-center gap-1 text-xs text-reliableBlack px-2 hover:text-reliableBlack70"
               href="#"
             >
-              <MdPersonOutline /> Login/Sign Up
+              <MdPersonOutline size={"20px"} /> Login/Sign Up
             </a>
             <a
-              className="flex justify-center items-center gap-1 text-reliableBlack px-5 hover:text-reliableBlack70"
+              className="flex justify-center items-center gap-1 text-reliableBlack px-2 hover:text-reliableBlack70"
               href="#"
             >
-              <MdOutlineShoppingCart />
+              <MdOutlineShoppingCart size={"18px"} />
             </a>
-            <Dropdown onSelect={setDefaultFlag} icon={<img src={defaultFlag} alt="en-us" style={{ height: "14px" }} />}  options={["/images/usflag.png", "/images/idflag.png"]} size="auto"/>
-       
+            <Dropdown
+              onSelect={setDefaultFlag}
+              icon={<img src={defaultFlag} alt="en-us" style={{ height: "14px" }} />}
+              options={["/images/usflag.png", "/images/idflag.png"]}
+              size="auto"
+            />
           </div>
         </div>
       </div>
-      <div className="bg-white py-1.5 px-8 md:px-16 md:py-5">
+      <div className="bg-white py-1.5 px-4 md:px-16 md:py-5">
         {/* Top Navbar */}
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -121,12 +130,11 @@ const Navbar = () => {
 
           <Input
             type="text"
-            icon={<MdSearch size={24} />}
+            icon={<MdSearch color="#333333" size={24} />}
             iconPosition="right"
             labelClassName="text-reliableBlack70 font-semibold"
             onChange={handleChange}
             value={inputValues}
-            placeholder="Search"
             containerClassName="hidden md:flex"
           />
         </div>

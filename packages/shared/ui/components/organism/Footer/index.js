@@ -5,45 +5,45 @@ const Footer = () => {
   return (
     <>
       <footer className="bg-[#2C2B2B]">
-        <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
+        <div className="space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-16">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
               <div>
-                <p className="font-medium text-[#A3A3A3]">NEW CAR</p>
+                <p className="font-medium text-white">NEW CAR</p>
 
-                <ul className="mt-6 space-y-4 text-sm">
+                <ul className="mt-6 text-[#A3A3A3] space-y-4 text-sm">
                   <li>
-                    <a href="#" className="text-white transition hover:opacity-75">
+                    <a href="#" className="transition hover:opacity-75">
                       YARIS CROSS
                     </a>
                   </li>
 
                   <li>
-                    <a href="#" className="text-white transition hover:opacity-75">
+                    <a href="#" className="transition hover:opacity-75">
                       YARIS CROSS HYBRID
                     </a>
                   </li>
 
                   <li>
-                    <a href="#" className="text-white transition hover:opacity-75">
+                    <a href="#" className="transition hover:opacity-75">
                       CAMRY HYBRID
                     </a>
                   </li>
 
                   <li>
-                    <a href="#" className="text-white transition hover:opacity-75">
+                    <a href="#" className="transition hover:opacity-75">
                       HILUX SINGLE CABIN
                     </a>
                   </li>
 
                   <li>
-                    <a href="#" className="text-white transition hover:opacity-75">
+                    <a href="#" className="transition hover:opacity-75">
                       INNOVA HYBDRID
                     </a>
                   </li>
 
                   <li>
-                    <a href="#" className="text-white transition hover:opacity-75">
+                    <a href="#" className="transition hover:opacity-75">
                       AGYA GR SPORT
                     </a>
                   </li>
@@ -51,47 +51,47 @@ const Footer = () => {
               </div>
 
               <div>
-                <p className="font-medium text-[#A3A3A3]">USED CARS</p>
+                <p className="font-medium text-white">USED CARS</p>
 
-                <ul className="mt-6 space-y-4 text-sm">
+                <ul className="mt-6 text-[#A3A3A3] space-y-4 text-sm">
                   <li>
-                    <a href="#" className="text-white transition hover:opacity-75">
+                    <a href="#" className="transition hover:opacity-75">
                       AFTER SALES
                     </a>
                   </li>
 
                   <li>
-                    <a href="#" className="text-white transition hover:opacity-75">
+                    <a href="#" className="transition hover:opacity-75">
                       ACCESSORIES
                     </a>
                   </li>
 
                   <li>
-                    <a href="#" className="text-white transition hover:opacity-75">
+                    <a href="#" className="transition hover:opacity-75">
                       SERVICE COUPON
                     </a>
                   </li>
 
                   <li>
-                    <a href="#" className="text-white transition hover:opacity-75">
+                    <a href="#" className="transition hover:opacity-75">
                       WORKSHOP SERVICE
                     </a>
                   </li>
 
                   <li>
-                    <a href="#" className="text-white transition hover:opacity-75">
+                    <a href="#" className="transition hover:opacity-75">
                       SERVICE AT HOME
                     </a>
                   </li>
 
                   <li>
-                    <a href="#" className="text-white transition hover:opacity-75">
+                    <a href="#" className="transition hover:opacity-75">
                       BODY & PAINT
                     </a>
                   </li>
 
                   <li>
-                    <a href="#" className="text-white transition hover:opacity-75">
+                    <a href="#" className="transition hover:opacity-75">
                       TRADE-IN
                     </a>
                   </li>
@@ -99,7 +99,7 @@ const Footer = () => {
               </div>
 
               <div>
-                <p className="font-medium text-[#A3A3A3]">FAQS</p>
+                <p className="font-medium text-white">FAQS</p>
 
                 <ul className="mt-6 space-y-4 text-sm">
                   <li>
@@ -129,7 +129,7 @@ const Footer = () => {
               </div>
 
               <div>
-                <p className="font-medium text-[#A3A3A3]">ABOUT AUTO2000</p>
+                <p className="font-medium text-white">ABOUT AUTO2000</p>
 
                 <ul className="mt-6 space-y-4 text-sm">
                   <li>
@@ -153,7 +153,7 @@ const Footer = () => {
               </div>
             </div>
 
-            <div className="flex flex-col justify-end">
+            <div className="flex flex-col justify-end md:h-[370px]">
               <div className="relative flex flex-col md:flex-row">
                 {/* Social media icon */}
                 <div className="flex flex-col justify-end mr-11">
