@@ -1,16 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  TabBarPromo,
-  QuickLink,
-  Accordion,
-  Button,
-  Dropdown,
-  Input,
-  Tag,
-  Layout,
-  BreadCrumbs,
-} from 'ui';
+import { TabBarPromo, QuickLink, Accordion, Tag, Layout, BreadCrumbs } from 'ui';
 
 const options = ['Option 1', 'Option 2', 'Option 3'];
 
@@ -99,26 +89,7 @@ export default function Home() {
           <div className="lg:container">
             <TabBarPromo />
           </div>
-
-          {/* <div className=" text-4xl md:text-8xl my-auto font-bold text-slate-900">
-            {searchValue ? searchValue : 'The Boilerplate'}
-          </div>
-          <Button>Test</Button> */}
-          {/* <Dropdown
-            label="Dropdown"
-            placeholder="Select an Option"
-            options={options}
-            onSelect={handleOptionSelect}
-            selectedOption={selectedOption}
-          /> */}
         </div>
-        {/* <Input
-          type="text"
-          label="Nama"
-          labelClassName="text-reliableBlack70 font-semibold"
-          onChange={handleChange}
-          value={inputValues}
-        /> */}
 
         {/* Info promo section */}
         <section className="py-4 lg:py-8 lg:hidden">

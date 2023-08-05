@@ -3,6 +3,7 @@ import constants from "@/constants";
 import {
   AskCsIcon,
   BtnContactUs,
+  BtnLoginSignup,
   CarIcon,
   Dropdown,
   GeoPosition,
@@ -45,17 +46,12 @@ const Navbar = () => {
               options={["Jakarta Pusat", "Bandung", "Yogyakarta", "Nanggroe Aceh Darussalam"]}
               onChange={handleChangeLocation}
             />
+            <BtnLoginSignup />
             <a
               className="flex justify-center items-center gap-1 text-xs text-reliableBlack px-2 hover:text-reliableBlack70"
               href="#"
             >
-              <MdPersonOutline size={"20px"} /> Login/Sign Up
-            </a>
-            <a
-              className="flex justify-center items-center gap-1 text-reliableBlack px-2 hover:text-reliableBlack70"
-              href="#"
-            >
-              <MdOutlineShoppingCart size={"18px"} />
+              <MdOutlineShoppingCart className="w-5 h-5" />
             </a>
             <Dropdown
               onSelect={setDefaultFlag}

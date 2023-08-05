@@ -30,11 +30,6 @@ module.exports = {
         reliableBlack90: '#393536',
         reliableBlack: '#231F20',
       },
-      // colors: {
-      //   redPrimary: '#CE181E',
-      //   reliableBlack10: '#E9E9E9',
-      //   whiteRealible8: '#F8F8F8',
-      // },
     },
   },
   plugins: [],
