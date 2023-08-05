@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AiFillCaretDown } from "react-icons/ai";
+import { MdOutlineArrowDropDown } from "react-icons/md";
 
 const GeoPosition = ({ onChange, value, options }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,8 +32,8 @@ const GeoPosition = ({ onChange, value, options }) => {
           />
         </svg>
         <p className="text-xs font-bold flex-1">{value}</p>
-        <AiFillCaretDown
-          className="text-xs"
+        <MdOutlineArrowDropDown
+          className="text-xl"
           style={{ rotate: isOpen ? "180deg" : "0deg" }}
         />
       </div>
