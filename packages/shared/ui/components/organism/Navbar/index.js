@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import constants from "@/constants";
-import { AskCsIcon, BtnContactUs, BtnLoginSignup, CarIcon, Dropdown, GeoPosition, Input, NavHomeIcon, NavLogo, ServiceCarIcon } from "../../atoms";
+import { AskCsIcon, BtnContactUs, BtnLoginSignup, Button, CarIcon, Dropdown, GeoPosition, Input, NavHomeIcon, NavLogo, ServiceCarIcon } from "../../atoms";
 import { MdOutlineCall, MdOutlineShoppingCart, MdPersonOutline, MdSearch } from "react-icons/md";
 
 const Navbar = () => {
@@ -41,12 +41,9 @@ const Navbar = () => {
               onChange={handleChangeLocation}
             />
             <BtnLoginSignup />
-            <a
-              className="flex justify-center items-center gap-1 text-reliableBlack px-5 hover:text-reliableBlack70"
-              href="#"
-            >
+            <Button variant="bg-transparent" size="small">
               <MdOutlineShoppingCart className="w-5 h-5" />
-            </a>
+            </Button>
             <Dropdown onSelect={setDefaultFlag} icon={<img src={defaultFlag} alt="en-us" style={{ height: "14px" }} />}  options={["/images/usflag.png", "/images/idflag.png"]} size="auto"/>
        
           </div>
