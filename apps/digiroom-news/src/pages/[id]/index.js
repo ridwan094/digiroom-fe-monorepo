@@ -10,7 +10,7 @@ import { Article } from 'ui/components/atoms';
 import { InquiryForm } from 'ui/components/molecules';
 import { MOCK_DATA } from '../../constants/news';
 
-export default function Home() {
+const Detail = () => {
   const { searchValue } = useSelector((state) => state.example);
   const [modalForm, setModalForm] = useState(false);
 
@@ -137,4 +137,6 @@ export default function Home() {
       </ButtonInquiry>
     </div>
   );
-}
+};
+
+export default Detail;
