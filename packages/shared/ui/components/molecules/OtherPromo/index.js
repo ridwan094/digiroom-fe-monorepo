@@ -5,7 +5,16 @@ import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import "./carousel.css";
 
-const OtherPromo = ({ data, type, arrows, pagination, perPage, items }) => {
+const OtherPromo = ({
+  data,
+  type,
+  arrows,
+  pagination,
+  perPage,
+  items,
+  title,
+  classNameContainerOtherPromo = "",
+}) => {
   // If response using html string
   // const [article, setArticle] = useState({ __html: "" });
 
@@ -19,13 +28,13 @@ const OtherPromo = ({ data, type, arrows, pagination, perPage, items }) => {
 
   // return <div dangerouslySetInnerHTML={article} />;
   return (
-    <div className="w-full px-4 flex flex-col justify-center gap-4">
-      <Text.Head3 className="text-black">OTHER PROMOTIONS</Text.Head3>
+    <div className={classNameContainerOtherPromo}>
+      <Text.Head3 className="text-black">{title}</Text.Head3>
       <Splide
         aria-label="Carousel"
         hasTrack={false}
         options={{
-          gap: "0.5rem",
+          gap: "2rem",
           type,
           arrows,
           pagination,
@@ -40,10 +49,10 @@ const OtherPromo = ({ data, type, arrows, pagination, perPage, items }) => {
                   <img src={item.src} className="w-full" />
                   <div className="px-4 flex flex-col justify-center gap-2 mb-4">
                     <Text.BodySmall className="text-black">
-                      21 Nov 23 - 21 Nov 23
+                      {item.date ? item.date : "-"}
                     </Text.BodySmall>
                     <Text.Headline5 className="text-black">
-                      Toyota Raize Light Installments
+                      {item.headline ? item.headline : "-"}
                     </Text.Headline5>
                   </div>
                 </div>
@@ -58,6 +67,8 @@ const OtherPromo = ({ data, type, arrows, pagination, perPage, items }) => {
 
 OtherPromo.defaultProps = {
   data: "",
+  classNameContainerOtherPromo: "",
+  title: "",
   type: "loop",
   arrows: true,
   pagination: true,
