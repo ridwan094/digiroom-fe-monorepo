@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { TabBarPromo, QuickLink, Accordion, Button, Dropdown, Input, Tag, Layout} from 'ui';
+import { TabBarPromo, QuickLink, Accordion, Button, Dropdown, Input, Tag, Layout, BreadCrumbs} from 'ui';
 
 const options = ['Option 1', 'Option 2', 'Option 3'];
 
@@ -61,8 +61,9 @@ export default function Home() {
         <QuickLink/>
         <div className="flex flex-col justify-center items-center gap-4">
           {/* Hero section promo page */}
-        <section className="py-4 lg:py-8 w-full">
+        <section className="py-4 lg:py-8 w-full">          
           <div className="container">
+          <BreadCrumbs/>
             <h2 className="text-base font-bold uppercase text-reliableBlack mb-2 mt-8 lg:text-2xl">
               Promo Toyota Terbaru 2023
             </h2>
