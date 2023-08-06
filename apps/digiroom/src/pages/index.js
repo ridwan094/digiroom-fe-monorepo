@@ -1,6 +1,16 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { TabBarPromo, QuickLink, Accordion, Button, Dropdown, Input, Tag, Layout, BreadCrumbs} from 'ui';
+import {
+  TabBarPromo,
+  QuickLink,
+  Accordion,
+  Button,
+  Dropdown,
+  Input,
+  Tag,
+  Layout,
+  BreadCrumbs,
+} from 'ui';
 
 const options = ['Option 1', 'Option 2', 'Option 3'];
 
@@ -58,35 +68,35 @@ export default function Home() {
   return (
     <>
       <Layout>
-        <QuickLink/>
+        <QuickLink />
         <div className="flex flex-col justify-center items-center gap-4">
           {/* Hero section promo page */}
-        <section className="py-4 lg:py-8 w-full">          
-          <div className="container">
-          <BreadCrumbs/>
-            <h2 className="text-base font-bold uppercase text-reliableBlack mb-2 mt-8 lg:text-2xl">
-              Promo Toyota Terbaru 2023
-            </h2>
-            <p className="text-xs font-medium leading-relaxed text-reliableBlack mb-4 lg:text-base">
-              Penawaran dan promo mobil Toyota online terbaru dari Auto2000 untuk Anda
-            </p>
-          </div>
-          <div className="relative lg:container">
-            <Tag className="absolute top-0 right-0 rounded-bl lg:px-[12px] py-[10px]">
-              <span className="font-bold text-reliableBlack90 lg:text-base">Hot Deal</span>
-            </Tag>
-            <img
-              className="w-full object-cover"
-              src="http://localhost:3002/images/banner-image.png"
-              alt="Promo banner image auto2000"
-            />
-          </div>
-        </section>
+          <section className="py-4 lg:py-8 w-full">
+            <div className="container">
+              <BreadCrumbs />
+              <h2 className="text-base font-bold uppercase text-reliableBlack mb-2 mt-8 lg:text-2xl">
+                Promo Toyota Terbaru 2023
+              </h2>
+              <p className="text-xs font-medium leading-relaxed text-reliableBlack mb-4 lg:text-base">
+                Penawaran dan promo mobil Toyota online terbaru dari Auto2000 untuk Anda
+              </p>
+            </div>
+            <div className="relative lg:container">
+              <Tag className="absolute top-0 right-0 rounded-bl lg:px-[12px] py-[10px]">
+                <span className="font-bold text-reliableBlack90 lg:text-base">Hot Deal</span>
+              </Tag>
+              <img
+                className="w-full object-cover"
+                src="http://localhost:3002/images/banner-image.png"
+                alt="Promo banner image auto2000"
+              />
+            </div>
+          </section>
 
-        {/* Tab Bar Promo */}
-        <div className='lg:container'>
-            <TabBarPromo/>
-        </div>
+          {/* Tab Bar Promo */}
+          <div className="lg:container">
+            <TabBarPromo />
+          </div>
 
           {/* <div className=" text-4xl md:text-8xl my-auto font-bold text-slate-900">
             {searchValue ? searchValue : 'The Boilerplate'}
@@ -131,7 +141,7 @@ export default function Home() {
               <span>Promo FAQ</span>
               <span className="lowercase">s</span>
             </h2>
-            <div className="px-4">
+            <div className="lg:px-4">
               {faqs.map((faq, index) => (
                 <Accordion key={index} title={faq.title}>
                   {faq.content}
