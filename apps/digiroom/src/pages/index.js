@@ -93,9 +93,11 @@ export default function Home() {
         </section>
 
         {/* Tab Bar Promo */}
-        <div className="lg:container">
-          <TabBarPromo />
-        </div>
+        <section className="py-4 lg:py-8">
+          <div className="lg:container">
+            <TabBarPromo />
+          </div>
+        </section>
 
         {/* <div className=" text-4xl md:text-8xl my-auto font-bold text-slate-900">
             {searchValue ? searchValue : 'The Boilerplate'}
