@@ -58,6 +58,12 @@ const Navbar = () => {
               options={[usFlag, idFlag]}
               size="auto"
             />
+            <Dropdown
+              onSelect={setDefaultFlag}
+              icon={<img src={defaultFlag.src} alt="en-us" style={{ height: '14px' }} />}
+              options={[usFlag, idFlag]}
+              size="auto"
+            />
           </div>
         </div>
       </div>
@@ -189,25 +195,31 @@ const Navbar = () => {
             isMobileMenuOpen ? 'block' : 'hidden'
           }`}
         >
-          <div className={`flex flex-col `}>
-            <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
-              New Cars
-            </a>
-            <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
-              Test Drive
-            </a>
-            <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
-              Used Cars
-            </a>
-            <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
-              After Sales
-            </a>
-            <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
-              Promo
-            </a>
-            <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
-              Toyota Dealer
-            </a>
+          <div
+            className={`absolute bottom-16 left-0 px-4 bg-gray-500 w-full ${
+              isMobileMenuOpen ? 'block' : 'hidden'
+            }`}
+          >
+            <div className={`flex flex-col `}>
+              <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
+                New Cars
+              </a>
+              <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
+                Test Drive
+              </a>
+              <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
+                Used Cars
+              </a>
+              <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
+                After Sales
+              </a>
+              <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
+                Promo
+              </a>
+              <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
+                Toyota Dealer
+              </a>
+            </div>
           </div>
         </div>
       </div>

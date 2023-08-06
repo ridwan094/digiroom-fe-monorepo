@@ -41,7 +41,7 @@ const OtherPromo = ({
           perPage,
         }}
       >
-        <div className="relative justify-center items-center">
+        <div className="justify-center items-center">
           <SplideTrack>
             {items.map((item) => (
               <SplideSlide key={item.src}>
@@ -49,6 +49,7 @@ const OtherPromo = ({
                   <img src={item.src} className="w-full" />
                   <div className="px-4 flex flex-col justify-center gap-2 mb-4">
                     <Text.BodySmall className="text-black">
+                      {item.date ? item.date : '-'}
                       {item.date ? item.date : '-'}
                     </Text.BodySmall>
                     <Text.Headline5 className="text-black font-bold">
