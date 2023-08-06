@@ -55,3 +55,54 @@ export const MOCK_DATA = {
     },
   ],
 };
+
+export const newsList = [
+  {
+    id: 1,
+    title: 'Mengenal Fitur Anti-Merosot Hill Start Assist yang Ada di Mobil Toyota',
+    subtitle: 'Posted on Jul 25, 2023',
+    image: '/images/news/1.png',
+  },
+  {
+    id: 2,
+    title: 'Mengenal 5 Komponen Penggerak Roda Depan',
+    subtitle: 'Posted on Jul 25, 2023',
+    image: '/images/news/2.png',
+  },
+  {
+    id: 3,
+    title: 'Pelajari Apa Itu Sistem Penggerak Roda Depan dan Keunggulannya',
+    subtitle: 'Posted on Jul 25, 2023',
+    image: '/images/news/3.png',
+  },
+  {
+    id: 4,
+    title: 'Inilah 5 Tips Melindungi Cat Mobil Agar Awet',
+    subtitle: 'Posted on Jul 25, 2023',
+    image: '/images/news/4.png',
+  },
+  {
+    id: 5,
+    title: 'Mengenal Fitur Anti-Merosot Hill Start Assist yang Ada di Mobil Toyota',
+    subtitle: 'Posted on Jul 25, 2023',
+    image: '/images/news/5.png',
+  },
+  {
+    id: 6,
+    title: 'Inilah 5 Tips Melindungi Cat Mobil Agar Awet',
+    subtitle: 'Posted on Jul 25, 2023',
+    image: '/images/news/6.png',
+  },
+  {
+    id: 7,
+    title: 'Simak, Inilah Cara Perpanjang SIM Beda Kota 2023',
+    subtitle: 'Posted on Jul 25, 2023',
+    image: '/images/news/7.png',
+  },
+  {
+    id: 8,
+    title: '7 Tips Persiapan Liburan Dengan Anak Menggunakan Mobil Pribadi',
+    subtitle: 'Posted on Jul 25, 2023',
+    image: '/images/news/8.png',
+  },
+];

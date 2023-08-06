@@ -2,6 +2,7 @@ import Layout from 'ui/components/templates/Layout';
 import { BreadCrumbs } from 'ui/components/molecules';
 import { ListArtikel } from 'ui/components/organism';
 import Image from 'next/image';
+import { newsList } from '../constants/news';
 
 export default function Home() {
   return (
@@ -27,7 +28,7 @@ export default function Home() {
           </div>
           {/* List Artikel Desktop */}
           <div className="hidden md:block">
-            <ListArtikel />
+            <ListArtikel itemList={newsList} />
           </div>
         </div>
       </Layout>
