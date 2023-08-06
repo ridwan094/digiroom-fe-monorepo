@@ -69,47 +69,47 @@ export default function Home() {
     <>
       <Layout>
         <QuickLink />
-        <div className="flex flex-col justify-center items-center gap-4">
-          {/* Hero section promo page */}
-          <section className="py-4 lg:py-8 w-full">
-            <div className="container lg:px-16">
-              <BreadCrumbs />
-              <h2 className="text-base font-bold uppercase text-reliableBlack mb-2 mt-8 lg:text-2xl">
-                Promo Toyota Terbaru 2023
-              </h2>
-              <p className="text-xs font-medium leading-relaxed text-reliableBlack mb-4 lg:text-base">
-                Penawaran dan promo mobil Toyota online terbaru dari Auto2000 untuk Anda
-              </p>
-            </div>
-            <div className="relative lg:px-16">
-              <Tag className="absolute top-0 right-0 rounded-bl lg:px-[12px] py-[10px]">
-                <span className="font-bold text-reliableBlack90 lg:text-base">Hot Deal</span>
-              </Tag>
-              <img
-                className="w-full object-cover"
-                src="http://localhost:3002/images/banner-image.png"
-                alt="Promo banner image auto2000"
-              />
-            </div>
-          </section>
+        {/* Hero section promo page */}
+        <section className="py-4 lg:py-8 w-full">
+          <div className="container">
+            <BreadCrumbs />
+            <h2 className="text-base font-bold uppercase text-reliableBlack mb-2 mt-8 lg:text-2xl">
+              Promo Toyota Terbaru 2023
+            </h2>
+            <p className="text-xs font-medium leading-relaxed text-reliableBlack mb-4 lg:text-base">
+              Penawaran dan promo mobil Toyota online terbaru dari Auto2000 untuk Anda
+            </p>
+          </div>
+          <div className="relative lg:container">
+            <Tag className="absolute top-0 right-0 rounded-bl lg:px-[12px] py-[10px]">
+              <span className="font-bold text-reliableBlack90 lg:text-base">Hot Deal</span>
+            </Tag>
+            <img
+              className="w-full object-cover"
+              src="http://localhost:3002/images/banner-image.png"
+              alt="Promo banner image auto2000"
+            />
+          </div>
+        </section>
 
-          {/* Tab Bar Promo */}
+        {/* Tab Bar Promo */}
+        <section className="py-4 lg:py-8">
           <div className="lg:container">
             <TabBarPromo />
           </div>
+        </section>
 
-          {/* <div className=" text-4xl md:text-8xl my-auto font-bold text-slate-900">
+        {/* <div className=" text-4xl md:text-8xl my-auto font-bold text-slate-900">
             {searchValue ? searchValue : 'The Boilerplate'}
           </div>
           <Button>Test</Button> */}
-          {/* <Dropdown
+        {/* <Dropdown
             label="Dropdown"
             placeholder="Select an Option"
             options={options}
             onSelect={handleOptionSelect}
             selectedOption={selectedOption}
           /> */}
-        </div>
         {/* <Input
           type="text"
           label="Nama"
@@ -141,7 +141,7 @@ export default function Home() {
               <span>Promo FAQ</span>
               <span className="lowercase">s</span>
             </h2>
-            <div className="px-4 text-reliableBlack ">
+            <div className="lg:px-4">
               {faqs.map((faq, index) => (
                 <Accordion key={index} title={faq.title}>
                   {faq.content}
