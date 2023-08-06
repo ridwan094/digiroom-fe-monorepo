@@ -4,6 +4,7 @@ import { FiX } from 'react-icons/fi';
 
 const Dropdown = ({
   label,
+  labelClassname,
   withInput = false,
   icon,
   text,
@@ -11,7 +12,7 @@ const Dropdown = ({
   onSelect,
   selectedOption,
   placeholder,
-  size = 'w-full',
+  size,
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -32,7 +33,7 @@ const Dropdown = ({
     <div className={`relative ${size}`}>
       {withInput ? (
         <Fragment>
-          <label className="block text-reliableBlack70 text-sm font-bold mb-2">{label}</label>
+          <label className={`${labelClassname}`}>{label}</label>
           <div className="flex items-center">
             <input
               type="text"
@@ -102,6 +103,11 @@ const Dropdown = ({
       )}
     </div>
   );
+};
+
+Dropdown.defaultProps = {
+  withInput: false,
+  size: 'w-full',
 };
 
 export default Dropdown;
