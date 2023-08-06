@@ -22,7 +22,7 @@ const Detail = () => {
     setModalForm(!modalForm);
   };
 
-  function generateSlides(length = 10, sig = 0) {
+  const generateSlides = (length = 10, sig = 0) => {
     return Array.from({ length }).map((value, index) => {
       index = sig || index;
 
@@ -33,7 +33,7 @@ const Detail = () => {
         headline: 'Toyota Raize Light Installments',
       };
     });
-  }
+  };
 
   return (
     <div className="relative">
