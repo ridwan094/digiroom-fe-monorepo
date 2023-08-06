@@ -9,7 +9,7 @@ const TabsNavigation = ({ tabs, onTabChange }) => {
   };
 
   return (
-    <div className="p-4 bg-white rounded-lg w-full md:p-8">
+    <div className="bg-white rounded-lg w-full">
       <div className="flex flex-col md:flex-row justify-between items-left md:space-x-8 overflow-x-auto">
         <ul className="flex flex-nowrap md:items-center gap-4 w-full">
           {tabs.map((tab, index) => (
@@ -28,7 +28,11 @@ const TabsNavigation = ({ tabs, onTabChange }) => {
                 } font-semibold`}
                 style={{ fontFamily: 'Montserrat, sans-serif' }}
               >
-                <span className={`text-base leading-8 whitespace-nowrap ${activeTab === index ? 'text-reliableBlack' : 'text-reliableBlack20'}`}>
+                <span
+                  className={`text-base leading-8 whitespace-nowrap ${
+                    activeTab === index ? 'text-reliableBlack' : 'text-reliableBlack20'
+                  }`}
+                >
                   {tab.title}
                 </span>
               </button>
