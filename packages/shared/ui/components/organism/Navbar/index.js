@@ -50,7 +50,7 @@ const Navbar = () => {
             />
             <BtnLoginSignup />
             <Button variant="bg-transparent" size="small">
-              <MdOutlineShoppingCart className="w-5 h-5" />
+              <MdOutlineShoppingCart className="w-5 h-5 text-reliableBlack" />
             </Button>
             <Dropdown
               onSelect={setDefaultFlag}
