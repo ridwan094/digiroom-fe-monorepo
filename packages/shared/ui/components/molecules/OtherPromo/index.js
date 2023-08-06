@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { FiCalendar } from "react-icons/fi";
-import Text from "../../atoms/Text";
-import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/react-splide/css";
-import "./carousel.css";
+import { useState, useEffect } from 'react';
+import { FiCalendar } from 'react-icons/fi';
+import Text from '../../atoms/Text';
+import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
+import './carousel.css';
 
 const OtherPromo = ({
   data,
@@ -13,7 +13,7 @@ const OtherPromo = ({
   perPage,
   items,
   title,
-  classNameContainerOtherPromo = "",
+  classNameContainerOtherPromo = '',
 }) => {
   // If response using html string
   // const [article, setArticle] = useState({ __html: "" });
@@ -34,14 +34,14 @@ const OtherPromo = ({
         aria-label="Carousel"
         hasTrack={false}
         options={{
-          gap: "2rem",
+          gap: '2rem',
           type,
           arrows,
           pagination,
           perPage,
         }}
       >
-        <div className="relative justify-center items-center">
+        <div className="justify-center items-center">
           <SplideTrack>
             {items.map((item) => (
               <SplideSlide key={item.src}>
@@ -49,10 +49,10 @@ const OtherPromo = ({
                   <img src={item.src} className="w-full" />
                   <div className="px-4 flex flex-col justify-center gap-2 mb-4">
                     <Text.BodySmall className="text-black">
-                      {item.date ? item.date : "-"}
+                      {item.date ? item.date : '-'}
                     </Text.BodySmall>
                     <Text.Headline5 className="text-black">
-                      {item.headline ? item.headline : "-"}
+                      {item.headline ? item.headline : '-'}
                     </Text.Headline5>
                   </div>
                 </div>
@@ -66,10 +66,10 @@ const OtherPromo = ({
 };
 
 OtherPromo.defaultProps = {
-  data: "",
-  classNameContainerOtherPromo: "",
-  title: "",
-  type: "loop",
+  data: '',
+  classNameContainerOtherPromo: '',
+  title: '',
+  type: 'loop',
   arrows: true,
   pagination: true,
   perPage: 1,
