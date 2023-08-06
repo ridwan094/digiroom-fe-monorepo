@@ -1,6 +1,16 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { TabBarPromo, QuickLink, Accordion, Button, Dropdown, Input, Tag, Layout, BreadCrumbs} from 'ui';
+import {
+  TabBarPromo,
+  QuickLink,
+  Accordion,
+  Button,
+  Dropdown,
+  Input,
+  Tag,
+  Layout,
+  BreadCrumbs,
+} from 'ui';
 
 const options = ['Option 1', 'Option 2', 'Option 3'];
 
@@ -58,12 +68,11 @@ export default function Home() {
   return (
     <>
       <Layout>
-        <QuickLink/>
-        <div className="flex flex-col justify-center items-center gap-4">
-          {/* Hero section promo page */}
-        <section className="py-4 lg:py-8 w-full">          
+        <QuickLink />
+        {/* Hero section promo page */}
+        <section className="py-4 lg:py-8 w-full">
           <div className="container">
-          <BreadCrumbs/>
+            <BreadCrumbs />
             <h2 className="text-base font-bold uppercase text-reliableBlack mb-2 mt-8 lg:text-2xl">
               Promo Toyota Terbaru 2023
             </h2>
@@ -84,22 +93,23 @@ export default function Home() {
         </section>
 
         {/* Tab Bar Promo */}
-        <div className='lg:container'>
-            <TabBarPromo/>
-        </div>
+        <section className="py-4 lg:py-8">
+          <div className="lg:container">
+            <TabBarPromo />
+          </div>
+        </section>
 
-          {/* <div className=" text-4xl md:text-8xl my-auto font-bold text-slate-900">
+        {/* <div className=" text-4xl md:text-8xl my-auto font-bold text-slate-900">
             {searchValue ? searchValue : 'The Boilerplate'}
           </div>
           <Button>Test</Button> */}
-          {/* <Dropdown
+        {/* <Dropdown
             label="Dropdown"
             placeholder="Select an Option"
             options={options}
             onSelect={handleOptionSelect}
             selectedOption={selectedOption}
           /> */}
-        </div>
         {/* <Input
           type="text"
           label="Nama"
@@ -131,7 +141,7 @@ export default function Home() {
               <span>Promo FAQ</span>
               <span className="lowercase">s</span>
             </h2>
-            <div className="px-4">
+            <div className="lg:px-4">
               {faqs.map((faq, index) => (
                 <Accordion key={index} title={faq.title}>
                   {faq.content}
