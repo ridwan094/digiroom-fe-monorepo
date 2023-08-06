@@ -1,29 +1,30 @@
-import { useState } from "react";
-import { ButtonConfirm, Dropdown } from "../../atoms";
-import { Input } from "../../atoms";
-import Text from "../../atoms/Text";
-import { FiArrowRight } from "react-icons/fi";
-import Checkbox from "../../atoms/CheckBox";
+import { useState } from 'react';
+import { ButtonConfirm, Dropdown } from '../../atoms';
+import { Input } from '../../atoms';
+import Text from '../../atoms/Text';
+import { FiArrowRight } from 'react-icons/fi';
+import Checkbox from '../../atoms/CheckBox';
 
 const InquiryForm = ({
   containerClassForm,
   containerInputClassName,
   containerDropdown,
   inputClassName,
+  labelStyle,
   onSubmit,
 }) => {
   const [submit, setSubmit] = useState({
-    fullName: "",
-    phoneNumber: "",
-    email: "",
-    province: "",
-    city: "",
-    branchOptional: "",
+    fullName: '',
+    phoneNumber: '',
+    email: '',
+    province: '',
+    city: '',
+    branchOptional: '',
     checked: false,
   });
 
   const handleChange = (e, category) => {
-    if (category === "fullname") {
+    if (category === 'fullname') {
       const newValue = e.target.value;
       setSubmit((prevState) => ({
         ...prevState,
@@ -31,7 +32,7 @@ const InquiryForm = ({
       }));
     }
 
-    if (category === "email") {
+    if (category === 'email') {
       const newValue = e.target.value;
       setSubmit((prevState) => ({
         ...prevState,
@@ -39,7 +40,7 @@ const InquiryForm = ({
       }));
     }
 
-    if (category === "number") {
+    if (category === 'number') {
       const newValue = e.target.value;
       setSubmit((prevState) => ({
         ...prevState,
@@ -47,28 +48,28 @@ const InquiryForm = ({
       }));
     }
 
-    if (category === "province") {
+    if (category === 'province') {
       setSubmit((prevState) => ({
         ...prevState,
         province: e,
       }));
     }
 
-    if (category === "city") {
+    if (category === 'city') {
       setSubmit((prevState) => ({
         ...prevState,
         city: e,
       }));
     }
 
-    if (category === "branchOptional") {
+    if (category === 'branchOptional') {
       setSubmit((prevState) => ({
         ...prevState,
         branchOptional: e,
       }));
     }
 
-    if (category === "checkbox") {
+    if (category === 'checkbox') {
       setSubmit((prevState) => ({
         ...prevState,
         checked: e.target.checked,
@@ -97,8 +98,8 @@ const InquiryForm = ({
     <form class={containerClassForm} onSubmit={handleSubmit}>
       <Input
         type="text"
-        labelClassName="text-black font-semibold"
-        onChange={(e) => handleChange(e, "fullname")}
+        labelClassName={`${labelStyle}`}
+        onChange={(e) => handleChange(e, 'fullname')}
         value={submit.fullName}
         label="Full Name"
         placeholder="First Name, Last Name"
@@ -109,8 +110,8 @@ const InquiryForm = ({
 
       <Input
         type="email"
-        labelClassName="text-black font-semibold"
-        onChange={(e) => handleChange(e, "email")}
+        labelClassName={`${labelStyle}`}
+        onChange={(e) => handleChange(e, 'email')}
         value={submit.email}
         label="Email"
         placeholder="Email@abc.com"
@@ -121,8 +122,8 @@ const InquiryForm = ({
 
       <Input
         type="text"
-        labelClassName="text-black font-semibold"
-        onChange={(e) => handleChange(e, "number")}
+        labelClassName={`${labelStyle}`}
+        onChange={(e) => handleChange(e, 'number')}
         value={submit.phoneNumber}
         label="Phone"
         onKeyPress={(event) => {
@@ -137,74 +138,65 @@ const InquiryForm = ({
       />
 
       {/* DROPDOWN PROVINCE */}
-      <div className={containerDropdown ? containerDropdown : ""}>
+      <div className={containerDropdown ? containerDropdown : ''}>
         <Dropdown
           withInput={true}
           label="Province"
-          options={[
-            "Jakarta",
-            "Jawa Barat",
-            "Jawa Tengah",
-            "Jawa Timur",
-            "Bali",
-          ]}
+          labelClassname={'text-[#666666]'}
+          options={['Jakarta', 'Jawa Barat', 'Jawa Tengah', 'Jawa Timur', 'Bali']}
           selectedOption={submit.province}
-          onSelect={(e) => handleChange(e, "province")}
+          onSelect={(e) => handleChange(e, 'province')}
           placeholder="Choose Province"
         />
       </div>
 
       {/* DROPDOWN CITY */}
-      <div className={containerDropdown ? containerDropdown : ""}>
+      <div className={containerDropdown ? containerDropdown : ''}>
         <Dropdown
           withInput={true}
           label="City"
-          options={[
-            "Jakarta",
-            "Bandung",
-            "Semarang",
-            "Surakarta",
-            "Surabaya",
-            "Jogja",
-          ]}
+          labelClassname={'text-[#666666]'}
+          options={['Jakarta', 'Bandung', 'Semarang', 'Surakarta', 'Surabaya', 'Jogja']}
           selectedOption={submit.city}
-          onSelect={(e) => handleChange(e, "city")}
+          onSelect={(e) => handleChange(e, 'city')}
           placeholder="Choose City"
         />
       </div>
 
       {/* BRANCH OPTIONAL */}
-      <div className={containerDropdown ? containerDropdown : ""}>
+      <div className={containerDropdown ? containerDropdown : ''}>
         <Dropdown
           withInput={true}
           label="Branch Optional"
+          labelClassname={'text-[#666666]'}
           options={[
-            "Auto 2000 Daan Magot",
-            "Auto 2001 Daan Magot",
-            "Auto 2002 Daan Magot",
-            "Auto 2003 Daan Magot",
-            "Auto 2004 Daan Magot",
-            "Auto 2005 Daan Magot",
+            'Auto 2000 Daan Magot',
+            'Auto 2001 Daan Magot',
+            'Auto 2002 Daan Magot',
+            'Auto 2003 Daan Magot',
+            'Auto 2004 Daan Magot',
+            'Auto 2005 Daan Magot',
           ]}
           selectedOption={submit.branchOptional}
-          onSelect={(e) => handleChange(e, "branchOptional")}
+          onSelect={(e) => handleChange(e, 'branchOptional')}
           placeholder="Choose Branch"
         />
       </div>
 
       {/* CheckBox */}
-      <div className={containerDropdown ? containerDropdown : ""}>
+      <div className={containerDropdown ? containerDropdown : ''}>
         <Checkbox
+          labelClassname="flex text-xs mt-5"
           label="Saya telah membaca dan menyetujui Syarat dan Ketentuan Auto 2000"
           checked={submit.checked}
-          onChange={(e) => handleChange(e, "checkbox")}
+          onChange={(e) => handleChange(e, 'checkbox')}
         />
       </div>
 
       <div class="flex items-center justify-between mt-4">
         <ButtonConfirm
           block={true}
-          className={checkFormInquiry() ? "bg-gray-500" : "bg-supportiveRed"}
+          className={checkFormInquiry() ? 'bg-gray-500' : 'bg-supportiveRed'}
           size="large"
           variant={true}
           iconType="icon"
@@ -221,10 +213,11 @@ const InquiryForm = ({
 };
 
 InquiryForm.defaultProps = {
-  containerClassForm: "",
-  containerInputClassName: "",
-  inputClassName: "",
-  containerDropdown: "",
+  containerClassForm: '',
+  containerInputClassName: '',
+  inputClassName: '',
+  containerDropdown: '',
+  labelStyle: 'text-black font-semibold',
   onSubmit: () => {},
 };
 
