@@ -19,15 +19,15 @@ export default function Home() {
             <p className="text-reliableBlack font-medium mb-6">
               Dapatkan informasi terkini melalui berita eksklusif dan tips dari Auto2000
             </p>
-            <div className="relative aspect-video">
-              <Image src="/images/banner.png" alt="" objectFit="cover" objectPosition="0 0" fill />
+            <div className="hidden md:block relative aspect-video">
+              <Image src="/images/banner.webp" alt="" objectFit="cover" objectPosition="0 0" fill />
               <h3 className="absolute text-white bottom-16 left-14 text-4xl font-bold w-[535px]">
                 Kupas Tuntas Fitur Safety Toyota CHR Hybrid Ini Bikin Makin Pengen Beli
               </h3>
             </div>
           </div>
           {/* List Artikel Desktop */}
-          <div className="hidden md:block">
+          <div className="">
             <ListArtikel itemList={newsList} />
           </div>
         </div>
