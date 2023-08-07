@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { MdOutlineArrowDropDown } from "react-icons/md";
+import React, { useState } from 'react';
+import { MdOutlineArrowDropDown } from 'react-icons/md';
 
 const GeoPosition = ({ onChange, value, options }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,11 +34,11 @@ const GeoPosition = ({ onChange, value, options }) => {
         <p className="text-xs font-bold flex-1">{value}</p>
         <MdOutlineArrowDropDown
           className="text-xl"
-          style={{ rotate: isOpen ? "180deg" : "0deg" }}
+          style={{ rotate: isOpen ? '180deg' : '0deg' }}
         />
       </div>
       {isOpen && (
-        <div className="bg-white absolute top-full left-0 right-0 shadow-md">
+        <div className="bg-white absolute top-full left-0 right-0 shadow-md z-50 rounded">
           {options?.map((location) => (
             <p
               className="text-xs font-bold cursor-pointer px-5 min-h-[40px] flex items-center hover:bg-gray-50"
@@ -54,7 +54,7 @@ const GeoPosition = ({ onChange, value, options }) => {
 };
 
 GeoPosition.defaultProps = {
-  value: "",
+  value: '',
   onChange: () => {},
   options: [],
 };
