@@ -106,3 +106,68 @@ export const newsList = [
     image: '/images/news/8.webp',
   },
 ];
+
+export const MOCK_DATA_CARD_INFO = [
+  {
+    title: '5 Tips Liburan Dengan Anak Balita Menggunakan Mobil Pribadi',
+    mainInfo: true,
+    srcImage: '/images/banner.webp',
+    datePost: '19 jul 2023',
+    subtitle:
+      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a,',
+  },
+  {
+    title:
+      'Mengenal Fitur Anti Merosot Hill Start Yang ada di Mobil Toyota, Mengenal Fitur Anti Merosot Hill Start Yang ada di Mobil Toyota',
+    mainInfo: false,
+    srcImage: '/images/banner.webp',
+    datePost: '19 jul 2023',
+    subtitle:
+      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a,',
+  },
+
+  {
+    title:
+      'Mengenal Fitur Anti Merosot Hill Start Yang ada di Mobil Toyota, Mengenal Fitur Anti Merosot Hill Start Yang ada di Mobil Toyota',
+    srcImage: '/images/banner.webp',
+    datePost: '19 jul 2023',
+    mainInfo: false,
+    subtitle: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. ',
+  },
+];
+
+export const MOCK_DATA_CARD_INFO_NO_MAIN = [
+  {
+    title: '5 Tips Liburan Dengan Anak Balita Menggunakan Mobil Pribadi',
+    srcImage: '/images/banner.webp',
+    mainInfo: false,
+    datePost: '19 jul 2023',
+    subtitle:
+      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a,',
+  },
+  {
+    title:
+      'Mengenal Fitur Anti Merosot Hill Start Yang ada di Mobil Toyota, Mengenal Fitur Anti Merosot Hill Start Yang ada di Mobil Toyota',
+    srcImage: '/images/banner.webp',
+    mainInfo: false,
+    datePost: '19 jul 2023',
+    subtitle:
+      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a,',
+  },
+  {
+    title:
+      'Mengenal Fitur Anti Merosot Hill Start Yang ada di Mobil Toyota, Mengenal Fitur Anti Merosot Hill Start Yang ada di Mobil Toyota',
+    srcImage: '/images/banner.webp',
+    datePost: '19 jul 2023',
+    mainInfo: false,
+    subtitle: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. ',
+  },
+  {
+    title:
+      'Mengenal Fitur Anti Merosot Hill Start Yang ada di Mobil Toyota, Mengenal Fitur Anti Merosot Hill Start Yang ada di Mobil Toyota',
+    srcImage: '/images/banner.webp',
+    datePost: '19 jul 2023',
+    mainInfo: false,
+    subtitle: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. ',
+  },
+];
