@@ -11,7 +11,7 @@ import {
 import Layout from 'ui/components/templates/Layout';
 import { FiArrowRight } from 'react-icons/fi';
 import { BreadCrumbs, OtherPromo, InquiryForm } from 'ui/components/molecules';
-import { MOCK_DATA, MOCK_DATA_CARD_INFO, MOCK_DATA_CARD_INFO_NO_MAIN } from '../../constants/news';
+import { MOCK_DATA } from '../../constants/news';
 
 const Detail = () => {
   const { searchValue } = useSelector((state) => state.example);
@@ -77,9 +77,6 @@ const Detail = () => {
             title="OTHER PROMOTIONS"
             classNameContainerOtherPromo="w-full flex flex-col justify-center gap-4 mb-20"
           />
-
-          <CardInfo data={MOCK_DATA_CARD_INFO} />
-          <CardInfo data={MOCK_DATA_CARD_INFO_NO_MAIN} />
         </div>
 
         {/* Breadcrumb => Mobile Resolutions */}
