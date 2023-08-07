@@ -10,8 +10,8 @@ const TabsNavigation = ({ tabs, onTabChange }) => {
 
   return (
     <div className="bg-white rounded-lg w-full">
-      <div className="flex flex-col md:flex-row justify-between items-left md:space-x-8 overflow-x-auto">
-        <ul className="flex flex-nowrap justify-center md:items-center gap-4 w-full lg:justify-start">
+      <div className="flex flex-col md:flex-row justify-between items-center md:space-x-8 overflow-x-auto">
+        <ul className="flex flex-nowrap justify-left md:items-center gap-4 w-full lg:justify-start ">
           {tabs.map((tab, index) => (
             <li
               key={index}

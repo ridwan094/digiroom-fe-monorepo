@@ -9,3 +9,4 @@ export { default as BreadCrumbs } from "./BreadCrumbs";
 export { default as QuickLink } from "./QuickLink";
 export { default as CardCarProduct } from "./CardCarProduct";
 export { default as CardAccessoriesProduct } from "./CardAccessoriesProduct";
+export { default as CardNews } from "./CardNews";

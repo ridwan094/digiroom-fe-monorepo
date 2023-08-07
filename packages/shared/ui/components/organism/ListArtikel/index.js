@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TabBar from 'ui/components/molecules/TabBar';
 import Image from 'next/image';
 import Link from 'next/link';
+import CardNews from '../../molecules/CardNews';
 
 const ListArtikel = ({ itemList = [] }) => {
   const [activeTab, setActiveTab] = useState(0);
@@ -10,19 +11,10 @@ const ListArtikel = ({ itemList = [] }) => {
     setActiveTab(index);
   };
 
-  const ArticleItem = itemList.map((news) => (
-    <Link href={`/${news.id}`}>
-      <div
-        key={news.id}
-        className="w-full overflow-hidden object-cover flex flex-col gap-6 border-b border-black"
-      >
-        <div className="relative aspect-video">
-          <Image src={news.image} alt={news.title} sizes="25vw" fill className="object-cover" />
-        </div>
-        <div className="px-4 flex flex-col gap-2 mb-4 flex-1 md:min-h-[120px]">
-          <h5 className="font-medium text-base text-reliableBlack flex-1">{news.title}</h5>
-          <p className="text-reliableBlack80">{news.subtitle}</p>
-        </div>
+  const ArticleItem = itemList.map((news, index) => (
+    <Link key={news.id} href={`/${news.id}`}>
+      <div className="flex flex-col">
+        <CardNews title={news.title} date={news.subtitle} coverImg={news.image} index={index}/>
       </div>
     </Link>
   ));
@@ -31,8 +23,14 @@ const ListArtikel = ({ itemList = [] }) => {
     {
       title: 'NEWS',
       content: (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">{ArticleItem}</div>
-      ),
+        <div className="lmd:grid grid-cols-2 lg:grid grid-cols-3 xl:grid grid-cols-4 gap-4">
+          {ArticleItem.map((item, index) => (
+            <div key={index} className={index === 0 ? 'col-span-2' : 'col-span-1'}>
+              {item}
+            </div>
+          ))}
+        </div>      
+        ),
     },
     {
       title: 'TIPS & TRICKS',
@@ -53,8 +51,9 @@ const ListArtikel = ({ itemList = [] }) => {
       ),
     },
   ];
+
   return (
-    <div>
+    <div className="container mx-auto py-2">
       <TabBar tabs={tabsData} onTabChange={handleTabChange} />
     </div>
   );
