@@ -93,23 +93,24 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Tab Bar Promo */}
+        {/* Tab Bar Promo */}
+        <section className="py-4 lg:py-8">
           <div className="lg:container">
             <TabBarPromo />
           </div>
+        </section>
 
-          {/* <div className=" text-4xl md:text-8xl my-auto font-bold text-slate-900">
+        {/* <div className=" text-4xl md:text-8xl my-auto font-bold text-slate-900">
             {searchValue ? searchValue : 'The Boilerplate'}
           </div>
           <Button>Test</Button> */}
-          {/* <Dropdown
+        {/* <Dropdown
             label="Dropdown"
             placeholder="Select an Option"
             options={options}
             onSelect={handleOptionSelect}
             selectedOption={selectedOption}
           /> */}
-        </div>
         {/* <Input
           type="text"
           label="Nama"
