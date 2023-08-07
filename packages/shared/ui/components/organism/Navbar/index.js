@@ -63,7 +63,7 @@ const Navbar = () => {
       </div>
       <div className="bg-white py-1.5 md:py-5">
         {/* Top Navbar */}
-        <div className="container">
+        <div className="container mx-auto">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex items-center justify-between md:gap-8">
