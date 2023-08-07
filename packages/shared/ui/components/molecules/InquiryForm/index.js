@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ButtonConfirm, Dropdown, Input, Text } from '../../atoms';
 import { FiArrowRight } from 'react-icons/fi';
-import Checkbox from '../../atoms/CheckBox';
+// import Checkbox from '../../atoms/CheckBox';
 
 const InquiryForm = ({
   containerClassForm,
@@ -17,7 +17,7 @@ const InquiryForm = ({
     province: '',
     city: '',
     branchOptional: '',
-    checked: false,
+    // checked: false,
   });
 
   const handleChange = (e, category) => {
@@ -58,7 +58,7 @@ const InquiryForm = ({
         city: e,
       }));
     }
-
+     
     if (category === 'branchOptional') {
       setSubmit((prevState) => ({
         ...prevState,
@@ -66,12 +66,12 @@ const InquiryForm = ({
       }));
     }
 
-    if (category === 'checkbox') {
-      setSubmit((prevState) => ({
-        ...prevState,
-        checked: e.target.checked,
-      }));
-    }
+    // if (category === 'checkbox') {
+    //   setSubmit((prevState) => ({
+    //     ...prevState,
+    //     checked: e.target.checked,
+    //   }));
+    // }
   };
 
   const handleSubmit = (e) => {
@@ -95,7 +95,7 @@ const InquiryForm = ({
     <form class={containerClassForm} onSubmit={handleSubmit}>
       <Input
         type="text"
-        labelClassName="text-black font-semibold"
+        labelClassName="block text-reliableBlack70 text-sm font-bold mb-2"
         onChange={(e) => handleChange(e, 'fullname')}
         value={submit.fullName}
         label="Full Name"
@@ -107,7 +107,7 @@ const InquiryForm = ({
 
       <Input
         type="email"
-        labelClassName="text-black font-semibold"
+        labelClassName="block text-reliableBlack70 text-sm font-bold mb-2"
         onChange={(e) => handleChange(e, 'email')}
         value={submit.email}
         label="Email"
@@ -119,7 +119,7 @@ const InquiryForm = ({
 
       <Input
         type="text"
-        labelClassName="text-black font-semibold"
+        labelClassName="block text-reliableBlack70 text-sm font-bold mb-2"
         onChange={(e) => handleChange(e, 'number')}
         value={submit.phoneNumber}
         label="Phone"
@@ -162,7 +162,7 @@ const InquiryForm = ({
       <div className={containerDropdown ? containerDropdown : ''}>
         <Dropdown
           withInput={true}
-          label="Branch Optional"
+          label="Branch (Optional)"
           options={[
             'Auto 2000 Daan Magot',
             'Auto 2001 Daan Magot',
@@ -178,13 +178,13 @@ const InquiryForm = ({
       </div>
 
       {/* CheckBox */}
-      <div className={containerDropdown ? containerDropdown : ''}>
+      {/* <div className={containerDropdown ? containerDropdown : ''}>
         <Checkbox
           label="Saya telah membaca dan menyetujui Syarat dan Ketentuan Auto 2000"
           checked={submit.checked}
           onChange={(e) => handleChange(e, 'checkbox')}
         />
-      </div>
+      </div> */}
 
       <div class="flex items-center justify-between mt-4">
         <ButtonConfirm
