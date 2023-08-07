@@ -1,13 +1,16 @@
-import { useSelector } from 'react-redux';
-import { ButtonInquiry } from 'ui/components/atoms';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import {
+  ButtonInquiry,
+  FormGroup,
+  Article,
+  Text,
+  ProductPanel,
+  CardInfo,
+} from 'ui/components/atoms';
 import Layout from 'ui/components/templates/Layout';
 import { FiArrowRight } from 'react-icons/fi';
-import Text from 'ui/components/atoms/Text';
-import { FormGroup } from 'ui/components/atoms';
-import { BreadCrumbs, OtherPromo } from 'ui/components/molecules';
-import { Article } from 'ui/components/atoms';
-import { InquiryForm } from 'ui/components/molecules';
+import { BreadCrumbs, OtherPromo, InquiryForm } from 'ui/components/molecules';
 import { MOCK_DATA } from '../../constants/news';
 
 const Detail = () => {
@@ -38,17 +41,12 @@ const Detail = () => {
   return (
     <div className="relative">
       <Layout>
-        <div className="flex flex-col justify-center items-center gap-4">
-          {/* Desktop Resolutions */}
-          {/* Article */}
-          <div class="md:flex">
-            <div class="md:w-3/5">
-              <img
-                src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                alt="image"
-                className="px-4"
-              />
-              <Article data={MOCK_DATA} />
+        <div className="px-4 container flex flex-col justify-center items-center gap-4 md:mx-auto">
+          {/* Article => Desktop Resolutions */}
+          <div class="md:flex gap-4">
+            <div class="md:w-3/5 relative aspect-video">
+              <ProductPanel srcImage="/images/banner.webp" objectFit="cover" layout="fill" block />
+              <Article data={MOCK_DATA} block />
             </div>
 
             <div class="hidden md:block w-1/3 border-none relative flex flex-col pointer-events-auto bg-clip-padding bg-reliableBlack5 h-fit px-10 py-10 rounded-md text-current">
@@ -77,16 +75,16 @@ const Detail = () => {
             pagination={true}
             items={generateSlides()}
             title="OTHER PROMOTIONS"
-            classNameContainerOtherPromo="w-full px-4 flex flex-col justify-center gap-4 mb-20"
+            classNameContainerOtherPromo="w-full flex flex-col justify-center gap-4 mb-20"
           />
         </div>
 
-        {/* Breadcrumb */}
+        {/* Breadcrumb => Mobile Resolutions */}
         <div className="px-4 md:hidden sm:hidden pb-5">
           <BreadCrumbs />
         </div>
 
-        {/* Modal */}
+        {/* Modal => Form Inquiry Mobile Resolutions */}
         {modalForm ? (
           <div
             class="z-40 fixed top-0 left-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto"
@@ -119,7 +117,7 @@ const Detail = () => {
         ) : null}
       </Layout>
 
-      {/* Button Inquiry Mobile */}
+      {/* Button Inquiry Mobile Resolutions */}
       <ButtonInquiry
         block={true}
         containerBtnInquiry="w-full absolute z-200 bottom-16 left-0 md:hidden lg:hidden"

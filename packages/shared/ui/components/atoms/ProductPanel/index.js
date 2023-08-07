@@ -1,15 +1,19 @@
-const ProductPanel = ({ containerClassName, imageProductPanelClassName, srcImage }) => {
+import Image from 'next/image';
+
+const ProductPanel = ({ containerClassName, srcImage, block, ...props }) => {
+  const classNameAssigned = ['relative h-full', block ? 'w-full' : '', containerClassName];
+
   return (
-    <div className={containerClassName}>
-      <img src={srcImage} alt="image" className={imageProductPanelClassName} />
+    <div className={classNameAssigned.join(' ')}>
+      <Image src={srcImage} alt="image" {...props} />
     </div>
   );
 };
 
 ProductPanel.defaultProps = {
   containerClassName: '',
-  imageProductPanelClassName: '',
   srcImage: '',
+  block: false,
 };
 
 export default ProductPanel;
