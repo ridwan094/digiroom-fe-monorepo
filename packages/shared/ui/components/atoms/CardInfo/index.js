@@ -31,10 +31,14 @@ const CardInfo = ({ data, containerClassname }) => {
                 <Text.Head3 maxLines={2} isClamp={true}>
                   {items?.title ? items?.title : '-'}
                 </Text.Head3>
-                <Text.BodySmall>{items?.datePost ? items?.datePost : '-'}</Text.BodySmall>
-                <Text.BodyMedium maxLines={3} isClamp={true}>
-                  {items?.subtitle ? items?.subtitle : '-'}
-                </Text.BodyMedium>
+                <Text.BodySmall className="hidden md:block">
+                  {items?.datePost ? items?.datePost : '-'}
+                </Text.BodySmall>
+                <div className="hidden md:block">
+                  <Text.BodySmall maxLines={3} isClamp={true}>
+                    {items?.subtitle ? items?.subtitle : '-'}
+                  </Text.BodySmall>
+                </div>
               </div>
             </div>
           </Card>
