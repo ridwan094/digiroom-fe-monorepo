@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { FiCalendar } from 'react-icons/fi';
 import Text from '../Text';
 
 const Article = ({ data, block, containerClassName }) => {
@@ -18,21 +17,22 @@ const Article = ({ data, block, containerClassName }) => {
   // return <div dangerouslySetInnerHTML={article} />;
   return (
     <div className={classNameAssigned.join(' ')}>
-      <div className="flex flex-col gap-3 mt-4 text-black">
-        <Text.Head6>{data.titleHeadPost}</Text.Head6>
-        <div className="flex items-center gap-2">
-          <FiCalendar size={16} />
-          <Text.BodyMedium>Diposting {data.datePost}</Text.BodyMedium>
-        </div>
+      <div className="flex flex-col gap-4 mt-4 text-black w-3/4 md:w-full gap-2">
+        <Text.BodyMedium className="text-lg font-semibold md:text-3xl text-reliableBlack">
+          {data.titleHeadPost}
+        </Text.BodyMedium>
+        <Text.BodyLarge className="text-xs font-normal text-reliableBlack90 md:text-base">
+          Diposting {data.datePost}
+        </Text.BodyLarge>
       </div>
 
-      <div className="flex flex-col gap-3 mt-4 text-black">
-        <Text.BodyLarge>
+      <div className="flex flex-col gap-2 mt-4 text-black">
+        <Text.BodyLarge className="text-base font-normal md:text-lg">
           Presiden Joko Widodo telah meresmikan jalan tol baru Bengkulu-Taba Penajung, dan
           berdasarkan informasi dari Kementerian PUPR ditargetkan akhir tahun 2023 akan ada 13 ruas
           tol baru.
         </Text.BodyLarge>
-        <Text.BodyLarge>
+        <Text.BodyLarge className="text-base font-normal md:text-lg">
           Namun perlu dipahami bahwa mengendarai kendaraan di jalan tol bukanlah perkara mudah, dan
           sangat berbeda dengan berkendara di jalan umum biasa. Selanjutnya, Auto2000 memberikan
           tips berkendara aman di jalan tol.
@@ -41,12 +41,16 @@ const Article = ({ data, block, containerClassName }) => {
 
       {data.contents &&
         data.contents.map((items, index) => (
-          <div className="flex flex-col gap-3 mt-4 text-black">
-            <Text.BodyLargeSemibold>
+          <div className="flex flex-col gap-2 mt-4 text-black">
+            <Text.BodyLargeSemibold className="text-base font-semibold md:text-lg">
               {index + 1}. {items.title}
             </Text.BodyLargeSemibold>
-            <Text.BodyLarge>{items.subTitle1}</Text.BodyLarge>
-            <Text.BodyLarge>{items.subTitle2}</Text.BodyLarge>
+            <Text.BodyLarge className="text-base font-normal md:text-lg">
+              {items.subTitle1}
+            </Text.BodyLarge>
+            <Text.BodyLarge className="text-base font-normal md:text-lg">
+              {items.subTitle2}
+            </Text.BodyLarge>
             {items.newsContent && (
               <Text.BodyLarge>
                 Baca Juga:
@@ -62,15 +66,24 @@ const Article = ({ data, block, containerClassName }) => {
                 </a>
               </Text.BodyLarge>
             )}
-
-            <Text.BodyLarge>{items.subTitle3}</Text.BodyLarge>
-            <Text.BodyLarge>{items.subTitle4}</Text.BodyLarge>
+            {items.subTitle3 && (
+              <Text.BodyLarge className="text-base font-normal md:text-lg">
+                {items.subTitle3}
+              </Text.BodyLarge>
+            )}
+            {items.subTitle4 && (
+              <Text.BodyLarge className="text-base font-normal md:text-lg">
+                {items.subTitle4}
+              </Text.BodyLarge>
+            )}
           </div>
         ))}
 
       <div className="flex flex-col gap-3 mt-4 text-black">
-        <Text.BodyExtraLarge>CHOOSE AND OWN THE RUSH YOU WANT</Text.BodyExtraLarge>
-        <Text.BodyLarge>
+        <Text.BodyExtraLarge className="text-base font-semibold md:text-lg">
+          CHOOSE AND OWN THE RUSH YOU WANT
+        </Text.BodyExtraLarge>
+        <Text.BodyLarge className="text-base font-normal md:text-lg">
           Information in the content of this article is subject to change and difference, adapting
           to certain developments, situations, business strategies, technological advances and
           policies without prior notification.
