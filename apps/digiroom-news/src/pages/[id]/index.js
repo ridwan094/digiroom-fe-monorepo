@@ -70,7 +70,7 @@ const Detail = () => {
           <OtherPromo
             perPage={2}
             arrows={false}
-            pagination={true}
+            pagination={false}
             items={generateSlides()}
             padding={{ right: '2rem' }}
             classNameContainer="px-4 md:px-0"
@@ -122,6 +122,7 @@ const Detail = () => {
 
       {/* Button Inquiry Mobile Resolutions */}
       <ButtonInquiry
+        showMediaSocialShare={true}
         block={true}
         containerBtnInquiry="w-full absolute z-200 bottom-14 left-0 md:hidden lg:hidden"
         className="bg-supportiveRed h-18"

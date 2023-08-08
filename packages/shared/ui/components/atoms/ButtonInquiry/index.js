@@ -2,6 +2,7 @@ import React from 'react';
 import { Fragment } from 'react';
 import { FaFacebookF, FaTwitter } from 'react-icons/fa';
 import { PiLinkSimpleBold } from 'react-icons/pi';
+import { SocialMediaShare } from '../../molecules';
 
 const iconClassname = {
   fill: '',
@@ -18,6 +19,7 @@ const ButtonInquiry = ({
   block,
   className,
   pressed = false,
+  showMediaSocialShare = false,
   type = 'submit',
   colorSocialMediaContainer = '',
   containerBtnInquiry = '',
@@ -36,11 +38,12 @@ const ButtonInquiry = ({
     classNameSocialMediaContainerInquiry,
   ];
 
-  const sosialMediaWrapper = ['border-2 border-black p-2', iconClassname[iconType]];
-
   return (
     <div className={containerBtnInquiry}>
-      <div className={classNameSocialMediaAssigned.join(' ')}>
+      {showMediaSocialShare && (
+        <SocialMediaShare className={classNameSocialMediaAssigned.join(' ')} iconType="icon" />
+      )}
+      {/* <div className={classNameSocialMediaAssigned.join(' ')}>
         <a href="/" rel="noreferrer" target="_blank" className={sosialMediaWrapper.join(' ')}>
           <FaTwitter size={20} color="#000" />
         </a>
@@ -50,7 +53,7 @@ const ButtonInquiry = ({
         <a href="/" rel="noreferrer" target="_blank" className={sosialMediaWrapper.join(' ')}>
           <PiLinkSimpleBold size={20} color="#000" />
         </a>
-      </div>
+      </div> */}
       <button
         className={classNameAssigned.join(' ')}
         disabled={disabled}
@@ -66,6 +69,7 @@ const ButtonInquiry = ({
 ButtonInquiry.defaultProps = {
   inverted: false,
   disabled: false,
+  showMediaSocialShare: false,
   block: false,
   size: 'large',
   colorSocialMediaContainer: '',
