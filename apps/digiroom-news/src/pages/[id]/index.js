@@ -5,6 +5,7 @@ import Layout from 'ui/components/templates/Layout';
 import { FiArrowRight } from 'react-icons/fi';
 import { BreadCrumbs, OtherPromo, InquiryForm } from 'ui/components/molecules';
 import { MOCK_DATA } from '../../constants/news';
+import { SocialMediaInfo } from 'ui';
 
 const Detail = () => {
   const { searchValue } = useSelector((state) => state.example);
@@ -82,6 +83,10 @@ const Detail = () => {
         {/* Breadcrumb => Mobile Resolutions */}
         <div className="px-4 md:hidden sm:hidden pb-5">
           <BreadCrumbs />
+        </div>
+
+        <div className="md:hidden">
+          <SocialMediaInfo />
         </div>
 
         {/* Modal => Form Inquiry Mobile Resolutions */}
