@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import TabBar from "ui/components/molecules/TabBar";
-import Card from "../../atoms/Card";
-import { CardPromo } from "ui/components/molecules";
-import { Tag } from "ui/components/atoms";
+import React, { useState } from 'react';
+import TabBar from 'ui/components/molecules/TabBar';
+import Card from '../../atoms/Card';
+import { CardPromo } from 'ui/components/molecules';
+import { Tag } from 'ui/components/atoms';
 
 const TabBarPromo = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -11,9 +11,9 @@ const TabBarPromo = () => {
   };
   const tabsData = [
     {
-      title: "ALL",
+      title: 'ALL',
       content: (
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 md:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 md:gap-6">
           <CardPromo
             title="Cicilan Ringan Toyota Raize"
             startDate="21 Nov 22"
@@ -68,7 +68,7 @@ const TabBarPromo = () => {
       ),
     },
     {
-      title: "MOBIL BARU",
+      title: 'MOBIL BARU',
       content: (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <CardPromo
@@ -81,7 +81,7 @@ const TabBarPromo = () => {
       ),
     },
     {
-      title: "SERVIS",
+      title: 'SERVIS',
       content: (
         <div>
           <Card className="mb-4">
@@ -95,7 +95,7 @@ const TabBarPromo = () => {
       ),
     },
     {
-      title: "LAINNYA",
+      title: 'LAINNYA',
       content: (
         <div>
           <Card className="mb-4 ">
