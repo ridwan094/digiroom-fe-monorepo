@@ -30,7 +30,6 @@ SocialMediaShare.defaultProps = {
   iconType: 'fill',
   className: '',
   onClick: () => {},
-  // style: {},
 };
 
 export default SocialMediaShare;

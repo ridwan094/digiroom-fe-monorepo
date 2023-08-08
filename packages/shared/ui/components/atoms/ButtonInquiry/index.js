@@ -1,14 +1,6 @@
 import React from 'react';
 import { Fragment } from 'react';
-import { FaFacebookF, FaTwitter } from 'react-icons/fa';
-import { PiLinkSimpleBold } from 'react-icons/pi';
 import { SocialMediaShare } from '../../molecules';
-
-const iconClassname = {
-  fill: '',
-  text: 'text',
-  icon: 'rounded-full',
-};
 
 const ButtonInquiry = ({
   children,
@@ -23,6 +15,7 @@ const ButtonInquiry = ({
   type = 'submit',
   colorSocialMediaContainer = '',
   containerBtnInquiry = '',
+  style,
   classNameSocialMediaContainerInquiry = '',
   ...props
 }) => {
@@ -43,23 +36,7 @@ const ButtonInquiry = ({
       {showMediaSocialShare && (
         <SocialMediaShare className={classNameSocialMediaAssigned.join(' ')} iconType="icon" />
       )}
-      {/* <div className={classNameSocialMediaAssigned.join(' ')}>
-        <a href="/" rel="noreferrer" target="_blank" className={sosialMediaWrapper.join(' ')}>
-          <FaTwitter size={20} color="#000" />
-        </a>
-        <a href="/" rel="noreferrer" target="_blank" className={sosialMediaWrapper.join(' ')}>
-          <FaFacebookF size={20} color="#000" />
-        </a>
-        <a href="/" rel="noreferrer" target="_blank" className={sosialMediaWrapper.join(' ')}>
-          <PiLinkSimpleBold size={20} color="#000" />
-        </a>
-      </div> */}
-      <button
-        className={classNameAssigned.join(' ')}
-        disabled={disabled}
-        // style={style}
-        {...props}
-      >
+      <button className={classNameAssigned.join(' ')} disabled={disabled} style={style} {...props}>
         {children ? children : <Fragment />}
       </button>
     </div>
@@ -78,7 +55,7 @@ ButtonInquiry.defaultProps = {
   iconType: 'fill',
   className: '',
   onClick: () => {},
-  // style: {},
+  style: {},
 };
 
 export default ButtonInquiry;
