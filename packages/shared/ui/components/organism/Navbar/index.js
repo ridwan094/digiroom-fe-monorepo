@@ -38,7 +38,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="bg-white border-b-2 border-reliableBlack30 px-8 md:px-16 md:py-3 hidden md:block">
+      <div className="bg-white md:border-b border-reliableBlack20 px-8 md:px-4 md:py-3 hidden md:block">
         {/* Top Navbar */}
         <div className="flex items-center justify-end">
           <div className="flex">
@@ -50,7 +50,7 @@ const Navbar = () => {
             />
             <BtnLoginSignup />
             <Button variant="bg-transparent" size="small">
-              <MdOutlineShoppingCart className="w-5 h-5" />
+              <MdOutlineShoppingCart className="w-5 h-5 text-reliableBlack" />
             </Button>
             <Dropdown
               onSelect={setDefaultFlag}
@@ -61,7 +61,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="bg-white py-1.5 md:py-5">
+      <div className="bg-white md:border-b md:border-reliableBlack70 py-1.5 px-4 md:px-16 md:py-5">
         {/* Top Navbar */}
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
@@ -132,85 +132,84 @@ const Navbar = () => {
 
             <Input
               type="text"
-              icon={<MdSearch size={24} />}
+              icon={<MdSearch color="#333333" size={24} />}
               iconPosition="right"
               labelClassName="text-reliableBlack70 font-semibold"
               onChange={handleChange}
               value={inputValues}
-              placeholder="Search"
               containerClassName="hidden md:flex"
             />
           </div>
         </div>
-      </div>
-      <div className="z-10 fixed bottom-0 left-0 bg-gray-700 px-5 md:hidden w-full">
-        <div className="flex items-center justify-between">
-          {/* Mobile Menu Toggle */}
-          <a
-            className="flex flex-col justify-center items-center text-white text-xs text-center py-4 hover:bg-gray-600"
-            href="#"
-          >
-            <NavHomeIcon />
-            Home
-          </a>
-          <div className="h-6 w-px bg-white my-2" />
-          <a
-            className="flex flex-col justify-center items-center text-white text-xs text-center py-4 hover:bg-gray-600"
-            href="#"
-          >
-            <CarIcon />
-            New Cars
-          </a>
-          <div className="h-6 w-px bg-white my-2" />
-          <a
-            className="flex flex-col justify-center items-center text-white text-xs text-center py-4 hover:bg-gray-600"
-            href="#"
-          >
-            <ServiceCarIcon />
-            Service
-          </a>
-          <div className="h-6 w-px bg-white my-2" />
-          <a
-            className="flex flex-col justify-center items-center text-white text-xs text-center py-4 hover:bg-gray-600"
-            href="#"
-          >
-            <span>
-              <AskCsIcon />
-            </span>
-            Ask Tasia
-          </a>
-          <div className="h-6 w-px bg-white my-2" />
-          {/* Hamburger Menu */}
-          <button className="text-white text-xl text-center" onClick={toggleMobileMenu}>
-            ☰
-          </button>
-        </div>
-
-        {/* Mobile Menu Items */}
-        <div
-          className={`absolute bottom-16 left-0 px-4 bg-gray-500 w-full ${
-            isMobileMenuOpen ? 'block' : 'hidden'
-          }`}
-        >
-          <div className={`flex flex-col `}>
-            <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
+        <div className="z-10 fixed bottom-0 left-0 bg-gray-700 px-5 md:hidden w-full">
+          <div className="flex items-center justify-between">
+            {/* Mobile Menu Toggle */}
+            <a
+              className="flex flex-col justify-center items-center text-white text-xs text-center py-4 hover:bg-gray-600"
+              href="#"
+            >
+              <NavHomeIcon />
+              Home
+            </a>
+            <div className="h-6 w-px bg-white my-2" />
+            <a
+              className="flex flex-col justify-center items-center text-white text-xs text-center py-4 hover:bg-gray-600"
+              href="#"
+            >
+              <CarIcon />
               New Cars
             </a>
-            <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
-              Test Drive
+            <div className="h-6 w-px bg-white my-2" />
+            <a
+              className="flex flex-col justify-center items-center text-white text-xs text-center py-4 hover:bg-gray-600"
+              href="#"
+            >
+              <ServiceCarIcon />
+              Service
             </a>
-            <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
-              Used Cars
+            <div className="h-6 w-px bg-white my-2" />
+            <a
+              className="flex flex-col justify-center items-center text-white text-xs text-center py-4 hover:bg-gray-600"
+              href="#"
+            >
+              <span>
+                <AskCsIcon />
+              </span>
+              Ask Tasia
             </a>
-            <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
-              After Sales
-            </a>
-            <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
-              Promo
-            </a>
-            <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
-              Toyota Dealer
-            </a>
+            <div className="h-6 w-px bg-white my-2" />
+            {/* Hamburger Menu */}
+            <button className="text-white text-xl text-center" onClick={toggleMobileMenu}>
+              ☰
+            </button>
+          </div>
+
+          {/* Mobile Menu Items */}
+          <div
+            className={`absolute bottom-16 left-0 px-4 bg-gray-500 w-full ${
+              isMobileMenuOpen ? 'block' : 'hidden'
+            }`}
+          >
+            <div className={`flex flex-col `}>
+              <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
+                New Cars
+              </a>
+              <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
+                Test Drive
+              </a>
+              <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
+                Used Cars
+              </a>
+              <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
+                After Sales
+              </a>
+              <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
+                Promo
+              </a>
+              <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
+                Toyota Dealer
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -18,9 +18,9 @@ const FormGroup = ({
         {title}
       </Text.Head4>
       {subTitle && (
-        <Text.BodyMedium className="font-light text-base" data-testid={titleTestId}>
+        <Text.BodyLarge className="md-max-w:text-head2" data-testid={titleTestId}>
           {subTitle}
-        </Text.BodyMedium>
+        </Text.BodyLarge>
       )}
       {withcCloseIcon ? (
         <div

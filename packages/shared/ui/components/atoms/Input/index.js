@@ -26,7 +26,7 @@ const Input = ({
 
   // tailwind styling
   const dafaultStyling = `w-full outline-none ${
-    disabled ? "bg-reliableBlack10 text-reliableBlack5" : "bg-white text-reliableBlack70"
+    disabled ? 'bg-reliableBlack10 text-reliableBlack5' : 'bg-[#f8f8f8] text-reliableBlack70'
   } border-b-2 border-reliableBlack30 focus:border-b-2`;
 
   return (
@@ -36,7 +36,15 @@ const Input = ({
         {label && <label className={labelClassName}>{label}</label>}
 
         {/* -- icon --- */}
-        {icon && <div className={`absolute inset-y-0 ${iconPosition === 'right' ? 'right-0' : 'left-0'} flex items-center`}>{icon}</div>}
+        {icon && (
+          <div
+            className={`absolute inset-y-0 ${
+              iconPosition === 'right' ? 'right-0' : 'left-0'
+            } flex items-center`}
+          >
+            {icon}
+          </div>
+        )}
 
         {/* --- input --- */}
         <div className={formatText ? `flex items-center gap-2` : ``}>
@@ -45,9 +53,11 @@ const Input = ({
             type={type}
             value={value}
             disabled={disabled}
-            className={`${inputClassName} ${dafaultStyling} ${sizeClassName[size]} ${iconPosition === 'left' ? "pl-11" : "pl-4"} ${
-              danger && "!border-supportiveRed"
-            } ${error && "!border-shadeRed"} focus:${focus || "border-reliableBlack5"}`}
+            className={`${inputClassName} ${dafaultStyling} ${sizeClassName[size]} ${
+              iconPosition === 'left' ? 'pl-11' : 'pl-4'
+            } ${danger && '!border-supportiveRed'} ${error && '!border-shadeRed'} focus:${
+              focus || 'border-reliableBlack5'
+            }`}
             {...register}
             {...props}
           />
@@ -57,27 +67,27 @@ const Input = ({
 
       {/* --- showed when input already touched before and error has a string --- */}
       {!showMessageError ? (
-        ""
+        ''
       ) : error ? (
         <div className="flex items-center gap-[5.67px]">
           <span className="text-supportiveRed text-[14px] leading-[20px] font-[400]">{error}</span>
         </div>
       ) : (
-        ""
+        ''
       )}
     </div>
   );
 };
 
 Input.defaultProps = {
-  focus: "outline-none",
-  size: "large",
-  type: "text",
-  value: "",
+  focus: 'outline-none',
+  size: 'large',
+  type: 'text',
+  value: '',
   disabled: false,
-  error: "",
+  error: '',
   icon: false,
-  containerClassName: "",
+  containerClassName: '',
   formatText: null,
 };
 

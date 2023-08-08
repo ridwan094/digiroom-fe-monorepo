@@ -16,7 +16,7 @@ const GeoPosition = ({ onChange, value, options }) => {
   return (
     <div className="bg-white relative">
       <div
-        className="flex gap-1 items-center cursor-pointer h-10 min-w-[165px] justify-center px-5"
+        className="flex gap-1 items-center cursor-pointer h-10 justify-center px-2"
         onClick={handleClickLocation}
       >
         <svg
@@ -31,14 +31,14 @@ const GeoPosition = ({ onChange, value, options }) => {
             fill="#494949"
           />
         </svg>
-        <p className="text-xs font-bold flex-1">{value}</p>
+        <p className="text-xs text-reliableBlack font-bold flex-1">{value}</p>
         <MdOutlineArrowDropDown
-          className="text-xl"
+          className="text-xl text-reliableBlack"
           style={{ rotate: isOpen ? '180deg' : '0deg' }}
         />
       </div>
       {isOpen && (
-        <div className="bg-white absolute top-full left-0 right-0 shadow-md z-50 rounded">
+        <div className="bg-white text-reliableBlack absolute top-full left-0 right-0 shadow-md">
           {options?.map((location) => (
             <p
               className="text-xs font-bold cursor-pointer px-5 min-h-[40px] flex items-center hover:bg-gray-50"
