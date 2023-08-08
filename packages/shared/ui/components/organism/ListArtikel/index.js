@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import TabBar from 'ui/components/molecules/TabBar';
-import Image from 'next/image';
 import Link from 'next/link';
 import CardNews from '../../molecules/CardNews';
 
@@ -13,7 +12,7 @@ const ListArtikel = ({ itemList = [] }) => {
 
   const ArticleItem = itemList.map((news, index) => (
     <Link key={news.id} href={`/${news.id}`}>
-      <div className="flex flex-col">
+      <div className="md:col-span-1 lg:col-span-1 xl:col-span-1">
         <CardNews title={news.title} date={news.subtitle} coverImg={news.image} index={index}/>
       </div>
     </Link>
