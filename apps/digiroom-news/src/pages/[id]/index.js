@@ -1,14 +1,13 @@
-import { useSelector } from 'react-redux';
-import { ButtonInquiry } from 'ui/components/atoms';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Button, ButtonInquiry, FormGroup, Text } from 'ui/components/atoms';
+import Image from 'next/image';
 import Layout from 'ui/components/templates/Layout';
 import { FiArrowRight } from 'react-icons/fi';
-import Text from 'ui/components/atoms/Text';
-import { FormGroup } from 'ui/components/atoms';
-import { BreadCrumbs, OtherPromo } from 'ui/components/molecules';
-import { Article } from 'ui/components/atoms';
-import { InquiryForm } from 'ui/components/molecules';
+import { BreadCrumbs, OtherPromo, InquiryForm } from 'ui/components/molecules';
 import { MOCK_DATA } from '../../constants/news';
+import { MdArrowBack, MdShare } from 'react-icons/md';
+import { SocialMediaInfo } from 'ui';
 
 const Detail = () => {
   const { searchValue } = useSelector((state) => state.example);
@@ -27,9 +26,10 @@ const Detail = () => {
       index = sig || index;
 
       return {
-        src: `https://source.unsplash.com/random/800x450?sig=${index}`,
+        // src: `https://source.unsplash.com/car/800x450?sig=${index}`,
+        src: `/images/detailNewsImage.png`,
         alt: `Image ${index + 1}`,
-        date: `2${index + 1} November 2023 - 2${index + 1} January 2024`,
+        date: `2${index + 1} Nov 23 - 2${index + 1} Jan 24`,
         headline: 'Toyota Raize Light Installments',
       };
     });
@@ -38,20 +38,25 @@ const Detail = () => {
   return (
     <div className="relative">
       <Layout>
+        <div className="hidden md:block border-b border-gray-100 px-16 py-1 mb-4">
+          <BreadCrumbs />
+        </div>
+        <div className="flex md:hidden border-b px-4 border-gray-100 pb-1 pt-2 mb-4">
+          <MdArrowBack size={24} color="black" />
+        </div>
         <div className="flex flex-col justify-center items-center gap-4">
           {/* Desktop Resolutions */}
           {/* Article */}
-          <div class="md:flex">
-            <div class="md:w-3/5">
+          {/* <div className="md:flex md:px-16 mt-11 gap-6">
+            <div>
               <img
                 src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
                 alt="image"
-                className="px-4"
               />
               <Article data={MOCK_DATA} />
             </div>
 
-            <div class="hidden md:block w-1/3 border-none relative flex flex-col pointer-events-auto bg-clip-padding bg-reliableBlack5 h-fit px-10 py-10 rounded-md text-current">
+            <div class="hidden md:block w-1/3 border-none relative flex-col pointer-events-auto bg-clip-padding bg-reliableBlack5 h-fit px-10 py-10 rounded-md text-current">
               <FormGroup
                 title="Dapatkan Penawaran Terbaik untuk Pemesanan Toyota Baru"
                 subTitle="Silakan isi data Anda. Data pribadi Anda aman bersama kami. Perwakilan sales kami akan segera menghubungi Anda."
@@ -60,7 +65,7 @@ const Detail = () => {
                 colorCloseIcons="bg-black"
                 withcCloseIcon={false}
               />
-              <div class="flex-auto overflow-y-auto relative">
+              <div class="flex-auto overflow-y-auto w-[480px] relative">
                 <InquiryForm
                   onSubmit={() => {}}
                   containerClassForm="bg-reliableBlack5 flex flex-col gap-4"
@@ -69,6 +74,49 @@ const Detail = () => {
                 />
               </div>
             </div>
+          </div> */}
+
+          <div className="flex mt-0 md:mt-8 gap-4 px-4 md:px-16">
+            <div className="flex flex-col">
+              <Image
+                className="px-0"
+                src="/images/detailNewsImage.png"
+                alt="detailPromoImage"
+                width={984}
+                height={520}
+              />
+              <div className="flex mt-6 justify-between items-center">
+                <h1 className="text-2xl md:text-4xl text-reliableBlack font-bold">
+                  Kupas Tuntas Fitur Safety Toyota CHR Hybrid Ini Bikin Makin Pengen Beli{' '}
+                </h1>
+              </div>
+              <div className="flex mt-6 items-center gap-4">
+                <h5 className="text-black">Diposting pada 19 Juli 2023</h5>
+              </div>
+              <p className="mt-6 text-black">
+                Hi AutoFamily! Untuk Anda para keluarga modern, mobil Calya cocok banget untuk Anda
+                nih. Mobil Calya yang memiliki ruang kabin yang lega bisa menampung 7 penumpang
+                sekaligus loh. Tak hanya itu, mobil Calya juga dilengkapi dengan Fitur Entertainment
+                yang lengkap. Yuk bawa pulang Toyota Calya untuk keluarga tersayang sekarang dengan
+                cicilan mulai dari 3.3 jutaan/bulan saja! <br /> Jangan lupa untuk isi formulir di
+                bawah ini untuk dapatkan penawarannya sekarang!
+              </p>
+            </div>
+            <div className="max-w-lg hidden md:block ">
+              <div className="bg-reliableBlack20 px-8 py-8">
+                <h4 className={'text-xl font-bold text-reliableBlack90 max-w-sm'}>
+                  Dapatkan Penawaran Terbaik untuk Pemesanan Toyota Baru
+                </h4>
+                <h4 className="text-xl text-reliableBlack text-justify mt-4">
+                  Silakan isi data Anda. Data pribadi Anda aman bersama kami. Perwakilan sales kami
+                  akan segera menghubungi Anda.
+                </h4>
+              </div>
+              <InquiryForm
+                labelStyle={'text-[#666666]'}
+                containerClassForm={'bg-reliableBlack20 px-8 pb-8'}
+              />
+            </div>
           </div>
           {/* Other Promo */}
           <OtherPromo
@@ -76,56 +124,63 @@ const Detail = () => {
             arrows={false}
             pagination={true}
             items={generateSlides()}
-            title="OTHER PROMOTIONS"
-            classNameContainerOtherPromo="w-full px-4 flex flex-col justify-center gap-4 mb-20"
+            title="Artikel Serupa"
+            classNameContainerOtherPromo="w-full px-4 md:px-16 flex flex-col justify-center gap-4 mb-20"
+            // padding={{ right: '2rem' }}
+            // classNameContainer="px-4 md:px-0"
+            // gap="1rem"
+            // title="OTHER PROMOTIONS"
+            // block
           />
         </div>
 
-        {/* Breadcrumb */}
+        {/* Breadcrumb => Mobile Resolutions */}
         <div className="px-4 md:hidden sm:hidden pb-5">
           <BreadCrumbs />
         </div>
 
-        {/* Modal */}
+        <div className="md:hidden">
+          <SocialMediaInfo />
+        </div>
+
+        {/* Modal => Form Inquiry Mobile Resolutions */}
         {modalForm ? (
           <div
-            class="z-40 fixed top-0 left-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+            class="z-40 fixed top-0 left-0 bottom-0 w-full h-full overflow-x-hidden overflow-y-auto"
             id="exampleModalScrollable"
             tabindex="-1"
             aria-labelledby="exampleModalScrollableLabel"
             aria-hidden="true"
           >
-            <div class="sm:h-[calc(100%-3rem)] max-w-lg my-6 mx-auto relative w-auto pointer-events-none ">
-              <div class="max-h-full overflow-hidden border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-                <FormGroup
-                  title="INQUIRY"
-                  onClose={handleInquiry}
-                  colorCloseIcons="bg-black"
-                  withcCloseIcon={true}
-                  containerFormGroupClass="flex items-center border-b-2 border-reliableBlack310 justify-between p-4 pb-4 text-black"
+            <div class="max-h-full overflow-hidden border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+              <FormGroup
+                title="INQUIRY"
+                onClose={handleInquiry}
+                colorCloseIcons="bg-black"
+                withcCloseIcon={true}
+                containerFormGroupClass="flex items-center border-b-2 border-reliableBlack310 justify-between p-4 pb-4 text-black"
+              />
+              <div class="flex-auto overflow-y-auto relative">
+                <InquiryForm
+                  onSubmit={handleSubmit}
+                  containerClassForm="bg-reliableBlack5 flex flex-col gap-4 pt-6"
+                  containerInputClassName="w-full mb-4 px-8"
+                  inputClassName="text-black bg-whiteRealible8 h-10"
+                  containerDropdown="px-8"
                 />
-                <div class="flex-auto overflow-y-auto relative">
-                  <InquiryForm
-                    onSubmit={handleSubmit}
-                    containerClassForm="bg-reliableBlack5 flex flex-col gap-4 pt-6"
-                    containerInputClassName="w-full mb-4 px-8"
-                    inputClassName="text-black bg-whiteRealible8 h-10"
-                    containerDropdown="px-8"
-                  />
-                </div>
               </div>
             </div>
           </div>
         ) : null}
       </Layout>
 
-      {/* Button Inquiry Mobile */}
+      {/* Button Inquiry Mobile Resolutions */}
       <ButtonInquiry
         block={true}
-        containerBtnInquiry="w-full absolute z-200 bottom-16 left-0 md:hidden lg:hidden"
-        className="bg-supportiveRed h-20"
+        containerBtnInquiry="w-full absolute z-200 bottom-14 left-0 md:hidden lg:hidden"
+        className="bg-supportiveRed h-18"
         classNameSocialMediaContainerInquiry="bg-reliableBlack3"
-        size="large"
+        size="small"
         variant={true}
         iconType="icon"
         onClick={handleInquiry}

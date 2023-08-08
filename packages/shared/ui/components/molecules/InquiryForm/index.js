@@ -9,6 +9,7 @@ const InquiryForm = ({
   containerClassForm,
   containerInputClassName,
   containerDropdown,
+  buttonContainer,
   inputClassName,
   labelStyle,
   onSubmit,
@@ -95,10 +96,10 @@ const InquiryForm = ({
   };
 
   return (
-    <form class={containerClassForm} onSubmit={handleSubmit}>
+    <form className={containerClassForm} onSubmit={handleSubmit}>
       <Input
         type="text"
-        labelClassName={`${labelStyle}`}
+        labelClassName="block text-reliableBlack70 text-sm font-bold mb-2"
         onChange={(e) => handleChange(e, 'fullname')}
         value={submit.fullName}
         label="Full Name"
@@ -110,7 +111,7 @@ const InquiryForm = ({
 
       <Input
         type="email"
-        labelClassName={`${labelStyle}`}
+        labelClassName="block text-reliableBlack70 text-sm font-bold mb-2"
         onChange={(e) => handleChange(e, 'email')}
         value={submit.email}
         label="Email"
@@ -122,7 +123,7 @@ const InquiryForm = ({
 
       <Input
         type="text"
-        labelClassName={`${labelStyle}`}
+        labelClassName="block text-reliableBlack70 text-sm font-bold mb-2"
         onChange={(e) => handleChange(e, 'number')}
         value={submit.phoneNumber}
         label="Phone"
@@ -142,7 +143,6 @@ const InquiryForm = ({
         <Dropdown
           withInput={true}
           label="Province"
-          labelClassname={'text-[#666666]'}
           options={['Jakarta', 'Jawa Barat', 'Jawa Tengah', 'Jawa Timur', 'Bali']}
           selectedOption={submit.province}
           onSelect={(e) => handleChange(e, 'province')}
@@ -155,7 +155,6 @@ const InquiryForm = ({
         <Dropdown
           withInput={true}
           label="City"
-          labelClassname={'text-[#666666]'}
           options={['Jakarta', 'Bandung', 'Semarang', 'Surakarta', 'Surabaya', 'Jogja']}
           selectedOption={submit.city}
           onSelect={(e) => handleChange(e, 'city')}
@@ -170,6 +169,12 @@ const InquiryForm = ({
           label="Branch Optional"
           labelClassname={'text-[#666666]'}
           options={[
+            'Auto 2000 Daan Magot',
+            'Auto 2001 Daan Magot',
+            'Auto 2002 Daan Magot',
+            'Auto 2003 Daan Magot',
+            'Auto 2004 Daan Magot',
+            'Auto 2005 Daan Magot',
             'Auto 2000 Daan Magot',
             'Auto 2001 Daan Magot',
             'Auto 2002 Daan Magot',
@@ -193,20 +198,22 @@ const InquiryForm = ({
         />
       </div>
 
-      <div class="flex items-center justify-between mt-4">
-        <ButtonConfirm
-          block={true}
-          className={checkFormInquiry() ? 'bg-gray-500' : 'bg-supportiveRed'}
-          size="large"
-          variant={true}
-          iconType="icon"
-          disabled={checkFormInquiry()}
-        >
-          <div className="flex justify-end items-center gap-x-2">
-            <Text.Head4>SUBMIT</Text.Head4>
-            <FiArrowRight size={20} />
-          </div>
-        </ButtonConfirm>
+      <div className={`${buttonContainer}`}>
+        <div class="flex items-center justify-between mt-4">
+          <ButtonConfirm
+            block={true}
+            className={checkFormInquiry() ? 'bg-gray-500' : 'bg-supportiveRed'}
+            size="large"
+            variant={true}
+            iconType="icon"
+            disabled={checkFormInquiry()}
+          >
+            <div className="flex justify-end items-center py-3 md:py-1 gap-x-2">
+              <Text.Head4>SUBMIT</Text.Head4>
+              <FiArrowRight size={20} />
+            </div>
+          </ButtonConfirm>
+        </div>
       </div>
     </form>
   );

@@ -1,27 +1,24 @@
-import React from "react";
-import Text from "ui/components/atoms/Text";
-import { FiX } from "react-icons/fi";
+import React from 'react';
+import Text from 'ui/components/atoms/Text';
+import { FiX } from 'react-icons/fi';
 
 const FormGroup = ({
-  title = "",
-  subTitle = "",
+  title = '',
+  subTitle = '',
   onClose,
   colorCloseIcons,
   titleTestId,
   btnCloseTestId,
   withcCloseIcon = false,
-  containerFormGroupClass = "",
+  containerFormGroupClass = '',
 }) => {
   return (
     <div className={containerFormGroupClass}>
-      <Text.Head4 className="md-max-w:text-head5" data-testid={titleTestId}>
+      <Text.Head4 className="text-reliableBlack90 md-max-w:text-head5" data-testid={titleTestId}>
         {title}
       </Text.Head4>
       {subTitle && (
-        <Text.BodyLarge
-          className="md-max-w:text-head2"
-          data-testid={titleTestId}
-        >
+        <Text.BodyLarge className="md-max-w:text-head2" data-testid={titleTestId}>
           {subTitle}
         </Text.BodyLarge>
       )}
@@ -39,13 +36,13 @@ const FormGroup = ({
 };
 
 FormGroup.defaultProps = {
-  title: "",
-  subTitle: "",
+  title: '',
+  subTitle: '',
   withcCloseIcon: false,
-  containerFormGroupClass: "",
-  colorCloseIcons: "",
-  titleTestId: "",
-  btnCloseTestId: "",
+  containerFormGroupClass: '',
+  colorCloseIcons: '',
+  titleTestId: '',
+  btnCloseTestId: '',
   onClose: () => {},
 };
 
