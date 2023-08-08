@@ -8,10 +8,10 @@ const CardNews = ({ id, title, coverImg, date, index }) => {
     <Card className="border border-reliableBlack-310 transition-all ease-in-out duration-300 hover:scale-105">
       <div
         key={id}
-        className={`p-4 lg:p-6 ${isFirstCard ? 'h-full flex flex-col justify-between' : 'h-full'}`}
+        className={`p-4 lg:p-6 md:p-6 ${isFirstCard ? 'h-40s flex flex-col justify-between' : 'h-full'}`}
       >
         <img
-          className={`w-full h-full object-cover ${isFirstCard ? 'h-48 mb-2' : 'h-44'}`}
+          className={`w-full h-full object-cover ${isFirstCard ? 'h-40 mb-9 mt-1' : 'h-40 mb-4'}`}
           src={coverImg}
           alt="Auto2000 promo"
         />

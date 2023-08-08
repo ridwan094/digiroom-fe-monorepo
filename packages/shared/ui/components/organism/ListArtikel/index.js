@@ -23,7 +23,7 @@ const ListArtikel = ({ itemList = [] }) => {
     {
       title: 'NEWS',
       content: (
-        <div className="lmd:grid grid-cols-2 lg:grid grid-cols-3 xl:grid grid-cols-4 gap-4">
+        <div className="grid-cols-2 lg:grid grid-cols-3 xl:grid grid-cols-4 gap-4">
           {ArticleItem.map((item, index) => (
             <div key={index} className={index === 0 ? 'col-span-2' : 'col-span-1'}>
               {item}
