@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ButtonConfirm, Dropdown, Input, Text } from '../../atoms';
 import { FiArrowRight } from 'react-icons/fi';
-// import Checkbox from '../../atoms/CheckBox';
+import Checkbox from '../../atoms/CheckBox';
 
 const InquiryForm = ({
   containerClassForm,
@@ -58,7 +58,7 @@ const InquiryForm = ({
         city: e,
       }));
     }
-     
+
     if (category === 'branchOptional') {
       setSubmit((prevState) => ({
         ...prevState,
@@ -66,12 +66,12 @@ const InquiryForm = ({
       }));
     }
 
-    // if (category === 'checkbox') {
-    //   setSubmit((prevState) => ({
-    //     ...prevState,
-    //     checked: e.target.checked,
-    //   }));
-    // }
+    if (category === 'checkbox') {
+      setSubmit((prevState) => ({
+        ...prevState,
+        checked: e.target.checked,
+      }));
+    }
   };
 
   const handleSubmit = (e) => {
@@ -178,13 +178,13 @@ const InquiryForm = ({
       </div>
 
       {/* CheckBox */}
-      {/* <div className={containerDropdown ? containerDropdown : ''}>
+      <div className={containerDropdown ? containerDropdown : ''}>
         <Checkbox
           label="Saya telah membaca dan menyetujui Syarat dan Ketentuan Auto 2000"
           checked={submit.checked}
           onChange={(e) => handleChange(e, 'checkbox')}
         />
-      </div> */}
+      </div>
 
       <div class="flex items-center justify-between mt-4">
         <ButtonConfirm
