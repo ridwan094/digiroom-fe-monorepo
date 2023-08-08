@@ -5,7 +5,7 @@ import { SiInstagram } from 'react-icons/si';
 
 const InfoDigiroom = () => {
   return (
-    <div>
+    <div className="text-reliableBlack">
       <h6 className="text-xs font-bold mb-2">Auto2000 Digiroom</h6>
       <p className="text-[10px] mb-2">
         The largest Toyota dealer in Indonesia serving a network of sales, maintenance, repair and

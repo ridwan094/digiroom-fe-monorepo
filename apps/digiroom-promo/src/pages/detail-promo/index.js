@@ -7,6 +7,7 @@ import {
   Card,
   Carousel,
   InquiryForm,
+  InquirySuccess,
   Layout,
   OtherPromo,
   OtpForm,
@@ -35,6 +36,7 @@ function DetailPromoPage() {
   const [isMobile, setIsMobile] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
   const [otpOpen, setOtpOpen] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     // Menggunakan fungsi window.matchMedia untuk mendeteksi ukuran layar
@@ -127,9 +129,14 @@ function DetailPromoPage() {
                 buttonContainer={'absolute w-full bottom-16 left-0'}
                 inputClassName={'text-center'}
                 onSubmit={() => {
-                  setOtpOpen(true);
+                  setSuccess(true);
                 }}
               />
+              {success && (
+                <div className="absolute px-4 transform -translate-y-1/2">
+                  <InquirySuccess onClick={() => setSuccess(false)} />
+                </div>
+              )}
 
               <p className="text-[14px] max-w-[328px] text-justify px-4 mt-14 text-reliableBlack">
                 Belum dapat kode?{' '}

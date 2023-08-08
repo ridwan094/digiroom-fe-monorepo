@@ -42,7 +42,9 @@ const Detail = () => {
           <BreadCrumbs />
         </div>
         <div className="flex md:hidden border-b px-4 border-gray-100 pb-1 pt-2 mb-4">
-          <MdArrowBack size={24} color="black" />
+          <a href="/">
+            <MdArrowBack size={24} color="black" />
+          </a>
         </div>
         <div className="flex flex-col justify-center items-center gap-4">
           {/* Desktop Resolutions */}
@@ -120,15 +122,15 @@ const Detail = () => {
           </div>
           {/* Other Promo */}
           <OtherPromo
-            perPage={2}
+            perPage={4}
             arrows={false}
             pagination={true}
             items={generateSlides()}
             title="Artikel Serupa"
-            classNameContainerOtherPromo="w-full px-4 md:px-16 flex flex-col justify-center gap-4 mb-20"
+            classNameContainer="w-full px-4 md:px-16 flex flex-col justify-center mb-20"
             // padding={{ right: '2rem' }}
             // classNameContainer="px-4 md:px-0"
-            // gap="1rem"
+            gap="1rem"
             // title="OTHER PROMOTIONS"
             // block
           />
