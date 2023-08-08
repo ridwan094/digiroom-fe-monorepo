@@ -11,7 +11,7 @@ const CardNews = ({ id, title, coverImg, date, index }) => {
         className={`p-4 lg:p-6 md:p-6 ${isFirstCard ? 'h-40s flex flex-col justify-between' : 'h-full'}`}
       >
         <img
-          className={`w-full h-full object-cover ${isFirstCard ? 'h-40 mb-9 mt-1' : 'h-40 mb-4'}`}
+          className={`w-full h-full object-cover ${isFirstCard ? 'h-44 mb-10 mt-1' : 'h-44 mb-5'}`}
           src={coverImg}
           alt="Auto2000 promo"
         />
