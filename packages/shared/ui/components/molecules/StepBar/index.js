@@ -1,38 +1,43 @@
-const DynamicStepper = ({ steps, activeTab }) => {
+const DynamicStepper = ({ numSteps, tabsData, activeTab }) => {
+  const steps = Array.from({ length: numSteps }, (_, index) => index + 1);
   return (
-    <div>
+<div>
       <ol className="flex items-center w-full mb-4 sm:mb-5">
-        {steps.map((step, index) => (
+        {steps.map((stepNumber, index) => (
           <li
             key={index}
             className={`flex w-full items-center ${
               index === activeTab
-                ? 'text-supportiveRed dark:text-supportiveRed after:border-supportiveRed'
-                : 'after:border-reliableBlack20 dark:after:border-reliableBlack20'
+                ? 'text-reliableBlack-500 dark:text-[#FBB90F] after:border-[#FBB90F]'
+                : 'after:border-reliableBlack70 dark:after:border-reliableBlack70'
             }`}
           >
             <span
-              className={`flex items-center justify-center w-10 h-10 ${
-                index === activeTab || index < activeTab
-                  ? 'bg-supportiveRed dark:bg-supportiveRed'
-                  : 'bg-reliableBlack20 dark:bg-reliableBlack20'
-              } rounded-full lg:h-12 lg:w-12 dark:text-white shrink-0`}
+              className={`flex items-center justify-center w-[22px] h-[22px] mr-2 ${
+                index === activeTab
+                  ? 'bg-yellow-300 dark:black-400'
+                  : index < activeTab
+                  ? 'bg-[#1DA707] dark:bg-[#1DA707]'
+                  : 'bg-reliableBlack70 dark:bg-gray-100'
+              } rounded-full lg:h-12 lg:w-12 text-white text-xs dark:text-white shrink-0`}
             >
-              {step.icon}
+              {stepNumber}
+            </span>
+            <span className="flex p-1 text-sm capitalize text-reliableBlack items-center">
+              {tabsData[index].title}
             </span>
             {index < steps.length - 1 && (
               <span
-                className={`h-1 w-full ${
+                className={`h-0.5 min-w-[10px] md:w-full mx-2 ${
                   index < activeTab
-                    ? 'bg-supportiveRed dark:bg-supportiveRed'
-                    : 'bg-reliableBlack20 dark:bg-reliableBlack20'
+                    ? 'bg-reliableBlack70 dark:bg-reliableBlack70'
+                    : 'bg-gray-300 dark:bg-gray-300'
                 }`}
               ></span>
             )}
           </li>
         ))}
       </ol>
-      {steps[activeTab].content}
     </div>
   );
 };
