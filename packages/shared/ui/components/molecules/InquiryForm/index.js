@@ -9,6 +9,7 @@ const InquiryForm = ({
   containerClassForm,
   containerInputClassName,
   containerDropdown,
+  buttonContainer,
   inputClassName,
   labelStyle,
   onSubmit,
@@ -95,7 +96,7 @@ const InquiryForm = ({
   };
 
   return (
-    <form class={containerClassForm} onSubmit={handleSubmit}>
+    <form className={containerClassForm} onSubmit={handleSubmit}>
       <Input
         type="text"
         labelClassName={`${labelStyle}`}
@@ -193,20 +194,22 @@ const InquiryForm = ({
         />
       </div>
 
-      <div class="flex items-center justify-between mt-4">
-        <ButtonConfirm
-          block={true}
-          className={checkFormInquiry() ? 'bg-gray-500' : 'bg-supportiveRed'}
-          size="large"
-          variant={true}
-          iconType="icon"
-          disabled={checkFormInquiry()}
-        >
-          <div className="flex justify-end items-center gap-x-2">
-            <Text.Head4>SUBMIT</Text.Head4>
-            <FiArrowRight size={20} />
-          </div>
-        </ButtonConfirm>
+      <div className={`${buttonContainer}`}>
+        <div class="flex items-center justify-between mt-4">
+          <ButtonConfirm
+            block={true}
+            className={checkFormInquiry() ? 'bg-gray-500' : 'bg-supportiveRed'}
+            size="large"
+            variant={true}
+            iconType="icon"
+            disabled={checkFormInquiry()}
+          >
+            <div className="flex justify-end items-center py-3 md:py-1 gap-x-2">
+              <Text.Head4>SUBMIT</Text.Head4>
+              <FiArrowRight size={20} />
+            </div>
+          </ButtonConfirm>
+        </div>
       </div>
     </form>
   );

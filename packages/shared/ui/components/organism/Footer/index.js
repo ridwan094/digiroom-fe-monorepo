@@ -1,17 +1,17 @@
-import React from "react";
-import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube, FaWhatsapp } from "react-icons/fa";
+import React from 'react';
+import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube, FaWhatsapp } from 'react-icons/fa';
 
 const Footer = () => {
   return (
     <>
       <footer className="bg-[#2C2B2B]">
-        <div className="space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-16">
+        <div className="space-y-8 px-5 py-16 sm:px-6 lg:space-y-16 lg:px-16">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
               <div>
-                <p className="font-medium text-white">NEW CAR</p>
+                <p className="font-bold text-white">NEW CAR</p>
 
-                <ul className="mt-6 text-[#A3A3A3] space-y-4 text-sm">
+                <ul className="mt-5 text-[#A3A3A3] space-y-4 text-sm">
                   <li>
                     <a href="#" className="transition hover:opacity-75">
                       YARIS CROSS
@@ -51,9 +51,9 @@ const Footer = () => {
               </div>
 
               <div>
-                <p className="font-medium text-white">USED CARS</p>
+                <p className="font-bold text-white">USED CARS</p>
 
-                <ul className="mt-6 text-[#A3A3A3] space-y-4 text-sm">
+                <ul className="mt-5 font-base text-[#A3A3A3] space-y-4 text-sm">
                   <li>
                     <a href="#" className="transition hover:opacity-75">
                       AFTER SALES
@@ -99,9 +99,9 @@ const Footer = () => {
               </div>
 
               <div>
-                <p className="font-medium text-white">FAQS</p>
+                <p className="font-bold text-white">FAQS</p>
 
-                <ul className="mt-6 space-y-4 text-sm">
+                <ul className="mt-5 font-bold space-y-4 text-sm">
                   <li>
                     <a href="#" className="text-white transition hover:opacity-75">
                       HELPS
@@ -129,9 +129,9 @@ const Footer = () => {
               </div>
 
               <div>
-                <p className="font-medium text-white">ABOUT AUTO2000</p>
+                <p className="font-bold text-white">ABOUT AUTO2000</p>
 
-                <ul className="mt-6 space-y-4 text-sm">
+                <ul className="mt-5 font-bold space-y-4 text-sm">
                   <li>
                     <a href="#" className="text-white transition hover:opacity-75">
                       PROMO
@@ -160,14 +160,24 @@ const Footer = () => {
                   <span className="text-white text-xs">Follow Us</span>
                   <ul className="flex gap-6 mt-3">
                     <li>
-                      <a href="/" rel="noreferrer" target="_blank" className="text-white transition hover:opacity-75">
+                      <a
+                        href="/"
+                        rel="noreferrer"
+                        target="_blank"
+                        className="text-white transition hover:opacity-75"
+                      >
                         <span className="sr-only">Facebook</span>
                         <FaFacebookF size="22px" />
                       </a>
                     </li>
 
                     <li>
-                      <a href="/" rel="noreferrer" target="_blank" className="text-white transition hover:opacity-75">
+                      <a
+                        href="/"
+                        rel="noreferrer"
+                        target="_blank"
+                        className="text-white transition hover:opacity-75"
+                      >
                         <span className="sr-only">Instagram</span>
 
                         <FaInstagram size="22px" />
@@ -175,21 +185,36 @@ const Footer = () => {
                     </li>
 
                     <li>
-                      <a href="/" rel="noreferrer" target="_blank" className="text-white transition hover:opacity-75">
+                      <a
+                        href="/"
+                        rel="noreferrer"
+                        target="_blank"
+                        className="text-white transition hover:opacity-75"
+                      >
                         <span className="sr-only">Twitter</span>
                         <FaTwitter size="22px" />
                       </a>
                     </li>
 
                     <li>
-                      <a href="/" rel="noreferrer" target="_blank" className="text-white transition hover:opacity-75">
+                      <a
+                        href="/"
+                        rel="noreferrer"
+                        target="_blank"
+                        className="text-white transition hover:opacity-75"
+                      >
                         <span className="sr-only">GitHub</span>
                         <FaYoutube size="22px" />
                       </a>
                     </li>
 
                     <li>
-                      <a href="/" rel="noreferrer" target="_blank" className="text-white transition hover:opacity-75">
+                      <a
+                        href="/"
+                        rel="noreferrer"
+                        target="_blank"
+                        className="text-white transition hover:opacity-75"
+                      >
                         <span className="sr-only">Dribbble</span>
                         <FaWhatsapp size="22px" />
                       </a>
@@ -200,45 +225,47 @@ const Footer = () => {
                 {/* Download on the Playstore */}
                 <div className="flex flex-col">
                   <span className="text-white text-xs mb-3 mt-4 md:mt-0">Download Digiroom</span>
-                  <div className="flex w-[140px] h-[51px] bg-black text-white rounded-md border border-white items-center justify-center">
-                    <div className="mr-2">
-                      <svg viewBox="30 336.7 120.9 129.2" width="23">
-                        <path
-                          fill="#FFD400"
-                          d="M119.2,421.2c15.3-8.4,27-14.8,28-15.3c3.2-1.7,6.5-6.2,0-9.7  c-2.1-1.1-13.4-7.3-28-15.3l-20.1,20.2L119.2,421.2z"
-                        />
-                        <path
-                          fill="#FF3333"
-                          d="M99.1,401.1l-64.2,64.7c1.5,0.2,3.2-0.2,5.2-1.3  c4.2-2.3,48.8-26.7,79.1-43.3L99.1,401.1L99.1,401.1z"
-                        />
-                        <path
-                          fill="#48FF48"
-                          d="M99.1,401.1l20.1-20.2c0,0-74.6-40.7-79.1-43.1  c-1.7-1-3.6-1.3-5.3-1L99.1,401.1z"
-                        />
-                        <path
-                          fill="#3BCCFF"
-                          d="M99.1,401.1l-64.3-64.3c-2.6,0.6-4.8,2.9-4.8,7.6  c0,7.5,0,107.5,0,113.8c0,4.3,1.7,7.4,4.9,7.7L99.1,401.1z"
-                        />
-                      </svg>
+                  <div className="flex items-center gap-3.5 md:gap-0 md:flex-col">
+                    <div className="flex w-[140px] h-[51px] bg-black text-white rounded-md border border-white items-center justify-center">
+                      <div className="mr-2">
+                        <svg viewBox="30 336.7 120.9 129.2" width="23">
+                          <path
+                            fill="#FFD400"
+                            d="M119.2,421.2c15.3-8.4,27-14.8,28-15.3c3.2-1.7,6.5-6.2,0-9.7  c-2.1-1.1-13.4-7.3-28-15.3l-20.1,20.2L119.2,421.2z"
+                          />
+                          <path
+                            fill="#FF3333"
+                            d="M99.1,401.1l-64.2,64.7c1.5,0.2,3.2-0.2,5.2-1.3  c4.2-2.3,48.8-26.7,79.1-43.3L99.1,401.1L99.1,401.1z"
+                          />
+                          <path
+                            fill="#48FF48"
+                            d="M99.1,401.1l20.1-20.2c0,0-74.6-40.7-79.1-43.1  c-1.7-1-3.6-1.3-5.3-1L99.1,401.1z"
+                          />
+                          <path
+                            fill="#3BCCFF"
+                            d="M99.1,401.1l-64.3-64.3c-2.6,0.6-4.8,2.9-4.8,7.6  c0,7.5,0,107.5,0,113.8c0,4.3,1.7,7.4,4.9,7.7L99.1,401.1z"
+                          />
+                        </svg>
+                      </div>
+                      <div>
+                        <div className="text-[9px]">GET IT ON</div>
+                        <div className="text-[16px] font-semibold font-sans -mt-1">Google Play</div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="text-[9px]">GET IT ON</div>
-                      <div className="text-[16px] font-semibold font-sans -mt-1">Google Play</div>
-                    </div>
-                  </div>
-                  {/* Download on the appstore & googleplay */}
-                  <div className="flex mt-3 w-[140px] h-[51px] bg-black text-white rounded-lg border border-white items-center justify-center">
-                    <div className="mr-2">
-                      <svg viewBox="0 0 384 512" width="23">
-                        <path
-                          fill="currentColor"
-                          d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
-                        />
-                      </svg>
-                    </div>
-                    <div className="-mb-1">
-                      <div className="text-[7px] -mb-2">Download on the</div>
-                      <div className="text-[16px] font-semibold font-sans">App Store</div>
+                    {/* Download on the appstore & googleplay */}
+                    <div className="flex md:mt-3 w-[140px] h-[51px] bg-black text-white rounded-lg border border-white items-center justify-center">
+                      <div className="mr-2">
+                        <svg viewBox="0 0 384 512" width="23">
+                          <path
+                            fill="currentColor"
+                            d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
+                          />
+                        </svg>
+                      </div>
+                      <div className="-mb-1">
+                        <div className="text-[7px] -mb-2">Download on the</div>
+                        <div className="text-[16px] font-semibold font-sans">App Store</div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -251,7 +278,13 @@ const Footer = () => {
         <div className="flex flex-col bg-[#1F1F1F] mb-16 md:mb-0 md:px-16 py-4 md:flex-row md:justify-between">
           <div className="flex items-center gap-9">
             {/* Satu Indonesia Icons */}
-            <svg width="57" height="29" viewBox="0 0 57 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              width="57"
+              height="29"
+              viewBox="0 0 57 29"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 d="M7.43471 11.9519L7.31498 11.7114C6.97075 10.919 6.85438 10.0462 6.97896 9.19127L7.05138 8.95084L7.17111 8.71041L7.33912 8.51729L7.53224 8.301L7.72535 8.13299C9.06944 7.36052 10.7254 7.53336 12.2375 7.72455L13.0534 7.84428L13.8935 8.01229L14.3763 8.08471H14.8591L15.3148 8.01229L15.7706 7.84428C18.3622 6.6682 20.2345 4.34018 22.5384 2.80394L23.2587 2.37232L23.979 2.01216L24.7515 1.60372L25.6157 1.2677L26.504 0.978023L27.4397 0.737593L28.4236 0.544477L29.4799 0.376465L30.5836 0.328186H31.7355L32.9831 0.376465L34.2789 0.544477L35.6471 0.784907L37.0627 1.12093L38.5989 1.57668L39.1271 1.7447L39.6552 1.86443L40.1834 1.98416L40.7116 2.05658L41.2398 2.129L41.7438 2.20142C44.7075 2.34814 47.6737 1.96626 50.5036 1.07362L51.2326 0.91526L51.5686 0.795528L51.9288 0.723109L52.2648 0.650691L52.6008 0.578272L52.5284 0.771388L52.456 0.964505L52.3343 1.17597L52.2146 1.4164L52.0948 1.65683L51.8785 1.89726C50.2226 4.36915 48.1582 6.62861 46.4066 9.00105L46.2386 9.24148L46.1189 9.4346H45.4709C42.8328 9.53728 40.2062 9.03421 37.7926 7.96401L36.9284 7.72358L36.0884 7.55557L35.2725 7.43584L34.5 7.38756H33.7275L32.9831 7.43584L32.2627 7.55557L31.5424 7.6753L30.8221 7.86842L30.1259 8.08471L29.4297 8.32514L28.7335 8.56557L28.0373 8.85525L27.3412 9.14492L26.6933 9.4346L25.9971 9.72427C18.3168 12.9406 17.5251 10.6126 11.3096 10.5402H10.9736L10.7331 10.5885H10.4435L10.2504 10.685L10.0099 10.7333L9.81681 10.8057L9.64879 10.8781L9.48078 10.9506L9.31277 11.359L9.24035 12.8228L7.43471 11.9519Z"
                 fill="#807F7F"
@@ -587,7 +620,13 @@ const Footer = () => {
             </svg>
 
             {/* Toyota Icons */}
-            <svg width="72" height="24" viewBox="0 0 72 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              width="72"
+              height="24"
+              viewBox="0 0 72 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -717,7 +756,13 @@ const Footer = () => {
             </svg>
 
             {/* Astra Icons */}
-            <svg width="77" height="22" viewBox="0 0 77 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              width="77"
+              height="22"
+              viewBox="0 0 77 22"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -764,7 +809,12 @@ const Footer = () => {
             </svg>
           </div>
           <div className="flex flex-col md:flex-row gap-1 md:gap-10">
-            <a href="#" rel="noreferrer" target="_blank" className="text-xs text-gray-500 mt-8 mb-1 md:mb-0 md:mt-0">
+            <a
+              href="#"
+              rel="noreferrer"
+              target="_blank"
+              className="text-xs text-gray-500 mt-8 mb-1 md:mb-0 md:mt-0"
+            >
               Roadside Assistance <span className="text-xs font-bold text-gray-500">1500 898</span>
             </a>
             <a href="#" rel="noreferrer" target="_blank" className="text-xs text-gray-500">

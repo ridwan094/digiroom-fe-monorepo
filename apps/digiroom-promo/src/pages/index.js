@@ -61,7 +61,7 @@ export default function Home() {
         <QuickLink />
         <div className="flex flex-col justify-center items-center gap-4">
           {/* Hero section promo page */}
-          <section className="py-4 lg:py-8 w-full">
+          <section className="py-4 lg:pb-8 lg:pt-1 w-full">
             <div className="container px-4 lg:px-16">
               <BreadCrumbs />
               <h2 className="text-base font-bold uppercase text-reliableBlack mb-2 mt-8 lg:text-2xl">
