@@ -6,8 +6,7 @@ import { newsList } from '../constants/news';
 import Link from 'next/link';
 
 export default function Home() {
-  return (
-    <div className="relative">
+  return (    
       <Layout>
         <div className="hidden md:block border-b border-gray-100 py-1 mb-4">
           <div className="px-16">
@@ -36,11 +35,12 @@ export default function Home() {
             </div>
           </div>
           {/* List Artikel Desktop */}
-          <div className="py-4">
+          <div className="px-4 mb-2">
             <ListArtikel itemList={newsList} />
           </div>
         </div>
+        </div>
       </Layout>
-    </div>
+   
   );
 }

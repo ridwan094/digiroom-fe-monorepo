@@ -1,14 +1,11 @@
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Button, ButtonInquiry } from 'ui/components/atoms';
 import { useState } from 'react';
 import Image from 'next/image';
 import Layout from 'ui/components/templates/Layout';
 import { FiArrowRight } from 'react-icons/fi';
-import Text from 'ui/components/atoms/Text';
-import { FormGroup } from 'ui/components/atoms';
-import { BreadCrumbs, OtherPromo } from 'ui/components/molecules';
-import { Article } from 'ui/components/atoms';
-import { InquiryForm } from 'ui/components/molecules';
+import { BreadCrumbs, OtherPromo, InquiryForm } from 'ui/components/molecules';
 import { MOCK_DATA } from '../../constants/news';
 import { MdArrowBack, MdShare } from 'react-icons/md';
 
@@ -32,7 +29,7 @@ const Detail = () => {
         // src: `https://source.unsplash.com/car/800x450?sig=${index}`,
         src: `/images/detailNewsImage.png`,
         alt: `Image ${index + 1}`,
-        date: `2${index + 1} November 2023 - 2${index + 1} January 2024`,
+        date: `2${index + 1} Nov 23 - 2${index + 1} Jan 24`,
         headline: 'Toyota Raize Light Installments',
       };
     });
@@ -132,51 +129,53 @@ const Detail = () => {
           />
         </div>
 
-        {/* Breadcrumb */}
+        {/* Breadcrumb => Mobile Resolutions */}
         <div className="px-4 md:hidden sm:hidden pb-5">
           <BreadCrumbs />
         </div>
 
-        {/* Modal */}
+        <div className="md:hidden">
+          <SocialMediaInfo />
+        </div>
+
+        {/* Modal => Form Inquiry Mobile Resolutions */}
         {modalForm ? (
           <div
-            class="z-40 fixed top-0 left-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+            class="z-40 fixed top-0 left-0 bottom-0 w-full h-full overflow-x-hidden overflow-y-auto"
             id="exampleModalScrollable"
             tabindex="-1"
             aria-labelledby="exampleModalScrollableLabel"
             aria-hidden="true"
           >
-            <div class="sm:h-[calc(100%-3rem)] max-w-lg my-6 mx-auto relative w-auto pointer-events-none ">
-              <div class="max-h-full overflow-hidden border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-                <FormGroup
-                  title="INQUIRY"
-                  onClose={handleInquiry}
-                  colorCloseIcons="bg-black"
-                  withcCloseIcon={true}
-                  containerFormGroupClass="flex items-center border-b-2 border-reliableBlack310 justify-between p-4 pb-4 text-black"
+            <div class="max-h-full overflow-hidden border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+              <FormGroup
+                title="INQUIRY"
+                onClose={handleInquiry}
+                colorCloseIcons="bg-black"
+                withcCloseIcon={true}
+                containerFormGroupClass="flex items-center border-b-2 border-reliableBlack310 justify-between p-4 pb-4 text-black"
+              />
+              <div class="flex-auto overflow-y-auto relative">
+                <InquiryForm
+                  onSubmit={handleSubmit}
+                  containerClassForm="bg-reliableBlack5 flex flex-col gap-4 pt-6"
+                  containerInputClassName="w-full mb-4 px-8"
+                  inputClassName="text-black bg-whiteRealible8 h-10"
+                  containerDropdown="px-8"
                 />
-                <div class="flex-auto overflow-y-auto relative">
-                  <InquiryForm
-                    onSubmit={handleSubmit}
-                    containerClassForm="bg-reliableBlack5 flex flex-col gap-4 pt-6"
-                    containerInputClassName="w-full mb-4 px-8"
-                    inputClassName="text-black bg-whiteRealible8 h-10"
-                    containerDropdown="px-8"
-                  />
-                </div>
               </div>
             </div>
           </div>
         ) : null}
       </Layout>
 
-      {/* Button Inquiry Mobile */}
+      {/* Button Inquiry Mobile Resolutions */}
       <ButtonInquiry
         block={true}
-        containerBtnInquiry="w-full absolute z-200 bottom-16 left-0 md:hidden lg:hidden"
-        className="bg-supportiveRed h-20"
+        containerBtnInquiry="w-full absolute z-200 bottom-14 left-0 md:hidden lg:hidden"
+        className="bg-supportiveRed h-18"
         classNameSocialMediaContainerInquiry="bg-reliableBlack3"
-        size="large"
+        size="small"
         variant={true}
         iconType="icon"
         onClick={handleInquiry}
