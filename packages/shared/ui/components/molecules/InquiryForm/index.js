@@ -190,12 +190,10 @@ const InquiryForm = ({
 
       {/* CheckBox */}
       <div className={containerDropdown ? containerDropdown : ''}>
-      <div className={containerDropdown ? containerDropdown : ''}>
         <Checkbox
           labelClassname="flex text-xs mt-5"
           label="Saya telah membaca dan menyetujui Syarat dan Ketentuan Auto 2000"
           checked={submit.checked}
-          onChange={(e) => handleChange(e, 'checkbox')}
           onChange={(e) => handleChange(e, 'checkbox')}
         />
       </div>

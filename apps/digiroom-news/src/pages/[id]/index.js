@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Button, ButtonInquiry } from 'ui/components/atoms';
-import { useState } from 'react';
+import { Button, ButtonInquiry, FormGroup, Text } from 'ui/components/atoms';
 import Image from 'next/image';
 import Layout from 'ui/components/templates/Layout';
 import { FiArrowRight } from 'react-icons/fi';
 import { BreadCrumbs, OtherPromo, InquiryForm } from 'ui/components/molecules';
 import { MOCK_DATA } from '../../constants/news';
 import { MdArrowBack, MdShare } from 'react-icons/md';
+import { SocialMediaInfo } from 'ui';
 
 const Detail = () => {
   const { searchValue } = useSelector((state) => state.example);
@@ -126,6 +126,11 @@ const Detail = () => {
             items={generateSlides()}
             title="Artikel Serupa"
             classNameContainerOtherPromo="w-full px-4 md:px-16 flex flex-col justify-center gap-4 mb-20"
+            // padding={{ right: '2rem' }}
+            // classNameContainer="px-4 md:px-0"
+            // gap="1rem"
+            // title="OTHER PROMOTIONS"
+            // block
           />
         </div>
 

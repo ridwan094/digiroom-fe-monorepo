@@ -1,13 +1,8 @@
 import React from 'react';
 import Text from 'ui/components/atoms/Text';
 import { FiX } from 'react-icons/fi';
-import React from 'react';
-import Text from 'ui/components/atoms/Text';
-import { FiX } from 'react-icons/fi';
 
 const FormGroup = ({
-  title = '',
-  subTitle = '',
   title = '',
   subTitle = '',
   onClose,
@@ -25,7 +20,7 @@ const FormGroup = ({
       {subTitle && (
         <Text.BodyLarge className="md-max-w:text-head2" data-testid={titleTestId}>
           {subTitle}
-        </Text.BodyMedium>
+        </Text.BodyLarge>
       )}
       {withcCloseIcon ? (
         <div
