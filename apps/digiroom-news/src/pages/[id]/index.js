@@ -124,7 +124,7 @@ const Detail = () => {
           <OtherPromo
             perPage={4}
             arrows={false}
-            pagination={true}
+            pagination={false}
             items={generateSlides()}
             title="Artikel Serupa"
             classNameContainer="w-full px-4 md:px-16 flex flex-col justify-center mb-20"
@@ -178,6 +178,7 @@ const Detail = () => {
 
       {/* Button Inquiry Mobile Resolutions */}
       <ButtonInquiry
+        showMediaSocialShare={true}
         block={true}
         containerBtnInquiry="w-full absolute z-200 bottom-14 left-0 md:hidden lg:hidden"
         className="bg-supportiveRed h-18"
