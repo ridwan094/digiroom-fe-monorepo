@@ -99,7 +99,7 @@ const InquiryForm = ({
     <form className={containerClassForm} onSubmit={handleSubmit}>
       <Input
         type="text"
-        labelClassName="block text-reliableBlack70 text-sm font-bold mb-2"
+        labelClassName="block text-reliableBlack70 text-sm font-semibold mb-2"
         onChange={(e) => handleChange(e, 'fullname')}
         value={submit.fullName}
         label="Full Name"
@@ -111,7 +111,7 @@ const InquiryForm = ({
 
       <Input
         type="email"
-        labelClassName="block text-reliableBlack70 text-sm font-bold mb-2"
+        labelClassName="block text-reliableBlack70 text-sm font-semibold mb-2"
         onChange={(e) => handleChange(e, 'email')}
         value={submit.email}
         label="Email"
@@ -123,7 +123,7 @@ const InquiryForm = ({
 
       <Input
         type="text"
-        labelClassName="block text-reliableBlack70 text-sm font-bold mb-2"
+        labelClassName="block text-reliableBlack70 text-sm font-semibold mb-2"
         onChange={(e) => handleChange(e, 'number')}
         value={submit.phoneNumber}
         label="Phone"
@@ -173,14 +173,14 @@ const InquiryForm = ({
             'Auto 2001 Daan Magot',
             'Auto 2002 Daan Magot',
             'Auto 2003 Daan Magot',
-            'Auto 2004 Daan Magot',
-            'Auto 2005 Daan Magot',
-            'Auto 2000 Daan Magot',
-            'Auto 2001 Daan Magot',
-            'Auto 2002 Daan Magot',
-            'Auto 2003 Daan Magot',
-            'Auto 2004 Daan Magot',
-            'Auto 2005 Daan Magot',
+            // 'Auto 2004 Daan Magot',
+            // 'Auto 2005 Daan Magot',
+            // 'Auto 2000 Daan Magot',
+            // 'Auto 2001 Daan Magot',
+            // 'Auto 2002 Daan Magot',
+            // 'Auto 2003 Daan Magot',
+            // 'Auto 2004 Daan Magot',
+            // 'Auto 2005 Daan Magot',
           ]}
           selectedOption={submit.branchOptional}
           onSelect={(e) => handleChange(e, 'branchOptional')}
