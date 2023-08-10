@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { TabBarPromo, QuickLink, Accordion, Tag, Layout, BreadCrumbs } from 'ui';
-import faqs from "../constants/faqs"
+import faqs from '../constants/faqs';
 
 const options = ['Option 1', 'Option 2', 'Option 3'];
 
@@ -43,7 +43,7 @@ export default function Home() {
               </div>
               <img
                 className="w-full object-cover"
-                src="http://localhost:3002/images/banner-image.png"
+                src="http://localhost:3002/images/banner-image.webp"
                 alt="Promo banner image auto2000"
               />
             </div>

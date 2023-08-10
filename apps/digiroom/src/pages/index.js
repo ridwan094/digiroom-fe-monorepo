@@ -87,7 +87,7 @@ export default function Home() {
               </Tag>
               <img
                 className="w-full object-cover"
-                src="http://localhost:3002/images/banner-image.png"
+                src="http://localhost:3002/images/banner-image.webp"
                 alt="Promo banner image auto2000"
               />
             </div>
