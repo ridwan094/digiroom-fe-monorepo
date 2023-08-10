@@ -168,20 +168,7 @@ const InquiryForm = ({
           withInput={true}
           label="Branch Optional"
           labelClassname={'text-[#666666]'}
-          options={[
-            'Auto 2000 Daan Magot',
-            'Auto 2001 Daan Magot',
-            'Auto 2002 Daan Magot',
-            'Auto 2003 Daan Magot',
-            // 'Auto 2004 Daan Magot',
-            // 'Auto 2005 Daan Magot',
-            // 'Auto 2000 Daan Magot',
-            // 'Auto 2001 Daan Magot',
-            // 'Auto 2002 Daan Magot',
-            // 'Auto 2003 Daan Magot',
-            // 'Auto 2004 Daan Magot',
-            // 'Auto 2005 Daan Magot',
-          ]}
+          options={['Auto 2000 Sunter', 'Auto 2000 Ciputat', 'Auto 2000 Monas']}
           selectedOption={submit.branchOptional}
           onSelect={(e) => handleChange(e, 'branchOptional')}
           placeholder="Choose Branch"

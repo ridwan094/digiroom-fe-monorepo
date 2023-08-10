@@ -62,24 +62,25 @@ function Checkout() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Menggunakan fungsi window.matchMedia untuk mendeteksi ukuran layar
+    // Use window.matchMedia function to detect screen size
     const mediaQuery = window.matchMedia('(max-width: 767px)');
 
-    // Tentukan status awal apakah mobile atau desktop
+    // Determine the initial status whether it's mobile or desktop
     setIsMobile(mediaQuery.matches);
 
-    // Tambahkan event listener untuk mendengarkan perubahan ukuran layar
+    // Add event listener to listen for screen size changes
     const handleResize = () => {
       setIsMobile(mediaQuery.matches);
     };
 
     mediaQuery.addEventListener('change', handleResize);
 
-    // Membersihkan event listener saat komponen dilepas
+    // Clean up the event listener when the component is unmounted
     return () => {
       mediaQuery.removeEventListener('change', handleResize);
     };
   }, []);
+
   return (
     <>
       <Layout>
