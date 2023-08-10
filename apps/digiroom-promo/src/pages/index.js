@@ -17,7 +17,6 @@ export default function Home() {
   const handleChange = (e) => {
     const newValue = e.target.value;
     setInputValues(newValue);
-    console.log(inputValues);
   };
 
   return (
