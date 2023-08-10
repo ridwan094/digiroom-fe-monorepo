@@ -28,9 +28,9 @@ const faqs = [
 ];
 
 const items = [
-  { src: '/images/detailCarCard.png' },
-  { src: '/images/detailCarCard.png' },
-  { src: '/images/detailCarCard.png' },
+  { src: '/images/detailCarCard.webp' },
+  { src: '/images/detailCarCard.webp' },
+  { src: '/images/detailCarCard.webp' },
 ];
 function DetailPromoPage() {
   const [isMobile, setIsMobile] = useState(false);
@@ -168,7 +168,7 @@ function DetailPromoPage() {
         </div>
         <Image
           className="block md:hidden"
-          src="/images/detailPromoImage2.png"
+          src="/images/detailPromoImage2.webp"
           alt="detailPromoImage"
           width={984}
           height={1}
@@ -180,7 +180,7 @@ function DetailPromoPage() {
             </Tag>
             <Image
               className="hidden md:block"
-              src="/images/detailPromoImage2.png"
+              src="/images/detailPromoImage2.webp"
               alt="detailPromoImage"
               width={984}
               height={1}
@@ -212,14 +212,14 @@ function DetailPromoPage() {
             <div className="mt-4 px-4 bg-[#F8F8F8]">
               <div className="flex flex-col justify-center gap-6">
                 <div className="flex">
-                  <Image width={140} height={70} src="/images/cardCarCheckout.png" alt="foto" />
+                  <Image width={140} height={70} src="/images/cardCarCheckout.webp" alt="foto" />
                   <h4 className="text-lg text-black font-bold ml-4">
                     All New Vios 1.5 E M/T <br />{' '}
                     <span className="font-light mt-4">Rp. 322.500,000</span>
                   </h4>
                 </div>
                 <div className="flex">
-                  <Image width={140} height={70} src="/images/spontan.png" alt="foto" />
+                  <Image width={140} height={70} src="/images/spontan.webp" alt="foto" />
                   <h4 className="text-lg text-black font-bold ml-4">
                     Paket Spontan C 3 Tahun Vios M/T <br />{' '}
                     <span className="font-light mt-4">Rp. 4.000,000</span>

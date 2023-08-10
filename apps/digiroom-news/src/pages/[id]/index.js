@@ -27,7 +27,7 @@ const Detail = () => {
 
       return {
         // src: `https://source.unsplash.com/car/800x450?sig=${index}`,
-        src: `/images/detailNewsImage.png`,
+        src: `/images/detailNewsImage.webp`,
         alt: `Image ${index + 1}`,
         date: `2${index + 1} Nov 23 - 2${index + 1} Jan 24`,
         headline: 'Toyota Raize Light Installments',
@@ -82,7 +82,7 @@ const Detail = () => {
             <div className="flex flex-col">
               <Image
                 className="px-0"
-                src="/images/detailNewsImage.png"
+                src="/images/detailNewsImage.webp"
                 alt="detailPromoImage"
                 width={984}
                 height={520}

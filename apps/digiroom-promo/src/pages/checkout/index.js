@@ -12,7 +12,7 @@ const coupons = [
     price: 'Rp. 80.000',
     discountPrice: 'Rp. 88.000',
     discountPercentage: '10%',
-    coverImg: '/images/accCardImage.png',
+    coverImg: '/images/accCardImage.webp',
     title: 'SPONTAN C 3TH INV BS AT',
   },
   {
@@ -20,7 +20,7 @@ const coupons = [
     price: 'Rp. 80.000',
     discountPrice: 'Rp. 88.000',
     discountPercentage: '10%',
-    coverImg: '/images/accCardImage.png',
+    coverImg: '/images/accCardImage.webp',
     title: 'SPONTAN C 3TH INV BS AT',
   },
   {
@@ -28,7 +28,7 @@ const coupons = [
     price: 'Rp. 80.000',
     discountPrice: 'Rp. 88.000',
     discountPercentage: '10%',
-    coverImg: '/images/accCardImage.png',
+    coverImg: '/images/accCardImage.webp',
     title: 'SPONTAN C 3TH INV BS AT',
   },
   {
@@ -36,7 +36,7 @@ const coupons = [
     price: 'Rp. 80.000',
     discountPrice: 'Rp. 88.000',
     discountPercentage: '10%',
-    coverImg: '/images/accCardImage.png',
+    coverImg: '/images/accCardImage.webp',
     title: 'SPONTAN C 3TH INV BS AT',
   },
 ];
@@ -46,14 +46,14 @@ const acc = [
     id: 1,
     price: 'Rp. 1.000.000',
     discountPrice: 'P5401-0KA0Q',
-    coverImg: '/images/cardCarCheckout.png',
+    coverImg: '/images/cardCarCheckout.webp',
     title: 'Upper Grille Ornament Modellista (All Type)',
   },
   {
     id: 2,
     price: 'Rp. 500.000',
     discountPrice: 'P5401-0KA0Q',
-    coverImg: '/images/cardCarCheckout.png',
+    coverImg: '/images/cardCarCheckout.webp',
     title: 'Upper Grille Ornament Modellista (All Type)',
   },
 ];
@@ -111,7 +111,7 @@ function Checkout() {
           </div>
           <div className="px-4 py-4 bg-white border-b border-b-reliableBlack20">
             <div className="flex justify-between">
-              <Image width={140} height={70} src="/images/cardCarCheckout.png" alt="foto" />
+              <Image width={140} height={70} src="/images/cardCarCheckout.webp" alt="foto" />
               <div className="flex flex-col ml-4">
                 <h4 className="text-sm text-black font-bold">Promo Flash Deals Vios Bundle</h4>
                 <span className="text-xs font-normal text-reliableBlack">x 1</span>

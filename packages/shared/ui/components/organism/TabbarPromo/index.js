@@ -18,51 +18,51 @@ const TabBarPromo = () => {
             title="Cicilan Ringan Toyota Raize"
             startDate="21 Nov 22"
             endDate="30 Jun 23"
-            coverImg="http://localhost:3002/images/promo-car-example.png"
+            coverImg="http://localhost:3002/images/promo-car-example.webp"
             tag={<Tag className="rounded-br">Trending</Tag>}
           />
           <CardPromo
             title="Cicilan Ringan Toyota Raize"
             startDate="21 Nov 22"
             endDate="30 Jun 23"
-            coverImg="http://localhost:3002/images/promo-car-example.png"
+            coverImg="http://localhost:3002/images/promo-car-example.webp"
           />
           <CardPromo
             title="Cicilan Ringan Toyota Raize"
             startDate="21 Nov 22"
             endDate="30 Jun 23"
-            coverImg="http://localhost:3002/images/promo-car-example.png"
+            coverImg="http://localhost:3002/images/promo-car-example.webp"
             tag={<Tag className="rounded-br">Trending</Tag>}
           />
           <CardPromo
             title="Cicilan Ringan Toyota Raize"
             startDate="21 Nov 22"
             endDate="30 Jun 23"
-            coverImg="http://localhost:3002/images/promo-car-example.png"
+            coverImg="http://localhost:3002/images/promo-car-example.webp"
           />
           <CardPromo
             title="Cicilan Ringan Toyota Raize"
             startDate="21 Nov 22"
             endDate="30 Jun 23"
-            coverImg="http://localhost:3002/images/promo-car-example.png"
+            coverImg="http://localhost:3002/images/promo-car-example.webp"
           />
           <CardPromo
             title="Cicilan Ringan Toyota Raize"
             startDate="21 Nov 22"
             endDate="30 Jun 23"
-            coverImg="http://localhost:3002/images/promo-car-example.png"
+            coverImg="http://localhost:3002/images/promo-car-example.webp"
           />
           <CardPromo
             title="Cicilan Ringan Toyota Raize"
             startDate="21 Nov 22"
             endDate="30 Jun 23"
-            coverImg="http://localhost:3002/images/promo-car-example.png"
+            coverImg="http://localhost:3002/images/promo-car-example.webp"
           />
           <CardPromo
             title="Cicilan Ringan Toyota Raize"
             startDate="21 Nov 22"
             endDate="30 Jun 23"
-            coverImg="http://localhost:3002/images/promo-car-example.png"
+            coverImg="http://localhost:3002/images/promo-car-example.webp"
           />
         </div>
       ),
@@ -75,7 +75,7 @@ const TabBarPromo = () => {
             title="Cicilan Ringan Toyota Raize"
             startDate="21 Nov 22"
             endDate="30 Jun 23"
-            coverImg="http://localhost:3002/images/promo-car-example.png"
+            coverImg="http://localhost:3002/images/promo-car-example.webp"
           />
         </div>
       ),
