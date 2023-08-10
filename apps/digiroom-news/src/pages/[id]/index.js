@@ -141,10 +141,6 @@ const Detail = () => {
           <BreadCrumbs />
         </div>
 
-        <div className="md:hidden">
-          <SocialMediaInfo />
-        </div>
-
         {/* Modal => Form Inquiry Mobile Resolutions */}
         {modalForm ? (
           <div
@@ -180,10 +176,10 @@ const Detail = () => {
       <ButtonInquiry
         showMediaSocialShare={true}
         block={true}
-        containerBtnInquiry="w-full absolute z-200 bottom-14 left-0 md:hidden lg:hidden"
-        className="bg-supportiveRed h-18"
+        containerBtnInquiry="w-full absolute z-200 bottom-16 left-0 md:hidden lg:hidden"
+        className="bg-supportiveRed h-20"
         classNameSocialMediaContainerInquiry="bg-reliableBlack3"
-        size="small"
+        size="large"
         variant={true}
         iconType="icon"
         onClick={handleInquiry}

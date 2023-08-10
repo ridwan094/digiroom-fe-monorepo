@@ -31,3 +31,5 @@ export { default as NavLogo } from './Icons/NavLogo';
 export { default as GeoPosition } from './GeoPosition';
 export { default as BtnContactUs } from './BtnContactUs';
 export { default as BtnLoginSignup } from './BtnLoginSignup';
+export { default as GeoLocation } from './Icons/GeoLocation'
+export { default as Playstore } from './Icons/Playstore'
