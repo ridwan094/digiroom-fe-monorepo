@@ -1,5 +1,7 @@
 // export the components
+export { default as SocialMediaShare } from './SocialMediaShare';
 export { default as InquiryForm } from './InquiryForm';
+export { default as OtpForm } from './OtpForm';
 export { default as OtherPromo } from './OtherPromo';
 export { default as SearchBar } from './SearchBar';
 export { default as DynamicStepper } from './StepBar';

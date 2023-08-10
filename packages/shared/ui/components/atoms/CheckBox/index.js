@@ -1,15 +1,10 @@
-const Checkbox = ({ label, checked, onChange }) => {
+const Checkbox = ({ label, labelClassname, checked, onChange }) => {
   return (
-    <label className="inline-flex items-center cursor-pointer">
+    <label className={`${labelClassname} items-center cursor-pointer`}>
       <div className="relative">
-        <input
-          type="checkbox"
-          className="sr-only"
-          checked={checked}
-          onChange={onChange}
-        />
+        <input type="checkbox" className="sr-only" checked={checked} onChange={onChange} />
         <div
-          className={`w-8 h-8 sm:w-10 sm:h-10 transition-all duration-200 ease-in-out border-2 rounded ${
+          className={`w-8 h-8 sm:w-6 sm:h-6 transition-all duration-200 ease-in-out border-2 rounded ${
             checked ? 'bg-supportiveRed border-supportiveRed' : 'bg-white border-reliableBlack20'
           } hover:bg-reliableBlack310`}
         >
