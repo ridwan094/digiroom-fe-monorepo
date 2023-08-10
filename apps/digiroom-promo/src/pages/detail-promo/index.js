@@ -94,7 +94,9 @@ function DetailPromoPage() {
             <InquiryForm
               containerClassForm={'w-full h-full mb-10'}
               containerInputClassName={'px-4 my-6'}
-              inputClassName={'bg-black'}
+              containerDropdown={'px-4 my-6 text-[#666666] font-semibold'}
+              labelStyle={'text-[#666666]'}
+              inputClassName={''}
               buttonContainer={'absolute w-full bottom-16'}
               onSubmit={() => {
                 setOtpOpen(true);
@@ -134,7 +136,7 @@ function DetailPromoPage() {
               />
               {success && (
                 <div className="absolute px-4 transform -translate-y-1/2">
-                  <InquirySuccess onClick={() => setSuccess(false)} />
+                  <InquirySuccess />
                 </div>
               )}
 
@@ -273,14 +275,16 @@ function DetailPromoPage() {
           ))}
         </div>
         {/* Other Promo */}
-        <OtherPromo
-          perPage={2}
-          arrows={false}
-          pagination={true}
-          items={generateSlides()}
-          title="Lihat Promo Lainnya"
-          classNameContainerOtherPromo="w-full bg-reliableBlack10 px-4 md:px-16 pt-[50px] pb-[30px] flex flex-col justify-center gap-4 mb-20"
-        />
+        <div className="px-4">
+          <OtherPromo
+            perPage={2}
+            arrows={false}
+            pagination={true}
+            items={generateSlides()}
+            title="Lihat Promo Lainnya"
+            classNameContainerOtherPromo="w-full bg-reliableBlack10 px-4 md:px-16 pt-[50px] pb-[30px] flex flex-col justify-center gap-4"
+          />
+        </div>
         <div className="flex justify-center pb-4 px-4">{!isMobile ? '' : <BreadCrumbs />}</div>
         <div
           className={`${
@@ -295,7 +299,7 @@ function DetailPromoPage() {
               variant={true}
               iconType="icon"
               onClick={() => {
-                setOtpOpen(true);
+                setFormOpen(true);
               }}
             >
               <div className="flex justify-end items-center gap-2">

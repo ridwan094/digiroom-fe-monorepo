@@ -93,25 +93,25 @@ export default function Home() {
             </div>
           </section>
 
-        {/* Tab Bar Promo */}
-        <section className="py-4 lg:py-8">
-          <div className="lg:container">
-            <TabBarPromo />
-          </div>
-        </section>
+          {/* Tab Bar Promo */}
+          <section className="py-4 lg:py-8">
+            <div className="lg:container">
+              <TabBarPromo />
+            </div>
+          </section>
 
-        {/* <div className=" text-4xl md:text-8xl my-auto font-bold text-slate-900">
+          {/* <div className=" text-4xl md:text-8xl my-auto font-bold text-slate-900">
             {searchValue ? searchValue : 'The Boilerplate'}
           </div>
           <Button>Test</Button> */}
-        {/* <Dropdown
+          {/* <Dropdown
             label="Dropdown"
             placeholder="Select an Option"
             options={options}
             onSelect={handleOptionSelect}
             selectedOption={selectedOption}
           /> */}
-        {/* <Input
+          {/* <Input
           type="text"
           label="Nama"
           labelClassName="text-reliableBlack70 font-semibold"
@@ -119,38 +119,39 @@ export default function Home() {
           value={inputValues}
         /> */}
 
-        {/* Info promo section */}
-        <section className="py-4 lg:py-8 lg:hidden">
-          <div className="px-4 text-reliableBlack">
-            <h2 className="text-base font-bold uppercase mb-4 lg:text-2xl">
-              Informasi Promo Toyota
-            </h2>
-            <p className="leading-relaxed lg:max-w-7xl ">
-              Selamat datang di dealer dan bengkel Toyota cabang resmi Auto2000. Tersedia beragam
-              kebutuhan Toyota di dealer dan bengkel Toyota meliputi layanan purna jual seperti
-              servis mobil dan penjualan part Toyota. Pilih berbagai tipe maupun varian mobil baru
-              Toyota dengan daftar harga dan spesifikasi yang tersedia di Auto2000. Temukan
-              kendaraan Toyota terbaik yang sesuai dengan kebutuhan Anda hanya di sini.
-            </p>
-          </div>
-        </section>
-
-        {/* Promo FAQ section */}
-        <section className="py-4 lg:py-8 lg:px-16">
-          <div className="container">
-            <h2 className="text-base text-reliableBlack font-bold uppercase mb-4 lg:text-2xl">
-              <span>Promo FAQ</span>
-              <span className="lowercase">s</span>
-            </h2>
-            <div className="px-4 text-reliableBlack ">
-              {faqs.map((faq, index) => (
-                <Accordion key={index} title={faq.title}>
-                  {faq.content}
-                </Accordion>
-              ))}
+          {/* Info promo section */}
+          <section className="py-4 lg:py-8 lg:hidden">
+            <div className="px-4 text-reliableBlack">
+              <h2 className="text-base font-bold uppercase mb-4 lg:text-2xl">
+                Informasi Promo Toyota
+              </h2>
+              <p className="leading-relaxed lg:max-w-7xl ">
+                Selamat datang di dealer dan bengkel Toyota cabang resmi Auto2000. Tersedia beragam
+                kebutuhan Toyota di dealer dan bengkel Toyota meliputi layanan purna jual seperti
+                servis mobil dan penjualan part Toyota. Pilih berbagai tipe maupun varian mobil baru
+                Toyota dengan daftar harga dan spesifikasi yang tersedia di Auto2000. Temukan
+                kendaraan Toyota terbaik yang sesuai dengan kebutuhan Anda hanya di sini.
+              </p>
             </div>
-          </div>
-        </section>
+          </section>
+
+          {/* Promo FAQ section */}
+          <section className="py-4 lg:py-8 lg:px-16">
+            <div className="container">
+              <h2 className="text-base text-reliableBlack font-bold uppercase mb-4 lg:text-2xl">
+                <span>Promo FAQ</span>
+                <span className="lowercase">s</span>
+              </h2>
+              <div className="px-4 text-reliableBlack ">
+                {faqs.map((faq, index) => (
+                  <Accordion key={index} title={faq.title}>
+                    {faq.content}
+                  </Accordion>
+                ))}
+              </div>
+            </div>
+          </section>
+        </div>
       </Layout>
     </>
   );

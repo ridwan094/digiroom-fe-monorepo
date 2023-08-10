@@ -13,9 +13,11 @@ const InquirySuccess = ({ onClick }) => {
         <p className="text-sm font-regular text-reliableBlack mb-4">
           Our team will be in touch with you soon to address your needs.
         </p>
-        <button onClick={onClick} className="text-sm font-bold uppercase text-[#63CB55]">
-          Done
-        </button>
+        <a href="/">
+          <button onClick={onClick} className="text-sm font-bold uppercase text-[#63CB55]">
+            Done
+          </button>
+        </a>
       </div>
     </div>
   );
