@@ -18,7 +18,7 @@ const QuickLink = () => {
   return (
     <div
       className={`bg-[#5B5B5B] fixed ${
-        showQuickLinks ? 'right-[29%] md:right-[8%]' : 'right-0'
+        showQuickLinks ? 'right-[25%] md:right-[5%]' : 'right-0'
       } p-3 top-[50%] z-50 `}
     >
       {!showQuickLinks ? (
