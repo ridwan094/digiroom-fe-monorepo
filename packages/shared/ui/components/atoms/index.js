@@ -18,6 +18,7 @@ export { default as Modal } from './Modal';
 export { default as Carousel } from './Carousel';
 export { default as Card } from './Card';
 export { default as Accordion } from './Accordion';
+export { default as Pagination } from './Pagination';
 export { default as CarIcon } from './Icons/CarIcon';
 export { default as LocateIcon } from './Icons/LocateIcon';
 export { default as TestDrive } from './Icons/TestDrive';
@@ -31,5 +32,5 @@ export { default as NavLogo } from './Icons/NavLogo';
 export { default as GeoPosition } from './GeoPosition';
 export { default as BtnContactUs } from './BtnContactUs';
 export { default as BtnLoginSignup } from './BtnLoginSignup';
-export { default as GeoLocation } from './Icons/GeoLocation'
-export { default as Playstore } from './Icons/Playstore'
+export { default as GeoLocation } from './Icons/GeoLocation';
+export { default as Playstore } from './Icons/Playstore';

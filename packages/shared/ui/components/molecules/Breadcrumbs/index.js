@@ -1,47 +1,41 @@
+import { MdChevronRight } from 'react-icons/md';
 
-import { MdChevronRight } from "react-icons/md";
-
-const BreadCrumbs = () => {
- const data = ["Home", "Promo", "cicilan-mobil-calya"]
+const BreadCrumbs = ({ items }) => {
   return (
     <nav className="flex" aria-label="Breadcrumb">
-      <ol className="inline-flex items-center space-x-1 md:space-x-3">
-        {data.map((item, _i) => {
-          return (
-            <>
-              {_i === 0 ? (
-                <li className="inline-flex items-center" key={_i}>
-                  <a
-                    href="#"
-                    className="text-[#333333] text-sm font-bold hover:text-gray-900 inline-flex items-center uppercase"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ) : (
-                <li key={_i}>
-                  <div className="flex items-center">
-                    <MdChevronRight />
+      <ul
+        className="w-full py-3 lg:border-b lg:border-[#F0EFEF
+]"
+      >
+        <div className="container flex items-center space-x-1 md:space-x-3">
+          {items.map((item, _i) => {
+            return (
+              <li key={_i}>
+                <div className="flex items-center">
+                  {_i !== 0 && <MdChevronRight color="#7B7979" />}
 
-                    {_i === data.length - 1 ? (
-                      <span className="text-[#828282] ml-1 md:ml-2 text-sm font-medium uppercase">
-                        {item}
-                      </span>
-                    ) : (
-                      <a
-                        href="#"
-                        className="text-[#333333] font-bold hover:text-gray-900 ml-1 md:ml-2 uppercase text-sm"
-                      >
-                        {item}
-                      </a>
-                    )}
-                  </div>
-                </li>
-              )}
-            </>
-          );
-        })}
-      </ol>
+                  {_i === items.length - 1 ? (
+                    // Last item
+                    <span className="text-reliableBlack60 text-xs uppercase font-bold ml-1 md:ml-2 lg:text-sm">
+                      {item.name}
+                    </span>
+                  ) : (
+                    // Previous item
+                    <a
+                      href={item.path}
+                      className={`text-reliableBlack60 text-xs uppercase font-medium hover:text-gray-900 lg:text-sm ${
+                        _i !== 0 && 'ml-1 md:ml-2'
+                      }`}
+                    >
+                      {item.name}
+                    </a>
+                  )}
+                </div>
+              </li>
+            );
+          })}
+        </div>
+      </ul>
     </nav>
   );
 };
