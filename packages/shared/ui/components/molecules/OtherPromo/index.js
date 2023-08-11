@@ -13,7 +13,6 @@ const OtherPromo = ({
   items,
   title,
   classNameContainer,
-  block,
   ...props
 }) => {
   // If response using html string
@@ -29,8 +28,7 @@ const OtherPromo = ({
 
   // return <div dangerouslySetInnerHTML={article} />;
   const classNameAssigned = [
-    'relative flex flex-col justify-center gap-4 mb-20',
-    block ? 'w-full' : '',
+    'relative flex flex-col justify-center gap-4',
     classNameContainer,
   ];
 
@@ -83,7 +81,6 @@ OtherPromo.defaultProps = {
   pagination: true,
   perPage: 1,
   items: [],
-  block: true,
   classNameContainer: '',
 };
 

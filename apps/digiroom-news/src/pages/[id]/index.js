@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Button, ButtonInquiry, FormGroup, Text } from 'ui/components/atoms';
-import Image from 'next/image';
+import { BtnInquiry, FormGroup, Text, Article, ProductPanel } from 'ui/components/atoms';
 import Layout from 'ui/components/templates/Layout';
 import { FiArrowRight } from 'react-icons/fi';
 import { BreadCrumbs, OtherPromo, InquiryForm } from 'ui/components/molecules';
-import { MOCK_DATA } from '../../constants/news';
 import { MdArrowBack, MdShare } from 'react-icons/md';
-import { SocialMediaInfo } from 'ui';
 
 const Detail = () => {
   const { searchValue } = useSelector((state) => state.example);
@@ -49,70 +46,26 @@ const Detail = () => {
         <div className="flex flex-col justify-center items-center gap-4">
           {/* Desktop Resolutions */}
           {/* Article */}
-          {/* <div className="md:flex md:px-16 mt-11 gap-6">
-            <div>
-              <img
-                src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                alt="image"
-              />
-              <Article data={MOCK_DATA} />
-            </div>
-
-            <div class="hidden md:block w-1/3 border-none relative flex-col pointer-events-auto bg-clip-padding bg-reliableBlack5 h-fit px-10 py-10 rounded-md text-current">
-              <FormGroup
-                title="Dapatkan Penawaran Terbaik untuk Pemesanan Toyota Baru"
-                subTitle="Silakan isi data Anda. Data pribadi Anda aman bersama kami. Perwakilan sales kami akan segera menghubungi Anda."
-                containerFormGroupClass="flex flex-col gap-4 justify-between md-max-w:p-2 pb-4 text-black"
-                onClose={handleInquiry}
-                colorCloseIcons="bg-black"
-                withcCloseIcon={false}
-              />
-              <div class="flex-auto overflow-y-auto w-[480px] relative">
-                <InquiryForm
-                  onSubmit={() => {}}
-                  containerClassForm="bg-reliableBlack5 flex flex-col gap-4"
-                  containerInputClassName="w-full"
-                  inputClassName="text-black bg-whiteRealible8 h-10"
-                />
-              </div>
-            </div>
-          </div> */}
-
           <div className="flex mt-0 md:mt-8 gap-4 px-4 md:px-16">
-            <div className="flex flex-col">
-              <Image
+            <div className="flex flex-col flex-1">
+              <ProductPanel
                 className="px-0"
                 src="/images/detailNewsImage.webp"
                 alt="detailPromoImage"
                 width={984}
                 height={520}
               />
-              <div className="flex mt-6 justify-between items-center">
-                <h1 className="text-2xl md:text-4xl text-reliableBlack font-bold">
-                  Kupas Tuntas Fitur Safety Toyota CHR Hybrid Ini Bikin Makin Pengen Beli{' '}
-                </h1>
-              </div>
-              <div className="flex mt-6 items-center gap-4">
-                <h5 className="text-black">Diposting pada 19 Juli 2023</h5>
-              </div>
-              <p className="mt-6 text-black">
-                Hi AutoFamily! Untuk Anda para keluarga modern, mobil Calya cocok banget untuk Anda
-                nih. Mobil Calya yang memiliki ruang kabin yang lega bisa menampung 7 penumpang
-                sekaligus loh. Tak hanya itu, mobil Calya juga dilengkapi dengan Fitur Entertainment
-                yang lengkap. Yuk bawa pulang Toyota Calya untuk keluarga tersayang sekarang dengan
-                cicilan mulai dari 3.3 jutaan/bulan saja! <br /> Jangan lupa untuk isi formulir di
-                bawah ini untuk dapatkan penawarannya sekarang!
-              </p>
+              <Article data={{}} />
             </div>
-            <div className="max-w-lg hidden md:block ">
+            <div className="flex-1 max-w-sm hidden md:block">
               <div className="bg-reliableBlack20 px-8 py-8">
                 <h4 className={'text-xl font-bold text-reliableBlack90 max-w-sm'}>
-                  Dapatkan Penawaran Terbaik untuk Pemesanan Toyota Baru
+                  Minta Penawaran
                 </h4>
-                <h4 className="text-xl text-reliableBlack text-justify mt-4">
+                <h5 className="text-base text-reliableBlack mt-4">
                   Silakan isi data Anda. Data pribadi Anda aman bersama kami. Perwakilan sales kami
                   akan segera menghubungi Anda.
-                </h4>
+                </h5>
               </div>
               <InquiryForm
                 labelStyle={'text-[#666666]'}
@@ -126,13 +79,20 @@ const Detail = () => {
             arrows={false}
             pagination={false}
             items={generateSlides()}
-            title="Artikel Serupa"
-            classNameContainer="w-full px-4 md:px-16 flex flex-col justify-center mb-20"
-            // padding={{ right: '2rem' }}
-            // classNameContainer="px-4 md:px-0"
+            title="Promo Terkait"
+            classNameContainer="w-full px-4 md:px-16 flex flex-col justify-center mb-4 md:mb-10"
             gap="1rem"
-            // title="OTHER PROMOTIONS"
-            // block
+          />
+
+          {/* Another Artikel */}
+          <OtherPromo
+            perPage={4}
+            arrows={false}
+            pagination={false}
+            items={generateSlides()}
+            title="Artikel Serupa"
+            classNameContainer="w-full px-4 md:px-16 flex flex-col justify-center mb-20 md:hidden"
+            gap="1rem"
           />
         </div>
 
@@ -152,7 +112,7 @@ const Detail = () => {
           >
             <div class="max-h-full overflow-hidden border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
               <FormGroup
-                title="INQUIRY"
+                title="ISI DATA"
                 onClose={handleInquiry}
                 colorCloseIcons="bg-black"
                 withcCloseIcon={true}
@@ -173,10 +133,10 @@ const Detail = () => {
       </Layout>
 
       {/* Button Inquiry Mobile Resolutions */}
-      <ButtonInquiry
-        showMediaSocialShare={true}
+      <BtnInquiry
+        showMediaSocialShare={false}
         block={true}
-        containerBtnInquiry="w-full absolute z-200 bottom-16 left-0 md:hidden lg:hidden"
+        containerBtnInquiry="w-full absolute z-200 bottom-0 left-0 md:hidden lg:hidden"
         className="bg-supportiveRed h-20"
         classNameSocialMediaContainerInquiry="bg-reliableBlack3"
         size="large"
@@ -185,10 +145,10 @@ const Detail = () => {
         onClick={handleInquiry}
       >
         <div className="flex justify-end items-center gap-x-2">
-          <Text.Head4>INQUIRY</Text.Head4>
+          <Text.Head4>DAPATKAN PROMO TERBARU</Text.Head4>
           <FiArrowRight size={20} />
         </div>
-      </ButtonInquiry>
+      </BtnInquiry>
     </div>
   );
 };

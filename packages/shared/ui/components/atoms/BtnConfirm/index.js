@@ -16,7 +16,7 @@ const iconClassname = {
 //   large: "h-14 w-14",
 // };
 
-const ButtonConfirm = ({
+const BtnConfirm = ({
   children,
   // inverted,
   loading,
@@ -52,7 +52,7 @@ const ButtonConfirm = ({
   );
 };
 
-ButtonConfirm.defaultProps = {
+BtnConfirm.defaultProps = {
   inverted: false,
   disabled: false,
   block: false,
@@ -66,4 +66,4 @@ ButtonConfirm.defaultProps = {
   // style: {},
 };
 
-export default ButtonConfirm;
+export default BtnConfirm;

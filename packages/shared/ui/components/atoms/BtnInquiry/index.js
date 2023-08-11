@@ -2,7 +2,7 @@ import React from 'react';
 import { Fragment } from 'react';
 import { SocialMediaShare } from '../../molecules';
 
-const ButtonInquiry = ({
+const BtnInquiry = ({
   children,
   loading,
   iconType,
@@ -43,7 +43,7 @@ const ButtonInquiry = ({
   );
 };
 
-ButtonInquiry.defaultProps = {
+BtnInquiry.defaultProps = {
   inverted: false,
   disabled: false,
   showMediaSocialShare: false,
@@ -58,4 +58,4 @@ ButtonInquiry.defaultProps = {
   style: {},
 };
 
-export default ButtonInquiry;
+export default BtnInquiry;
