@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import TabBar from 'ui/components/molecules/TabBar';
 import Card from '../../atoms/Card';
 import { CardPromo } from 'ui/components/molecules';
-import { Tag } from 'ui/components/atoms';
 
 const TabBarPromo = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -19,7 +18,7 @@ const TabBarPromo = () => {
             startDate="21 Nov 22"
             endDate="30 Jun 23"
             coverImg="http://localhost:3002/images/promo-car-example.webp"
-            tag={<Tag className="rounded-br">Trending</Tag>}
+            tag="Trending"
           />
           <CardPromo
             title="Cicilan Ringan Toyota Raize"
@@ -32,7 +31,7 @@ const TabBarPromo = () => {
             startDate="21 Nov 22"
             endDate="30 Jun 23"
             coverImg="http://localhost:3002/images/promo-car-example.webp"
-            tag={<Tag className="rounded-br">Trending</Tag>}
+            tag="Hot Deal"
           />
           <CardPromo
             title="Cicilan Ringan Toyota Raize"
