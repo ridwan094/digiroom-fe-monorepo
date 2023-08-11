@@ -28,9 +28,9 @@ const faqs = [
 ];
 
 const items = [
-  { src: '/images/detailCarCard.png' },
-  { src: '/images/detailCarCard.png' },
-  { src: '/images/detailCarCard.png' },
+  { src: '/images/detailCarCard.webp' },
+  { src: '/images/detailCarCard.webp' },
+  { src: '/images/detailCarCard.webp' },
 ];
 function DetailPromoPage() {
   const [isMobile, setIsMobile] = useState(false);
@@ -94,7 +94,9 @@ function DetailPromoPage() {
             <InquiryForm
               containerClassForm={'w-full h-full mb-10'}
               containerInputClassName={'px-4 my-6'}
-              inputClassName={'bg-black'}
+              containerDropdown={'px-4 my-6 text-[#666666] font-semibold'}
+              labelStyle={'text-[#666666]'}
+              inputClassName={''}
               buttonContainer={'absolute w-full bottom-16'}
               onSubmit={() => {
                 setOtpOpen(true);
@@ -134,7 +136,7 @@ function DetailPromoPage() {
               />
               {success && (
                 <div className="absolute px-4 transform -translate-y-1/2">
-                  <InquirySuccess onClick={() => setSuccess(false)} />
+                  <InquirySuccess />
                 </div>
               )}
 
@@ -166,7 +168,7 @@ function DetailPromoPage() {
         </div>
         <Image
           className="block md:hidden"
-          src="/images/detailPromoImage2.png"
+          src="/images/detailPromoImage2.webp"
           alt="detailPromoImage"
           width={984}
           height={1}
@@ -178,7 +180,7 @@ function DetailPromoPage() {
             </Tag>
             <Image
               className="hidden md:block"
-              src="/images/detailPromoImage2.png"
+              src="/images/detailPromoImage2.webp"
               alt="detailPromoImage"
               width={984}
               height={1}
@@ -210,14 +212,14 @@ function DetailPromoPage() {
             <div className="mt-4 px-4 bg-[#F8F8F8]">
               <div className="flex flex-col justify-center gap-6">
                 <div className="flex">
-                  <Image width={140} height={70} src="/images/cardCarCheckout.png" alt="foto" />
+                  <Image width={140} height={70} src="/images/cardCarCheckout.webp" alt="foto" />
                   <h4 className="text-lg text-black font-bold ml-4">
                     All New Vios 1.5 E M/T <br />{' '}
                     <span className="font-light mt-4">Rp. 322.500,000</span>
                   </h4>
                 </div>
                 <div className="flex">
-                  <Image width={140} height={70} src="/images/spontan.png" alt="foto" />
+                  <Image width={140} height={70} src="/images/spontan.webp" alt="foto" />
                   <h4 className="text-lg text-black font-bold ml-4">
                     Paket Spontan C 3 Tahun Vios M/T <br />{' '}
                     <span className="font-light mt-4">Rp. 4.000,000</span>
@@ -273,14 +275,16 @@ function DetailPromoPage() {
           ))}
         </div>
         {/* Other Promo */}
-        <OtherPromo
-          perPage={2}
-          arrows={false}
-          pagination={true}
-          items={generateSlides()}
-          title="Lihat Promo Lainnya"
-          classNameContainerOtherPromo="w-full bg-reliableBlack10 px-4 md:px-16 pt-[50px] pb-[30px] flex flex-col justify-center gap-4 mb-20"
-        />
+        <div className="px-4">
+          <OtherPromo
+            perPage={2}
+            arrows={false}
+            pagination={true}
+            items={generateSlides()}
+            title="Lihat Promo Lainnya"
+            classNameContainerOtherPromo="w-full bg-reliableBlack10 px-4 md:px-16 pt-[50px] pb-[30px] flex flex-col justify-center gap-4"
+          />
+        </div>
         <div className="flex justify-center pb-4 px-4">{!isMobile ? '' : <BreadCrumbs />}</div>
         <div
           className={`${
@@ -295,7 +299,7 @@ function DetailPromoPage() {
               variant={true}
               iconType="icon"
               onClick={() => {
-                setOtpOpen(true);
+                setFormOpen(true);
               }}
             >
               <div className="flex justify-end items-center gap-2">

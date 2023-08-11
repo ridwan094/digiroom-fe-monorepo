@@ -14,6 +14,7 @@ const QuickLink = () => {
     { title: 'Tracking Order', icon: <TrackingOrder fill={'#fff'} size="40" /> },
     { title: 'Connect on whatsapp', icon: <Whatsapp fill={'#fff'} size="40" /> },
   ];
+
   return (
     <div
       className={`bg-[#5B5B5B] fixed ${

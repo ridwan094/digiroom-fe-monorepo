@@ -95,7 +95,7 @@ const InquiryForm = ({
     <form className={containerClassForm} onSubmit={handleSubmit}>
       <Input
         type="text"
-        labelClassName="block text-[#666666] text-sm font-semibold"
+        labelClassName="block text-reliableBlack70 text-sm font-semibold mb-2"
         onChange={(e) => handleChange(e, 'fullname')}
         value={submit.fullName}
         label="Full Name"
@@ -107,7 +107,7 @@ const InquiryForm = ({
 
       <Input
         type="email"
-        labelClassName="block text-[#666666] text-sm font-semibold mb-2 mt-1"
+        labelClassName="block text-reliableBlack70 text-sm font-semibold mb-2"
         onChange={(e) => handleChange(e, 'email')}
         value={submit.email}
         label="Email"
@@ -119,7 +119,7 @@ const InquiryForm = ({
 
       <Input
         type="text"
-        labelClassName="block text-[#666666] text-sm font-semibold mb-2 mt-1"
+        labelClassName="block text-reliableBlack70 text-sm font-semibold mb-2"
         onChange={(e) => handleChange(e, 'number')}
         value={submit.phoneNumber}
         label="Phone"
@@ -165,21 +165,8 @@ const InquiryForm = ({
         <Dropdown
           withInput={true}
           label="Branch Optional"
-          labelClassname="block text-reliableBlack70 text-sm font-bold mb-2 mt-1"
-          options={[
-            'Auto 2000 Daan Magot',
-            'Auto 2001 Daan Magot',
-            'Auto 2002 Daan Magot',
-            'Auto 2003 Daan Magot',
-            'Auto 2004 Daan Magot',
-            'Auto 2005 Daan Magot',
-            'Auto 2000 Daan Magot',
-            'Auto 2001 Daan Magot',
-            'Auto 2002 Daan Magot',
-            'Auto 2003 Daan Magot',
-            'Auto 2004 Daan Magot',
-            'Auto 2005 Daan Magot',
-          ]}
+          labelClassname={'text-[#666666]'}
+          options={['Auto 2000 Sunter', 'Auto 2000 Ciputat', 'Auto 2000 Monas']}
           selectedOption={submit.branchOptional}
           onSelect={(e) => handleChange(e, 'branchOptional')}
           placeholder="Choose Branch"

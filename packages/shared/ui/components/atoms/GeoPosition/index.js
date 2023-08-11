@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
+import GeoLocation from '../Icons/GeoLocation';
 
 const GeoPosition = ({ onChange, value, options }) => {
   const [isOpen, setIsOpen] = useState(false);

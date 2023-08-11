@@ -2,8 +2,9 @@ import Layout from 'ui/components/templates/Layout';
 import { BreadCrumbs } from 'ui/components/molecules';
 import { ListArtikel } from 'ui/components/organism';
 import Image from 'next/image';
-import { newsList } from '../constants/news';
+import { FAQS, newsList } from '../constants/news';
 import Link from 'next/link';
+import { Accordion } from 'ui';
 
 export default function Home() {
   return (
@@ -32,6 +33,38 @@ export default function Home() {
         <div className="px-4 mb-2">
           <ListArtikel itemList={newsList} />
         </div>
+
+        {/* Info promo section */}
+        <section className="py-4 lg:py-8 lg:px-16">
+          <div className="px-4 text-reliableBlack">
+            <h2 className="text-base font-bold uppercase mb-4 lg:text-2xl">
+              Informasi Berita Toyota
+            </h2>
+            <p className="leading-relaxed lg:max-w-7xl ">
+              Selamat datang di dealer dan bengkel Toyota cabang resmi Auto2000. Tersedia beragam
+              kebutuhan Toyota di dealer dan bengkel Toyota meliputi layanan purna jual seperti
+              servis mobil dan penjualan part Toyota. Pilih berbagai tipe maupun varian mobil baru
+              Toyota dengan daftar harga dan spesifikasi yang tersedia di Auto2000. Temukan
+              kendaraan Toyota terbaik yang sesuai dengan kebutuhan Anda hanya di sini.
+            </p>
+          </div>
+        </section>
+
+        {/* Promo FAQ section */}
+        <section className="py-4 lg:py-8 lg:px-16">
+          <div className="container px-4">
+            <h2 className="text-base text-reliableBlack font-bold uppercase mb-4 lg:text-2xl">
+              <span>FAQ TIPS TOYOTA</span>
+            </h2>
+            <div className="px-4 text-reliableBlack ">
+              {FAQS.map((faq, index) => (
+                <Accordion key={index} title={faq.title}>
+                  {faq.content}
+                </Accordion>
+              ))}
+            </div>
+          </div>
+        </section>
       </div>
     </Layout>
   );

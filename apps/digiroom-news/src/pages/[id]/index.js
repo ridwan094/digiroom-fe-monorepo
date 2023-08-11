@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Button, BtnInquiry, FormGroup, Text, Article, ProductPanel } from 'ui/components/atoms';
-import Image from 'next/image';
+import { BtnInquiry, FormGroup, Text, Article, ProductPanel } from 'ui/components/atoms';
 import Layout from 'ui/components/templates/Layout';
 import { FiArrowRight } from 'react-icons/fi';
 import { BreadCrumbs, OtherPromo, InquiryForm } from 'ui/components/molecules';
-import { MOCK_DATA } from '../../constants/news';
 import { MdArrowBack, MdShare } from 'react-icons/md';
-import { SocialMediaInfo } from 'ui';
 
 const Detail = () => {
   const { searchValue } = useSelector((state) => state.example);
@@ -27,7 +24,7 @@ const Detail = () => {
 
       return {
         // src: `https://source.unsplash.com/car/800x450?sig=${index}`,
-        src: `/images/detailNewsImage.png`,
+        src: `/images/detailNewsImage.webp`,
         alt: `Image ${index + 1}`,
         date: `2${index + 1} Nov 23 - 2${index + 1} Jan 24`,
         headline: 'Toyota Raize Light Installments',
@@ -53,10 +50,10 @@ const Detail = () => {
             <div className="flex flex-col flex-1">
               <ProductPanel
                 className="px-0"
-                srcImage="/images/detailNewsImage.png"
+                src="/images/detailNewsImage.webp"
+                alt="detailPromoImage"
                 width={984}
                 height={520}
-                alt="detailPromoImage"
               />
               <Article data={{}} />
             </div>
@@ -104,10 +101,6 @@ const Detail = () => {
           <BreadCrumbs />
         </div>
 
-        <div className="md:hidden">
-          <SocialMediaInfo />
-        </div>
-
         {/* Modal => Form Inquiry Mobile Resolutions */}
         {modalForm ? (
           <div
@@ -144,9 +137,9 @@ const Detail = () => {
         showMediaSocialShare={false}
         block={true}
         containerBtnInquiry="w-full absolute z-200 bottom-0 left-0 md:hidden lg:hidden"
-        className="bg-supportiveRed h-18"
+        className="bg-supportiveRed h-20"
         classNameSocialMediaContainerInquiry="bg-reliableBlack3"
-        size="small"
+        size="large"
         variant={true}
         iconType="icon"
         onClick={handleInquiry}
