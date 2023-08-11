@@ -1,13 +1,13 @@
-import { Footer, Navbar } from "../../organism";
+import { Footer, Navbar } from '../../organism';
 
 const Layout = ({ children }) => {
-	return (
-		<>
-			<Navbar />
-			<div className={`bg-white`}>{children}</div>
-			<Footer />
-		</>
-	);
+  return (
+    <>
+      <Navbar />
+      <main className={`bg-white`}>{children}</main>
+      <Footer />
+    </>
+  );
 };
 
 export default Layout;
