@@ -20,7 +20,6 @@ const InquiryForm = ({
     email: '',
     province: '',
     city: '',
-    // branchOptional: '',
     checked: false,
   });
 
@@ -63,13 +62,6 @@ const InquiryForm = ({
       }));
     }
 
-    // if (category === 'branchOptional') {
-    //   setSubmit((prevState) => ({
-    //     ...prevState,
-    //     branchOptional: e,
-    //   }));
-    // }
-
     if (category === 'checkbox') {
       setSubmit((prevState) => ({
         ...prevState,
@@ -87,7 +79,6 @@ const InquiryForm = ({
   const checkFormInquiry = () => {
     return (
       !submit.fullName || !submit.email || !submit.phoneNumber || !submit.province || !submit.city
-      // || !submit.branchOptional
     );
   };
 
@@ -159,19 +150,6 @@ const InquiryForm = ({
           placeholder="Choose City"
         />
       </div>
-
-      {/* BRANCH OPTIONAL */}
-      {/* <div className={containerDropdown ? containerDropdown : ''}>
-        <Dropdown
-          withInput={true}
-          label="Branch Optional"
-          labelClassname={'text-[#666666]'}
-          options={['Auto 2000 Sunter', 'Auto 2000 Ciputat', 'Auto 2000 Monas']}
-          selectedOption={submit.branchOptional}
-          onSelect={(e) => handleChange(e, 'branchOptional')}
-          placeholder="Choose Branch"
-        />
-      </div> */}
 
       {/* CheckBox */}
       <div className={containerDropdown ? containerDropdown : ''}>

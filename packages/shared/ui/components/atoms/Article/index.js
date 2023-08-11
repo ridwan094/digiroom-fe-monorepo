@@ -43,46 +43,6 @@ const Article = ({ data, block, containerClassName }) => {
         jutaan/bulan saja! <br /> Jangan lupa untuk isi formulir di bawah ini untuk dapatkan
         penawarannya sekarang!
       </p>
-
-      {/* {data.contents &&
-        data.contents.map((items, index) => (
-          <div className="flex flex-col gap-2 mt-4 text-black">
-            <Text.BodyLargeSemibold className="text-base font-semibold md:text-lg">
-              {index + 1}. {items.title}
-            </Text.BodyLargeSemibold>
-            <Text.BodyLarge className="text-base font-normal md:text-lg">
-              {items.subTitle1}
-            </Text.BodyLarge>
-            <Text.BodyLarge className="text-base font-normal md:text-lg">
-              {items.subTitle2}
-            </Text.BodyLarge>
-            {items.newsContent && (
-              <Text.BodyLarge>
-                Baca Juga:
-                <a
-                  className="ml-1"
-                  href="https://auto2000.co.id/berita-dan-tips/crm-paa-mobil-raize-apakah-matic-ulasan"
-                  target="_blank"
-                  style={{
-                    color: '#036EBC',
-                  }}
-                >
-                  {items.newsContent}
-                </a>
-              </Text.BodyLarge>
-            )}
-            {items.subTitle3 && (
-              <Text.BodyLarge className="text-base font-normal md:text-lg">
-                {items.subTitle3}
-              </Text.BodyLarge>
-            )}
-            {items.subTitle4 && (
-              <Text.BodyLarge className="text-base font-normal md:text-lg">
-                {items.subTitle4}
-              </Text.BodyLarge>
-            )}
-          </div>
-        ))} */}
     </div>
   );
 };
