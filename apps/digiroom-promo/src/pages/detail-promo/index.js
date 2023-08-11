@@ -175,8 +175,8 @@ function DetailPromoPage() {
         />
         <div className="flex mt-0 md:mt-16 gap-4 px-4 md:px-16">
           <div className="flex flex-col">
-            <Tag className="absolute md:hidden top-[75px] right-0 rounded-bl lg:px-[12px] py-[10px]">
-              <span className="font-bold text-reliableBlack90 lg:text-base">Trending</span>
+            <Tag className="absolute md:hidden top-[75px] rounded-bl lg:px-[12px] py-[10px]">
+              <span className="font-bold text-reliableBlack90 lg:text-base">Trending </span>
             </Tag>
             <Image
               className="hidden md:block"
