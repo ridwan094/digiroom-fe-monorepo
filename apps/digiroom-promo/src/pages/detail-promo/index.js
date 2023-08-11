@@ -3,7 +3,7 @@ import {
   Accordion,
   BreadCrumbs,
   Button,
-  ButtonConfirm,
+  BtnConfirm,
   Card,
   Carousel,
   InquiryForm,
@@ -288,7 +288,7 @@ function DetailPromoPage() {
           } fixed z-10 md:hidden bottom-16 w-full`}
         >
           <div class="flex items-center justify-between mt-4">
-            <ButtonConfirm
+            <BtnConfirm
               block={true}
               className={'bg-supportiveRed'}
               size="large"
@@ -307,7 +307,7 @@ function DetailPromoPage() {
                 </div>
                 <FiArrowRight size={34} />
               </div>
-            </ButtonConfirm>
+            </BtnConfirm>
           </div>
         </div>
       </Layout>

@@ -1,5 +1,5 @@
 import { createRef, useRef, useState } from 'react';
-import { ButtonConfirm, Dropdown } from '../../atoms';
+import { BtnConfirm, Dropdown } from '../../atoms';
 import { Input } from '../../atoms';
 import Text from '../../atoms/Text';
 import { FiArrowRight } from 'react-icons/fi';
@@ -150,7 +150,7 @@ const InquiryForm = ({
 
       <div className={`${buttonContainer}`}>
         <div class="flex items-center justify-between mt-4">
-          <ButtonConfirm
+          <BtnConfirm
             block={true}
             className={checkFormInquiry() ? 'bg-gray-500' : 'bg-supportiveRed'}
             size="large"
@@ -162,7 +162,7 @@ const InquiryForm = ({
               <Text.Head4>SUBMIT</Text.Head4>
               <FiArrowRight size={20} />
             </div>
-          </ButtonConfirm>
+          </BtnConfirm>
         </div>
       </div>
     </form>

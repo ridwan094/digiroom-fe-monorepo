@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ButtonConfirm, Dropdown } from '../../atoms';
+import { BtnConfirm, Dropdown } from '../../atoms';
 import { Input } from '../../atoms';
 import Text from '../../atoms/Text';
 import { FiArrowRight } from 'react-icons/fi';
@@ -20,7 +20,7 @@ const InquiryForm = ({
     email: '',
     province: '',
     city: '',
-    branchOptional: '',
+    // branchOptional: '',
     checked: false,
   });
 
@@ -63,12 +63,12 @@ const InquiryForm = ({
       }));
     }
 
-    if (category === 'branchOptional') {
-      setSubmit((prevState) => ({
-        ...prevState,
-        branchOptional: e,
-      }));
-    }
+    // if (category === 'branchOptional') {
+    //   setSubmit((prevState) => ({
+    //     ...prevState,
+    //     branchOptional: e,
+    //   }));
+    // }
 
     if (category === 'checkbox') {
       setSubmit((prevState) => ({
@@ -86,12 +86,8 @@ const InquiryForm = ({
 
   const checkFormInquiry = () => {
     return (
-      !submit.fullName ||
-      !submit.email ||
-      !submit.phoneNumber ||
-      !submit.province ||
-      !submit.city ||
-      !submit.branchOptional
+      !submit.fullName || !submit.email || !submit.phoneNumber || !submit.province || !submit.city
+      // || !submit.branchOptional
     );
   };
 
@@ -99,7 +95,7 @@ const InquiryForm = ({
     <form className={containerClassForm} onSubmit={handleSubmit}>
       <Input
         type="text"
-        labelClassName="block text-reliableBlack70 text-sm font-bold mb-2"
+        labelClassName="block text-[#666666] text-sm font-semibold"
         onChange={(e) => handleChange(e, 'fullname')}
         value={submit.fullName}
         label="Full Name"
@@ -111,7 +107,7 @@ const InquiryForm = ({
 
       <Input
         type="email"
-        labelClassName="block text-reliableBlack70 text-sm font-bold mb-2"
+        labelClassName="block text-[#666666] text-sm font-semibold mb-2 mt-1"
         onChange={(e) => handleChange(e, 'email')}
         value={submit.email}
         label="Email"
@@ -123,7 +119,7 @@ const InquiryForm = ({
 
       <Input
         type="text"
-        labelClassName="block text-reliableBlack70 text-sm font-bold mb-2"
+        labelClassName="block text-[#666666] text-sm font-semibold mb-2 mt-1"
         onChange={(e) => handleChange(e, 'number')}
         value={submit.phoneNumber}
         label="Phone"
@@ -143,6 +139,7 @@ const InquiryForm = ({
         <Dropdown
           withInput={true}
           label="Province"
+          labelClassname="block text-[#666666] text-sm font-semibold mb-2 mt-1"
           options={['Jakarta', 'Jawa Barat', 'Jawa Tengah', 'Jawa Timur', 'Bali']}
           selectedOption={submit.province}
           onSelect={(e) => handleChange(e, 'province')}
@@ -155,6 +152,7 @@ const InquiryForm = ({
         <Dropdown
           withInput={true}
           label="City"
+          labelClassname="block text-[#666666] text-sm font-semibold mb-2 mt-1"
           options={['Jakarta', 'Bandung', 'Semarang', 'Surakarta', 'Surabaya', 'Jogja']}
           selectedOption={submit.city}
           onSelect={(e) => handleChange(e, 'city')}
@@ -163,11 +161,11 @@ const InquiryForm = ({
       </div>
 
       {/* BRANCH OPTIONAL */}
-      <div className={containerDropdown ? containerDropdown : ''}>
+      {/* <div className={containerDropdown ? containerDropdown : ''}>
         <Dropdown
           withInput={true}
           label="Branch Optional"
-          labelClassname={'text-[#666666]'}
+          labelClassname="block text-reliableBlack70 text-sm font-bold mb-2 mt-1"
           options={[
             'Auto 2000 Daan Magot',
             'Auto 2001 Daan Magot',
@@ -186,12 +184,12 @@ const InquiryForm = ({
           onSelect={(e) => handleChange(e, 'branchOptional')}
           placeholder="Choose Branch"
         />
-      </div>
+      </div> */}
 
       {/* CheckBox */}
       <div className={containerDropdown ? containerDropdown : ''}>
         <Checkbox
-          labelClassname="flex text-xs mt-5"
+          labelClassname="hidden md:flex text-xs mt-5"
           label="Saya telah membaca dan menyetujui Syarat dan Ketentuan Auto 2000"
           checked={submit.checked}
           onChange={(e) => handleChange(e, 'checkbox')}
@@ -199,20 +197,20 @@ const InquiryForm = ({
       </div>
 
       <div className={`${buttonContainer}`}>
-        <div class="flex items-center justify-between mt-4">
-          <ButtonConfirm
+        <div class="flex items-center justify-between mt-5">
+          <BtnConfirm
             block={true}
-            className={checkFormInquiry() ? 'bg-gray-500' : 'bg-supportiveRed'}
+            className={checkFormInquiry() ? 'bg-reliableBlack310' : 'bg-supportiveRed'}
             size="large"
             variant={true}
             iconType="icon"
             disabled={checkFormInquiry()}
           >
             <div className="flex justify-end items-center py-3 md:py-1 gap-x-2">
-              <Text.Head4>SUBMIT</Text.Head4>
+              <Text.Head4 className="text-lg sm:text-xl">SUBMIT</Text.Head4>
               <FiArrowRight size={20} />
             </div>
-          </ButtonConfirm>
+          </BtnConfirm>
         </div>
       </div>
     </form>
