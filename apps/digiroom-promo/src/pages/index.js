@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { TabBarPromo, QuickLink, Layout, BreadCrumbs } from 'ui';
+import { TabBarPromo, QuickLink, Layout } from 'ui';
+import { BreadCrumbs } from 'ui/components/molecules';
 import { PromoBannerSection, PromoInfoSection, PromoFaqSection } from 'ui/components/organism';
 import faqs from '../constants/faqs';
 
@@ -25,8 +26,8 @@ export default function Home() {
       <Layout>
         <QuickLink />
 
-        <div className="container hidden lg:block">
-          <BreadCrumbs />
+        <div className="hidden lg:block">
+          <BreadCrumbs items={[{ name: 'Home', path: '/' }, { name: 'Promo' }]} />
         </div>
 
         {/* Promo banner section */}
@@ -42,6 +43,11 @@ export default function Home() {
 
         {/* Promo FAQ section */}
         <PromoFaqSection faqs={faqs} />
+
+        {/* Breadcrumb for mobile screen */}
+        <div className="lg:hidden">
+          <BreadCrumbs items={[{ name: 'Home', path: '/' }, { name: 'Promo' }]} />
+        </div>
       </Layout>
     </>
   );
