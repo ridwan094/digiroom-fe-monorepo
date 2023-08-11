@@ -15,7 +15,6 @@ const Tag = ({ children, severity, className }) => {
 	}, []);
 
 	return (
-		// <span className={`inline-block py-1 px-[10px] ${bgColor} ${className}`}>
 		<span className={`inline-block py-1 px-[10px] ${bgColor} ${className}`}>
 			<span className="text-xs font-regular text-reliableBlack90">
 				{children}
