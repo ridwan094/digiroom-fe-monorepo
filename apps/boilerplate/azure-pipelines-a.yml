@@ -31,12 +31,13 @@ jobs:
     displayName: 'Install npm dependencies'
     workingDirectory: 'apps/boilerplate'
     # Add condition if needed to run only when package.json changes
-
+  
   - task: Docker@2
-    inputs:
-      command: 'buildAndPush'
-      containerRegistry: 'Docker hub connection'
-      repository: 'rainover922/boilerplate'
-      tags: '$(BuildID)'
-      buildContext: 'apps/boilerplate'
-    displayName: 'Build and push Docker image to ACR'
+  inputs:
+    command: 'buildAndPush'
+    containerRegistry: 'Docker hub connection'
+    repository: 'rainover922/boilerplate'
+    tags: '$(Build.BuildNumber)-$(Date:yyyyMMdd.HHmmss)'
+    buildContext: 'apps/boilerplate'
+  displayName: 'Build and push Docker image to Docker Hub'
+
