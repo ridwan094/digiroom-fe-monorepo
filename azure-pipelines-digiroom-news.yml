@@ -28,13 +28,9 @@ jobs:
       script: |
       arguments: 
         npm install
-        cd .\apps\digiroom-news\
-        npm install
-        npm run build
-
   - task: Docker@2
     inputs:
       containerRegistry: 'Docker hub connection'
       repository: 'digiroom-news'
       command: 'buildAndPush'
-      Dockerfile: './apps/digiroom-news/Dockerfile'
+      Dockerfile: 'apps/digiroom-news/Dockerfile'
