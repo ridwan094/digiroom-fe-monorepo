@@ -1,0 +1,29 @@
+# Build numbering format Existing
+name: $(BuildID)
+
+trigger:
+  branches:
+    include:
+      - devops
+      - feat/*
+  paths:
+    exclude:
+      - 'apps/boilerplate/*'
+      - 'apps/digiroom/*'
+      - 'apps/digiroom-cms/*'
+      - 'apps/digiroom-new-car-purchase/*'
+      - 'apps/digiroom-news/*'
+      - 'apps/digiroom-promo/*'
+
+pool:
+  vmImage: ubuntu-latest
+
+jobs:
+- job: BuildAndPush
+  steps:
+    - script: |
+        echo "Hello from '/' root folder."
+
+- job: BuildAndPushBoilerplate
+  steps:
+    - template: apps/boilerplate/azure-pipeline-a.yml
