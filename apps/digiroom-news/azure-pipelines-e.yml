@@ -8,6 +8,7 @@ trigger:
   paths:
     include:
       - 'apps/digiroom-news/*'
+      - '.'
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -20,7 +21,7 @@ jobs:
     inputs:
       targetType: 'inline'
       script: |
-        cd ../../
+        cd .
         npm install
         cd apps/digiroom-news
     displayName: 'npm install from parent dir'
