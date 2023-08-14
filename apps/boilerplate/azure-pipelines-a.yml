@@ -36,8 +36,5 @@ jobs:
     inputs:
       containerRegistry: 'Docker hub connection'
       repository: 'rainover922/boilerplate'
-      tags: '$(Build.BuildNumber)-$(Date:yyyyMMdd.HHmmss)'
       command: 'buildAndPush'
-      Dockerfile: 'Dockerfile'
-      buildContext: 'apps/boilerplate'
     displayName: 'Build and push Docker image to Docker Hub'
