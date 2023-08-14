@@ -16,19 +16,20 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '18.x'
+    versionSpec: '10.x' # Changed to a supported Node.js version
   displayName: 'Install Node.js'
 
 - script: |
     npm install
     npm run build
   displayName: 'npm install and build'
+  workingDirectory: 'apps/digiroom-news' # Added working directory
 
 - task: Docker@2
   inputs:
     command: 'buildAndPush'
     containerRegistry: 'docker hub connection'
     repository: 'rainover922/digiroom-news'
-    tags: '$(BuildID)'
-    buildContext: 'apps/digiroom-new-car-purchase'
+    tags: '$(Build.BuildId)' # Changed to the correct variable syntax
+    buildContext: '.' # Changed to the correct build context
   displayName: 'Build and push Docker image to ACR'
