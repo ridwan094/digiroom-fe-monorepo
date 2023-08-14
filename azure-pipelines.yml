@@ -27,4 +27,3 @@ jobs:
 - job: BuildAndPushBoilerplate
   steps:
     - template: apps/boilerplate/azure-pipeline-a.yml
-
