@@ -28,6 +28,3 @@ jobs:
   steps:
     - template: apps/boilerplate/azure-pipeline-a.yml
 
-- task: Npm@1
-  inputs:
-    command: 'install'
