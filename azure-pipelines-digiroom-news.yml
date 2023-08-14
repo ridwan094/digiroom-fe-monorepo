@@ -25,10 +25,13 @@ jobs:
   - task: Npm@1
     inputs:
       command: 'install'
-  - task: PowerShell@2
+      workingDir: '.'
+  - task: Npm@1
     inputs:
-      targetType: 'inline'
-      script: |
-        cd apps/digiroom-news/
-        npm install
-        npm run build
+      command: 'install'
+      workingDir: 'apps/digiroom-news/' # Set the working directory
+  - task: Npm@1
+    inputs:
+      command: 'custom'
+      workingDir: 'apps/digiroom-news/' # Set the working directory
+      customCommand: 'run build'
