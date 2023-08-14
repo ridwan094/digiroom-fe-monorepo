@@ -1,0 +1,27 @@
+name: $(Build.BuildId) # Corrected the variable syntax
+
+trigger:
+  branches:
+    include:
+      - devops
+      - feat/*
+  paths:
+    include:
+      - 'apps/digiroom-news/*'
+      - '.'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+- job: BuildAndPush
+  displayName: 'Build and Push'
+  steps:
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        cd ../..
+        npm install
+        cd apps/digiroom-news
+    displayName: 'npm install from parent dir'
