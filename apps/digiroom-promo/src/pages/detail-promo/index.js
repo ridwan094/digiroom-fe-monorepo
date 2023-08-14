@@ -159,7 +159,13 @@ function DetailPromoPage() {
       <Layout>
         <div className="px-2 py-2 md:px-16">
           {!isMobile ? (
-            <BreadCrumbs />
+            <BreadCrumbs
+              items={[
+                { name: 'Home', path: '/' },
+                { name: 'Promo', path: '/' },
+                { name: 'Detail Promo' },
+              ]}
+            />
           ) : (
             <Link href="/">
               <MdOutlineArrowBack size={24} color="black" />
@@ -285,7 +291,19 @@ function DetailPromoPage() {
             classNameContainerOtherPromo="w-full bg-reliableBlack10 px-4 md:px-16 pt-[50px] pb-[30px] flex flex-col justify-center gap-4"
           />
         </div>
-        <div className="flex justify-center pb-4 px-4">{!isMobile ? '' : <BreadCrumbs />}</div>
+        <div className="flex justify-center pb-4 px-4">
+          {!isMobile ? (
+            ''
+          ) : (
+            <BreadCrumbs
+              items={[
+                { name: 'Home', path: '/' },
+                { name: 'Promo', path: '/' },
+                { name: 'Detail Promo' },
+              ]}
+            />
+          )}
+        </div>
         <div
           className={`${
             formOpen || otpOpen ? 'hidden' : 'block'

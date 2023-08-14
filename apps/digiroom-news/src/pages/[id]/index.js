@@ -104,7 +104,13 @@ const Detail = () => {
 
         {/* Breadcrumb => Mobile Resolutions */}
         <div className="px-4 md:hidden sm:hidden pb-5">
-          <BreadCrumbs />
+          <BreadCrumbs
+            items={[
+              { name: 'Home', path: '/' },
+              { name: 'Promo', path: '/' },
+              { name: 'Detail News' },
+            ]}
+          />
         </div>
 
         {/* Modal => Form Inquiry Mobile Resolutions */}
