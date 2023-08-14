@@ -1,4 +1,5 @@
 // export the components
+export { default as ShareButton } from './ShareButton';
 export { default as CardInfo } from './CardInfo';
 export { default as ProductPanel } from './ProductPanel';
 export { default as Article } from './Article';

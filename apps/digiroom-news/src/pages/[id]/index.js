@@ -39,8 +39,8 @@ const Detail = () => {
           <BreadCrumbs
             items={[
               { name: 'Home', path: '/' },
-              { name: 'Promo', path: '/' },
-              { name: 'Detail News' },
+              { name: 'News & Tips' },
+              { name: 'News & Tips Detail' },
             ]}
           />
         </div>
