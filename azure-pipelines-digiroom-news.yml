@@ -1,5 +1,4 @@
-# Build numbering format Existing
-name: $(BuildID)
+name: $(Date:yyyyMMdd).$(Rev:r) # Custom build numbering format
 
 trigger:
   branches:
@@ -20,16 +19,19 @@ pool:
   vmImage: ubuntu-latest
 
 jobs:
-- task: Npm@1
-  inputs:
-    command: 'install'
-  
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: 'cd /apps/digiroom-news/'
-    
-- task: Npm@1
-  inputs:
-    command: 'custom'
-    customCommand: 'build'
+- job: BuildAndDeploy
+  displayName: 'Build and Deploy'
+  steps:
+  - task: Npm@1
+    inputs:
+      command: 'install'
+      
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: 'cd apps/digiroom-news/'
+
+  - script: |
+      npm run build
+    displayName: 'npm build'
+    workingDirectory: 'apps/digiroom-news/'
