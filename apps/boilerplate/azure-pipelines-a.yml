@@ -24,10 +24,6 @@ steps:
   workingDirectory: 'apps/boilerplate'
   # Add condition if needed to run only when package.json changes
 
-- script: npm run build
-  displayName: 'Run npm build'
-  workingDirectory: 'apps/boilerplate'
-
 - task: Docker@2
   inputs:
     command: 'buildAndPush'
