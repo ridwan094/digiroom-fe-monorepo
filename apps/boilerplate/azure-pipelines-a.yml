@@ -19,9 +19,9 @@ steps:
     versionSpec: '18.x'
   displayName: 'Install Node.js'
 
-- script: |
-    npm run build
-  displayName: 'npm build'
+- task: Npm@1
+  inputs:
+    command: 'build'
 
 - task: Docker@2
   inputs:
