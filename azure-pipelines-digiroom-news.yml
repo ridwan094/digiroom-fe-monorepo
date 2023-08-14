@@ -31,6 +31,9 @@ jobs:
   - task: Docker@2
     inputs:
       containerRegistry: 'Docker hub connection'
-      repository: 'digiroom-news'
+      repository: 'dig'
       command: 'buildAndPush'
-      Dockerfile: 'apps/digiroom-news/Dockerfile'
+      Dockerfile: '/apps/digiroom-new/Dockerfile'
+      tags: |
+        $(Build.BuildId)
+    displayName: 'Build and Push Docker Image'
