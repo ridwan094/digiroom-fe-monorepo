@@ -22,20 +22,12 @@ jobs:
 - job: BuildAndDeploy
   displayName: 'Build and Deploy'
   steps:
-  - task: Npm@1
-    inputs:
-      command: 'install'
   - task: PowerShell@2
     inputs:
       targetType: 'inline'
       script: |
+      arguments: 
+        npm install
         cd .\apps\digiroom-news\
-  - task: Npm@1
-    inputs:
-      command: 'install'
-      workingDir: './apps/digiroom-news'
-  - task: Npm@1
-    inputs:
-      command: 'custom'
-      customCommand: 'run build'
-      workingDir: './apps/digiroom-news'
+        npm install
+        npm run build
