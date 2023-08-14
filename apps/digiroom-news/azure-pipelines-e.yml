@@ -1,0 +1,34 @@
+# azure-pipeline-a.yml
+name: $(BuildID)
+
+trigger:
+  branches:
+    include:
+      - devops
+      - feat/*
+  paths:
+    include:
+      - 'apps/digiroom-news/*'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '18.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
+
+- task: Docker@2
+  inputs:
+    command: 'buildAndPush'
+    containerRegistry: 'docker hub connection'
+    repository: 'rainover922/digiroom-news'
+    tags: '$(BuildID)'
+    buildContext: 'apps/digiroom-new-car-purchase'
+  displayName: 'Build and push Docker image to ACR'
