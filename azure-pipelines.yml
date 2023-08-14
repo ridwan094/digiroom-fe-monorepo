@@ -23,7 +23,7 @@ jobs:
   - checkout: self
     persistCredentials: true
   - script: |
-      cd ../..
+      cd ../../
       npm install
     displayName: 'Change Directory and npm install'
     
