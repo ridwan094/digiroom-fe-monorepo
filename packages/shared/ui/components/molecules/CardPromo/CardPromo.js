@@ -19,8 +19,7 @@ const CardPromo = ({ title, coverImg, startDate, endDate, tag }) => {
               <span>{endDate}</span>
             </p>
           </div>
-        </div>
-      </Card>
+        </Card>
       </a>
     </>
   );
