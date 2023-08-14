@@ -36,7 +36,13 @@ const Detail = () => {
     <div className="relative">
       <Layout>
         <div className="hidden md:block border-b border-gray-100 px-16 py-1 mb-4">
-          <BreadCrumbs />
+          <BreadCrumbs
+            items={[
+              { name: 'Home', path: '/' },
+              { name: 'Promo', path: '/' },
+              { name: 'Detail News' },
+            ]}
+          />
         </div>
         <div className="flex md:hidden border-b px-4 border-gray-100 pb-1 pt-2 mb-4">
           <a href="/">
@@ -98,7 +104,13 @@ const Detail = () => {
 
         {/* Breadcrumb => Mobile Resolutions */}
         <div className="px-4 md:hidden sm:hidden pb-5">
-          <BreadCrumbs />
+          <BreadCrumbs
+            items={[
+              { name: 'Home', path: '/' },
+              { name: 'Promo', path: '/' },
+              { name: 'Detail News' },
+            ]}
+          />
         </div>
 
         {/* Modal => Form Inquiry Mobile Resolutions */}

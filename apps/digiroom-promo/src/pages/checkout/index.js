@@ -86,7 +86,13 @@ function Checkout() {
       <Layout>
         <div className="px-2 py-2 md:px-16">
           {!isMobile ? (
-            <BreadCrumbs />
+            <BreadCrumbs
+              items={[
+                { name: 'Home', path: '/' },
+                { name: 'Promo', path: '/' },
+                { name: 'Checkout' },
+              ]}
+            />
           ) : (
             <Link href="/detail-promo">
               <MdOutlineArrowBack size={24} color="black" />

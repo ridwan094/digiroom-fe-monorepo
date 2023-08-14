@@ -11,7 +11,12 @@ export default function Home() {
     <Layout>
       <div className="hidden md:block border-b border-gray-100 py-1 mb-4">
         <div className="px-16">
-          <BreadCrumbs />
+          <BreadCrumbs
+            items={[
+              { name: 'Home', path: '/' },
+              { name: 'News', path: '/' },
+            ]}
+          />
         </div>
       </div>
       <div className="container mx-auto">
