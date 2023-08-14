@@ -27,7 +27,7 @@ steps:
 - task: Docker@2
   inputs:
     command: 'buildAndPush'
-    containerRegistry: 'docker hub connection'
+    containerRegistry: 'Docker hub connection'
     repository: 'rainover922/boilerplate'
     tags: '$(BuildID)'
     buildContext: 'apps/boilerplate'
