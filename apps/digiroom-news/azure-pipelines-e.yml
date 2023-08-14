@@ -1,5 +1,4 @@
-# azure-pipeline-a.yml
-name: $(BuildID)
+name: $(Build.BuildId) # Corrected the variable syntax
 
 trigger:
   branches:
@@ -13,31 +12,36 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      cd ../../
+jobs:
+- job: BuildAndPush
+  displayName: 'Build and Push'
+  steps:
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        cd ../../
+        npm install
+        cd apps/digiroom-news
+    displayName: 'npm install from parent dir'
+
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '14.x' # Changed to a supported Node.js version
+    displayName: 'Install Node.js'
+
+  - script: |
+      cd apps/digiroom-news
       npm install
-      cd /apps/digiroom-news
-  displayName: 'npm install from parent dir'
+      npm run build
+    displayName: 'npm install and build'
+    workingDirectory: $(Build.SourcesDirectory) # Changed to use predefined variable
 
-- task: NodeTool@0
-  inputs:
-    versionSpec: '18.x' # Changed to a supported Node.js version
-  displayName: 'Install Node.js'
-
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
-  workingDirectory: 'apps/digiroom-news' # Added working directory
-
-- task: Docker@2
-  inputs:
-    command: 'buildAndPush'
-    containerRegistry: 'docker hub connection'
-    repository: 'rainover922/digiroom-news'
-    tags: '$(Build.BuildId)' # Changed to the correct variable syntax
-    buildContext: '.' # Changed to the correct build context
-  displayName: 'Build and push Docker image to ACR'
+  - task: Docker@2
+    inputs:
+      command: 'buildAndPush'
+      containerRegistry: 'docker hub connection'
+      repository: 'rainover922/digiroom-news'
+      tags: '$(Build.BuildId)'
+      buildContext: 'apps/digiroom-news' # Changed to the correct build context
+    displayName: 'Build and push Docker image to ACR'
