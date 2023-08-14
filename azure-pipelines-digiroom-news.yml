@@ -37,4 +37,4 @@ jobs:
       containerRegistry: 'Docker hub connection'
       repository: 'digiroom-news'
       command: 'buildAndPush'
-      Dockerfile: '**/apps/digiroom-news/Dockerfile'
+      Dockerfile: './apps/digiroom-news/Dockerfile'
