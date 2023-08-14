@@ -25,7 +25,7 @@ const Pagination = ({ currentPage = 1, totalPages = 5, onPageChange }) => {
         {Array(totalPages)
           .fill(0)
           .map((num, i) => (
-            <li>
+            <li key={i}>
               <button
                 className={`py-2 px-4 text-sm font-regular text-reliableBlack rounded ${
                   currentPage === i + 1 && 'bg-reliableBlack text-white'
