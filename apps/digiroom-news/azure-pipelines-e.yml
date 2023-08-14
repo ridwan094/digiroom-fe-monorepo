@@ -13,10 +13,18 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      cd ../../
+      npm install
+      cd /apps/digiroom-news
+  displayName: 'npm install from parent dir'
+
 - task: NodeTool@0
   inputs:
-    versionSpec: '10.x' # Changed to a supported Node.js version
+    versionSpec: '18.x' # Changed to a supported Node.js version
   displayName: 'Install Node.js'
 
 - script: |
