@@ -27,10 +27,7 @@ const OtherPromo = ({
   // }, []);
 
   // return <div dangerouslySetInnerHTML={article} />;
-  const classNameAssigned = [
-    'relative flex flex-col justify-center gap-4',
-    classNameContainer,
-  ];
+  const classNameAssigned = ['relative flex flex-col justify-center gap-4', classNameContainer];
 
   return (
     <div className={classNameAssigned.join(' ')}>
@@ -53,7 +50,7 @@ const OtherPromo = ({
             {items.map((item) => (
               <SplideSlide
                 key={item.src}
-                className="w-full overflow-hidden object-cover flex flex-col justify-center gap-6 border-b-4 border-black"
+                className="w-full overflow-hidden object-cover flex flex-col justify-center gap-6 border-b-4 border-black transition-all ease-in-out duration-300 hover:scale-105"
               >
                 <img src={item.src} className="w-full" alt="Auto2000 other promotions" />
                 <div className="flex flex-col justify-center gap-2 mb-5">

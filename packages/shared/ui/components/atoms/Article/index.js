@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Text from '../Text';
-import Button from '../Button';
-import { BiSolidShareAlt, BiCalendar } from 'react-icons/bi';
+import ShareButton from '../ShareButton';
+import { BiCalendar } from 'react-icons/bi';
 
 const Article = ({ data, block, containerClassName }) => {
   const classNameAssigned = [block ? 'w-full' : '', containerClassName];
@@ -23,13 +23,7 @@ const Article = ({ data, block, containerClassName }) => {
         <h1 className="text-2xl md:text-4xl text-reliableBlack font-bold">
           Kupas Tuntas Fitur Safety Toyota CHR Hybrid Ini Bikin Makin Pengen Beli{' '}
         </h1>
-        <Button
-          className="bg-reliableBlack20 md:hidden sm:block px-3 py-[11px]"
-          type="button"
-          variant={'bg-reliableBlack10'}
-        >
-          <BiSolidShareAlt size={24} fill="bg-reliableBlack90" />
-        </Button>
+        <ShareButton onClick={() => {}} />
       </div>
       <div className="flex mt-6 items-center gap-4">
         <BiCalendar size={24} color="black" />
