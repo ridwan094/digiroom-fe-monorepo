@@ -18,6 +18,8 @@ jobs:
   - checkout: self
 
   - script: |
+      cd ../..
+      npm install
       cd apps/boilerplate
       npm install
     displayName: 'Change Directory and npm install'
