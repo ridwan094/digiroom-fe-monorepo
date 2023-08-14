@@ -19,9 +19,14 @@ steps:
     versionSpec: '18.x'
   displayName: 'Install Node.js'
 
-- task: Npm@1
-  inputs:
-    command: 'build'
+- script: npm install
+  displayName: 'Install npm dependencies'
+  workingDirectory: 'apps/boilerplate'
+  # Add condition if needed to run only when package.json changes
+
+- script: npm run build
+  displayName: 'Run npm build'
+  workingDirectory: 'apps/boilerplate'
 
 - task: Docker@2
   inputs:
