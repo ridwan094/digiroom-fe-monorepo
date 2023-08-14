@@ -1,3 +1,4 @@
+# Build numbering format Existing
 name: $(BuildID)
 
 trigger:
@@ -18,33 +19,11 @@ pool:
   vmImage: ubuntu-latest
 
 jobs:
-- job: BuildAndInstall
+- job: BuildAndPush
   steps:
-  - checkout: self
-    persistCredentials: true
-  - script: |
-      cd ../../
-      npm install
-    displayName: 'Change Directory and npm install'
-    
-- job: BuildBoilerplate
+    - script: |
+        echo "Hello from '/' root folder."
+
+- job: BuildAndPushBoilerplate
   steps:
-  - checkout: self
-    persistCredentials: true
-  - script: |
-      cd apps/boilerplate
-      npm install
-      # Add your build steps for boilerplate here
-    displayName: 'Build Boilerplate'
-    condition: eq(variables['Build.SourceBranch'], 'refs/heads/devops') # Build only on 'devops' branch
-    
-- job: BuildDigiroom
-  steps:
-  - checkout: self
-    persistCredentials: true
-  - script: |
-      cd apps/digiroom
-      npm install
-      # Add your build steps for digiroom here
-    displayName: 'Build Digiroom'
-    condition: startsWith(variables['Build.SourceBranch'], 'refs/heads/feat/') # Build only on 'feat/*' branches
+    - template: apps/boilerplate/azure-pipeline-a.yml
