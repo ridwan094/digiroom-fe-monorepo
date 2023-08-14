@@ -1,4 +1,3 @@
-# azure-pipeline-a.yml
 name: $(BuildID)
 
 trigger:
@@ -13,21 +12,33 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '18.x'
-  displayName: 'Install Node.js'
+jobs:
+- job: BuildAndDeploy
+  steps:
+  - checkout: self
 
-- script: |
-    npm run build
-  displayName: 'npm build'
+  - script: |
+      cd ../..
+      npm install
+      cd apps/boilerplate
+      npm install
+    displayName: 'Change Directory and npm install'
+    
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '18.x'
+    displayName: 'Install Node.js'
 
-- task: Docker@2
-  inputs:
-    command: 'buildAndPush'
-    containerRegistry: 'docker hub connection'
-    repository: 'rainover922/boilerplate'
-    tags: '$(BuildID)'
-    buildContext: 'apps/boilerplate'
-  displayName: 'Build and push Docker image to ACR'
+  - script: npm install
+    displayName: 'Install npm dependencies'
+    workingDirectory: 'apps/boilerplate'
+    # Add condition if needed to run only when package.json changes
+
+  - task: Docker@2
+    inputs:
+      command: 'buildAndPush'
+      containerRegistry: 'Docker hub connection'
+      repository: 'rainover922/boilerplate'
+      tags: '$(BuildID)'
+      buildContext: 'apps/boilerplate'
+    displayName: 'Build and push Docker image to ACR'
