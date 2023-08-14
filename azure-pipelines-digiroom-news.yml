@@ -1,4 +1,5 @@
-name: $(Build.BuildId) # Corrected the variable syntax
+# Build numbering format Existing
+name: $(BuildID)
 
 trigger:
   branches:
@@ -6,22 +7,29 @@ trigger:
       - devops
       - feat/*
   paths:
+    exclude:
+      - 'apps/boilerplate/*'
+      - 'apps/digiroom/*'
+      - 'apps/digiroom-cms/*'
+      - 'apps/digiroom-new-car-purchase/*'
+      - 'apps/digiroom-promo/*'
     include:
       - 'apps/digiroom-news/*'
-      - '.'
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: ubuntu-latest
 
 jobs:
-- job: BuildAndPush
-  displayName: 'Build and Push'
-  steps:
-  - task: PowerShell@2
-    inputs:
-      targetType: 'inline'
-      script: |
-        cd ../..
-        npm install
-        cd apps/digiroom-news
-    displayName: 'npm install from parent dir'
+- task: Npm@1
+  inputs:
+    command: 'install'
+  
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: 'cd /apps/digiroom-news/'
+    
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'build'
