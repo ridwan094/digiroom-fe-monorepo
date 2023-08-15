@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy package.json and package-lock.json to the container
 COPY package.json package-lock.json /app/
 
-RUN npm run parent
+RUN npm run build
 
 # Install project dependencies
 RUN npm install
