@@ -19,6 +19,7 @@ const CMSHeader = ({ sidebarCollapse }) => {
             arrowIcon: 'ml-4 h-3 w-3',
           }}
         >
+          <Dropdown.Item>Profile</Dropdown.Item>
           <Dropdown.Item>Sign out</Dropdown.Item>
         </Dropdown>
       </div>
