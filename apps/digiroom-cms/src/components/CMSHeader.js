@@ -8,7 +8,7 @@ const CMSHeader = ({ sidebarCollapse }) => {
       }`}
     >
       <div>
-        <img className="h-8" src="/header-logo.png" alt="Auto2000 logo image" />
+        <img className="h-8" src="/images/logo-beyond.webp" alt="Auto2000 logo brand image" />
       </div>
 
       <div>

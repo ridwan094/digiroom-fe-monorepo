@@ -42,7 +42,7 @@ const CMSSidebar = ({ sidebarCollapse, onToggle }) => {
       >
         {!sidebarCollapse && (
           <Link href="/">
-            <img className={`${sidebarCollapse ? 'h-2' : 'h-12'}`} src="/sidebar-logo.png" alt="" />
+            <img className="h-12" src="/images/Auto2000.webp" alt="Auto2000 logo brand image" />
           </Link>
         )}
 
