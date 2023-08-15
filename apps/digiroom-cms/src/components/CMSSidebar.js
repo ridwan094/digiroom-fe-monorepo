@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { Sidebar } from 'flowbite-react';
+import { Sidebar, Tooltip, Button } from 'flowbite-react';
 import {
   MdWork,
   MdTrendingUp,
@@ -10,16 +9,19 @@ import {
   MdDirectionsCar,
   MdChevronLeft,
   MdChevronRight,
+  MdList,
+  MdQuestionAnswer,
 } from 'react-icons/md';
 
 const customTheme = {
   root: {
-    base: 'border-r border-gray-200',
-    inner: 'bg-white h-full',
-  },
-  logo: {
-    base: '',
-    img: 'mr-0 h-full w-full sm:h-full #{!important}',
+    base: 'h-full border-r border-gray-200',
+    collapsed: {
+      on: 'w-16',
+      off: 'w-64',
+    },
+    inner:
+      'h-full bg-white overflow-y-auto overflow-x-hidden rounded bg-gray-50 py-4 px-3 dark:bg-gray-800',
   },
 };
 
@@ -46,96 +48,129 @@ const CMSSidebar = ({ sidebarCollapse, onToggle }) => {
           </Link>
         )}
 
-        <button onClick={() => onToggle(!sidebarCollapse)}>
+        <Button color="light" size="xs" onClick={() => onToggle(!sidebarCollapse)}>
           {sidebarCollapse ? <MdChevronRight size={22} /> : <MdChevronLeft size={22} />}
-        </button>
+        </Button>
       </div>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
-          <Sidebar.Item
-            className={`mb-4 p-3 rounded-none text-reliableBlack60 hover:bg-[#F5F5F5] ${
-              router.pathname === '/master-data' && 'bg-[#F5F5F5] text-reliableBlack90'
-            }`}
-            as={Link}
-            href="/master-data"
+          <Tooltip
+            className={`${!sidebarCollapse && 'hidden'}`}
+            content="Master Data"
+            placement="right"
+            theme={{ target: 'w-full' }}
           >
-            <p
-              className={`flex gap-3 items-center font-semibold uppercase ${
-                sidebarCollapse && 'justify-center'
-              }`}
+            <Sidebar.Item
+              className="text-reliableBlack60"
+              href="/master-data"
+              as={Link}
+              icon={MdWork}
             >
-              <MdWork size={20} />
-              {!sidebarCollapse && <span>Master Data</span>}
-            </p>
-          </Sidebar.Item>
-          <Sidebar.Item
-            className={`mb-4 p-3 rounded-none text-reliableBlack60 hover:bg-[#F5F5F5] ${
-              router.pathname === '/dashboard' && 'bg-[#F5F5F5] text-reliableBlack90'
-            }`}
-            as={Link}
-            href="/dashboard"
+              {!sidebarCollapse && <p>Master Data</p>}
+            </Sidebar.Item>
+          </Tooltip>
+          <Tooltip
+            className={`${!sidebarCollapse && 'hidden'}`}
+            content="Dashboard"
+            placement="right"
+            theme={{ target: 'w-full' }}
           >
-            <p
-              className={`flex gap-3 items-center font-semibold uppercase ${
-                sidebarCollapse && 'justify-center'
-              }`}
+            <Sidebar.Item
+              className="mt-4 text-reliableBlack60"
+              href="/dashboard"
+              as={Link}
+              icon={MdTrendingUp}
             >
-              <MdTrendingUp size={20} />
-
-              {!sidebarCollapse && <span>Dashboard</span>}
-            </p>
-          </Sidebar.Item>
-          <Sidebar.Item
-            className={`mb-4 p-3 rounded-none text-reliableBlack60 hover:bg-[#F5F5F5] ${
-              router.pathname === '/promo' && 'bg-[#F5F5F5] text-reliableBlack90'
-            }`}
-            as={Link}
-            href="/promo"
+              {!sidebarCollapse && <p>Dashboard</p>}
+            </Sidebar.Item>
+          </Tooltip>
+          <Sidebar.Collapse
+            className="mt-4 text-reliableBlack60"
+            icon={MdLocalOffer}
+            label={!sidebarCollapse ? 'Promo' : ''}
           >
-            <p
-              className={`flex gap-3 items-center font-semibold uppercase ${
-                sidebarCollapse && 'justify-center'
-              }`}
+            <Tooltip
+              className={`${!sidebarCollapse && 'hidden'}`}
+              content="List Promo"
+              placement="right"
+              theme={{ target: 'w-full' }}
             >
-              <MdLocalOffer size={20} />
-
-              {!sidebarCollapse && <span>Promo</span>}
-            </p>
-          </Sidebar.Item>
-          <Sidebar.Item
-            className={`mb-4 p-3 rounded-none text-reliableBlack60 hover:bg-[#F5F5F5] ${
-              router.pathname === '/articles' && 'bg-[#F5F5F5] text-reliableBlack90'
-            }`}
-            as={Link}
-            href="/articles"
+              <Sidebar.Item
+                className="text-reliableBlack60"
+                href="/promo/list"
+                as={Link}
+                icon={MdList}
+              >
+                {!sidebarCollapse && <p>List Promo</p>}
+              </Sidebar.Item>
+            </Tooltip>
+            <Tooltip
+              className={`${!sidebarCollapse && 'hidden'}`}
+              content="FAQ Promo"
+              placement="right"
+              theme={{ target: 'w-full' }}
+            >
+              <Sidebar.Item
+                className="text-reliableBlack60"
+                href="/promo/faq"
+                as={Link}
+                icon={MdQuestionAnswer}
+              >
+                {!sidebarCollapse && <p>FAQ Promo</p>}
+              </Sidebar.Item>
+            </Tooltip>
+          </Sidebar.Collapse>
+          <Sidebar.Collapse
+            className="mt-4 text-reliableBlack60"
+            icon={MdInsertDriveFile}
+            label={!sidebarCollapse ? 'Articles' : ''}
           >
-            <p
-              className={`flex gap-3 items-center font-semibold uppercase ${
-                sidebarCollapse && 'justify-center'
-              }`}
+            <Tooltip
+              className={`${!sidebarCollapse && 'hidden'}`}
+              content="List Article"
+              placement="right"
+              theme={{ target: 'w-full' }}
             >
-              <MdInsertDriveFile size={20} />
-
-              {!sidebarCollapse && <span>Articles</span>}
-            </p>
-          </Sidebar.Item>
-          <Sidebar.Item
-            className={`mb-4 p-3 rounded-none text-reliableBlack60 hover:bg-[#F5F5F5] ${
-              router.pathname === '/product-knowledge' && 'bg-[#F5F5F5] text-reliableBlack90'
-            }`}
-            as={Link}
-            href="/product-knowledge"
+              <Sidebar.Item
+                className="text-reliableBlack60"
+                href="/article/list"
+                as={Link}
+                icon={MdList}
+              >
+                {!sidebarCollapse && 'List Article'}
+              </Sidebar.Item>
+            </Tooltip>
+            <Tooltip
+              className={`${!sidebarCollapse && 'hidden'}`}
+              content="FAQ Article"
+              placement="right"
+              theme={{ target: 'w-full' }}
+            >
+              <Sidebar.Item
+                className="text-reliableBlack60"
+                href="/article/faq"
+                as={Link}
+                icon={MdQuestionAnswer}
+              >
+                {!sidebarCollapse && 'FAQ Article'}
+              </Sidebar.Item>
+            </Tooltip>
+          </Sidebar.Collapse>
+          <Tooltip
+            className={`${!sidebarCollapse && 'hidden'}`}
+            content="Product Knowledge"
+            placement="right"
+            theme={{ target: 'w-full' }}
           >
-            <p
-              className={`flex gap-3 items-center font-semibold uppercase ${
-                sidebarCollapse && 'justify-center'
-              }`}
+            <Sidebar.Item
+              className="mt-4 text-reliableBlack60"
+              href="/product-knowledge"
+              as={Link}
+              icon={MdDirectionsCar}
             >
-              <MdDirectionsCar size={20} />
-
-              {!sidebarCollapse && <span>Product Knowledge</span>}
-            </p>
-          </Sidebar.Item>
+              {!sidebarCollapse && <p>Product Knowledge</p>}
+            </Sidebar.Item>
+          </Tooltip>
         </Sidebar.ItemGroup>
       </Sidebar.Items>
     </Sidebar>

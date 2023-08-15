@@ -17,7 +17,7 @@ const CMSLayout = ({ children }) => {
         <div
           className="bg-gray-100 text-gray-800"
           style={{
-            marginLeft: `${sidebarCollapse ? '100px' : '300px'}`,
+            marginLeft: `${sidebarCollapse ? '0' : '300px'}`,
             minHeight: '100vh',
             transition: 'margin 300ms',
           }}
