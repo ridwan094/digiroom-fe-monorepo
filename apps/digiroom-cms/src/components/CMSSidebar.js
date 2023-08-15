@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { Sidebar, Tooltip, Button } from 'flowbite-react';
+import { Sidebar, Tooltip } from 'flowbite-react';
 import {
   MdWork,
   MdTrendingUp,
@@ -48,9 +48,9 @@ const CMSSidebar = ({ sidebarCollapse, onToggle }) => {
           </Link>
         )}
 
-        <Button color="light" size="xs" onClick={() => onToggle(!sidebarCollapse)}>
+        <button onClick={() => onToggle(!sidebarCollapse)}>
           {sidebarCollapse ? <MdChevronRight size={22} /> : <MdChevronLeft size={22} />}
-        </Button>
+        </button>
       </div>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
