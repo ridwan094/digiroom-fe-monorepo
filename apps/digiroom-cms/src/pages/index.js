@@ -1,4 +1,4 @@
-import DashboardPromo  from './dashboardpromo'
+import DashboardPromo  from './dashboard-promo'
 
 export default function Home() {
   return (
