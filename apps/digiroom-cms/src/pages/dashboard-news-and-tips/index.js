@@ -9,6 +9,7 @@ import {
   MdOutlineFileCopy,
 } from 'react-icons/md';
 import { Table, Pagination, Toast, Tooltip, Modal, Spinner } from 'flowbite-react';
+import BreadCrumbs from 'ui/components/molecules/Breadcrumbs';
 
 const DashboardNewsAndTips = () => {
   const [title, settitle] = useState([
@@ -137,43 +138,7 @@ const DashboardNewsAndTips = () => {
       {/* Title */}
       <div className={`flex items-center justify-between ${isLoading ? 'opacity-50' : ''}`}>
         <h3 className="px-2 py-4 relative text-2xl text-gray-800 uppercase font-bold">Article</h3>
-        <nav className="flex items-center" aria-label="Breadcrumb">
-          <ol className="inline-flex items-center space-x-1 md:space-x-3">
-            <li className="inline-flex items-center">
-              <a
-                href="#"
-                className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
-              >
-                Dashboard
-              </a>
-            </li>
-            <li>
-              <div className="flex items-center">
-                <svg
-                  className="w-3 h-3 text-gray-400 mx-1"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 6 10"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="m1 9 4-4-4-4"
-                  />
-                </svg>
-                <a
-                  href="#"
-                  className="ml-1 text-sm font-medium text-gray-700 hover:text-gray-600 md:ml-2 dark:text-black dark:hover:text-gray-600"
-                >
-                  List Promo
-                </a>
-              </div>
-            </li>
-          </ol>
-        </nav>
+        <BreadCrumbs items={[{ name: 'Dashboard', path: '/' }, { name: 'List Promo' }]} />
       </div>
 
       <div className="relative overflow-x-auto mt-10">
