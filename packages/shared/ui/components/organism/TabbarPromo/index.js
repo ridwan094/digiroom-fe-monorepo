@@ -109,9 +109,11 @@ const TabBarPromo = () => {
     },
   ];
   return (
-    <div>
-      <TabBar tabs={tabsData} onTabChange={handleTabChange} />
-    </div>
+    <section className="my-[30px] lg:my-20">
+      <div className="lg:container">
+        <TabBar tabs={tabsData} onTabChange={handleTabChange} />
+      </div>
+    </section>
   );
 };
 

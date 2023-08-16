@@ -37,9 +37,7 @@ const PromoPage = () => {
         <PromoBannerSection />
 
         {/* Tab Bar Promo */}
-        <div className="lg:container">
-          <TabBarPromo />
-        </div>
+        <TabBarPromo />
 
         {/* Promo info section */}
         <PromoInfoSection />
