@@ -137,20 +137,20 @@ const DashboardNewsAndTips = () => {
       {/* Title */}
       <div className={`flex items-center justify-between ${isLoading ? 'opacity-50' : ''}`}>
         <h3 className="px-2 py-4 relative text-2xl text-gray-800 uppercase font-bold">Article</h3>
-        <nav class="flex items-center" aria-label="Breadcrumb">
-          <ol class="inline-flex items-center space-x-1 md:space-x-3">
-            <li class="inline-flex items-center">
+        <nav className="flex items-center" aria-label="Breadcrumb">
+          <ol className="inline-flex items-center space-x-1 md:space-x-3">
+            <li className="inline-flex items-center">
               <a
                 href="#"
-                class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
+                className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
               >
                 Dashboard
               </a>
             </li>
             <li>
-              <div class="flex items-center">
+              <div className="flex items-center">
                 <svg
-                  class="w-3 h-3 text-gray-400 mx-1"
+                  className="w-3 h-3 text-gray-400 mx-1"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -166,7 +166,7 @@ const DashboardNewsAndTips = () => {
                 </svg>
                 <a
                   href="#"
-                  class="ml-1 text-sm font-medium text-gray-700 hover:text-gray-600 md:ml-2 dark:text-black dark:hover:text-gray-600"
+                  className="ml-1 text-sm font-medium text-gray-700 hover:text-gray-600 md:ml-2 dark:text-black dark:hover:text-gray-600"
                 >
                   List Promo
                 </a>
@@ -176,8 +176,8 @@ const DashboardNewsAndTips = () => {
         </nav>
       </div>
 
-      <div class="relative overflow-x-auto mt-10">
-        <div class="p-5 border-x border-t border-black w-full">
+      <div className="relative overflow-x-auto mt-10">
+        <div className="p-5 border-x border-t border-black w-full">
           <div className="flex justify-between items-center">
             <p className="text-black text-lg text-gray-800 font-bold">List Article</p>
             <div className="flex justify-between items-center space-x-6">
@@ -208,7 +208,7 @@ const DashboardNewsAndTips = () => {
                 <Table.HeadCell key={index}>{title}</Table.HeadCell>
               ))}
             </Table.Head>
-            <Table.Body class="divide-y">
+            <Table.Body className="divide-y">
               {displayedItems.map((itemProduct, index) => (
                 <Table.Row key={index} className={isLoading ? 'animate-pulse' : ''}>
                   <Table.Cell>
@@ -268,7 +268,7 @@ const DashboardNewsAndTips = () => {
             </Table.Body>
           </Table>
         </div>
-        <div class="p-5 border-x border-b border-black w-full flex items-center justify-end">
+        <div className="p-5 border-x border-b border-black w-full flex items-center justify-end">
           <Pagination
             currentPage={currentPage}
             onPageChange={onPageChange}
