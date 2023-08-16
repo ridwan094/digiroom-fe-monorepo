@@ -179,7 +179,7 @@ const DashboardPromo = () => {
   };
 
   return (
-    <div className="relative w-3/4">
+    <div className="relative w-full">
       <div
         className={`fixed inset-x-0 top-10 right-10 z-50 flex justify-end items-left ${
           showToast
