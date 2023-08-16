@@ -1,103 +1,99 @@
-import {
-  MdSearch,
-  MdAdd,
-  MdOutlineFileCopy,
-  MdOutlineCreate,
-  MdDeleteOutline,
-  MdOutlineDelete,
-  MdCheckCircleOutline,
-} from 'react-icons/md';
+'use client';
+
+import { MdAdd, MdOutlineFileCopy, MdOutlineCreate, MdOutlineDelete } from 'react-icons/md';
 import React, { useState } from 'react';
 import { Table, Pagination, Button, Toast, Tooltip, Modal, Spinner } from 'flowbite-react';
 import ToggleSwitch from 'ui/components/atoms/Toogle';
-import { Dropdown } from 'ui';
+import Dropdown from 'ui/components/atoms/Dropdown';
+import { useRouter } from 'next/navigation';
 
 const DashboardPromo = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [showToast, setShowToast] = useState(false);
-  const props = { showToast, setShowToast };
-
+  const [title, settitle] = useState([
+    'promo name',
+    'slug',
+    'date publised',
+    'expired date',
+    'action',
+    'status',
+  ]);
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + 1);
-
-  const Title = ['promo name', 'slug', 'date publised', 'expired date', 'action', 'status'];
-
   const itemProduct = [
     {
-      Title: 'Promo Yaris',
-      Slug: 'wow',
-      DatePublished: new Date(),
-      ExpiredDate: currentDate,
-      Status: 'Published',
-      Boolean: 'inactive',
+      title: 'Promo Yaris',
+      slug: 'wow',
+      datePublished: new Date(),
+      expiredDate: currentDate,
+      status: 'Published',
+      boolean: 'inactive',
     },
     {
-      Title: 'Promo HRV',
-      Slug: 'shy',
-      DatePublished: new Date(),
-      ExpiredDate: currentDate,
-      Status: 'Published',
-      Boolean: 'active',
+      title: 'Promo HRV',
+      slug: 'shy',
+      datePublished: new Date(),
+      expiredDate: currentDate,
+      status: 'Published',
+      boolean: 'active',
     },
     {
-      Title: 'Promo CRT',
-      Slug: 'soemthing liek that',
-      DatePublished: new Date(),
-      ExpiredDate: currentDate,
-      Status: 'Published',
-      Boolean: 'active',
+      title: 'Promo CRT',
+      slug: 'soemthing liek that',
+      datePublished: new Date(),
+      expiredDate: currentDate,
+      status: 'Published',
+      boolean: 'active',
     },
     {
-      Title: 'Promo CDR',
-      Slug: 'big ben',
-      DatePublished: new Date(),
-      ExpiredDate: currentDate,
-      Status: 'Published',
-      Boolean: 'inactive',
+      title: 'Promo CDR',
+      slug: 'big ben',
+      datePublished: new Date(),
+      expiredDate: currentDate,
+      status: 'Published',
+      boolean: 'inactive',
     },
     {
-      Title: 'Toyota Camry',
-      Slug: 'i try to',
-      DatePublished: new Date(),
-      ExpiredDate: currentDate,
-      Status: 'Published',
-      Boolean: 'waitings',
+      title: 'Toyota Camry',
+      slug: 'i try to',
+      datePublished: new Date(),
+      expiredDate: currentDate,
+      status: 'Published',
+      boolean: 'waitings',
     },
     {
-      Title: 'Promo Raize',
-      Slug: 'ultima',
-      DatePublished: new Date(),
-      ExpiredDate: currentDate,
-      Status: 'Published',
-      Boolean: 'inactive',
+      title: 'Promo Raize',
+      slug: 'ultima',
+      datePublished: new Date(),
+      expiredDate: currentDate,
+      status: 'Published',
+      boolean: 'inactive',
     },
     {
-      Title: 'Promo Corolla Cross',
-      Slug: 'coffee',
-      DatePublished: new Date(),
-      ExpiredDate: currentDate,
-      Status: 'Published',
-      Boolean: 'active',
+      title: 'Promo Corolla Cross',
+      slug: 'coffee',
+      datePublished: new Date(),
+      expiredDate: currentDate,
+      status: 'Published',
+      boolean: 'active',
     },
   ];
 
-  //   const itemsPerPage = 5;
-  //   const totalItems = itemProduct.length;
-  //   const totalPages = Math.ceil(totalItems / itemsPerPage);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [showToast, setShowToast] = useState(false);
   const [toastDescription, setToastDescription] = useState('');
   const [toastIcons, setToastIcons] = useState(null);
-  const [openModal, setOpenModal] = useState();
+  const [openModal, setOpenModal] = useState(null);
   const [modalText, setModalText] = useState('');
   const [modalHeader, setModalHeader] = useState('');
   const [caseItems, setCaseItems] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [itemsPerPage, setitemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
   const [totalItems, setTotalItems] = useState(itemProduct.length);
-  const [totalPages, setTotalPage] = useState(Math.ceil(totalItems / itemsPerPage));
+  const [totalPages, setTotalPages] = useState(Math.ceil(totalItems / itemsPerPage));
   const [displayedItems, setDisplayedItems] = useState(
     itemProduct.slice(currentPage - 1, itemsPerPage)
   );
+  const [page, setPage] = useState([5, 10, 15]);
+  const router = useRouter();
 
   const onPageChange = (page) => {
     setIsLoading(true);
@@ -111,51 +107,54 @@ const DashboardPromo = () => {
     }, 1000);
   };
 
+  const addListPromo = () => {
+    router.push('/#');
+  };
+
   const onClick = (items, index) => {
     setCaseItems(items);
     switch (items) {
       case 'edit':
+        router.push('/#');
         break;
       case 'delete':
         setOpenModal('dismissible');
         setModalText('delete');
-        setModalHeader(`Delete ${displayedItems[index].Title}`);
+        setModalHeader(`Delete ${displayedItems[index].title}`);
         break;
       case 'copy':
-        const textToCopy = itemProduct[index].Slug;
+        const textToCopy = itemProduct[index].slug;
         copyToClipboard(textToCopy);
-        props.setShowToast(!props.showToast);
+        setShowToast(!showToast);
         setToastDescription('Copy to Clipboard');
         setToastIcons(<MdOutlineFileCopy />);
         setTimeout(() => {
-          props.setShowToast(false);
+          setShowToast(false);
         }, 2000);
         break;
     }
   };
 
   const dropdownPageChange = (selectedValue) => {
-    console.log('Selected Rows per Page:', selectedValue);
-    setitemsPerPage(selectedValue);
-    setDisplayedItems(itemProduct.slice(currentPage - 1, selectedValue));
+    setItemsPerPage(selectedValue);
+    setTotalPages(Math.ceil(totalItems / selectedValue));
+    onPageChange(1);
   };
-
-  const page = [5, 10, 15];
 
   const onClickModal = () => {
     var updateItemProduct = [...itemProduct];
-    switch (caseItems ? caseItems.newValue : caseItems) {
+    switch (caseItems.newValue ? caseItems.newValue : caseItems) {
       case 'delete':
         setOpenModal(undefined);
         break;
       case false:
-        updateItemProduct[caseItems.index].Boolean = caseItems ? 'inactive' : 'active';
+        updateItemProduct[caseItems.index].boolean = caseItems ? 'inactive' : 'active';
         setDisplayedItems(itemProduct.slice(0, itemsPerPage));
         setOpenModal(undefined);
         updateItemProduct = null;
         break;
-      default:
-        updateItemProduct[caseItems.index].Boolean = caseItems ? 'active' : 'inactive';
+      case true:
+        updateItemProduct[caseItems.index].boolean = caseItems ? 'active' : 'inactive';
         setDisplayedItems(itemProduct.slice(0, itemsPerPage));
         setOpenModal(undefined);
         updateItemProduct = null;
@@ -164,10 +163,9 @@ const DashboardPromo = () => {
   };
 
   const handleToggleChange = (isChecked) => {
-    console.log('isi index', isChecked.index);
     setOpenModal('dismissible');
     setModalText(!isChecked.newValue ? 'unpublished' : 'published');
-    setModalHeader(displayedItems[isChecked.index].Title);
+    setModalHeader(displayedItems[isChecked.index].title);
     setCaseItems(isChecked);
   };
 
@@ -184,19 +182,19 @@ const DashboardPromo = () => {
     <div className="relative w-3/4">
       <div
         className={`fixed inset-x-0 top-10 right-10 z-50 flex justify-end items-left ${
-          props.showToast
+          showToast
             ? 'opacity-100 transition-opacity duration-300'
             : 'opacity-0 transition-opacity duration-300'
         }`}
       >
-        {props.showToast && (
+        {showToast && (
           <Toast className="bg-white border border-gray-300 p-3 rounded-md shadow-md">
             <div className="flex items-center justify-center w-10 h-10 bg-black text-white text-2xl">
               {toastIcons}
             </div>
             <div className="ml-3 text-sm font-normal text-gray-800">{toastDescription}</div>
             <Toast.Toggle
-              onDismiss={() => props.setShowToast(false)}
+              onDismiss={() => setShowToast(false)}
               className="ml-auto text-gray-500 hover:text-gray-700 cursor-pointer"
             />
           </Toast>
@@ -204,7 +202,7 @@ const DashboardPromo = () => {
       </div>
       <div className={`flex items-center justify-between ${isLoading ? 'opacity-50' : ''}`}>
         <p className="px-2 py-4 relative text-lg uppercase font-bold">promo</p>
-        <Button color="light">
+        <Button color="light" onClick={() => addListPromo()}>
           <p className="flex items-center gap-2">
             <MdAdd /> Add
           </p>
@@ -213,17 +211,17 @@ const DashboardPromo = () => {
       <div className="relative">
         <Table className={`${isLoading ? 'opacity-20' : ''}`}>
           <Table.Head>
-            {Title.map((title, index) => (
+            {title.map((title, index) => (
               <Table.HeadCell key={index}>{title}</Table.HeadCell>
             ))}
           </Table.Head>
           <Table.Body class="divide-y">
             {displayedItems.map((itemProduct, index) => (
               <Table.Row key={index} className={isLoading ? 'animate-pulse' : ''}>
-                <Table.Cell>{itemProduct.Title}</Table.Cell>
-                <Table.Cell>{itemProduct.Slug}</Table.Cell>
-                <Table.Cell>{itemProduct.DatePublished.toDateString()}</Table.Cell>
-                <Table.Cell>{itemProduct.ExpiredDate.toDateString()}</Table.Cell>
+                <Table.Cell>{itemProduct.title}</Table.Cell>
+                <Table.Cell>{itemProduct.slug}</Table.Cell>
+                <Table.Cell>{itemProduct.datePublished.toDateString()}</Table.Cell>
+                <Table.Cell>{itemProduct.expiredDate.toDateString()}</Table.Cell>
                 <Table.Cell>
                   <div className="flex flex-rows hover:cursor-pointer gap-2">
                     <Tooltip content="Edit">
@@ -250,32 +248,32 @@ const DashboardPromo = () => {
                   <div className="flex items-center gap-2">
                     <div
                       className={`p-2 w-full h-full border border-gray-200 ${
-                        itemProduct.Boolean === 'active'
+                        itemProduct.boolean === 'active'
                           ? 'bg-gray-200'
-                          : itemProduct.Boolean === 'inactive'
+                          : itemProduct.boolean === 'inactive'
                           ? 'bg-gray-300'
-                          : itemProduct.Boolean === 'waitings'
+                          : itemProduct.boolean === 'waitings'
                           ? 'bg-gray-500'
                           : 'bg-gray-200'
                       } rounded-full text-black capitalized text-md flex justify-center items-center font-Montserrat`}
                     >
-                      {itemProduct.Boolean === 'active'
+                      {itemProduct.boolean === 'active'
                         ? 'Published'
-                        : itemProduct.Boolean === 'inactive'
+                        : itemProduct.boolean === 'inactive'
                         ? 'Unpublished'
                         : 'Waiting'}
                     </div>
                     <ToggleSwitch
                       index={index}
-                      disabled={itemProduct.Boolean === 'waitings'}
-                      value={itemProduct.Boolean === 'active'}
+                      disabled={itemProduct.boolean === 'waitings'}
+                      value={itemProduct.boolean === 'active'}
                       onToggleChange={handleToggleChange}
                       classNameLabel={`w-11 h-6 bg-gray-200 rounded-full peer  
                     peer-checked:after:border-white after:content-[''] 
                     after:absolute after:top-[2px] after:left-[2px] 
                     after:bg-gray-600 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 
                     after:transition-all ${
-                      itemProduct.Boolean === 'active'
+                      itemProduct.boolean === 'active'
                         ? 'peer-checked:bg-gray-800 peer-checked:after:translate-x-full'
                         : 'peer-checked:after:translate-x-0'
                     } `}
@@ -294,7 +292,7 @@ const DashboardPromo = () => {
         )}
       </div>
       <div className="mt-2 text-gray-600 flex flex-row justify-end gap-2">
-        <p className="flex items-center border border-grey-200 rounded-lg px-2 mt-1.5">
+        <div className="flex items-center border border-grey-200 rounded-lg px-2 mt-1.5">
           Showing {itemsPerPage * (currentPage - 1) + 1} to{' '}
           <Dropdown
             text={Math.min(itemsPerPage * currentPage, totalItems)}
@@ -304,7 +302,7 @@ const DashboardPromo = () => {
             size="w-11"
           />{' '}
           of {totalItems} items
-        </p>
+        </div>
         <Pagination
           currentPage={currentPage}
           onPageChange={onPageChange}

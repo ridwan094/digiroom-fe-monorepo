@@ -65,25 +65,6 @@ export default function Home() {
               </div>
             </section>
 
-            {/* <div className=" text-4xl md:text-8xl my-auto font-bold text-slate-900">
-            {searchValue ? searchValue : 'The Boilerplate'}
-          </div>
-          <Button>Test</Button> */}
-            {/* <Dropdown
-            label="Dropdown"
-            placeholder="Select an Option"
-            options={options}
-            onSelect={handleOptionSelect}
-            selectedOption={selectedOption}
-          /> */}
-            {/* <Input
-          type="text"
-          label="Nama"
-          labelClassName="text-reliableBlack70 font-semibold"
-          onChange={handleChange}
-          value={inputValues}
-        /> */}
-
             {/* Info promo section */}
             <section className="py-4 lg:py-8 md:container lg:container">
               <div className="px-4 text-reliableBlack md:px-0 lg:px-0">
