@@ -11,7 +11,7 @@ export default function LayoutPagePromo() {
       <div className="flex items-center mb-2">
         <MdOutlineCalendarMonth />
         <Text.BodySmall className="mx-2">Date published - Date expired </Text.BodySmall>
-        <button className="bg-[#E9E9E9] text-[12px] px-2">Countdown</button>
+        <div className="bg-[#E9E9E9] text-[12px] px-2">Countdown</div>
       </div>
       <Text.BodySmall className="font-semibold mb-1">DETAIL PROMOSI</Text.BodySmall>
       <Text.BodySmall>

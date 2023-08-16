@@ -40,13 +40,13 @@ const Accordion = ({ title, index, isActive, children }) => {
         {isChecked ? <MdExpandLess size={24} /> : <MdExpandMore size={24} />}
       </div>
 
-      <p
+      <div
         className={`text-start text-xs text-reliableBlack leading-relaxed h-0 overflow-hidden transition-all duration-300 lg:text-base lg:leading-relaxed ${
           isChecked && 'h-auto overflow-auto mt-4'
         }`}
       >
         {children}
-      </p>
+      </div>
     </button>
   );
 };
