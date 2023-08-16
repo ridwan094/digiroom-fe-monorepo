@@ -216,7 +216,7 @@ export default function LayoutForm() {
         />
         <div>
           <label
-            htmlFor="underline_select"
+            htmlFor="showpage"
             className="font-[500] text-[14px] leading-[17px] text-reliableBlack70"
           >
             Show Page
@@ -236,7 +236,7 @@ export default function LayoutForm() {
 
         <div>
           <label
-            htmlFor="underline_select"
+            htmlFor="robot_tags"
             className="font-[500] text-[14px] leading-[17px] text-reliableBlack70"
           >
             Robot Tags
@@ -276,7 +276,7 @@ export default function LayoutForm() {
 
         <div>
           <label
-            htmlFor="underline_select"
+            htmlFor="city"
             className="font-[500] text-[14px] leading-[17px] text-reliableBlack70"
           >
             City
@@ -296,7 +296,7 @@ export default function LayoutForm() {
 
         <div>
           <label
-            htmlFor="underline_select"
+            htmlFor="branch"
             className="font-[500] text-[14px] leading-[17px] text-reliableBlack70"
           >
             Branch
@@ -316,7 +316,7 @@ export default function LayoutForm() {
 
         <div>
           <label
-            htmlFor="underline_select"
+            htmlFor="tags"
             className="font-[500] text-[14px] leading-[17px] text-reliableBlack70"
           >
             Tags
