@@ -1,0 +1,6 @@
+projectKey=digiroom-monorepo
+serverUrl=http://20.20.1.43:32699
+serverVersion=10.1.0.73491
+dashboardUrl=http://20.20.1.43:32699/dashboard?id=digiroom-monorepo
+ceTaskId=AYn874IZjao8lgMLYKXS
+ceTaskUrl=http://20.20.1.43:32699/api/ce/task?id=AYn874IZjao8lgMLYKXS
