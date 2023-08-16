@@ -42,7 +42,7 @@ export default function LayoutForm() {
         </label>
         <MdCalendarToday
           onClick={props.onClick}
-          style={{ position: 'absolute', top: '16px', right: '16px' }}
+          style={{ position: 'absolute', top: '28px', right: '16px' }}
         />
       </div>
     );
