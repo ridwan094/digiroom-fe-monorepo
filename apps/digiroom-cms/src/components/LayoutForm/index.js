@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Dropzone from './Dropzone';
 import { Controller, useForm } from 'react-hook-form';
 import { RichTextEditor, TextInput } from 'ui';
@@ -8,6 +8,9 @@ import { MdCalendarToday } from 'react-icons/md';
 import generateSlug from '@/helpers/utils/slug';
 import SelectCategory from './Select';
 import Select from 'react-select';
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 export default function LayoutForm() {
   const [dataForm, setDataForm] = useState({
@@ -93,6 +96,20 @@ export default function LayoutForm() {
     { value: 'trending', label: 'Trending' },
   ];
 
+  const handleDetailPromo = (value) => {
+    setDataForm((prev) => {
+      return {
+        ...prev,
+        detailPromosi: value,
+      };
+    });
+  };
+
+  const editor = useRef();
+
+
+
+
   return (
     <div className="bg-white p-3 w-full">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -169,11 +186,16 @@ export default function LayoutForm() {
           />
         </div>
 
-        <RichTextEditor
-          register={register('detailPromosi', {
-            onChange: (text) => setDataForm({ ...dataForm, detailPromosi: text }),
-          })}
+        <label className="font-[500] text-[14px] leading-[17px] text-reliableBlack70 mb-4">
+          Detail Promosi
+        </label>
+        <ReactQuill
+          ref={editor}
+          theme="snow"
+          className="my-3"
           value={dataForm.detailPromosi}
+          onChange={handleDetailPromo}
+          register={register('detailPromosi')}
         />
 
         <div className="flex justify-between mb-3">
