@@ -336,17 +336,17 @@ export default function LayoutForm() {
 
         <div className="flex justify-between mt-[48px]">
           <div>
-            <button class="text-reliableBlack90  py-2 px-4 tracking-wide border border-transparent text-[16px] font-bold ">
+            <button className="text-reliableBlack90  py-2 px-4 tracking-wide border border-transparent text-[16px] font-bold ">
               CANCEL
             </button>
           </div>
           <div className="flex">
-            <button class="text-reliableBlack90  py-2 px-4 tracking-wide border border-transparent text-[16px] font-bold ">
+            <button className="text-reliableBlack90  py-2 px-4 tracking-wide border border-transparent text-[16px] font-bold ">
               PREVIEW
             </button>
             <button
               type="submit"
-              class="bg-reliableBlack90 rounded-[4px] tracking-wide text-white  py-2 px-4 border border-transparent text-[16px] font-bold "
+              className="bg-reliableBlack90 rounded-[4px] tracking-wide text-white  py-2 px-4 border border-transparent text-[16px] font-bold "
             >
               SUBMIT
             </button>
