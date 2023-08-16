@@ -13,6 +13,7 @@ const CMSLayout = ({ children }) => {
   const router = useRouter();
   const { asPath } = router;
   const lastSegment = getLastSegment(asPath);
+  const nameLayout = lastSegment !== null ? lastSegment.replace(/-/g, ' ').toUpperCase() : 'Dashboard';
   
   const [sidebarCollapse, setSidebarCollapse] = useState(false);
 
@@ -35,7 +36,7 @@ const CMSLayout = ({ children }) => {
         >
           <div className="container relative" style={{ padding: '120px 32px 16px' }}>
             <div className='flex justify-between'>
-              <p className='text-2xl font-bold'>{lastSegment.replace(/-/g, ' ').toUpperCase()}</p>
+              <p className='text-2xl font-bold'>{nameLayout}</p>
 
               <Breadcrumb />
             </div>
