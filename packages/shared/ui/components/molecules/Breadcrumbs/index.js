@@ -1,11 +1,10 @@
 import { MdChevronRight } from 'react-icons/md';
 
-const BreadCrumbs = ({ items }) => {
+const BreadCrumbs = ({ items, border }) => {
   return (
     <nav className="flex" aria-label="Breadcrumb">
       <ul
-        className="w-full py-3 lg:border-b lg:border-[#F0EFEF
-]"
+          className={`w-full py-3 ${border ? 'lg:border-b lg:border-[#F0EFEF]' : null }`}
       >
         <div className="container flex items-center space-x-1 md:space-x-3">
           {items.map((item, _i) => {
@@ -40,4 +39,7 @@ const BreadCrumbs = ({ items }) => {
   );
 };
 
+BreadCrumbs.defaultProps = {
+  border: true
+};
 export default BreadCrumbs;
