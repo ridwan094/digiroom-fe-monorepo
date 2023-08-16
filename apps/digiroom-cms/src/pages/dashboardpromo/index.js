@@ -8,17 +8,9 @@ import {
   MdCheckCircleOutline,
 } from 'react-icons/md';
 import React, { useState } from 'react';
-import {
-  Table,
-  Pagination,
-  Button,
-  Toast,
-  Tooltip,
-  Modal,
-  Spinner,
-  Dropdown,
-} from 'flowbite-react';
-import { ToogleSwitch } from 'ui';
+import { Table, Pagination, Button, Toast, Tooltip, Modal, Spinner } from 'flowbite-react';
+import ToggleSwitch from 'ui/components/atoms/Toogle';
+import { Dropdown } from 'ui';
 
 const DashboardPromo = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -89,11 +81,10 @@ const DashboardPromo = () => {
     },
   ];
 
-  const itemsPerPage = 5;
-  const totalItems = itemProduct.length;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  //   const itemsPerPage = 5;
+  //   const totalItems = itemProduct.length;
+  //   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  const [displayedItems, setDisplayedItems] = useState(itemProduct.slice(0, itemsPerPage));
   const [toastDescription, setToastDescription] = useState('');
   const [toastIcons, setToastIcons] = useState(null);
   const [openModal, setOpenModal] = useState();
@@ -101,6 +92,12 @@ const DashboardPromo = () => {
   const [modalHeader, setModalHeader] = useState('');
   const [caseItems, setCaseItems] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [itemsPerPage, setitemsPerPage] = useState(5);
+  const [totalItems, setTotalItems] = useState(itemProduct.length);
+  const [totalPages, setTotalPage] = useState(Math.ceil(totalItems / itemsPerPage));
+  const [displayedItems, setDisplayedItems] = useState(
+    itemProduct.slice(currentPage - 1, itemsPerPage)
+  );
 
   const onPageChange = (page) => {
     setIsLoading(true);
@@ -139,6 +136,8 @@ const DashboardPromo = () => {
 
   const dropdownPageChange = (selectedValue) => {
     console.log('Selected Rows per Page:', selectedValue);
+    setitemsPerPage(selectedValue);
+    setDisplayedItems(itemProduct.slice(currentPage - 1, selectedValue));
   };
 
   const page = [5, 10, 15];
@@ -266,7 +265,7 @@ const DashboardPromo = () => {
                         ? 'Unpublished'
                         : 'Waiting'}
                     </div>
-                    <ToogleSwitch
+                    <ToggleSwitch
                       index={index}
                       disabled={itemProduct.Boolean === 'waitings'}
                       value={itemProduct.Boolean === 'active'}
@@ -295,15 +294,23 @@ const DashboardPromo = () => {
         )}
       </div>
       <div className="mt-2 text-gray-600 flex flex-row justify-end gap-2">
-        <p className="flex items-center">
+        <p className="flex items-center border border-grey-200 rounded-lg px-2 mt-1.5">
           Showing {itemsPerPage * (currentPage - 1) + 1} to{' '}
-          {Math.min(itemsPerPage * currentPage, totalItems)} of {totalItems} items
+          <Dropdown
+            text={Math.min(itemsPerPage * currentPage, totalItems)}
+            onSelect={dropdownPageChange}
+            selectedOption={itemsPerPage}
+            options={page}
+            size="w-11"
+          />{' '}
+          of {totalItems} items
         </p>
         <Pagination
           currentPage={currentPage}
           onPageChange={onPageChange}
           showIcons
           totalPages={totalPages}
+          className="flex justify-center items-center"
         />
       </div>
 
