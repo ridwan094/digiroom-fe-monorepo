@@ -134,9 +134,7 @@ const DashboardPromo = () => {
   };
 
   const dropdownPageChange = (selectedValue) => {
-    console.log('isi data', selectedValue);
     setItemsPerPage(selectedValue);
-    console.log('isi data dalam items', itemsPerPage);
     setTotalPages(Math.ceil(totalItems / selectedValue));
     onPageChange(1);
   };
