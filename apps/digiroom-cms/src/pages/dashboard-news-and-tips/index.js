@@ -8,8 +8,6 @@ import {
   MdOutlineDelete,
   MdOutlineFileCopy,
 } from 'react-icons/md';
-// import ToggleSwitch from 'ui/components/atoms/Toogle';
-
 import { Table, Pagination, Toast, Tooltip, Modal, Spinner } from 'flowbite-react';
 
 const DashboardNewsAndTips = () => {
@@ -263,21 +261,6 @@ const DashboardNewsAndTips = () => {
                           ? 'Unpublished'
                           : 'Waiting'}
                       </div>
-                      {/* <ToggleSwitch
-                        index={index}
-                        disabled={itemProduct?.boolean === 'waitings'}
-                        value={itemProduct?.boolean === 'active'}
-                        onToggleChange={handleToggleChange}
-                        classNameLabel={`w-11 h-6 bg-gray-200 rounded-full peer  
-                    peer-checked:after:border-white after:content-[''] 
-                    after:absolute after:top-[2px] after:left-[2px] 
-                    after:bg-gray-600 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 
-                    after:transition-all ${
-                      itemProduct?.boolean === 'active'
-                        ? 'peer-checked:bg-gray-800 peer-checked:after:translate-x-full'
-                        : 'peer-checked:after:translate-x-0'
-                    } `}
-                      /> */}
                     </div>
                   </Table.Cell>
                 </Table.Row>
