@@ -97,7 +97,7 @@ const CMSSidebar = ({ sidebarCollapse, onToggle }) => {
             >
               <Sidebar.Item
                 className="text-reliableBlack60"
-                href="/promo/list"
+                href="/dashboard-promo"
                 as={Link}
                 icon={MdList}
               >
