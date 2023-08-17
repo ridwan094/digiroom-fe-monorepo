@@ -1,7 +1,5 @@
-'use client';
-
 import { MdAdd, MdOutlineFileCopy, MdOutlineCreate, MdOutlineDelete } from 'react-icons/md';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table, Pagination, Button, Toast, Tooltip, Modal, Spinner } from 'flowbite-react';
 import ToggleSwitch from 'ui/components/atoms/Toogle';
 import Dropdown from 'ui/components/atoms/Dropdown';
@@ -143,10 +141,7 @@ const DashboardPromo = () => {
 
   const onClickModal = () => {
     var updateItemProduct = [...itemProduct];
-    switch (caseItems.newValue ? caseItems.newValue : caseItems) {
-      case 'delete':
-        setOpenModal(undefined);
-        break;
+    switch (caseItems.newValue) {
       case false:
         updateItemProduct[caseItems.index].boolean = caseItems ? 'inactive' : 'active';
         setDisplayedItems(itemProduct.slice(0, itemsPerPage));
@@ -158,6 +153,9 @@ const DashboardPromo = () => {
         setDisplayedItems(itemProduct.slice(0, itemsPerPage));
         setOpenModal(undefined);
         updateItemProduct = null;
+        break;
+      default:
+        setOpenModal(undefined);
         break;
     }
   };
@@ -177,6 +175,10 @@ const DashboardPromo = () => {
     document.execCommand('copy');
     document.body.removeChild(textArea);
   };
+
+  useEffect(() => {
+    onPageChange(1);
+  }, [itemsPerPage]);
 
   return (
     <div className="relative w-full">
