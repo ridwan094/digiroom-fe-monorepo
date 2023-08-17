@@ -35,3 +35,4 @@ export { default as BtnContactUs } from './BtnContactUs';
 export { default as BtnLoginSignup } from './BtnLoginSignup';
 export { default as GeoLocation } from './Icons/GeoLocation';
 export { default as Playstore } from './Icons/Playstore';
+export { default as ToogleSwitch } from './Toogle'

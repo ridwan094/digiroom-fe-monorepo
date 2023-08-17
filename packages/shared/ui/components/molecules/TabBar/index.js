@@ -9,39 +9,24 @@ const TabsNavigation = ({ tabs, onTabChange }) => {
   };
 
   return (
-    <div className="py-4 bg-white rounded-lg w-full">
-      <div className="flex flex-col md:flex-row justify-between items-left md:space-x-8 overflow-x-auto">
-        <ul className="flex justify-center md:justify-start flex-nowrap md:items-center gap-4 w-full">
-          {tabs.map((tab, index) => (
-            <li
-              key={index}
-              className={`md:mb-0 md:mr-8 ${activeTab === index ? 'md:font-bold' : ''}`}
-              role="presentation"
-              style={{ listStyleType: 'none' }}
+    <>
+      <ul className="flex items-center justify-between w-full lg:justify-start lg:pb-6">
+        {tabs.map((tab, index) => (
+          <li key={index} role="presentation">
+            <button
+              className={`text-xs text-reliableBlack px-4 pb-2 border-b-4 hover:border-supportiveRed lg:text-base ${
+                activeTab === index ? 'font-bold border-supportiveRed' : 'border-transparent'
+              }`}
+              onClick={() => handleTabClick(index)}
             >
-              <button
-                onClick={() => handleTabClick(index)}
-                className={`md:inline-block md:rounded-t-lg pb-2 md:pb-1 border-b-2 ${
-                  activeTab === index
-                    ? 'border-supportiveRed hover:border-supportiveRed hover:text-reliableBlack transition-all ease-in-out duration-300 transform hover:scale-105'
-                    : 'border-transparent hover:border-supportiveRed hover:text-reliableBlack20 transition-all ease-in-out duration-300 transform hover:scale-105'
-                } font-semibold`}
-                style={{ fontFamily: 'Montserrat, sans-serif' }}
-              >
-                <span
-                  className={`text-base leading-8 whitespace-nowrap ${
-                    activeTab === index ? 'text-reliableBlack' : 'text-reliableBlack20'
-                  }`}
-                >
-                  {tab.title}
-                </span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="mt-4">{tabs[activeTab].content}</div>
-    </div>
+              {tab.title}
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      <div>{tabs[activeTab].content}</div>
+    </>
   );
 };
 
