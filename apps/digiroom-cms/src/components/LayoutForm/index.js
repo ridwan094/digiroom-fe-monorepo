@@ -107,7 +107,9 @@ export default function LayoutForm() {
 
   const editor = useRef();
 
-
+  const showPreviewPage = () => {
+    window.open("http://localhost:3004/promo/preview", "_blank"); 
+  };
 
 
   return (
@@ -363,7 +365,7 @@ export default function LayoutForm() {
             </button>
           </div>
           <div className="flex">
-            <button className="text-reliableBlack90  py-2 px-4 tracking-wide border border-transparent text-[16px] font-bold ">
+            <button onClick={showPreviewPage} className="text-reliableBlack90  py-2 px-4 tracking-wide border border-transparent text-[16px] font-bold ">
               PREVIEW
             </button>
             <button
