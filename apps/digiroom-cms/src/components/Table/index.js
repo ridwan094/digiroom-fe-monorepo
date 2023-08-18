@@ -12,6 +12,7 @@ const CustomTable = ({
   onToggleChange,
   onPageChange,
   onDropdownPageChange,
+  isLoading,
 }) => {
   const {
     currentPage = 1,
@@ -20,6 +21,8 @@ const CustomTable = ({
     page = 0,
     displayedItems = dataSource,
   } = pagination;
+
+  console.log('isi loading', isLoading);
 
   return (
     <div className="relative w-full">
@@ -33,10 +36,7 @@ const CustomTable = ({
           </Table.Head>
           <Table.Body className="divide-y">
             {displayedItems.map((item, rowIndex) => (
-              <Table.Row
-                key={rowIndex}
-                // className={isLoading ? 'animate-pulse' : ''}
-              >
+              <Table.Row key={rowIndex} className={isLoading ? 'animate-pulse' : ''}>
                 {columns.map((column) => (
                   <Table.Cell key={column.key}>
                     {column.render
@@ -46,7 +46,7 @@ const CustomTable = ({
                           rowIndex,
                           onClick,
                           onToggleChange
-                        ) // Pass the 'onClick' function
+                        )
                       : item[column.dataIndex]}
                   </Table.Cell>
                 ))}
@@ -54,6 +54,13 @@ const CustomTable = ({
             ))}
           </Table.Body>
         </Table>
+
+        {/* Loading state */}
+        {isLoading && (
+          <div className="absolute inset-0 flex justify-center items-center bg-white bg-opacity-80 z-50">
+            <Spinner aria-label="Loading" size="lg" />
+          </div>
+        )}
       </div>
       {/* Add pagination controls */}
       {pagination && (

@@ -146,12 +146,8 @@ const DashboardPromo = () => {
     }
   };
 
-  const handleToggleChange = (isChecked) => {
-    console.log('isi data', isChecked);
-    // setOpenModal('dismissible');
-    // setModalText(!isChecked.newValue ? 'unpublished' : 'published');
-    // setModalHeader(displayedItems[isChecked.index].title);
-    // setCaseItems(isChecked);
+  const handleToggleChange = (index, newValue) => {
+    console.log('isi data', index);
   };
 
   const copyToClipboard = (text) => {
@@ -212,7 +208,7 @@ const DashboardPromo = () => {
           onAddListPromo={addListPromo}
           onClick={onClick}
           onToggleChange={handleToggleChange}
-          loading={isLoading}
+          isLoading={isLoading}
           onDropdownPageChange={dropdownPageChange}
         />
       </div>
