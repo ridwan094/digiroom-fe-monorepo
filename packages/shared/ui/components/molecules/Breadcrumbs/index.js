@@ -11,13 +11,13 @@ const Breadcrumbs = ({ isMobileScreen, items }) => {
           <div className="container flex items-center space-x-1 md:space-x-3">
             {items.map((item, _i) => {
               return (
-                <li key={_i}>
-                  <div className="flex items-center">
+                <li className="truncate" key={_i}>
+                  <div className="flex items-center truncate">
                     {_i !== 0 && <MdChevronRight color="#7B7979" />}
 
                     {_i === items.length - 1 ? (
                       // Last item
-                      <span className="text-reliableBlack60 text-xs uppercase font-bold ml-1 md:ml-2 lg:text-sm">
+                      <span className="text-reliableBlack60 text-xs uppercase font-bold ml-1 md:ml-2 truncate lg:text-sm">
                         {item.name}
                       </span>
                     ) : (

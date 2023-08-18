@@ -1,10 +1,10 @@
 import { Card, Tag } from 'ui/components/atoms';
 
-const CardPromo = ({ title, coverImg, startDate, endDate, tag }) => {
+const CardPromo = ({ title, slug, coverImg, startDate, endDate, tag, classNames }) => {
   return (
     <>
-      <a href="/detail-promo">
-        <Card className="border border-reliableBlack10">
+      <a href={`/promo/${slug}`}>
+        <Card className={`border border-reliableBlack10 ${classNames}`}>
           {/* Tag */}
           <div className={`${!tag && 'pb-8'}`}>
             {tag && (
@@ -35,6 +35,7 @@ CardPromo.defaultProps = {
   startDate: '',
   endDate: '',
   tag: null,
+  classNames: '',
 };
 
 export default CardPromo;

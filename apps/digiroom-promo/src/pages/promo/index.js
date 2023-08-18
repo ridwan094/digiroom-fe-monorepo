@@ -23,35 +23,30 @@ const PromoPage = () => {
   };
 
   return (
-    <>
-      <Layout>
-        <QuickLink />
+    <Layout>
+      <QuickLink />
 
-        {/* Breadcrumb for web screen */}
-        <BreadCrumbs
-          isMobileScreen={false}
-          items={[{ name: 'Home', path: '/' }, { name: 'Promo' }]}
-        />
+      {/* Breadcrumb for web screen */}
+      <BreadCrumbs
+        isMobileScreen={false}
+        items={[{ name: 'Home', path: '/' }, { name: 'Promo' }]}
+      />
 
-        {/* Promo banner section */}
-        <PromoBannerSection />
+      {/* Promo banner section */}
+      <PromoBannerSection />
 
-        {/* Tab Bar Promo */}
-        <TabBarPromo />
+      {/* Tab Bar Promo */}
+      <TabBarPromo />
 
-        {/* Promo info section */}
-        <PromoInfoSection />
+      {/* Promo info section */}
+      <PromoInfoSection />
 
-        {/* Promo FAQ section */}
-        <PromoFaqSection faqs={faqs} />
+      {/* Promo FAQ section */}
+      <PromoFaqSection faqs={faqs} />
 
-        {/* Breadcrumb for mobile screen */}
-        <BreadCrumbs
-          isMobileScreen={true}
-          items={[{ name: 'Home', path: '/' }, { name: 'Promo' }]}
-        />
-      </Layout>
-    </>
+      {/* Breadcrumb for mobile screen */}
+      <BreadCrumbs isMobileScreen={true} items={[{ name: 'Home', path: '/' }, { name: 'Promo' }]} />
+    </Layout>
   );
 };
 export default PromoPage;
