@@ -18,7 +18,9 @@ const ToggleSwitch = ({
 
   const handleToggle = () => {
     const newValue = !isChecked;
-    onToggleChange({ newValue, index });
+    console.log('isi data', newValue);
+    console.log('isi inde', index);
+    onToggleChange({ test: newValue, indexTest: index });
   };
 
   const labelClassName = `${classNameLabel} ${disabled ? 'hover:cursor-not-allowed' : ''} `;
