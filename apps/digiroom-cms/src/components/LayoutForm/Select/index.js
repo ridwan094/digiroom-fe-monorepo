@@ -1,8 +1,9 @@
 import React from 'react';
 
-export default function SelectCategory({ items }) {
+export default function SelectCategory({ items, block = false }) {
+  const containerClassName = block ? 'w-full' : 'w-[48%]';
   return (
-    <div className='w-[48%]'>
+    <div className={containerClassName}>
       <label
         htmlFor="underline_select"
         className="font-[500] text-[14px] leading-[17px] text-reliableBlack70"
@@ -16,7 +17,11 @@ export default function SelectCategory({ items }) {
       >
         <option selected>Please Insert Here</option>
         {items.map((data, _i) => {
-          return <option value={data.value} key={_i}>{data.label}</option>;
+          return (
+            <option value={data.value} key={_i}>
+              {data.label}
+            </option>
+          );
         })}
       </select>
     </div>
