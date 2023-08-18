@@ -1,8 +1,20 @@
 import { useState } from 'react';
 import CMSSidebar from '@/components/CMSSidebar';
+import Breadcrumb from '@/components/Breadcrumb';
 import CMSHeader from '@/components/CMSHeader';
+import { useRouter } from 'next/router';
+
+const getLastSegment = (path) => {
+  const segments = path.split('/').filter(segment => segment !== '');
+  return segments[segments.length - 1] || null;
+};
 
 const CMSLayout = ({ children }) => {
+  const router = useRouter();
+  const { asPath } = router;
+  const lastSegment = getLastSegment(asPath);
+  const nameLayout = lastSegment !== null ? lastSegment.replace(/-/g, ' ').toUpperCase() : 'Dashboard';
+  
   const [sidebarCollapse, setSidebarCollapse] = useState(false);
 
   return (
@@ -23,6 +35,11 @@ const CMSLayout = ({ children }) => {
           }}
         >
           <div className="container relative" style={{ padding: '120px 32px 16px' }}>
+            <div className='flex justify-between'>
+              <p className='text-2xl font-bold'>{nameLayout}</p>
+
+              <Breadcrumb />
+            </div>
             {children}
           </div>
         </div>

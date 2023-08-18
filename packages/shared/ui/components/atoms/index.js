@@ -37,3 +37,4 @@ export { default as GeoLocation } from './Icons/GeoLocation';
 export { default as Playstore } from './Icons/Playstore';
 export { default as FacebookIcon } from './Icons/FacebookIcon';
 export { default as TwitterIcon } from './Icons/TwitterIcon';
+export { default as ToogleSwitch } from './Toogle'
