@@ -1,4 +1,4 @@
-import { store } from '@/store';
+import { store, wrapper } from '@/store';
 import '@/styles/globals.css';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
@@ -7,7 +7,7 @@ import { setIsMobileScreen, setScreenSize } from '@/store/page/actions';
 import { useSelector } from 'react-redux';
 import screenBreakpoints from 'src/constants/screen-breakpoints';
 
-export default function App({ Component, pageProps }) {
+const App = ({ Component, pageProps }) => {
   const { screenSize } = useSelector((state) => state.page);
   useEffect(() => {
     store.dispatch(setIsMobileScreen(screenSize?.width < screenBreakpoints.MIN_DESKTOP_SCREEN));
@@ -49,3 +49,5 @@ export default function App({ Component, pageProps }) {
     </>
   );
 }
+
+export default wrapper.withRedux(App);
