@@ -1,6 +1,16 @@
 import { Dropdown, Avatar } from 'flowbite-react';
+import { useAuth } from '@/helpers/utils/AuthContext';
+import { useRouter } from 'next/router';
 
 const CMSHeader = ({ sidebarCollapse }) => {
+  const router = useRouter();
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    router.push('/login')
+  }
+
   return (
     <header
       className={`flex items-center justify-between fixed top-0 z-50 bg-white shadow py-6 px-8 transition-all duration-300 ${
@@ -20,7 +30,7 @@ const CMSHeader = ({ sidebarCollapse }) => {
           }}
         >
           <Dropdown.Item>Profile</Dropdown.Item>
-          <Dropdown.Item>Sign out</Dropdown.Item>
+          <Dropdown.Item onClick={handleLogout}>Sign out</Dropdown.Item>
         </Dropdown>
       </div>
     </header>
