@@ -5,9 +5,11 @@ import { createWrapper } from 'next-redux-wrapper';
 
 // Reducera
 import example from './example/reducer';
+import page from './page/reducer';
 
 const rootReducer = {
   example,
+  page,
 };
 
 const reducer = combineReducers(rootReducer);
