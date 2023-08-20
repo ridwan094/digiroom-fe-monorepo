@@ -16,7 +16,9 @@ export default function implementTable() {
     return (
         <div className='pt-5'>
             <Table 
-                columns={columns} 
+                columns={columns(
+                    (value) => console.log(value) 
+                )} 
                 dataSource={itemProduct}
                 pagination={{ 
                     currentPage: 1, 

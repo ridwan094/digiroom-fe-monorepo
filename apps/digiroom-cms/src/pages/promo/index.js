@@ -146,8 +146,19 @@ const DashboardPromo = () => {
     }
   };
 
-  const handleToggleChange = (index, newValue) => {
-    console.log('isi data', index);
+  const handleToggleChange = (value) => {
+    const {
+      test, 
+      indexTest
+    } = value;
+
+    setOpenModal('dismissible');
+    setModalText(!test ? 'unpublished' : 'published');
+    setModalHeader(displayedItems[indexTest].title);
+    setCaseItems({
+      newValue: test,
+      index: indexTest
+    });
   };
 
   const copyToClipboard = (text) => {
@@ -195,7 +206,10 @@ const DashboardPromo = () => {
       </div>
       <div className="relative">
         <CustomTable
-          columns={columns}
+          columns={columns(
+            (value) => handleToggleChange(value),
+            (index) => onClick('copy', index)
+          )}
           dataSource={itemProduct}
           pagination={{
             currentPage,
@@ -203,35 +217,12 @@ const DashboardPromo = () => {
             itemsPerPage,
             page,
             displayedItems,
+            onPageChange: (page) => onPageChange(page),
+            onDropdownPageChange: (value) => dropdownPageChange(value)
           }}
-          onPageChange={onPageChange}
-          onAddListPromo={addListPromo}
-          onClick={onClick}
-          onToggleChange={handleToggleChange}
           isLoading={isLoading}
-          onDropdownPageChange={dropdownPageChange}
         />
       </div>
-      {/* <div className="mt-2 text-gray-600 flex flex-row justify-end gap-2">
-        <div className="flex items-center border border-grey-200 rounded-lg px-2 mt-1.5">
-          Showing {itemsPerPage * (currentPage - 1) + 1} to{' '}
-          <Dropdown
-            text={Math.min(itemsPerPage * currentPage, totalItems)}
-            onSelect={dropdownPageChange}
-            selectedOption={itemsPerPage}
-            options={page}
-            size="w-11"
-          />{' '}
-          of {totalItems} items
-        </div>
-        <Pagination
-          currentPage={currentPage}
-          onPageChange={onPageChange}
-          showIcons
-          totalPages={totalPages}
-          className="flex justify-center items-center"
-        />
-      </div> */}
 
       {/* Modal */}
       <div>

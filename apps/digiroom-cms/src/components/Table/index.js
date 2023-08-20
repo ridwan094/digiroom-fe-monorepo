@@ -1,17 +1,11 @@
 import React from 'react';
-import { Table, Pagination, Button, Toast, Tooltip, Modal, Spinner } from 'flowbite-react';
-import ToggleSwitch from 'ui/components/atoms/Toogle';
+import { Table, Pagination, Spinner } from 'flowbite-react';
 import Dropdown from 'ui/components/atoms/Dropdown';
 
 const CustomTable = ({
   dataSource,
   columns,
   pagination,
-  onAddListPromo,
-  onClick,
-  onToggleChange,
-  onPageChange,
-  onDropdownPageChange,
   isLoading,
 }) => {
   const {
@@ -20,14 +14,14 @@ const CustomTable = ({
     itemsPerPage = 0,
     page = 0,
     displayedItems = dataSource,
+    onPageChange = () => {},
+    onDropdownPageChange = () => {},
   } = pagination;
 
-  console.log('isi loading', isLoading);
-
   return (
-    <div className="relative w-full">
+    <div className="relative overflow-x-auto">
       <div className="relative">
-        {/* <Table className={`${isLoading ? 'opacity-20' : ''}`}> */}
+
         <Table>
           <Table.Head>
             {columns.map((item, index) => (
@@ -44,8 +38,6 @@ const CustomTable = ({
                           item[column.dataIndex],
                           item,
                           rowIndex,
-                          onClick,
-                          onToggleChange
                         )
                       : item[column.dataIndex]}
                   </Table.Cell>
