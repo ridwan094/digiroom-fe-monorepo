@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import Text from '../Text';
+import { useState } from 'react';
 import ShareButton from '../ShareButton';
 import { BiCalendar } from 'react-icons/bi';
 import ModalShare from '../ModalShare';
@@ -9,19 +8,6 @@ const Article = ({ data, block, containerClassName }) => {
   const classNameAssigned = [block ? 'w-full' : '', containerClassName];
 
   const [showModalPreview, setShowModalPreview] = useState(false);
-
-  // If response using html string
-  // const [article, setArticle] = useState({ __html: "" });
-
-  // useEffect(() => {
-  //   async function createMarkUp() {
-  //     return await { __html: data };
-  //   }
-
-  //   createMarkUp().then((result) => setArticle(result));
-  // }, []);
-
-  // return <div dangerouslySetInnerHTML={article} />;
 
   return (
     <div className={classNameAssigned.join(' ')}>
