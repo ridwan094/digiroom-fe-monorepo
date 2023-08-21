@@ -1,5 +1,3 @@
-'use client';
-
 import { MdAdd, MdOutlineFileCopy, MdOutlineCreate, MdOutlineDelete } from 'react-icons/md';
 import React, { useState } from 'react';
 import {
@@ -23,16 +21,17 @@ const FaqPage = () => {
   const [title, settitle] = useState(['title', 'description', 'action', 'visibility']);
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + 1);
-  const itemProduct = [
+  const dummyFaq = [
     {
       title: 'This is FAQ 1',
+      slug: 'percobaan copy',
       description:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, ullam! Libero in necessitatibus ad fugit?',
       status: 'hidden',
       boolean: 'inactive',
     },
     {
-      title: 'Mengapa danu ganteng banget unch ikeh ikeh rraaawwwrrr',
+      title: 'This is FAQ 2',
       description:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, ullam! Libero in necessitatibus ad fugit?',
       status: 'hidden',
@@ -81,15 +80,17 @@ const FaqPage = () => {
   const [toastIcons, setToastIcons] = useState(null);
   const [openModal, setOpenModal] = useState(null);
   const [createFaq, setCreateFaq] = useState(null);
+  const [editFaq, setEditFaq] = useState(null);
+  const [editData, setEditData] = useState(null);
   const [modalText, setModalText] = useState('');
   const [modalHeader, setModalHeader] = useState('');
   const [caseItems, setCaseItems] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [totalItems, setTotalItems] = useState(itemProduct.length);
+  const [totalItems, setTotalItems] = useState(dummyFaq.length);
   const [totalPages, setTotalPages] = useState(Math.ceil(totalItems / itemsPerPage));
   const [displayedItems, setDisplayedItems] = useState(
-    itemProduct.slice(currentPage - 1, itemsPerPage)
+    dummyFaq.slice(currentPage - 1, itemsPerPage)
   );
   const [page, setPage] = useState([5, 10, 15]);
   const router = useRouter();
@@ -99,7 +100,7 @@ const FaqPage = () => {
     setTimeout(() => {
       const startIndex = (page - 1) * itemsPerPage;
       const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
-      const displayedItems = itemProduct.slice(startIndex, endIndex);
+      const displayedItems = dummyFaq.slice(startIndex, endIndex);
       setCurrentPage(page);
       setDisplayedItems(displayedItems);
       setIsLoading(false);
@@ -117,7 +118,8 @@ const FaqPage = () => {
         setCreateFaq('dismissible');
         break;
       case 'edit':
-        setCreateFaq('dismissible');
+        setEditFaq('dismissible');
+        setEditData(dummyFaq[index]); // Set data yang akan diedit
         break;
       case 'delete':
         setOpenModal('dismissible');
@@ -125,7 +127,7 @@ const FaqPage = () => {
         setModalHeader(`Delete ${displayedItems[index].title}`);
         break;
       case 'copy':
-        const textToCopy = itemProduct[index].slug;
+        const textToCopy = dummyFaq[index].slug;
         copyToClipboard(textToCopy);
         setShowToast(!showToast);
         setToastDescription('Copy to Clipboard');
@@ -144,8 +146,8 @@ const FaqPage = () => {
   };
 
   const onClickModal = () => {
-    var updateItemProduct = [...itemProduct];
-    switch (caseItems.newValue ? caseItems.newValue : caseItems) {
+    var updateDummyFaq = [...dummyFaq];
+    switch (caseItems.newValue) {
       case 'add':
         router.push('/promo/faq');
         break;
@@ -153,23 +155,44 @@ const FaqPage = () => {
         setOpenModal(undefined);
         break;
       case false:
-        updateItemProduct[caseItems.index].boolean = caseItems ? 'inactive' : 'active';
-        setDisplayedItems(itemProduct.slice(0, itemsPerPage));
+        updateDummyFaq[caseItems.index].boolean = caseItems ? 'inactive' : 'active';
+        setDisplayedItems(dummyFaq.slice(0, itemsPerPage));
         setOpenModal(undefined);
-        updateItemProduct = null;
+        updateDummyFaq = null;
         break;
       case true:
-        updateItemProduct[caseItems.index].boolean = caseItems ? 'active' : 'inactive';
-        setDisplayedItems(itemProduct.slice(0, itemsPerPage));
+        updateDummyFaq[caseItems.index].boolean = caseItems ? 'active' : 'inactive';
+        setDisplayedItems(dummyFaq.slice(0, itemsPerPage));
         setOpenModal(undefined);
-        updateItemProduct = null;
+        updateDummyFaq = null;
+        break;
+      default:
+        setOpenModal(undefined);
         break;
     }
   };
 
+  const handleEdit = () => {
+    // Update the dummyFaq data with the edited data
+    const updatedDummyFaq = [...dummyFaq];
+    updatedDummyFaq[caseItems.index] = editData;
+    setDisplayedItems(updatedDummyFaq.slice(0, itemsPerPage));
+
+    // Close the edit modal
+    setEditFaq(null);
+    setEditData(null);
+  };
+
+  const handleEditInputChange = (field, value) => {
+    setEditData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+  };
+
   const handleToggleChange = (isChecked) => {
     setOpenModal('dismissible');
-    setModalText(!isChecked.newValue ? 'hidden' : 'showed');
+    setModalText(!isChecked.newValue ? 'hide' : 'show');
     setModalHeader(displayedItems[isChecked.index].title);
     setCaseItems(isChecked);
   };
@@ -226,11 +249,11 @@ const FaqPage = () => {
               </Table.HeadCell>
             ))}
           </Table.Head>
-          <Table.Body className="divide-y">
-            {displayedItems.map((itemProduct, index) => (
+          <Table.Body class="divide-y">
+            {displayedItems.map((dummyFaq, index) => (
               <Table.Row key={index} className={isLoading ? 'animate-pulse' : ''}>
-                <Table.Cell className="max-w-lg">{itemProduct.title}</Table.Cell>
-                <Table.Cell>{itemProduct.description}</Table.Cell>
+                <Table.Cell className="max-w-lg">{dummyFaq.title}</Table.Cell>
+                <Table.Cell>{dummyFaq.description}</Table.Cell>
                 <Table.Cell>
                   <div className="flex flex-rows hover:cursor-pointer gap-2">
                     <Tooltip content="Edit">
@@ -257,18 +280,18 @@ const FaqPage = () => {
                   <div className="flex items-center gap-2">
                     <div
                       className={`p-1.5 w-full h-full border border-gray-200 ${
-                        itemProduct.boolean === 'active'
+                        dummyFaq.boolean === 'active'
                           ? 'bg-blue-400'
-                          : itemProduct.boolean === 'inactive'
+                          : dummyFaq.boolean === 'inactive'
                           ? 'bg-red-400'
-                          : itemProduct.boolean === 'waitings'
+                          : dummyFaq.boolean === 'waitings'
                           ? 'bg-yellow-500'
                           : 'bg-gray-200'
                       } rounded-full text-white capitalized text-md flex justify-center items-center font-Montserrat`}
                     >
-                      {itemProduct.boolean === 'active' ? (
+                      {dummyFaq.boolean === 'active' ? (
                         <FaEye size={18} />
-                      ) : itemProduct.boolean === 'inactive' ? (
+                      ) : dummyFaq.boolean === 'inactive' ? (
                         <FaEyeSlash size={18} />
                       ) : (
                         'Waiting'
@@ -276,15 +299,15 @@ const FaqPage = () => {
                     </div>
                     <ToggleSwitch
                       index={index}
-                      disabled={itemProduct.boolean === 'waitings'}
-                      value={itemProduct.boolean === 'active'}
+                      disabled={dummyFaq.boolean === 'waitings'}
+                      value={dummyFaq.boolean === 'active'}
                       onToggleChange={handleToggleChange}
                       classNameLabel={`w-11 h-6 bg-gray-200 rounded-full peer  
                     peer-checked:after:border-white after:content-[''] 
                     after:absolute after:top-[2px] after:left-[2px] 
                     after:bg-gray-600 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 
                     after:transition-all ${
-                      itemProduct.boolean === 'active'
+                      dummyFaq.boolean === 'active'
                         ? 'peer-checked:bg-gray-800 peer-checked:after:translate-x-full'
                         : 'peer-checked:after:translate-x-0'
                     } `}
@@ -334,10 +357,10 @@ const FaqPage = () => {
           <Modal.Body>
             <div className="text-center">
               <h3 className="mb-5 text-lg font-normal text-gray-500">
-                Are you sure you want to {modalText} this product?
+                Are you sure you want to {modalText} this data?
               </h3>
               <div className="flex justify-center gap-4">
-                <Button color="failure" onClick={() => onClickModal('add')}>
+                <Button color="failure" onClick={() => onClickModal()}>
                   Yes, I&apos;m sure
                 </Button>
                 <Button color="gray" onClick={() => setOpenModal(undefined)}>
@@ -396,6 +419,65 @@ const FaqPage = () => {
                 className="w-1/2 rounded"
                 color="gray"
                 onClick={() => setCreateFaq(undefined)}
+              >
+                Cancel
+              </Button>
+            </div>
+          </Modal.Body>
+        </Modal>
+
+        {/* Edit Modal */}
+        <Modal
+          dismissible
+          show={editFaq === 'dismissible'}
+          onClose={() => {
+            setEditFaq(null);
+            setEditData(null);
+          }}
+        >
+          <Modal.Header>
+            <h2 className="text-3xl font-bold">Edit FAQ</h2>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="flex flex-col gap-4">
+              <div className="block -mb-3">
+                <Label htmlFor="faqtitle" className="font-semibold text-reliableBlack60">
+                  FAQ Title
+                </Label>
+              </div>
+              <TextInput
+                class="bg-reliableBlack5 w-full p-2 rounded-none border-b-2 border-reliableBlack30 focus:border focus:ring-1 focus:ring-reliableBlack30 focus:border-reliableBlack30"
+                id="faqtitle"
+                type="text"
+                value={editData ? editData.title : ''} // Set default value from editData
+                onChange={(e) => handleEditInputChange('title', e.target.value)} // Add onChange handler
+              />
+              <div className="block -mb-3">
+                <Label htmlFor="desc" className="font-semibold text-reliableBlack60">
+                  FAQ Description
+                </Label>
+              </div>
+              <Textarea
+                className="bg-reliableBlack5 p-2 rounded-none border-b-2 border-reliableBlack30 focus:border focus:ring-1 focus:ring-reliableBlack30 focus:border-reliableBlack30"
+                id="desc"
+                sizing="lg"
+                type="textarea"
+                rows={5}
+                value={editData ? editData.description : ''} // Set default value from editData
+                onChange={(e) => handleEditInputChange('description', e.target.value)} // Add onChange handler
+              />
+            </div>
+            <div className="flex justify-center items-center mt-6 gap-4">
+              <Button className="w-1/2 rounded" color="success" onClick={() => handleEdit()}>
+                Save Changes
+              </Button>
+              <Button
+                className="w-1/2 rounded"
+                color="gray"
+                onClick={() => {
+                  setEditFaq(null);
+                  setEditData(null);
+                }}
               >
                 Cancel
               </Button>
