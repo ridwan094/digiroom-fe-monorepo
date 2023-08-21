@@ -2,9 +2,14 @@ import { useState, useEffect } from 'react';
 import Text from '../Text';
 import ShareButton from '../ShareButton';
 import { BiCalendar } from 'react-icons/bi';
+import ModalShare from '../ModalShare';
+
 
 const Article = ({ data, block, containerClassName }) => {
   const classNameAssigned = [block ? 'w-full' : '', containerClassName];
+
+  const [showModalPreview, setShowModalPreview] = useState(false);
+
   // If response using html string
   // const [article, setArticle] = useState({ __html: "" });
 
@@ -17,13 +22,16 @@ const Article = ({ data, block, containerClassName }) => {
   // }, []);
 
   // return <div dangerouslySetInnerHTML={article} />;
+
   return (
     <div className={classNameAssigned.join(' ')}>
       <div className="flex mt-6 justify-between">
         <h1 className="text-2xl md:text-4xl text-reliableBlack font-bold">
           Kupas Tuntas Fitur Safety Toyota CHR Hybrid Ini Bikin Makin Pengen Beli{' '}
         </h1>
-        <ShareButton onClick={() => {}} />
+        <ShareButton
+          onClick={() => setShowModalPreview((prevShowModalPreview) => !prevShowModalPreview)}
+        />
       </div>
       <div className="flex mt-6 items-center gap-4">
         <BiCalendar size={24} color="black" />
@@ -37,6 +45,13 @@ const Article = ({ data, block, containerClassName }) => {
         jutaan/bulan saja! <br /> Jangan lupa untuk isi formulir di bawah ini untuk dapatkan
         penawarannya sekarang!
       </p>
+
+      <ModalShare
+        visible={showModalPreview}
+        close={() => setShowModalPreview((prevShowModalPreview) => !prevShowModalPreview)}
+      />
+
+     
     </div>
   );
 };
