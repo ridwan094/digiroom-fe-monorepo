@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { BtnConfirm, Dropdown } from '../../atoms';
 import { Input } from '../../atoms';
 import Text from '../../atoms/Text';
@@ -10,6 +10,7 @@ const InquiryForm = ({
   containerInputClassName,
   containerDropdown,
   buttonContainer,
+  innerButton,
   inputClassName,
   labelStyle,
   onSubmit,
@@ -20,6 +21,7 @@ const InquiryForm = ({
     email: '',
     province: '',
     city: '',
+    branch: '',
     checked: false,
   });
 
@@ -76,107 +78,123 @@ const InquiryForm = ({
     onSubmit(submit);
   };
 
-  const checkFormInquiry = () => {
-    return (
-      !submit.fullName || !submit.email || !submit.phoneNumber || !submit.province || !submit.city
-    );
-  };
+  const checkFormInquiry = useMemo(
+    () =>
+      !submit.fullName || !submit.email || !submit.phoneNumber || !submit.province || !submit.city,
+    [submit]
+  );
 
   return (
     <form className={containerClassForm} onSubmit={handleSubmit}>
-      <Input
-        type="text"
-        labelClassName="block text-reliableBlack70 text-sm font-semibold mb-2"
-        onChange={(e) => handleChange(e, 'fullname')}
-        value={submit.fullName}
-        label="Full Name"
-        placeholder="First Name, Last Name"
-        size="large"
-        inputClassName={inputClassName}
-        containerClassName={containerInputClassName}
-      />
+      <div className="mb-4">
+        <Input
+          type="text"
+          labelClassName="block text-[#666666] text-[13px] font-medium mb-[10px]"
+          onChange={(e) => handleChange(e, 'fullname')}
+          value={submit.fullName}
+          label="Nama"
+          placeholder="Nama Lengkap"
+          size="medium"
+          inputClassName={inputClassName}
+          containerClassName={containerInputClassName}
+        />
+      </div>
 
-      <Input
-        type="email"
-        labelClassName="block text-reliableBlack70 text-sm font-semibold mb-2"
-        onChange={(e) => handleChange(e, 'email')}
-        value={submit.email}
-        label="Email"
-        placeholder="Email@abc.com"
-        size="large"
-        inputClassName={inputClassName}
-        containerClassName={containerInputClassName}
-      />
+      <div className="mb-4">
+        <Input
+          type="email"
+          labelClassName="block text-[#666666] text-[13px] font-medium mb-[10px]"
+          onChange={(e) => handleChange(e, 'email')}
+          value={submit.email}
+          label="Email"
+          placeholder="Email address"
+          size="medium"
+          inputClassName={inputClassName}
+          containerClassName={containerInputClassName}
+        />
+      </div>
 
-      <Input
-        type="text"
-        labelClassName="block text-reliableBlack70 text-sm font-semibold mb-2"
-        onChange={(e) => handleChange(e, 'number')}
-        value={submit.phoneNumber}
-        label="Phone"
-        onKeyPress={(event) => {
-          if (!/[0-9]/.test(event.key)) {
-            event.preventDefault();
-          }
-        }}
-        placeholder="+62 XXX-XXX-XXX"
-        size="large"
-        inputClassName={inputClassName}
-        containerClassName={containerInputClassName}
-      />
+      <div className="mb-4">
+        <Input
+          type="text"
+          labelClassName="block text-[#666666] text-[13px] font-medium mb-[10px]"
+          onChange={(e) => handleChange(e, 'number')}
+          value={submit.phoneNumber}
+          label="Nomor Telepon"
+          onKeyPress={(event) => {
+            if (!/[0-9]/.test(event.key)) {
+              event.preventDefault();
+            }
+          }}
+          placeholder="+62 -"
+          size="medium"
+          inputClassName={inputClassName}
+          containerClassName={containerInputClassName}
+        />
+      </div>
 
       {/* DROPDOWN PROVINCE */}
-      <div className={containerDropdown ? containerDropdown : ''}>
+      <div className={`${containerDropdown ? containerDropdown : ''} mb-4`}>
         <Dropdown
           withInput={true}
-          label="Province"
-          labelClassname="block text-[#666666] text-sm font-semibold mb-2 mt-1"
+          label="Provinsi"
+          labelClassname="block text-[#666666] text-[13px] font-medium mb-[10px]"
           options={['Jakarta', 'Jawa Barat', 'Jawa Tengah', 'Jawa Timur', 'Bali']}
           selectedOption={submit.province}
           onSelect={(e) => handleChange(e, 'province')}
-          placeholder="Choose Province"
+          placeholder="Pilih Provinsi"
         />
       </div>
 
       {/* DROPDOWN CITY */}
-      <div className={containerDropdown ? containerDropdown : ''}>
+      <div className={`${containerDropdown ? containerDropdown : ''} mb-4`}>
         <Dropdown
           withInput={true}
-          label="City"
-          labelClassname="block text-[#666666] text-sm font-semibold mb-2 mt-1"
+          label="Kota"
+          labelClassname="block text-[#666666] text-[13px] font-medium mb-[10px]"
           options={['Jakarta', 'Bandung', 'Semarang', 'Surakarta', 'Surabaya', 'Jogja']}
           selectedOption={submit.city}
           onSelect={(e) => handleChange(e, 'city')}
-          placeholder="Choose City"
+          placeholder="Pilih Kota"
+        />
+      </div>
+
+      {/* DROPDOWN BRANCH */}
+      <div className={`${containerDropdown ? containerDropdown : ''} mb-4`}>
+        <Dropdown
+          withInput={true}
+          label="Cabang"
+          labelClassname="block text-[#666666] text-[13px] font-medium mb-[10px]"
+          options={['Cabang A', 'Cabang B', 'Cabang C']}
+          selectedOption={submit.branch}
+          onSelect={(e) => handleChange(e, 'branch')}
+          placeholder="Pilih Cabang"
         />
       </div>
 
       {/* CheckBox */}
-      <div className={containerDropdown ? containerDropdown : ''}>
+      <div className={`${containerDropdown ? containerDropdown : ''} mb-8 pb-16 md:pb-0`}>
         <Checkbox
-          labelClassname="hidden md:flex text-xs mt-5"
+          labelClassname="hidden md:flex text-sm font-medium mt-5"
           label="Saya telah membaca dan menyetujui Syarat dan Ketentuan Auto 2000"
           checked={submit.checked}
           onChange={(e) => handleChange(e, 'checkbox')}
         />
       </div>
 
+      {/* Suubmit button */}
       <div className={`${buttonContainer}`}>
-        <div class="flex items-center justify-between mt-5">
-          <BtnConfirm
-            block={true}
-            className={checkFormInquiry() ? 'bg-reliableBlack310' : 'bg-supportiveRed'}
-            size="large"
-            variant={true}
-            iconType="icon"
-            disabled={checkFormInquiry()}
-          >
-            <div className="flex justify-end items-center py-3 md:py-1 gap-x-2">
-              <Text.Head4 className="text-lg sm:text-xl">SUBMIT</Text.Head4>
-              <FiArrowRight size={20} />
-            </div>
-          </BtnConfirm>
-        </div>
+        <BtnConfirm
+          className={`${
+            checkFormInquiry ? 'bg-reliableBlack20' : 'bg-supportiveRed'
+          } ${innerButton} w-full bg-reliableBlack text-white py-6 px-8`}
+          size="large"
+          iconType="icon"
+          disabled={checkFormInquiry}
+        >
+          <Text.Head4 className="text-base font-bold uppercase">Submit</Text.Head4>
+          <FiArrowRight className="lg:hidden" size={20} />
+        </BtnConfirm>
       </div>
     </form>
   );
@@ -187,6 +205,8 @@ InquiryForm.defaultProps = {
   containerInputClassName: '',
   inputClassName: '',
   containerDropdown: '',
+  buttonContainer: '',
+  innerButton: '',
   labelStyle: 'text-black font-semibold',
   onSubmit: () => {},
 };

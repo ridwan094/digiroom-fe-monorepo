@@ -1,48 +1,36 @@
-import React from "react";
-import { Fragment } from "react";
+import React from 'react';
+import { Fragment } from 'react';
 
-// const sizeClassName = {
-//   small: "h-[38px] text-sm",
-//   large: "h-[72px] text-base",
-// };
 const iconClassname = {
-  fill: "",
-  text: "text",
-  icon: "rounded-full",
+  fill: '',
+  text: 'text',
+  icon: 'rounded-full',
 };
-// sizeIconClassName = {
-//   small: "h-8 w-8",
-//   medium: "h-12 w-12",
-//   large: "h-14 w-14",
-// };
 
 const BtnConfirm = ({
   children,
-  // inverted,
   loading,
   iconType,
   size,
   disabled,
-  // icon,
   block,
   className,
-  // style,
   pressed = false,
-  type = "submit",
-  colorSocialMediaContainer = "",
+  type = 'submit',
+  colorSocialMediaContainer = '',
   ...props
 }) => {
   const classNameAssigned = [
-    "justify-end items-center p-3 gap-x-1.5 font-semibold",
-    block ? "w-full" : "",
-    pressed ? "pressed" : "",
+    'flex justify-end items-center p-3 gap-x-3 text-base font-bold',
+    block ? 'w-full' : '',
+    pressed ? 'pressed' : '',
     className,
-    disabled ? "cursor-not-allowed" : "",
+    disabled ? 'cursor-not-allowed' : '',
   ];
 
   return (
     <button
-      className={classNameAssigned.join(" ")}
+      className={classNameAssigned.join(' ')}
       disabled={disabled}
       // style={style}
       {...props}
@@ -56,12 +44,12 @@ BtnConfirm.defaultProps = {
   inverted: false,
   disabled: false,
   block: false,
-  variant: "bg-supportiveRed",
-  size: "large",
-  colorSocialMediaContainer: "",
+  variant: 'bg-supportiveRed',
+  size: 'large',
+  colorSocialMediaContainer: '',
   // icon: null,
-  iconType: "fill",
-  className: "",
+  iconType: 'fill',
+  className: '',
   onClick: () => {},
   // style: {},
 };

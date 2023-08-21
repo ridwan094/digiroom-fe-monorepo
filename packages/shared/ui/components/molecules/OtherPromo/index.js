@@ -1,66 +1,37 @@
-import { useState, useEffect } from 'react';
-import Text from '../../atoms/Text';
 import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
-import './carousel.css';
+import { CardPromo } from 'ui/components/molecules';
 
-const OtherPromo = ({
-  data,
-  type,
-  arrows,
-  pagination,
-  perPage,
-  items,
-  title,
-  classNameContainer,
-  ...props
-}) => {
-  // If response using html string
-  // const [article, setArticle] = useState({ __html: "" });
-
-  // useEffect(() => {
-  //   async function createMarkUp() {
-  //     return await { __html: data };
-  //   }
-
-  //   createMarkUp().then((result) => setArticle(result));
-  // }, []);
-
-  // return <div dangerouslySetInnerHTML={article} />;
-  const classNameAssigned = ['relative flex flex-col justify-center gap-4', classNameContainer];
+const OtherPromo = ({ items, classNameContainer, ...props }) => {
+  const classNameAssigned = ['relative flex flex-col justify-center gap-4', ...classNameContainer];
 
   return (
     <div className={classNameAssigned.join(' ')}>
-      <Text.Head3 className="text-base font-semibold text-reliableBlack md:text-2xl">
-        {title}
-      </Text.Head3>
       <Splide
         aria-label="Carousel"
         hasTrack={false}
         options={{
-          type,
-          arrows,
-          pagination,
-          perPage,
+          type: 'slide',
+          arrows: false,
+          pagination: false,
+          perPage: 2,
+          gap: '8px',
           ...props,
         }}
       >
         <div className="justify-center items-center">
           <SplideTrack>
-            {items.map((item) => (
-              <SplideSlide
-                key={item.src}
-                className="w-full overflow-hidden object-cover flex flex-col justify-center gap-6 border-b-4 border-black transition-all ease-in-out duration-300 hover:scale-105"
-              >
-                <img src={item.src} className="w-full" alt="Auto2000 other promotions" />
-                <div className="flex flex-col justify-center gap-2 mb-5">
-                  <Text.BodySmall className="text-[10px] text-black md:text-[12px]">
-                    {item.date ? item.date : '-'}
-                  </Text.BodySmall>
-                  <Text.Headline5 className="text-base font-semibold text-black md:">
-                    {item.headline ? item.headline : '-'}
-                  </Text.Headline5>
-                </div>
+            {items.map((item, idx) => (
+              <SplideSlide key={idx}>
+                <CardPromo
+                  classNames="border-t-0 border-l-0 border-r-0"
+                  title={item.title}
+                  slug={item.slug}
+                  startDate={item.startDate}
+                  endDate={item.endDate}
+                  coverImg={item.coverImg}
+                  tag={item.tag}
+                />
               </SplideSlide>
             ))}
           </SplideTrack>
@@ -71,12 +42,6 @@ const OtherPromo = ({
 };
 
 OtherPromo.defaultProps = {
-  data: '',
-  title: '',
-  type: 'loop',
-  arrows: true,
-  pagination: true,
-  perPage: 1,
   items: [],
   classNameContainer: '',
 };

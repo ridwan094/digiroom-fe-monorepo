@@ -1,23 +1,27 @@
 import SuccessIcon from 'ui/components/atoms/Icons/SuccessIcon';
 import './InquirySuccess.css';
 
-const InquirySuccess = ({ onClick }) => {
+const InquirySuccess = () => {
   return (
-    <div className="bg-white border p-6 shadow-md">
+    <div className="h-full min-h-screen bg-white p-6 pt-24">
       <SuccessIcon />
 
       <div className="leading-5 text-center lg:leading-9">
-        <p className="text-base font-semibold text-reliableBlack mb-2 lg:text-lg">
-          Thank you for submitting your inquiry!
+        <p className="text-base font-bold text-reliableBlack mb-4 lg:text-lg">
+          Terima Kasih Atas Ketertarikan Anda!
         </p>
-        <p className="text-sm font-regular text-reliableBlack mb-4">
-          Our team will be in touch with you soon to address your needs.
+        <p className="text-sm font-regular text-reliableBlack">
+          Perwakilan sales kami akan segera menghubungi Anda dalam 1-2 hari kerja.
         </p>
-        <a href="/">
-          <button onClick={onClick} className="text-sm font-bold uppercase text-[#63CB55]">
-            Done
-          </button>
-        </a>
+
+        <div className="mt-8">
+          <a
+            className="block w-full p-4 text-base font-bold uppercase border border-reliableBlack"
+            href="/promo"
+          >
+            Lihat Promo Lainnya
+          </a>
+        </div>
       </div>
     </div>
   );
