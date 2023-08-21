@@ -1,66 +1,11 @@
 import { MdAdd, MdOutlineFileCopy, MdOutlineCreate, MdOutlineDelete } from 'react-icons/md';
 import React, { useEffect, useState } from 'react';
-import { Table, Pagination, Button, Toast, Tooltip, Modal, Spinner } from 'flowbite-react';
-import ToggleSwitch from 'ui/components/atoms/Toogle';
-import Dropdown from 'ui/components/atoms/Dropdown';
+import { Button, Toast, Modal } from 'flowbite-react';
 import CustomTable from '@/components/Table';
 import { useRouter } from 'next/navigation';
-import { columns } from '@/constants/implement-table';
+import { columns, itemProduct } from '@/constants/implement-table';
 
 const DashboardPromo = () => {
-  const currentDate = new Date();
-  currentDate.setDate(currentDate.getDate() + 1);
-  const itemProduct = [
-    {
-      title: 'Promo Yaris',
-      slug: 'wow',
-      datePublished: new Date().toDateString(),
-      category: 'Body & Paint',
-      status: 'Published',
-      boolean: 'active',
-    },
-    {
-      title: 'Promo HRV',
-      slug: 'OKE',
-      datePublished: new Date().toDateString(),
-      category: 'Body & Paint',
-      status: 'Published',
-      boolean: 'inactive',
-    },
-    {
-      title: 'Promo HR',
-      slug: 'wow',
-      datePublished: new Date().toDateString(),
-      category: 'Body & Paint',
-      status: 'Published',
-      boolean: 'active',
-    },
-    {
-      title: 'Promo Yaris',
-      slug: 'wow',
-      datePublished: new Date().toDateString(),
-      category: 'Body & Paint',
-      status: 'Published',
-      boolean: 'waitings',
-    },
-    {
-      title: 'Promo Yaris',
-      slug: 'wow',
-      datePublished: new Date().toDateString(),
-      category: 'Body & Paint',
-      status: 'Published',
-      boolean: 'inactive',
-    },
-    {
-      title: 'Promo Yaris',
-      slug: 'wow',
-      datePublished: new Date().toDateString(),
-      category: 'Body & Paint',
-      status: 'Published',
-      boolean: 'inactive',
-    },
-  ];
-
   const [currentPage, setCurrentPage] = useState(1);
   const [showToast, setShowToast] = useState(false);
   const [toastDescription, setToastDescription] = useState('');
@@ -147,17 +92,14 @@ const DashboardPromo = () => {
   };
 
   const handleToggleChange = (value) => {
-    const {
-      test, 
-      indexTest
-    } = value;
+    const { test, indexTest } = value;
 
     setOpenModal('dismissible');
     setModalText(!test ? 'unpublished' : 'published');
     setModalHeader(displayedItems[indexTest].title);
     setCaseItems({
       newValue: test,
-      index: indexTest
+      index: indexTest,
     });
   };
 
@@ -208,7 +150,7 @@ const DashboardPromo = () => {
         <CustomTable
           columns={columns(
             (value) => handleToggleChange(value),
-            (index) => onClick('copy', index)
+            (value, index) => onClick(value, index)
           )}
           dataSource={itemProduct}
           pagination={{
@@ -217,8 +159,9 @@ const DashboardPromo = () => {
             itemsPerPage,
             page,
             displayedItems,
+            onselect: (value) => onselect(value),
             onPageChange: (page) => onPageChange(page),
-            onDropdownPageChange: (value) => dropdownPageChange(value)
+            onDropdownPageChange: (value) => dropdownPageChange(value),
           }}
           isLoading={isLoading}
         />

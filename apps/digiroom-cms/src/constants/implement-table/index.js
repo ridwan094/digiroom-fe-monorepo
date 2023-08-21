@@ -2,11 +2,60 @@ import { Tooltip } from 'flowbite-react';
 import { MdOutlineCreate, MdOutlineDelete, MdOutlineFileCopy } from 'react-icons/md';
 import ToggleSwitch from 'ui/components/atoms/Toogle';
 
-export const columns = (
-  onToggleChange = () => {},
-  onCopyClick = () => {},
-) => {
+const currentDate = new Date();
+currentDate.setDate(currentDate.getDate() + 1);
+export const itemProduct = [
+  {
+    title: 'Promo Yaris',
+    slug: 'wow',
+    datePublished: new Date().toDateString(),
+    category: 'Body & Paint',
+    status: 'Published',
+    boolean: 'active',
+  },
+  {
+    title: 'Promo HRV',
+    slug: 'OKE',
+    datePublished: new Date().toDateString(),
+    category: 'Body & Paint',
+    status: 'Published',
+    boolean: 'inactive',
+  },
+  {
+    title: 'Promo HR',
+    slug: 'wow',
+    datePublished: new Date().toDateString(),
+    category: 'Body & Paint',
+    status: 'Published',
+    boolean: 'active',
+  },
+  {
+    title: 'Promo Yaris',
+    slug: 'wow',
+    datePublished: new Date().toDateString(),
+    category: 'Body & Paint',
+    status: 'Published',
+    boolean: 'waitings',
+  },
+  {
+    title: 'Promo Yaris',
+    slug: 'wow',
+    datePublished: new Date().toDateString(),
+    category: 'Body & Paint',
+    status: 'Published',
+    boolean: 'inactive',
+  },
+  {
+    title: 'Promo Yaris',
+    slug: 'wow',
+    datePublished: new Date().toDateString(),
+    category: 'Body & Paint',
+    status: 'Published',
+    boolean: 'inactive',
+  },
+];
 
+export const columns = (onToggleChange = () => {}, onClick = () => {}) => {
   return [
     {
       title: 'Promo Name',
@@ -32,11 +81,7 @@ export const columns = (
       title: 'Action',
       dataIndex: 'action',
       key: 'action',
-      render: (
-        text,
-        item,
-        index,
-      ) => (
+      render: (text, item, index) => (
         <div className="flex flex-rows hover:cursor-pointer gap-2">
           <Tooltip content="Edit">
             <MdOutlineCreate className="text-2xl" onClick={() => onClick('edit', index)} />
@@ -45,7 +90,7 @@ export const columns = (
             <MdOutlineDelete className="text-2xl" onClick={() => onClick('delete', index)} />
           </Tooltip>
           <Tooltip content="Copy">
-            <MdOutlineFileCopy className="text-2xl" onClick={() => onCopyClick(index)} />
+            <MdOutlineFileCopy className="text-2xl" onClick={() => onClick('copy', index)} />
           </Tooltip>
         </div>
       ),
@@ -92,5 +137,4 @@ export const columns = (
       ),
     },
   ];
-}
-
+};

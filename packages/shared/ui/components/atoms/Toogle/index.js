@@ -18,8 +18,6 @@ const ToggleSwitch = ({
 
   const handleToggle = () => {
     const newValue = !isChecked;
-    console.log('isi data', newValue);
-    console.log('isi inde', index);
     onToggleChange({ test: newValue, indexTest: index });
   };
 
