@@ -7,7 +7,7 @@ import { createWrapper } from 'next-redux-wrapper';
 import example from './example/reducer';
 
 const rootReducer = {
-  example,
+  example
 };
 
 const reducer = combineReducers(rootReducer);
