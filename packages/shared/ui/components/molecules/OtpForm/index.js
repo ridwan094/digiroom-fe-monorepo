@@ -1,14 +1,12 @@
-import { createRef, useRef, useState } from 'react';
-import { BtnConfirm, Dropdown } from '../../atoms';
+import { createRef, useRef, useState, useMemo } from 'react';
+import { BtnConfirm } from '../../atoms';
 import { Input } from '../../atoms';
 import Text from '../../atoms/Text';
 import { FiArrowRight } from 'react-icons/fi';
-import Checkbox from '../../atoms/CheckBox';
 
-const InquiryForm = ({
+const OtpForm = ({
   containerClassForm,
   containerInputClassName,
-  containerDropdown,
   buttonContainer,
   inputClassName,
   labelStyle,
@@ -42,19 +40,21 @@ const InquiryForm = ({
     onSubmit(submit);
   };
 
-  const checkFormInquiry = () => {
-    return (
+  const checkFormInquiry = useMemo(
+    () =>
       !submit.Number1 ||
       !submit.Number2 ||
       !submit.Number3 ||
       !submit.Number4 ||
       !submit.Number5 ||
-      !submit.Number6
-    );
-  };
+      !submit.Number6,
+    [submit]
+  );
 
   return (
     <form className={containerClassForm} onSubmit={handleSubmit}>
+      <p className="text-[13px] font-medium text-[#666666] uppercase mb-2.5">OTP</p>
+
       <div className="flex justify-center items-center w-full gap-1">
         <Input
           type="text"
@@ -148,20 +148,21 @@ const InquiryForm = ({
         />
       </div>
 
+      {/* Submit Button */}
       <div className={`${buttonContainer}`}>
         <div class="flex items-center justify-between mt-4">
           <BtnConfirm
             block={true}
-            className={checkFormInquiry() ? 'bg-gray-500' : 'bg-supportiveRed'}
+            className={`${
+              checkFormInquiry ? 'bg-reliableBlack20' : 'bg-supportiveRed'
+            } w-full bg-reliableBlack text-white py-6 px-8`}
             size="large"
             variant={true}
             iconType="icon"
-            disabled={checkFormInquiry()}
+            disabled={checkFormInquiry}
           >
-            <div className="flex justify-end items-center py-3 md:py-1 gap-x-2">
-              <Text.Head4>SUBMIT</Text.Head4>
-              <FiArrowRight size={20} />
-            </div>
+            <Text.Head4 className="text-base font-bold uppercase">Submit</Text.Head4>
+            <FiArrowRight className="lg:hidden" size={20} />
           </BtnConfirm>
         </div>
       </div>
@@ -169,7 +170,7 @@ const InquiryForm = ({
   );
 };
 
-InquiryForm.defaultProps = {
+OtpForm.defaultProps = {
   containerClassForm: '',
   containerInputClassName: '',
   inputClassName: '',
@@ -178,4 +179,4 @@ InquiryForm.defaultProps = {
   onSubmit: () => {},
 };
 
-export default InquiryForm;
+export default OtpForm;

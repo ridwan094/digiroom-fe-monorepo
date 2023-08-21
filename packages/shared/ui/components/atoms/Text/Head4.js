@@ -26,7 +26,7 @@ const Head4 = ({
   return (
     <h4
       style={{ ...lineClampStyle, ...style }}
-      className={`font-semibold text-2xl text-black90 ${additionalClassName} ${className}`}
+      className={`font-bold text-2xl text-black90 ${additionalClassName} ${className}`}
       {...props}
     >
       {children}

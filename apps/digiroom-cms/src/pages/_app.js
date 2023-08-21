@@ -5,6 +5,7 @@ import '@/styles/globals.css';
 import CMSLayout from '@/layout';
 import { AuthProvider, useAuth } from '@/helpers/utils/AuthContext';
 
+
 function MyApp({ Component, pageProps }) {
   const { user } = useAuth();
 

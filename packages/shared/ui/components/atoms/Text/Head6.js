@@ -27,7 +27,7 @@ const Head6 = ({
   return (
     <div
       style={{ ...lineClampStyle, ...style }}
-      className={`text-[16px] font-semibold leading-6 text-black90 ${additionalClassName} ${className}`}
+      className={`text-[16px] font-bold leading-6 text-black90 ${additionalClassName} ${className}`}
       {...props}
     >
       {children}

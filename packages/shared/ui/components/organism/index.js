@@ -8,3 +8,8 @@ export { default as SocialMediaInfo } from './SocialMediaInfo';
 export { default as PromoBannerSection } from './PromoBannerSection';
 export { default as PromoInfoSection } from './PromoInfoSection';
 export { default as PromoFaqSection } from './PromoFaqSection';
+export { default as DetailPromoHeroSection } from './DetailPromoHeroSection';
+export { default as DetailPromoBodySection } from './DetailPromoBodySection';
+export { default as DetailPromoAnotherPromoSection } from './DetailPromoAnotherPromoSection';
+export { default as SocialMediaLinksSection } from './SocialMediaLinksSection';
+export { default as DetailPromoInquiryFormSection } from './DetailPromoInquiryFormSection';
