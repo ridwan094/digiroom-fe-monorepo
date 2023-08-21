@@ -13,8 +13,6 @@ const App = ({ Component, pageProps }) => {
     store.dispatch(setIsMobileScreen(screenSize?.width < screenBreakpoints.MIN_DESKTOP_SCREEN));
   }, [screenSize?.width]);
 
-  console.log(screenSize)
-
   useEffect(() => {
     store.dispatch(
       setScreenSize({
