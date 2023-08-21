@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Button, Toast, Modal } from 'flowbite-react';
 import CustomTable from '@/components/Table';
 import { useRouter } from 'next/navigation';
-import { columns, itemProduct } from '@/constants/implement-table';
+import { columns } from '@/constants/implement-table';
+import { itemProduct } from '@/constants/promo';
 
 const DashboardPromo = () => {
   const [currentPage, setCurrentPage] = useState(1);
