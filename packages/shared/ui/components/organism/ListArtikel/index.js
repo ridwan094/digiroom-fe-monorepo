@@ -11,7 +11,7 @@ const ListArtikel = ({ itemList = [] }) => {
   };
 
   const ArticleItem = itemList.map((news, index) => (
-    <Link key={news.id} href={`/${news.id}`}>
+    <Link key={news.id} href={`/${news.slug}`}>
       <div className="md:col-span-1 lg:col-span-1 xl:col-span-1">
         <CardNews title={news.title} date={news.subtitle} coverImg={news.image} index={index}/>
       </div>

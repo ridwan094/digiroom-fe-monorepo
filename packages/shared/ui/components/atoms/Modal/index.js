@@ -1,5 +1,6 @@
 import { Fragment, useEffect } from 'react';
 import Text from '../Text'
+import { MdClose } from 'react-icons/md';
 
 const Modal = ({
   onClose = () => {},
@@ -78,10 +79,11 @@ const Modal = ({
                 data-testid={btnCloseTestId}
               >
                 {/* <Icons.Close size={32} fill={colors.black90} /> */}
+                <MdClose size={16} color={"#000"}/>
               </div>
             </div>
           )}
-          <div className={`${!mobile && `overflow-auto`} ${bodyClassName} flex justify-center`}>
+          <div className={`${!mobile && `overflow-auto`} ${bodyClassName}`}>
             {children}
           </div>
         </div>
