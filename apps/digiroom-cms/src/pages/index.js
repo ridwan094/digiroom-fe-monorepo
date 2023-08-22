@@ -1,11 +1,17 @@
+import React, { useState } from 'react';
 import DashboardPromo from './promo';
+import LoginPage from './login';
 
 export default function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
   return (
-    <>
-      <div className="flex flex-row justify-center items-center mt-10 bg-white border-white rounded-2xl">
-        <DashboardPromo />
-      </div>
-    </>
+    <React.Fragment>
+      {isLoggedIn ? <DashboardPromo /> : <LoginPage onLogin={handleLogin} />}
+    </React.Fragment>
   );
 }
