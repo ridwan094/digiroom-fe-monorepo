@@ -59,6 +59,7 @@ export const MOCK_DATA = {
 export const newsList = [
   {
     id: 1,
+    slug:'mengenal-fitur-anti-merosot-hill-start-assist-yang-ada-di-mobil-toyota',
     title: 'Mengenal Fitur Anti-Merosot Hill Start Assist yang Ada di Mobil Toyota',
     slug: 'mengenal-fitur-anti-merosot-hill-start',
     createdDate: 'Jul 25, 2023',
@@ -69,6 +70,7 @@ export const newsList = [
   },
   {
     id: 2,
+    slug:'mengenal-5-komponen-penggerak-roda-depan',
     title: 'Mengenal 5 Komponen Penggerak Roda Depan',
     slug: 'mengenal-5-komponen-penggerak-roda-depan',
     createdDate: 'Jul 25, 2023',
@@ -79,6 +81,7 @@ export const newsList = [
   },
   {
     id: 3,
+    slug:'pelajari-apa-itu-sistem-penggerak-roda-depan-dan-keunggulanya',
     title: 'Pelajari Apa Itu Sistem Penggerak Roda Depan dan Keunggulannya',
     slug: 'pelajari-apa-itu-sistem-penggerak-roda',
     createdDate: 'Jul 25, 2023',
@@ -89,6 +92,7 @@ export const newsList = [
   },
   {
     id: 4,
+    slug:'inilah-5-tips-melindungi-cat-mobil-agar-awet',
     title: 'Inilah 5 Tips Melindungi Cat Mobil Agar Awet',
     slug: 'inilah-5-tips-melindungi-cat-mobil',
     createdDate: 'Jul 25, 2023',
@@ -99,6 +103,7 @@ export const newsList = [
   },
   {
     id: 5,
+    slug:'mengenal-fitur-anti-merosot-hill-start-assist-yang-ada-di-mobil-toyota',
     title: 'Mengenal Fitur Anti-Merosot Hill Start Assist yang Ada di Mobil Toyota',
     slug: 'mengenal-fitur-anti-merosot-hill-start',
     createdDate: 'Jul 25, 2023',
@@ -109,6 +114,7 @@ export const newsList = [
   },
   {
     id: 6,
+    slug:'inilah-5-tips-melindungi-cat-mobil-agar-awet',
     title: 'Inilah 5 Tips Melindungi Cat Mobil Agar Awet',
     slug: 'inilah-5-tips-melindungi-cat-mobil',
     createdDate: 'Jul 25, 2023',
@@ -119,6 +125,7 @@ export const newsList = [
   },
   {
     id: 7,
+    slug:'simak-inilah-cara-perpanjang-sim-beda-kota-2023',
     title: 'Simak, Inilah Cara Perpanjang SIM Beda Kota 2023',
     slug: 'simak-inilah-cara-perpanjang-sim',
     createdDate: 'Jul 25, 2023',
@@ -129,6 +136,7 @@ export const newsList = [
   },
   {
     id: 8,
+    slug:'7-tips-persiapan-liburan-dengan-anak-menggunakan-mobil-pribadi',
     title: '7 Tips Persiapan Liburan Dengan Anak Menggunakan Mobil Pribadi',
     slug: '7-tips-persiapan-liburan-dengan-anak',
     createdDate: 'Jul 25, 2023',

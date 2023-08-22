@@ -1,11 +1,9 @@
-import DashboardPromo from './dashboard-promo';
+import React from 'react';
 
 export default function Home() {
   return (
-    <>
-      <div className="flex flex-row justify-center items-center mt-10">
-        <DashboardPromo />
-      </div>
-    </>
+    <React.Fragment>
+      <p>Welcome, to dashboard</p>
+    </React.Fragment>
   );
 }

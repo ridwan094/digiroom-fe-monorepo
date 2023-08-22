@@ -16,6 +16,7 @@ export { default as Input } from './Input';
 export { default as Tag } from './Tag';
 export { default as Text } from './Text';
 export { default as Modal } from './Modal';
+export { default as ModalShare } from './ModalShare';
 export { default as Carousel } from './Carousel';
 export { default as Card } from './Card';
 export { default as Accordion } from './Accordion';

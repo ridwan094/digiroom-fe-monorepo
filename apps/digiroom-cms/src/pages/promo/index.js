@@ -1,81 +1,12 @@
 import { MdAdd, MdOutlineFileCopy, MdOutlineCreate, MdOutlineDelete } from 'react-icons/md';
 import React, { useEffect, useState } from 'react';
-import { Table, Pagination, Button, Toast, Tooltip, Modal, Spinner } from 'flowbite-react';
-import ToggleSwitch from 'ui/components/atoms/Toogle';
-import Dropdown from 'ui/components/atoms/Dropdown';
+import { Button, Toast, Modal } from 'flowbite-react';
+import CustomTable from '@/components/Table';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { columns } from '@/constants/implement-table';
+import { itemProduct } from '@/constants/promo';
 
 const DashboardPromo = () => {
-  const [title, settitle] = useState([
-    'promo name',
-    'slug',
-    'date publised',
-    'expired date',
-    'action',
-    'status',
-  ]);
-  const currentDate = new Date();
-  currentDate.setDate(currentDate.getDate() + 1);
-  const itemProduct = [
-    {
-      title: 'Promo Yaris',
-      slug: 'wow',
-      datePublished: new Date(),
-      expiredDate: currentDate,
-      status: 'Published',
-      boolean: 'inactive',
-    },
-    {
-      title: 'Promo HRV',
-      slug: 'shy',
-      datePublished: new Date(),
-      expiredDate: currentDate,
-      status: 'Published',
-      boolean: 'active',
-    },
-    {
-      title: 'Promo CRT',
-      slug: 'soemthing liek that',
-      datePublished: new Date(),
-      expiredDate: currentDate,
-      status: 'Published',
-      boolean: 'active',
-    },
-    {
-      title: 'Promo CDR',
-      slug: 'big ben',
-      datePublished: new Date(),
-      expiredDate: currentDate,
-      status: 'Published',
-      boolean: 'inactive',
-    },
-    {
-      title: 'Toyota Camry',
-      slug: 'i try to',
-      datePublished: new Date(),
-      expiredDate: currentDate,
-      status: 'Published',
-      boolean: 'waitings',
-    },
-    {
-      title: 'Promo Raize',
-      slug: 'ultima',
-      datePublished: new Date(),
-      expiredDate: currentDate,
-      status: 'Published',
-      boolean: 'inactive',
-    },
-    {
-      title: 'Promo Corolla Cross',
-      slug: 'coffee',
-      datePublished: new Date(),
-      expiredDate: currentDate,
-      status: 'Published',
-      boolean: 'active',
-    },
-  ];
-
   const [currentPage, setCurrentPage] = useState(1);
   const [showToast, setShowToast] = useState(false);
   const [toastDescription, setToastDescription] = useState('');
@@ -161,11 +92,16 @@ const DashboardPromo = () => {
     }
   };
 
-  const handleToggleChange = (isChecked) => {
+  const handleToggleChange = (value) => {
+    const { test, indexTest } = value;
+
     setOpenModal('dismissible');
-    setModalText(!isChecked.newValue ? 'unpublished' : 'published');
-    setModalHeader(displayedItems[isChecked.index].title);
-    setCaseItems(isChecked);
+    setModalText(!test ? 'unpublished' : 'published');
+    setModalHeader(displayedItems[indexTest].title);
+    setCaseItems({
+      newValue: test,
+      index: indexTest,
+    });
   };
 
   const copyToClipboard = (text) => {
@@ -182,7 +118,7 @@ const DashboardPromo = () => {
   }, [itemsPerPage]);
 
   return (
-    <div className="relative w-full pt-5">
+    <div className="relative w-full">
       <div
         className={`fixed inset-x-0 top-10 right-10 z-50 flex justify-end items-left ${
           showToast
@@ -204,116 +140,31 @@ const DashboardPromo = () => {
         )}
       </div>
       <div className={`flex items-center justify-between ${isLoading ? 'opacity-50' : ''}`}>
-        <p className="px-2 py-4 relative text-lg uppercase font-bold">list</p>
-        <Link href="/promo/add-promo">
-          <Button color="light">
-            <p className="flex items-center gap-2">
-              <MdAdd /> Add
-            </p>
-          </Button>
-        </Link> 
+        <p className="px-2 py-4 relative text-lg uppercase font-bold">promo</p>
+        <Button color="light" onClick={() => addListPromo()}>
+          <p className="flex items-center gap-2">
+            <MdAdd /> Add
+          </p>
+        </Button>
       </div>
       <div className="relative">
-        <Table className={`${isLoading ? 'opacity-20' : ''}`}>
-          <Table.Head>
-            {title.map((title, index) => (
-              <Table.HeadCell key={index}>{title}</Table.HeadCell>
-            ))}
-          </Table.Head>
-          <Table.Body class="divide-y">
-            {displayedItems.map((itemProduct, index) => (
-              <Table.Row key={index} className={isLoading ? 'animate-pulse' : ''}>
-                <Table.Cell>{itemProduct.title}</Table.Cell>
-                <Table.Cell>{itemProduct.slug}</Table.Cell>
-                <Table.Cell>{itemProduct.datePublished.toDateString()}</Table.Cell>
-                <Table.Cell>{itemProduct.expiredDate.toDateString()}</Table.Cell>
-                <Table.Cell>
-                  <div className="flex flex-rows hover:cursor-pointer gap-2">
-                    <Tooltip content="Edit">
-                      <MdOutlineCreate
-                        className="text-2xl"
-                        onClick={() => onClick('edit', index)}
-                      />
-                    </Tooltip>
-                    <Tooltip content="Delete">
-                      <MdOutlineDelete
-                        className="text-2xl"
-                        onClick={() => onClick('delete', index)}
-                      />
-                    </Tooltip>
-                    <Tooltip content="Copy">
-                      <MdOutlineFileCopy
-                        className="text-2xl"
-                        onClick={() => onClick('copy', index)}
-                      />
-                    </Tooltip>
-                  </div>
-                </Table.Cell>
-                <Table.Cell>
-                  <div className="flex items-center gap-2">
-                    <div
-                      className={`p-2 w-full h-full border border-gray-200 ${
-                        itemProduct.boolean === 'active'
-                          ? 'bg-gray-200'
-                          : itemProduct.boolean === 'inactive'
-                          ? 'bg-gray-300'
-                          : itemProduct.boolean === 'waitings'
-                          ? 'bg-gray-500'
-                          : 'bg-gray-200'
-                      } rounded-full text-black capitalized text-md flex justify-center items-center font-Montserrat`}
-                    >
-                      {itemProduct.boolean === 'active'
-                        ? 'Published'
-                        : itemProduct.boolean === 'inactive'
-                        ? 'Unpublished'
-                        : 'Waiting'}
-                    </div>
-                    <ToggleSwitch
-                      index={index}
-                      disabled={itemProduct.boolean === 'waitings'}
-                      value={itemProduct.boolean === 'active'}
-                      onToggleChange={handleToggleChange}
-                      classNameLabel={`w-11 h-6 bg-gray-200 rounded-full peer  
-                    peer-checked:after:border-white after:content-[''] 
-                    after:absolute after:top-[2px] after:left-[2px] 
-                    after:bg-gray-600 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 
-                    after:transition-all ${
-                      itemProduct.boolean === 'active'
-                        ? 'peer-checked:bg-gray-800 peer-checked:after:translate-x-full'
-                        : 'peer-checked:after:translate-x-0'
-                    } `}
-                    />
-                  </div>
-                </Table.Cell>
-              </Table.Row>
-            ))}
-          </Table.Body>
-        </Table>
-
-        {isLoading && (
-          <div className="absolute inset-0 flex justify-center items-center bg-white bg-opacity-80 z-50">
-            <Spinner aria-label="Loading" size="lg" />
-          </div>
-        )}
-      </div>
-      <div className="mt-2 text-gray-600 flex flex-row justify-end gap-2">
-        <div className="flex items-center border border-grey-200 rounded-lg px-2 mt-1.5">
-          Showing {itemsPerPage * (currentPage - 1) + 1} to{' '}
-          <Dropdown
-            text={Math.min(itemsPerPage * currentPage, totalItems)}
-            onSelect={dropdownPageChange}
-            selectedOption={itemsPerPage}
-            options={page}
-            size="w-11"
-          />{' '}
-          of {totalItems} items
-        </div>
-        <Pagination
-          currentPage={currentPage}
-          onPageChange={onPageChange}
-          showIcons
-          totalPages={totalPages}
-          className="flex justify-center items-center"
+        <CustomTable
+          columns={columns(
+            (value) => handleToggleChange(value),
+            (value, index) => onClick(value, index)
+          )}
+          dataSource={itemProduct}
+          pagination={{
+            currentPage,
+            totalPages,
+            itemsPerPage,
+            page,
+            displayedItems,
+            onselect: (value) => onselect(value),
+            onPageChange: (page) => onPageChange(page),
+            onDropdownPageChange: (value) => dropdownPageChange(value),
+          }}
+          isLoading={isLoading}
         />
       </div>
 
