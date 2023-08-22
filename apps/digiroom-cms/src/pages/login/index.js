@@ -1,7 +1,4 @@
-import React, { useState } from 'react';
-import { Label, TextInput } from 'flowbite-react';
-import Image from 'next/image';
-import { Button, Input } from 'ui';
+import React from 'react';
 import { useAuth } from '@/helpers/utils/AuthContext';
 import { useRouter } from 'next/router';
 import Login from '@/components/Login';
@@ -12,7 +9,7 @@ const LoginPage = () => {
 
   const handleLogin = () => {
     login({ username: 'example_user' });
-    router.push('/promo');
+    router.push('/');
   };
 
   return (

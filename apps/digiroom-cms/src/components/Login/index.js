@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Label, TextInput } from 'flowbite-react';
 import Image from 'next/image';
-import { Button, Input } from 'ui';
+import { Button } from 'ui';
 
-const Login = ({ onLogin }) => {
+const Login = ({ onLogin = () => {} }) => {
   return (
     <React.Fragment>
       <form>
