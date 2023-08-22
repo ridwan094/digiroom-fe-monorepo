@@ -6,13 +6,12 @@ import { useAuth } from '@/helpers/utils/AuthContext';
 import { useRouter } from 'next/router';
 import Login from '@/components/Login';
 
-const LoginPage = ({ onLogin }) => {
+const LoginPage = () => {
   const router = useRouter();
   const { login } = useAuth();
 
   const handleLogin = () => {
     login({ username: 'example_user' });
-    onLogin();
     router.push('/promo');
   };
 
