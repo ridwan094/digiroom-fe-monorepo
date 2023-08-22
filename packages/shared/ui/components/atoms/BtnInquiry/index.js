@@ -44,7 +44,6 @@ const BtnInquiry = ({
 };
 
 BtnInquiry.defaultProps = {
-  inverted: false,
   disabled: false,
   showMediaSocialShare: false,
   block: false,
