@@ -1,17 +1,9 @@
-import React, { useState } from 'react';
-import DashboardPromo from './promo';
-import LoginPage from './login';
+import React from 'react';
 
 export default function Home() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
   return (
     <React.Fragment>
-      {isLoggedIn ? <DashboardPromo /> : <LoginPage onLogin={handleLogin} />}
+      <p>Welcome, to dashboard</p>
     </React.Fragment>
   );
 }
