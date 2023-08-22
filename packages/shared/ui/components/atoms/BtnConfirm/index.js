@@ -41,7 +41,6 @@ const BtnConfirm = ({
 };
 
 BtnConfirm.defaultProps = {
-  inverted: false,
   disabled: false,
   block: false,
   variant: 'bg-supportiveRed',

@@ -6,7 +6,7 @@ const Tag = ({ children, severity, className }) => {
   useEffect(() => {
     switch (severity) {
       case 'warn':
-        setBgColor('bg-[#F6E195]');
+        setBgColor('bg-[#FFE293]/50');
         break;
       case 'info':
         setBgColor('bg-[#4CC0AD]/30');
