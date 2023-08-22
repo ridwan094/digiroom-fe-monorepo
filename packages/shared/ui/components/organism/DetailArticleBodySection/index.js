@@ -7,9 +7,7 @@ const DetailArticleBodySection = ({ article }) => {
       <div className="container">
         {/* Header */}
         <div className="flex justify-between items-center mb-5 lg:mb-[30px]">
-          <h1 className="text-sm font-semibold text-reliableBlack lg:text-[32px]">
-            {article.title}
-          </h1>
+          <h1 className="text-sm font-semibold text-reliableBlack lg:text-4xl">{article.title}</h1>
           <Button type="button" variant={'bg-reliableBlack10'}>
             <MdShare size={24} color="#4F4C4D" />
           </Button>

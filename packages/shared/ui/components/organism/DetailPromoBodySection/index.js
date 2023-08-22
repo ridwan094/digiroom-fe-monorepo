@@ -7,7 +7,7 @@ const DetailPromoBodySection = ({ promo }) => {
       <div className="container">
         {/* Header */}
         <div className="flex justify-between items-center mb-5 lg:mb-[30px]">
-          <h1 className="text-base font-bold uppercase text-reliableBlack lg:text-[32px]">
+          <h1 className="text-base font-bold uppercase text-reliableBlack lg:text-3xl">
             {promo.title}
           </h1>
           <Button type="button" variant={'bg-reliableBlack10'}>
