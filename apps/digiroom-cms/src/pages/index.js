@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DashboardPromo from './dashboard-promo';
+import DashboardPromo from './promo';
 import LoginPage from './login';
 
 export default function Home() {
