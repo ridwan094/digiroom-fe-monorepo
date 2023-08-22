@@ -1,6 +1,5 @@
-import Layout from 'ui/components/templates/Layout';
 import { BreadCrumbs } from 'ui/components/molecules';
-import { ListArtikel } from 'ui/components/organism';
+import { ArticleListTabSection } from 'ui/components/organism';
 import Image from 'next/image';
 import { FAQS, newsList } from '../constants/news';
 import Link from 'next/link';
@@ -8,7 +7,7 @@ import { Accordion } from 'ui';
 
 export default function Home() {
   return (
-    <Layout>
+    <>
       <div className="hidden md:block border-b border-gray-100 py-1 mb-4">
         <div className="px-16">
           <BreadCrumbs
@@ -36,7 +35,7 @@ export default function Home() {
         </div>
         {/* List Artikel Desktop */}
         <div className="px-4 mb-2">
-          <ListArtikel itemList={newsList} />
+          <ArticleListTabSection itemList={newsList} />
         </div>
 
         {/* Info promo section */}
@@ -71,6 +70,6 @@ export default function Home() {
           </div>
         </section>
       </div>
-    </Layout>
+    </>
   );
 }

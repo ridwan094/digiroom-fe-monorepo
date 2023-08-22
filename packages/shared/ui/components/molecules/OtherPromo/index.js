@@ -1,6 +1,6 @@
 import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
-import { CardPromo } from 'ui/components/molecules';
+import { Card, Tag } from 'ui/components/atoms';
 
 const OtherPromo = ({ items, classNameContainer, ...props }) => {
   const classNameAssigned = ['relative flex flex-col justify-center gap-4', ...classNameContainer];
@@ -23,15 +23,23 @@ const OtherPromo = ({ items, classNameContainer, ...props }) => {
           <SplideTrack>
             {items.map((item, idx) => (
               <SplideSlide key={idx}>
-                <CardPromo
-                  classNames="border-t-0 border-l-0 border-r-0"
-                  title={item.title}
-                  slug={item.slug}
-                  startDate={item.startDate}
-                  endDate={item.endDate}
-                  coverImg={item.coverImg}
-                  tag={item.tag}
-                />
+                <Card className="border-b border-reliableBlack310 lg:border-transparent">
+                  <div className="pb-4">
+                    <img
+                      className="w-full object-cover mb-4"
+                      src={item.coverImg}
+                      alt="Auto2000 promo image"
+                    />
+                    <p className="text-sm font-semibold text-reliableBlack mb-2 lg:text-lg">
+                      {item.title}
+                    </p>
+                    <p className="text-xs font-normal text-reliableBlack70 lg:text-base">
+                      <span>{item.startDate}</span>
+                      <span> - </span>
+                      <span>{item.endDate}</span>
+                    </p>
+                  </div>
+                </Card>
               </SplideSlide>
             ))}
           </SplideTrack>

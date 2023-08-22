@@ -12,5 +12,7 @@ export { default as QuickLink } from './QuickLink';
 export { default as CardCarProduct } from './CardCarProduct';
 export { default as CardAccessoriesProduct } from './CardAccessoriesProduct';
 export { default as CardNews } from './CardNews';
+export { default as ArticleList } from './ArticleList';
+export { default as OtherArticles } from './OtherArticles';
 export { default as LogoDigiroomCircle } from './LogoDigiroomCircle';
 export { default as InfoDigiroom } from './InfoDigiroom';

@@ -10,11 +10,11 @@ const TabsNavigation = ({ tabs, onTabChange }) => {
 
   return (
     <>
-      <ul className="flex items-center justify-between w-full lg:justify-start lg:pb-6">
+      <ul className="flex items-center justify-between w-full overflow-x-auto no-scrollbar lg:justify-start lg:pb-6">
         {tabs.map((tab, index) => (
           <li key={index} role="presentation">
             <button
-              className={`text-xs text-reliableBlack px-4 pb-2 border-b-4 hover:border-supportiveRed lg:text-base ${
+              className={`text-xs uppercase text-reliableBlack px-4 pb-2 border-b-4 hover:border-supportiveRed lg:text-base ${
                 activeTab === index ? 'font-bold border-supportiveRed' : 'border-transparent'
               }`}
               onClick={() => handleTabClick(index)}
