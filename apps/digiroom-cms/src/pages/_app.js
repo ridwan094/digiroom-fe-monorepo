@@ -1,33 +1,19 @@
 import { AuthProvider, useAuth } from '@/helpers/utils/AuthContext';
-import { useEffect } from 'react';
 import { store } from '@/store';
 import Head from 'next/head';
-import Router from 'next/router';
 import CMSLayout from '@/layout';
-import LoginPage from './login';
 import { Provider } from 'react-redux';
 import '@/styles/globals.css';
+import { ProtectedRoute } from '@/components/ProtectedRoute';
 
 function MyApp({ Component, pageProps }) {
-  const { user } = useAuth();
-
-  useEffect(() => {
-    if(!user) {
-      Router.push('/')
-    }
-  }, [])
-
-  if (user) {
-    // Jika pengguna telah login, tampilkan layout yang sesuai
-    return (
+  return (
+    <ProtectedRoute>
       <CMSLayout>
-        <Component {...pageProps} />
+         <Component {...pageProps} />
       </CMSLayout>
-    );
-  } else {
-    // Jika pengguna belum login
-    return <LoginPage />;
-  }
+    </ProtectedRoute>
+  )
 }
 
 export default function App(props) {
