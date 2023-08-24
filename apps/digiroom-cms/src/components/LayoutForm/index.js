@@ -8,6 +8,7 @@ import { MdCalendarToday } from 'react-icons/md';
 import generateSlug from '@/helpers/utils/slug';
 import SelectCategory from './Select';
 import Select from 'react-select';
+import { handleUpload } from '@/service/azure/fileUpload';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
@@ -111,11 +112,21 @@ export default function LayoutForm() {
     window.open("http://localhost:3004/promo/preview", "_blank"); 
   };
 
-
   return (
     <div className="bg-white p-3 w-full">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Dropzone />
+        <Controller
+            control={control}
+            name="file"
+            render={({ field }) => (
+              <Dropzone 
+                onChange={(file) => {
+                  handleUpload(file);
+                  field.onChange(file);
+                }}
+              />
+            )}
+          />
         <TextInput
           label="Title Page"
           labelClassName="font-[500] text-[14px] leading-[17px] text-reliableBlack70"
