@@ -16,13 +16,9 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const login = (userData) => {
-        // Implement your login logic here
-        // Set the user data in the state
         setUser(userData);
-
-        // Save user data to localStorage
         localStorage.setItem('user', JSON.stringify(userData));
-    };
+    }
 
     const logout = () => {
         // Implement your logout logic here

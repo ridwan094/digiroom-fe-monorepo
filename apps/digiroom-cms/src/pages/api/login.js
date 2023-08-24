@@ -1,0 +1,20 @@
+export default function handler(req, res) {
+    const { username, password } = req.body;
+
+    const responseSuccses = {
+        "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJJQ0g1T1FMUmdoNW84NjBaN29Xc2w3b1hKQlA4a2llX25CM0w1ZkctYUQ0In0.eyJleHAiOjE2OTI2OTA0MzcsImlhdCI6MTY5MjY5MDEzNywianRpIjoiMWZhNmMxYTMtMmFmZC00NDdlLTg2M2QtMGQ1YzA3NGI2NjhjIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay5kaWdpZm9ybS5jby5pZC9yZWFsbXMvc3ByaW5nLWJvb3QtY21zLXJlYWxtIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6Ijg3NDFlOWJiLTU3ZWYtNGZkNC1hODQ5LTRiYzVmNTFjNThlZiIsInR5cCI6IkJlYXJlciIsImF6cCI6InNwcmluZy1ib290LWNtcy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiZDg4ZjE2NTQtMjE3Yi00ZjI3LThhODAtMjNmYmY5ZTljODA2IiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtc3ByaW5nLWJvb3QtY21zLXJlYWxtIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJzaWQiOiJkODhmMTY1NC0yMTdiLTRmMjctOGE4MC0yM2ZiZjllOWM4MDYiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IkFndXN0aWFuIElzcnVsIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWd1c3RpYW4uaXNydWwiLCJnaXZlbl9uYW1lIjoiQWd1c3RpYW4iLCJmYW1pbHlfbmFtZSI6IklzcnVsIiwiZW1haWwiOiJhZ3VzdGlhbi5pc3J1bEBtaWkuY28uaWQifQ.C7aTgmlQBAyuPK5AdKmmKUOItRntYjS05iY8_wT1DpA_jGhWYKQx2dgUWoUkNmrnp9Kk6OU2FVRqVbwG-j2Re0TsTCrjtq2tctzcFtWf3HhCN1aecMVYMdMLSbklWb6x8zqqSf6mzkPPUel68OGFDOy5NXuxCGNHYGSpWkTrgg3PqNq_7_3MBo9se4IhRaWuqjfQhnWKarf7RiY_ML4cqA8MgNBLC77XHD75YL1S0hD1F4dF_ChJFOrTrQHdOLHpksZ2MWCGX0dqCxlaoMOxNmo_GnT6-sMpI4CDTqOvpNu-XxXJmuhttb8VKfvo9MTrFDrs2cDK3PtCRoLAXUPDag",
+        "expires_in": 300,
+        "refresh_expires_in": 600,
+        "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwYmI2ZDQxZC00MzYwLTRhOWQtYTY2MC03ZDQyNTRkNTI4OGUifQ.eyJleHAiOjE2OTI2OTA3MzcsImlhdCI6MTY5MjY5MDEzNywianRpIjoiNDRiMjJmMDktMGQ3MS00NTdjLWFlOGMtYzYwZjNiNzA1NmE0IiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay5kaWdpZm9ybS5jby5pZC9yZWFsbXMvc3ByaW5nLWJvb3QtY21zLXJlYWxtIiwiYXVkIjoiaHR0cHM6Ly9rZXljbG9hay5kaWdpZm9ybS5jby5pZC9yZWFsbXMvc3ByaW5nLWJvb3QtY21zLXJlYWxtIiwic3ViIjoiODc0MWU5YmItNTdlZi00ZmQ0LWE4NDktNGJjNWY1MWM1OGVmIiwidHlwIjoiUmVmcmVzaCIsImF6cCI6InNwcmluZy1ib290LWNtcy1jbGllbnQiLCJzZXNzaW9uX3N0YXRlIjoiZDg4ZjE2NTQtMjE3Yi00ZjI3LThhODAtMjNmYmY5ZTljODA2Iiwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwic2lkIjoiZDg4ZjE2NTQtMjE3Yi00ZjI3LThhODAtMjNmYmY5ZTljODA2In0.BW6bECdN93oQ1gG00VgF7u70rKAFRilSSiubA83rB-I",
+        "token_type": "Bearer",
+        "session_state": "d88f1654-217b-4f27-8a80-23fbf9e9c806"
+    }
+  
+    // Simulate a successful login for demonstration purposes
+    if (username === 'agustian.isrul' && password === 'agustian.isrul') {
+      // In a real scenario, you would generate a token and return it here
+      res.status(201).json(responseSuccses);
+    } else {
+      res.status(401).json({ message: 'Invalid credentials' });
+    }
+}
