@@ -1,5 +1,7 @@
 import React from 'react';
-import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube, FaWhatsapp } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaTiktok, FaYoutube, FaWhatsapp } from 'react-icons/fa';
+import { footerDekstopImage, footerMobileImage } from '../../../assets/images';
+import XLogo from '../../atoms/Icons/Xlogo';
 
 const Footer = () => {
   return (
@@ -153,10 +155,10 @@ const Footer = () => {
               </div>
             </div>
 
-            <div className="flex flex-col justify-end md:h-[370px]">
-              <div className="relative flex flex-col md:flex-row">
+            <div className="flex flex-col md:h-[370px]">
+              <div className="relative flex flex-col">
                 {/* Social media icon */}
-                <div className="flex flex-col justify-end mr-11">
+                <div className="flex flex-col mr-11">
                   <span className="text-white text-xs">Follow Us</span>
                   <ul className="flex gap-6 mt-3">
                     <li>
@@ -192,7 +194,7 @@ const Footer = () => {
                         className="text-white transition hover:opacity-75"
                       >
                         <span className="sr-only">Twitter</span>
-                        <FaTwitter size="22px" />
+                        <XLogo width="22px" height="22px" />
                       </a>
                     </li>
 
@@ -219,13 +221,27 @@ const Footer = () => {
                         <FaWhatsapp size="22px" />
                       </a>
                     </li>
+
+                    <li>
+                      <a
+                        href="/"
+                        rel="noreferrer"
+                        target="_blank"
+                        className="text-white transition hover:opacity-75"
+                      >
+                        <span className="sr-only">Dribbble</span>
+                        <FaTiktok size="22px" />
+                      </a>
+                    </li>
                   </ul>
                 </div>
 
                 {/* Download on the Playstore */}
                 <div className="flex flex-col">
-                  <span className="text-white text-xs mb-3 mt-4 md:mt-0">Download Digiroom</span>
-                  <div className="flex items-center gap-3.5 md:gap-0 md:flex-col">
+                  <span className="text-white text-xs mb-3 mt-4 md:mt-[59px]">
+                    Download Digiroom
+                  </span>
+                  <div className="flex gap-3.5 md:gap-0 md:flex-col">
                     <div className="flex w-[140px] h-[51px] bg-black text-white rounded-md border border-white items-center justify-center">
                       <div className="mr-2">
                         <svg viewBox="30 336.7 120.9 129.2" width="23">
@@ -273,10 +289,18 @@ const Footer = () => {
             </div>
           </div>
         </div>
+        {/* Footer Image */}
+        <div>
+          <img
+            src={footerDekstopImage.src}
+            className="w-full hidden md:block"
+            alt="auto2000 footer dekstop image"
+          />
+        </div>
 
         {/* Copyright Section */}
-        <div className="flex flex-col bg-[#1F1F1F] mb-16 md:mb-0 md:px-16 py-4 md:flex-row md:justify-between">
-          <div className="flex items-center gap-9">
+        <div className="flex flex-col bg-[#1F1F1F] md:px-16 py-4 md:flex-row md:justify-between">
+          <div className="flex mx-4 md:mx-0 items-center gap-9">
             {/* Satu Indonesia Icons */}
             <svg
               width="57"
@@ -808,7 +832,7 @@ const Footer = () => {
               />
             </svg>
           </div>
-          <div className="flex flex-col md:flex-row gap-1 md:gap-10">
+          <div className="flex flex-col mx-4 md:mx-0 md:flex-row gap-1 md:gap-10 md:items-center">
             <a
               href="#"
               rel="noreferrer"
@@ -824,6 +848,14 @@ const Footer = () => {
               &copy; 2019 AUTO2000 | All Rights Reserved
             </a>
           </div>
+        </div>
+
+        <div className="mb-[67px] md:mb-0 bg-[#1F1F1F]">
+          <img
+            src={footerMobileImage.src}
+            className="w-full md:hidden"
+            alt="auto2000 footer mobile image"
+          />
         </div>
       </footer>
     </>
