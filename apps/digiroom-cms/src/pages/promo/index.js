@@ -40,7 +40,7 @@ const DashboardPromo = () => {
   const onClickCheck = (value) => {
     switch (value) {
       case 'add':
-        router.push('/#');
+        router.push('/promo/add-promo');
         break;
       case 'filter':
         setOpenModalFilter('dismissible');
