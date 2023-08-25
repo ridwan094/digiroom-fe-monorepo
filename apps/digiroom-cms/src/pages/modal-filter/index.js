@@ -4,19 +4,6 @@ import { Modal, Checkbox, Label, Button } from 'flowbite-react';
 export default function ModalFilter({ isOpen, onClose, filterData, onClickFilter }) {
   const [checkboxStates, setCheckboxStates] = useState([]);
 
-  const toggleCheckbox = (filter) => {
-    setCheckboxStates((prevState) => {
-      const existingFilterIndex = prevState.findIndex(
-        (item) => item.column === filter.column && item.key === filter.key
-      );
-      if (existingFilterIndex !== -1) {
-        return prevState.filter((_, index) => index !== existingFilterIndex);
-      } else {
-        return [...prevState, { column: filter.column, key: filter.key }];
-      }
-    });
-  };
-
   return (
     <div>
       <Modal dismissible show={isOpen} onClose={onClose} size="lg">
@@ -32,7 +19,6 @@ export default function ModalFilter({ isOpen, onClose, filterData, onClickFilter
                       <Checkbox
                         class="border-black bg-gray-200 checked:bg-black checked:focus:ring-black focus:ring-black"
                         id={filterItem.key}
-                        onChange={() => toggleCheckbox(filterItem)}
                       />
                       <Label>{filterItem.label}</Label>
                     </div>
