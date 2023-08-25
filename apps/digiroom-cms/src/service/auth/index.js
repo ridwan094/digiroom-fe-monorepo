@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Login from '@/components/Login';
 
 const urlApi = 'api/login';
-// const urlApi = 'http://192.168.8.224:61084/login/authenticate';
+// const urlApi = `${process.env.NEXT_PUBLIC_BASE_LOCAL_PROMO}/login/authenticate`;
 
 const LoginPage = () => {
   const router = useRouter();

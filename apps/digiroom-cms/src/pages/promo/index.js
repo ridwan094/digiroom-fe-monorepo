@@ -6,7 +6,7 @@ import { columns, filterData, headerArray } from '@/constants/implement-table';
 import { itemProduct } from '@/constants/promo';
 import ModalText from '../modal-text';
 import ModalFilter from '../modal-filter';
-import { getListDashboardPromo } from '../api/promo-dashboard';
+import { getListDashboardPromo } from '../../service/promo-dashboard-homepage/promo-dashboard';
 
 const DashboardPromo = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,7 +34,6 @@ const DashboardPromo = () => {
 
   const onPageChange = async (page) => {
     setCurrentPage(page);
-    await fetchDashboardData();
   };
 
   const onClickCheck = (value) => {
@@ -59,7 +58,6 @@ const DashboardPromo = () => {
       );
       setFilteredItem(filtered);
       setCurrentPage(1);
-      await fetchDashboardData();
     }
   };
 
@@ -138,26 +136,6 @@ const DashboardPromo = () => {
     document.body.removeChild(textArea);
   };
 
-  const token = localStorage.getItem('user');
-  const fetchDashboardData = async () => {
-    setIsLoading(true);
-    // const data = await getListDashboardPromo(JSON.parse(token));
-    // if (data !== null) {
-    // setListDashboard(search ? filteredItem : data);
-    // setTotalItems(data.length);
-    // setItemsPerPage(page[0]);
-    // const startIndex = (currentPage - 1) * itemsPerPage;
-    // const currentPageData = listDashboard;
-    // const endIndex = startIndex + itemsPerPage;
-    // const displayedItems = currentPageData.slice(startIndex, endIndex);
-    // setTotalPages(totalItems ? Math.ceil(totalItems / itemsPerPage) : 0);
-    // setDisplayedItems(displayedItems || []);
-    //   setIsLoading(false);
-    // } else {
-    setIsLoading(false);
-    // }
-  };
-
   const handleSort = (key) => {
     if (sortKey === key) {
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
@@ -167,9 +145,7 @@ const DashboardPromo = () => {
     }
   };
 
-  useEffect(() => {
-    fetchDashboardData();
-  }, [currentPage, itemsPerPage, filteredItem, sortKey, sortDirection]);
+  useEffect(() => {}, [currentPage, itemsPerPage, filteredItem, sortKey, sortDirection]);
 
   return (
     <div className="relative w-full">

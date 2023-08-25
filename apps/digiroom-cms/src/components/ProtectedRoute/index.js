@@ -1,4 +1,4 @@
-import LoginPage from "@/pages/login";
+import LoginPage from "@/service/auth";
 import { useAuth } from "@/helpers/utils/AuthContext";
 
 export const ProtectedRoute = ({ children }) => {

@@ -10,16 +10,12 @@ export default function ModalFilter({ isOpen, onClose, filterData, onClickFilter
         (item) => item.column === filter.column && item.key === filter.key
       );
       if (existingFilterIndex !== -1) {
-        // Remove the existing filter if found
         return prevState.filter((_, index) => index !== existingFilterIndex);
       } else {
-        // Add the new filter if not found
         return [...prevState, { column: filter.column, key: filter.key }];
       }
     });
   };
-
-  useEffect(() => {}, [checkboxStates]);
 
   return (
     <div>
