@@ -1,6 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-export default function Dropzone() {
+export default function Dropzone({
+  onChange = () => {},
+  onRemove = () => {}
+}) {
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+
+    if (onChange) {
+      onChange(file); // Pass the selected file to the onChange function
+    }
+  };
+
+  const handleRemove = () => {
+    setSelectedFile(null);
+
+    if (onRemove) {
+      onRemove();
+    }
+  };
+
   return (
     <div className="flex items-center justify-center w-full mb-3">
       <label
@@ -28,7 +50,17 @@ export default function Dropzone() {
           </p>
           <p className="text-xs text-gray-500 dark:text-gray-400">Support: JPG, Jpeg2000, PNG</p>
         </div>
-        <input id="dropzone-file" type="file" className="hidden" />
+        <input id="dropzone-file" type="file" className="hidden" accept=".jpg, .jpeg, .png" onChange={handleFileChange} />
+
+        {selectedFile && (
+          <div className="flex p-2 border-2">
+            <img style={{ width: 30, height: 30, marginRight: 10 }} src={URL.createObjectURL(selectedFile)} alt="Uploaded" />
+            <div className="text-xs text-gray-500 dark:text-gray-400 mr-5">
+              {selectedFile.name}
+            </div>
+            <button className="text-xs text-gray-500 text-end dark:text-gray-400" onClick={handleRemove}>X</button>
+          </div>
+        )}
       </label>
     </div>
   );

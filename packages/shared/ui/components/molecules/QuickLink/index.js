@@ -8,17 +8,21 @@ import { LocateIcon, TestDrive, HomeService, TrackingOrder, Whatsapp } from '../
 const QuickLink = () => {
   const [showQuickLinks, setShowQuickLinks] = useState(false);
   const menuQuickLink = [
-    { title: 'Locate Dealer', icon: <LocateIcon fill={'#fff'} size="40" /> },
-    { title: 'Test Drive', icon: <TestDrive fill={'#fff'} size="40" /> },
-    { title: 'Home Service', icon: <HomeService fill={'#fff'} width="40" height="28" /> },
-    { title: 'Tracking Order', icon: <TrackingOrder fill={'#fff'} size="40" /> },
-    { title: 'Connect on whatsapp', icon: <Whatsapp fill={'#fff'} size="40" /> },
+    {
+      title: 'Locate Dealer',
+      src: 'https://auto2000.co.id/dealer-toyota',
+      icon: <LocateIcon fill={'#fff'} size="40" />,
+    },
+    { title: 'Test Drive', src: '', icon: <TestDrive fill={'#fff'} size="40" /> },
+    { title: 'Home Service', src: '', icon: <HomeService fill={'#fff'} width="40" height="28" /> },
+    { title: 'Tracking Order', src: '', icon: <TrackingOrder fill={'#fff'} size="40" /> },
+    { title: 'Connect on whatsapp', src: '', icon: <Whatsapp fill={'#fff'} size="40" /> },
   ];
 
   return (
     <div
       className={`bg-[#5B5B5B] fixed ${
-        showQuickLinks ? 'right-[25%] md:right-[5%]' : 'right-0'
+        showQuickLinks ? 'right-[25%] md:right-[7%]' : 'right-0'
       } p-3 top-[50%] z-50 `}
     >
       {!showQuickLinks ? (
@@ -50,10 +54,12 @@ const QuickLink = () => {
                     key={indx}
                     className="cursor-pointer border-b-2 border-[#6e6e6e] last:border-0 last:border-none  pb-2 mb-2"
                   >
-                    <div className="max-w-[50%] m-auto mb-2">{items.icon}</div>
-                    <Text.BodySmall className={'font-[500] text-[#fff] max-w-[75px] m-auto'}>
-                      {items.title}
-                    </Text.BodySmall>
+                    <a href={items.src} target="_blank" rel="noreferrer">
+                      <div className="max-w-[50%] m-auto mb-2">{items.icon}</div>
+                      <Text.BodySmall className={'font-[500] text-[#fff] max-w-[75px] m-auto'}>
+                        {items.title}
+                      </Text.BodySmall>
+                    </a>
                   </li>
                 );
               })}
