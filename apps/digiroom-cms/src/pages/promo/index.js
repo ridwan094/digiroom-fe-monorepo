@@ -57,7 +57,6 @@ const DashboardPromo = () => {
       const filtered = listDashboard.filter((item) =>
         item.title.toLowerCase().includes(value.toLowerCase())
       );
-      console.log('isi filter', filtered);
       setFilteredItem(filtered);
       setCurrentPage(1);
       await fetchDashboardData();
