@@ -19,3 +19,5 @@ export { default as DetailArticleHeroSection } from './DetailArticleHeroSection'
 export { default as DetailArticleBodySection } from './DetailArticleBodySection';
 export { default as DetailArticleAnotherPromoSection } from './DetailArticleAnotherPromoSection';
 export { default as DetailArticleAnotherArticlesSection } from './DetailArticleAnotherArticlesSection';
+export { default as DetailProductKnowledgeHeroSection } from './DetailProductKnowledgeHeroSection';
+export { default as DetailProductKnowledgeBodySection } from './DetailProductKnowledgeBodySection';

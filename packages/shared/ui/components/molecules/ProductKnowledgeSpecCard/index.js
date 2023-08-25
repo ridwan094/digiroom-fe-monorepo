@@ -5,7 +5,7 @@ import { Button } from '../../atoms';
 
 const ProductKnowledgeSpecCard = ({ title, caption, specList }) => {
   return (
-    <Card className="container">
+    <Card>
       <div className="lg:bg-reliableBlack5 lg:p-5 rounded">
         <Text.BodyMediumSemibold className="mb-4 lg:text-2xl lg">{title}</Text.BodyMediumSemibold>
         <Text.BodyMedium className="mb-[18px]">{caption}</Text.BodyMedium>
