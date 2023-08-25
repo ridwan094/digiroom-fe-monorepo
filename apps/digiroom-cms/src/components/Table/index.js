@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { Table, Pagination, Spinner } from 'flowbite-react';
 import Dropdown from 'ui/components/atoms/Dropdown';
-import {
-  MdKeyboardArrowUp,
-  MdKeyboardArrowDown,
-} from 'react-icons/md';
+import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md';
 
 const CustomTable = ({
   dataSource,
@@ -51,7 +48,7 @@ const CustomTable = ({
           key={index}
           className={`p-2 items-center justify-between ${isLoading ? 'opacity-50' : ''}`}
         >
-          {headerComponent.render()} {/* Render the dynamic header content */}
+          {headerComponent.render()}
         </div>
       ))}
       <div className="overflow-x-auto">
