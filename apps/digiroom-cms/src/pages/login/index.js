@@ -2,9 +2,7 @@ import React from 'react';
 import { useAuth } from '@/helpers/utils/AuthContext';
 import { useRouter } from 'next/router';
 import Login from '@/components/Login';
-
-const urlApi = 'api/login';
-// const urlApi = `${process.env.NEXT_PUBLIC_BASE_LOCAL_PROMO}/login/authenticate`;
+import { logInAuth } from '../../service/auth/login';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -12,17 +10,9 @@ const LoginPage = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await fetch(urlApi, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Origin: 'http://localhost:3004',
-        },
-        body: JSON.stringify({ username: 'agustian.isrul', password: 'agustian.isrul' }),
-      });
-
+      const temporaryUser = { username: 'agustian.isrul', password: 'agustian.isrul' };
+      const response = await logInAuth(temporaryUser);
       if (response.status === 201) {
         const userData = await response.json();
         login(userData);
