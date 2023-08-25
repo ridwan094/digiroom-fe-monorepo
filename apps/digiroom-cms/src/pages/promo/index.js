@@ -1,10 +1,12 @@
-import { MdAdd, MdOutlineFileCopy, MdOutlineCreate, MdOutlineDelete } from 'react-icons/md';
+import { MdOutlineFileCopy } from 'react-icons/md';
 import React, { useEffect, useState } from 'react';
-import { Button, Toast, Modal } from 'flowbite-react';
 import CustomTable from '@/components/Table';
 import { useRouter } from 'next/navigation';
-import { columns } from '@/constants/implement-table';
+import { columns, filterData, headerArray } from '@/constants/implement-table';
 import { itemProduct } from '@/constants/promo';
+import ModalText from '../modal-text';
+import ModalFilter from '../modal-filter';
+import { getListDashboardPromo } from '../api/promo-dashboard';
 
 const DashboardPromo = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -12,33 +14,54 @@ const DashboardPromo = () => {
   const [toastDescription, setToastDescription] = useState('');
   const [toastIcons, setToastIcons] = useState(null);
   const [openModal, setOpenModal] = useState(null);
+  const [openModalFilter, setOpenModalFilter] = useState(null);
   const [modalText, setModalText] = useState('');
   const [modalHeader, setModalHeader] = useState('');
   const [caseItems, setCaseItems] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [totalItems, setTotalItems] = useState(itemProduct.length);
-  const [totalPages, setTotalPages] = useState(Math.ceil(totalItems / itemsPerPage));
-  const [displayedItems, setDisplayedItems] = useState(
-    itemProduct.slice(currentPage - 1, itemsPerPage)
-  );
-  const [page, setPage] = useState([5, 10, 15]);
+  const [itemsPerPage, setItemsPerPage] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [displayedItems, setDisplayedItems] = useState(0);
+  const [page, setPage] = useState([10, 20, 30]);
   const router = useRouter();
+  const [search, setSearch] = useState('');
+  const [searchBoolean, setSearchBoolean] = useState(false);
+  const [filteredItem, setFilteredItem] = useState([]);
+  const [listDashboard, setListDashboard] = useState([]);
+  const [sortKey, setSortKey] = useState(null);
+  const [sortDirection, setSortDirection] = useState('asc');
 
-  const onPageChange = (page) => {
-    setIsLoading(true);
-    setTimeout(() => {
-      const startIndex = (page - 1) * itemsPerPage;
-      const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
-      const displayedItems = itemProduct.slice(startIndex, endIndex);
-      setCurrentPage(page);
-      setDisplayedItems(displayedItems);
-      setIsLoading(false);
-    }, 1000);
+  const onPageChange = async (page) => {
+    setCurrentPage(page);
+    await fetchDashboardData();
   };
 
-  const addListPromo = () => {
-    router.push('/#');
+  const onClickCheck = (value) => {
+    switch (value) {
+      case 'add':
+        router.push('/#');
+        break;
+      case 'filter':
+        setOpenModalFilter('dismissible');
+        break;
+      case 'search':
+        setSearchBoolean(!searchBoolean);
+        break;
+    }
+  };
+
+  const searchTable = async (value) => {
+    if (search !== null && event.key === 'Enter') {
+      event.preventDefault();
+      const filtered = listDashboard.filter((item) =>
+        item.title.toLowerCase().includes(value.toLowerCase())
+      );
+      console.log('isi filter', filtered);
+      setFilteredItem(filtered);
+      setCurrentPage(1);
+      await fetchDashboardData();
+    }
   };
 
   const onClick = (items, index) => {
@@ -94,7 +117,6 @@ const DashboardPromo = () => {
 
   const handleToggleChange = (value) => {
     const { test, indexTest } = value;
-
     setOpenModal('dismissible');
     setModalText(!test ? 'unpublished' : 'published');
     setModalHeader(displayedItems[indexTest].title);
@@ -102,6 +124,10 @@ const DashboardPromo = () => {
       newValue: test,
       index: indexTest,
     });
+  };
+
+  const handleFilter = (filterData) => {
+    setOpenModalFilter(false);
   };
 
   const copyToClipboard = (text) => {
@@ -113,85 +139,93 @@ const DashboardPromo = () => {
     document.body.removeChild(textArea);
   };
 
+  const token = localStorage.getItem('user');
+  const fetchDashboardData = async () => {
+    setIsLoading(true);
+    // const data = await getListDashboardPromo(JSON.parse(token));
+    // if (data !== null) {
+    // setListDashboard(search ? filteredItem : data);
+    // setTotalItems(data.length);
+    // setItemsPerPage(page[0]);
+    // const startIndex = (currentPage - 1) * itemsPerPage;
+    // const currentPageData = listDashboard;
+    // const endIndex = startIndex + itemsPerPage;
+    // const displayedItems = currentPageData.slice(startIndex, endIndex);
+    // setTotalPages(totalItems ? Math.ceil(totalItems / itemsPerPage) : 0);
+    // setDisplayedItems(displayedItems || []);
+    //   setIsLoading(false);
+    // } else {
+    setIsLoading(false);
+    // }
+  };
+
+  const handleSort = (key) => {
+    if (sortKey === key) {
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortKey(key);
+      setSortDirection('asc');
+    }
+  };
+
   useEffect(() => {
-    onPageChange(1);
-  }, [itemsPerPage]);
+    fetchDashboardData();
+  }, [currentPage, itemsPerPage, filteredItem, sortKey, sortDirection]);
 
   return (
     <div className="relative w-full">
-      <div
-        className={`fixed inset-x-0 top-10 right-10 z-50 flex justify-end items-left ${
-          showToast
-            ? 'opacity-100 transition-opacity duration-300'
-            : 'opacity-0 transition-opacity duration-300'
-        }`}
-      >
-        {showToast && (
-          <Toast className="bg-white border border-gray-300 p-3 rounded-md shadow-md">
-            <div className="flex items-center justify-center w-10 h-10 bg-black text-white text-2xl">
-              {toastIcons}
-            </div>
-            <div className="ml-3 text-sm font-normal text-gray-800">{toastDescription}</div>
-            <Toast.Toggle
-              onDismiss={() => setShowToast(false)}
-              className="ml-auto text-gray-500 hover:text-gray-700 cursor-pointer"
-            />
-          </Toast>
-        )}
-      </div>
-      <div className={`flex items-center justify-between ${isLoading ? 'opacity-50' : ''}`}>
-        <p className="px-2 py-4 relative text-lg uppercase font-bold">promo</p>
-        <Button color="light" onClick={() => addListPromo()}>
-          <p className="flex items-center gap-2">
-            <MdAdd /> Add
-          </p>
-        </Button>
-      </div>
       <div className="relative">
         <CustomTable
           columns={columns(
             (value) => handleToggleChange(value),
             (value, index) => onClick(value, index)
           )}
-          dataSource={itemProduct}
+          dataSource={listDashboard}
           pagination={{
             currentPage,
             totalPages,
             itemsPerPage,
             page,
-            displayedItems,
+            listDashboard,
+            totalItems,
             onselect: (value) => onselect(value),
             onPageChange: (page) => onPageChange(page),
             onDropdownPageChange: (value) => dropdownPageChange(value),
+            onClickCheck: onClickCheck,
+            searchBoolean: searchBoolean,
+            setSearch: searchTable,
           }}
           isLoading={isLoading}
+          onSort={handleSort}
+          sortKey={sortKey}
+          sortDirection={sortDirection}
+          headerData={headerArray(
+            searchBoolean,
+            search,
+            (value) => setSearch(value),
+            (value) => onClickCheck(value),
+            searchTable
+          )}
         />
       </div>
 
       {/* Modal */}
       <div>
-        <Modal
-          dismissible
-          show={openModal === 'dismissible'}
-          onClose={() => setOpenModal(undefined)}
-        >
-          <Modal.Header>{modalHeader}</Modal.Header>
-          <Modal.Body>
-            <div className="text-center">
-              <h3 className="mb-5 text-lg font-normal text-gray-500">
-                Are you sure you want to {modalText} this product?
-              </h3>
-              <div className="flex justify-center gap-4">
-                <Button color="failure" onClick={() => onClickModal()}>
-                  Yes, I&apos;m sure
-                </Button>
-                <Button color="gray" onClick={() => setOpenModal(undefined)}>
-                  No, cancel
-                </Button>
-              </div>
-            </div>
-          </Modal.Body>
-        </Modal>
+        <ModalText
+          isOpen={openModal === 'dismissible'}
+          onClose={() => setOpenModal(false)}
+          modalHeader={modalHeader}
+          modalText={modalText}
+          onConfirm={onClickModal}
+        />
+      </div>
+      <div>
+        <ModalFilter
+          isOpen={openModalFilter === 'dismissible'}
+          onClose={() => setOpenModalFilter(false)}
+          filterData={filterData}
+          onClickFilter={handleFilter}
+        />
       </div>
     </div>
   );

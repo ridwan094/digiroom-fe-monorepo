@@ -4,7 +4,8 @@ export const itemProduct = [
   {
     title: 'Promo Yaris',
     slug: 'wow',
-    datePublished: new Date().toDateString(),
+    startDate: new Date().toDateString(),
+    endDate: new Date().toDateString(),
     category: 'Body & Paint',
     status: 'Published',
     boolean: 'active',
@@ -12,7 +13,8 @@ export const itemProduct = [
   {
     title: 'Promo HRV',
     slug: 'OKE',
-    datePublished: new Date().toDateString(),
+    startDate: new Date().toDateString(),
+    endDate: new Date().toDateString(),
     category: 'Body & Paint',
     status: 'Published',
     boolean: 'inactive',
@@ -20,7 +22,8 @@ export const itemProduct = [
   {
     title: 'Promo HR',
     slug: 'wow',
-    datePublished: new Date().toDateString(),
+    startDate: new Date().toDateString(),
+    endDate: new Date().toDateString(),
     category: 'Body & Paint',
     status: 'Published',
     boolean: 'active',
@@ -28,7 +31,8 @@ export const itemProduct = [
   {
     title: 'Promo Yaris',
     slug: 'wow',
-    datePublished: new Date().toDateString(),
+    startDate: new Date().toDateString(),
+    endDate: new Date().toDateString(),
     category: 'Body & Paint',
     status: 'Published',
     boolean: 'waitings',
@@ -36,7 +40,8 @@ export const itemProduct = [
   {
     title: 'Promo Yaris',
     slug: 'wow',
-    datePublished: new Date().toDateString(),
+    startDate: new Date().toDateString(),
+    endDate: new Date().toDateString(),
     category: 'Body & Paint',
     status: 'Published',
     boolean: 'inactive',
@@ -44,7 +49,8 @@ export const itemProduct = [
   {
     title: 'Promo Yaris',
     slug: 'wow',
-    datePublished: new Date().toDateString(),
+    startDate: new Date().toDateString(),
+    endDate: new Date().toDateString(),
     category: 'Body & Paint',
     status: 'Published',
     boolean: 'inactive',
