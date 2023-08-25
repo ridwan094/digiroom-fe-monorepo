@@ -17,3 +17,4 @@ export { default as OtherArticles } from './OtherArticles';
 export { default as LogoDigiroomCircle } from './LogoDigiroomCircle';
 export { default as InfoDigiroom } from './InfoDigiroom';
 export { default as ProductKnowledgeFeatureCard } from './ProductKnowledgeFeatureCard';
+export { default as RecommedationCard } from './RecommedationCard';
