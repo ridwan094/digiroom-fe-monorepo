@@ -38,7 +38,7 @@ const DashboardPromo = () => {
   };
 
   const addListPromo = () => {
-    router.push('/#');
+    router.push('/promo/add-promo');
   };
 
   const onClick = (items, index) => {

@@ -1,7 +1,6 @@
 import React from 'react';
 import LayoutForm from '@/components/LayoutForm';
 import LayoutSection from '@/components/LayoutSection';
-import { BreadCrumbs, Text } from 'ui';
 import LayoutPagePromo from '@/components/LayoutSection/LayoutPagePromo';
 
 export default function PromoCms() {

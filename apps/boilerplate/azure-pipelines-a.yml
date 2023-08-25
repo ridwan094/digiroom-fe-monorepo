@@ -1,0 +1,40 @@
+name: $(BuildID)
+
+trigger:
+  branches:
+    include:
+      - devops
+      - feat/*
+  paths:
+    include:
+      - 'apps/boilerplate/*'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+- job: BuildAndDeploy
+  steps:
+  - checkout: self
+
+  - script: |
+      cd apps/boilerplate
+      npm install
+    displayName: 'Change Directory and npm install'
+    
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '18.x'
+    displayName: 'Install Node.js'
+
+  - script: npm install
+    displayName: 'Install npm dependencies'
+    workingDirectory: 'apps/boilerplate'
+    # Add condition if needed to run only when package.json changes
+  
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'Docker hub connection'
+      repository: 'rainover922/boilerplate'
+      command: 'buildAndPush'
+    displayName: 'Build and push Docker image to Docker Hub'
