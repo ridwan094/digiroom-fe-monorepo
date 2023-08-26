@@ -1,11 +1,12 @@
 export const getListDashboardPromo = async (token) => {
-  const api = `${process.env.NEXT_PUBLIC_BASE_LOCAL_PROMO}/promo/getlist`;
+  const api = 'api/list-dashboard-promo';
+  // const api = `${process.env.NEXT_PUBLIC_BASE_LOCAL_PROMO}/promo/getlist`;
   try {
     const response = await fetch(api, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Origin: 'http://localhost:3004',
       },
     });
 
