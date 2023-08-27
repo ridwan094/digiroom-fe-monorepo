@@ -5,7 +5,10 @@ import { useRouter } from 'next/navigation';
 import { columns, filterData, headerArray } from '@/constants/implement-table';
 import ModalText from '../modal-text';
 import ModalFilter from '../modal-filter';
-import { getListDashboardPromo } from '../../service/promo-dashboard-homepage/promo-dashboard';
+import {
+  deleteListDashboardPromo,
+  getListDashboardPromo,
+} from '../../service/promo-dashboard-homepage/promo-dashboard';
 
 const DashboardPromo = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -56,16 +59,7 @@ const DashboardPromo = () => {
   };
 
   const searchTable = async (value) => {
-    if (search.length === 0 && value.key === 'Enter') {
-      setFilteredItem(null);
-      setDisplayedItems(0, 10);
-      setCurrentPage(1);
-    } else if (search !== null && value.key === 'Enter') {
-      event.preventDefault();
-      const filtered = listDashboard.filter((item) =>
-        item.title.toLowerCase().includes(search.toLowerCase())
-      );
-      setFilteredItem(filtered);
+    if (value.key === 'Enter') {
       setCurrentPage(1);
       fetchListDarhboard();
     }
@@ -97,42 +91,39 @@ const DashboardPromo = () => {
   };
 
   const onDeleteData = async (value) => {
-    const indexToDelete = displayedItems.findIndex((item) => item === value);
-    const updatedListDashboard = displayedItems.filter((item, index) => index !== indexToDelete);
-    setDisplayedItems(updatedListDashboard);
+    const deleteData = await deleteListDashboardPromo(value.id);
+    if (deleteData) {
+      const updatedList = listDashboard.filter((item) => item.id !== value.id);
+      setListDashboard(updatedList);
+    }
   };
 
   const fetchListDarhboard = async () => {
     const tokenUser = localStorage.getItem('user');
     const token = JSON.parse(tokenUser);
     setIsLoading(true);
-
     try {
-      const data = await getListDashboardPromo(token.access_token);
-
+      const data = await getListDashboardPromo(
+        token.access_token,
+        search,
+        sortDirection,
+        currentPage,
+        startIndex,
+        endIndex,
+        activeFilters
+      );
       if (data !== null) {
-        let sortedData = data;
-
-        if (sortKey) {
-          sortedData = sortData(data, sortKey, sortDirection);
-        }
-
-        const displayed = filteredItem
-          ? filteredItem.slice(startIndex, endIndex)
-          : sortedData.slice(startIndex, endIndex);
-
-        setListDashboard(sortedData);
-        setDisplayedItems(displayed);
-        setTotalItems(sortedData.length);
-        setTotalPages(Math.ceil(sortedData.length / itemsPerPage));
+        setListDashboard(data.data);
+        setTotalItems(data.total);
+        setTotalPages(Math.ceil(data.total / itemsPerPage));
       }
-
       setIsLoading(false);
     } catch (error) {
       console.error('Error fetching data:', error);
       setIsLoading(false);
     }
   };
+
   const dropdownPageChange = (selectedValue) => {
     setItemsPerPage(selectedValue);
     onPageChange(1);
@@ -175,24 +166,6 @@ const DashboardPromo = () => {
   const handleFilter = (filterData) => {
     event.preventDefault();
     setActiveFilters(filterData);
-    const filterFunctions = {
-      category: (item, key) => item.category.toLowerCase() === key.toLowerCase(),
-      status: (item, key) => item.boolean === 'active',
-    };
-    const filtered = listDashboard.filter((item) => {
-      const matchesSearch = item.title.toLowerCase().includes(search.toLowerCase());
-      if (filterData.length > 0) {
-        return filterData.every((filter) => {
-          const filterFunction = filterFunctions[filter.column];
-          return filterFunction ? filterFunction(item, filter.key) : true;
-        });
-      }
-
-      return matchesSearch;
-    });
-    setFilteredItem(filtered);
-    setCurrentPage(1);
-    setOpenModalFilter(false);
     fetchListDarhboard();
   };
 
@@ -244,7 +217,7 @@ const DashboardPromo = () => {
             (value) => handleToggleChange(value),
             (value, index) => onClick(value, index)
           )}
-          dataSource={displayedItems}
+          dataSource={listDashboard}
           showToast={showToast}
           toastIcons={toastIcons}
           toastDescription={toastDescription}
@@ -253,7 +226,6 @@ const DashboardPromo = () => {
             totalPages,
             itemsPerPage,
             page,
-            displayedItems,
             totalItems,
             onPageChange: (page) => onPageChange(page),
             onDropdownPageChange: (value) => dropdownPageChange(value),

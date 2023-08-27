@@ -22,6 +22,7 @@
   "license": "ISC",
   "dependencies": {
     "@splidejs/react-splide": "^0.7.12",
+    "axios": "^1.5.0",
     "moment": "^2.29.4",
     "next-share": "^0.25.0",
     "next-transpile-modules": "^10.0.1",
