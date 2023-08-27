@@ -99,12 +99,9 @@ const DashboardPromo = () => {
   };
 
   const fetchListDarhboard = async () => {
-    const tokenUser = localStorage.getItem('user');
-    const token = JSON.parse(tokenUser);
     setIsLoading(true);
     try {
       const data = await getListDashboardPromo(
-        token.access_token,
         search,
         sortDirection,
         currentPage,

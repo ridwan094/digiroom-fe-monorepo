@@ -1,7 +1,7 @@
-import axios from 'axios';
+import CMS from '../apiCMS';
+import apiConfig from '../apiCMS/api-config';
 
 export const getListDashboardPromo = async (
-  token,
   search,
   sorting,
   page,
@@ -18,19 +18,14 @@ export const getListDashboardPromo = async (
     filter: JSON.stringify(filter),
   });
 
-  const api = `http://localhost:3004/api/list-dashboard-promo?${queryParams.toString()}`;
+  const api = `${apiConfig.local}/list-dashboard-promo?${queryParams.toString()}`;
   try {
-    const response = await axios.get(api, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (response.status === 200) {
-      const data = await response.data;
+    const response = await CMS.get(api);
+    if (response !== null) {
+      const data = response;
       return data;
     } else {
-      return response.status;
+      return response;
     }
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -39,13 +34,9 @@ export const getListDashboardPromo = async (
 };
 
 export const deleteListDashboardPromo = async (id, token) => {
-  const api = `http://localhost:3004/api/list-dashboard-promo?id=${id}`;
+  const api = `${apiConfig.local}/list-dashboard-promo?id=${id}`;
   try {
-    const response = await axios.delete(api, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await CMS.delete(api);
     if (response.status === 204) {
       return true;
     } else {
