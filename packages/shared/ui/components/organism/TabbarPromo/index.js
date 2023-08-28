@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
-import TabBar from 'ui/components/molecules/TabBar';
-import Card from '../../atoms/Card';
-import { CardPromo } from 'ui/components/molecules';
+import { useState } from 'react';
+import { Card, Pagination } from '../../atoms';
+import { CardPromo, TabBar } from 'ui/components/molecules';
 
 const TabBarPromo = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+
   const handleTabChange = (index) => {
     setActiveTab(index);
   };
   const tabsData = [
     {
-      title: 'ALL',
+      title: 'Semua',
       content: (
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 md:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
           <CardPromo
             title="Cicilan Ringan Toyota Raize"
             slug="cicilan-ringan-toyota-raize"
@@ -34,7 +35,7 @@ const TabBarPromo = () => {
             startDate="21 Nov 22"
             endDate="30 Jun 23"
             coverImg="http://localhost:3002/images/promo-car-example.webp"
-            tag="Hot Deal"
+            tag="Best Seller"
           />
           <CardPromo
             title="Cicilan Ringan Toyota Raize"
@@ -117,9 +118,25 @@ const TabBarPromo = () => {
     },
   ];
   return (
-    <section className="my-[30px] lg:my-20">
+    <section className="my-[30px] lg:my-8">
       <div className="lg:container">
         <TabBar tabs={tabsData} onTabChange={handleTabChange} />
+
+        {/* Pagination */}
+        <div className="flex items-center justify-center mt-6 lg:mt-9 lg:justify-between">
+          <p className="hidden items-center gap-1 text-lg lg:flex">
+            <span>Menampilkan</span>
+            <span className="font-semibold">12</span>
+            <span>dari</span>
+            <span className="font-semibold">60</span>
+          </p>
+
+          <Pagination
+            currentPage={currentPage}
+            totalPages={5}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
+        </div>
       </div>
     </section>
   );
