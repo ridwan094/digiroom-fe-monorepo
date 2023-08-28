@@ -6,7 +6,7 @@ const ProductKnowledgeFeatureCard = ({ title, itemList }) => {
   return (
     <div>
       <Text.BodyMediumSemibold className="mb-[18px] lg:text-xl">{title}</Text.BodyMediumSemibold>
-      <div className="flex gap-[10px] lg:grid grid-cols-2 overflow-scroll">
+      <div className="flex gap-[10px] lg:grid grid-cols-2 overflow-scroll lg:overflow-auto">
         {itemList.map((item) => (
           <Card className="bg-[#F8F8F8] p-4 rounded" key={item.id}>
             <Text.BodyMediumSemibold className="w-60 mb-2 lg:text-xl">
