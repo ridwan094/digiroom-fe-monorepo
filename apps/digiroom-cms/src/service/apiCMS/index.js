@@ -20,9 +20,10 @@ const CMS = () => {
   });
 
   instance.interceptors.request.use(function (config) {
-    let token = sessionStorage.authKey;
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (user.access_token) {
+      config.headers.Authorization = `Bearer ${user.access_token}`;
     }
     // Add checking Version APP
     config.headers['X-App-Version'] = packageJson.version;

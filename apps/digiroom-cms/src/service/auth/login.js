@@ -1,5 +1,4 @@
-const urlApi = 'api/login';
-// const urlApi = `${process.env.NEXT_PUBLIC_BASE_LOCAL_PROMO}/login/authenticate`;
+const urlApi = `${process.env.NEXT_PUBLIC_BASE_URL}/login/authenticate`;
 
 export const logInAuth = async (body) => {
   try {
