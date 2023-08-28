@@ -61,7 +61,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="bg-white md:border-b md:border-reliableBlack70 py-1.5 px-4 md:px-16 md:py-5">
+      <div className="bg-white md:border-b md:border-reliableBlack70 py-1.5 md:py-5">
         {/* Top Navbar */}
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
