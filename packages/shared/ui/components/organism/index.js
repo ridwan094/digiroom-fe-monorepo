@@ -4,6 +4,7 @@ export { default as Footer } from './Footer';
 export { default as TabBarPromo } from './TabbarPromo';
 export { default as InquirySuccess } from './InquirySuccess';
 export { default as SocialMediaInfo } from './SocialMediaInfo';
+export { default as InquiryFormMobileSection } from './InquiryFormMobileSection';
 export { default as PromoBannerSection } from './PromoBannerSection';
 export { default as PromoInfoSection } from './PromoInfoSection';
 export { default as PromoFaqSection } from './PromoFaqSection';

@@ -14,8 +14,14 @@ const OtherPromo = ({ items, classNameContainer, ...props }) => {
           type: 'slide',
           arrows: false,
           pagination: false,
-          perPage: 2,
-          gap: '8px',
+          perPage: 4,
+          gap: '24px',
+          breakpoints: {
+            1024: {
+              perPage: 2,
+              gap: '10px',
+            },
+          },
           ...props,
         }}
       >
@@ -23,17 +29,17 @@ const OtherPromo = ({ items, classNameContainer, ...props }) => {
           <SplideTrack>
             {items.map((item, idx) => (
               <SplideSlide key={idx}>
-                <Card className="border-b border-reliableBlack310 lg:border-transparent">
-                  <div className="pb-4">
+                <Card className="border-b border-[#656263]">
+                  <div className="pb-5">
                     <img
                       className="w-full object-cover mb-4"
                       src={item.coverImg}
                       alt="Auto2000 promo image"
                     />
-                    <p className="text-sm font-semibold text-reliableBlack mb-2 lg:text-lg">
+                    <p className="text-sm font-semibold text-reliableBlack mb-2 lg:text-lg lg:mb-5">
                       {item.title}
                     </p>
-                    <p className="text-xs font-normal text-reliableBlack70 lg:text-base">
+                    <p className="text-xs font-normal text-reliableBlack70 lg:text-sm">
                       <span>{item.startDate}</span>
                       <span> - </span>
                       <span>{item.endDate}</span>
