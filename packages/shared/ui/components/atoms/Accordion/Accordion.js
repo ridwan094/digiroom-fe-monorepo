@@ -18,13 +18,13 @@ const Accordion = ({ title, children }) => {
       }}
     >
       <div className="flex justify-between items-center">
-        <p className="text-xs text-start font-medium text-reliableBlack lg:text-base">{title}</p>
+        <p className="text-sm text-start font-medium text-reliableBlack lg:text-base">{title}</p>
 
         {isActive ? <MdRemove size={18} /> : <MdAdd size={18} />}
       </div>
 
       <p
-        className={`text-start text-xs text-reliableBlack leading-relaxed h-0 overflow-hidden transition-all duration-300 lg:text-base lg:leading-relaxed ${
+        className={`text-start text-sm text-reliableBlack leading-relaxed h-0 overflow-hidden transition-all duration-300 lg:text-base lg:leading-relaxed ${
           isActive && 'h-auto overflow-auto mt-4'
         }`}
       >

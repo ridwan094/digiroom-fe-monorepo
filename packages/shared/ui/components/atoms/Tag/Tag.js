@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const Tag = ({ children, severity, className }) => {
+const Tag = ({ children, severity, size, className }) => {
   const [bgColor, setBgColor] = useState(null);
 
   useEffect(() => {
@@ -9,7 +9,7 @@ const Tag = ({ children, severity, className }) => {
         setBgColor('bg-[#FFE293]/50');
         break;
       case 'info':
-        setBgColor('bg-[#4CC0AD]/30');
+        setBgColor('bg-[#45B3D5]/30');
         break;
       case 'primary':
         setBgColor('bg-supportiveRed');
@@ -19,7 +19,9 @@ const Tag = ({ children, severity, className }) => {
 
   return (
     <span className={`inline-block py-1 px-[10px] ${bgColor} ${className}`}>
-      <span className="text-xs font-regular text-reliableBlack90">{children}</span>
+      <span className="text-xs font-normal text-reliableBlack90 lg:text-sm lg:font-medium">
+        {children}
+      </span>
     </span>
   );
 };

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Fragment } from 'react';
 
 const iconClassname = {
@@ -21,7 +20,7 @@ const BtnConfirm = ({
   ...props
 }) => {
   const classNameAssigned = [
-    'flex justify-end items-center p-3 gap-x-3 text-base font-bold',
+    'flex justify-end items-center p-3 gap-x-3 text-base font-bold lg:p-4 lg:justify-center lg:flex-1',
     block ? 'w-full' : '',
     pressed ? 'pressed' : '',
     className,
