@@ -19,3 +19,4 @@ export { default as InfoDigiroom } from './InfoDigiroom';
 export { default as ProductKnowledgeFeatureCard } from './ProductKnowledgeFeatureCard';
 export { default as ProductKnowledgeSpecCard } from './ProductKnowledgeSpecCard';
 export { default as RecommedationCard } from './RecommedationCard';
+export { default as OfferCard } from './OfferCard';

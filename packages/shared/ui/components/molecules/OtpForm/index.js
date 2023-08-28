@@ -52,7 +52,7 @@ const OtpForm = ({
   );
 
   return (
-    <form className={containerClassForm} onSubmit={handleSubmit}>
+    <form className={containerClassForm} onSubmit={onSubmit}>
       <p className="text-[13px] font-medium text-[#666666] uppercase mb-2.5">OTP</p>
 
       <div className="flex justify-center items-center w-full gap-1">
