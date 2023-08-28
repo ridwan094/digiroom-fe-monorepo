@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { QuickLink, BreadCrumbs } from 'ui/components/molecules';
 import {
   ArticleListHeroSection,
@@ -8,21 +9,34 @@ import {
 import { FAQS, newsList } from '../../constants/news';
 
 const ArticleListingPage = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  const handleScroll = () => {
+    if (window.scrollY > 0) {
+      setIsScrolled(true);
+    } else {
+      setIsScrolled(false);
+    }
+  };
   return (
-    <>
+    <React.Fragment>
       <QuickLink />
 
       {/* Breadcrumb for web screen */}
-      <BreadCrumbs
-        isMobileScreen={false}
-        items={[{ name: 'Home', path: '/' }, { name: 'Berita dan Tips' }]}
-      />
-
-      {/* Hero Section */}
-      <ArticleListHeroSection />
+      <div className="sticky top-[123.5px] z-30 bg-white border-b-1 border-reliableBlack30">
+        <div className="w-full">
+          <BreadCrumbs
+            isMobileScreen={false}
+            items={[{ name: 'Home', path: '/' }, { name: 'Berita dan Tips' }]}
+          />
+        </div>
+      </div>
 
       {/* List Artikel Desktop */}
-      <ArticleListTabSection itemList={newsList} />
+      <div className={``}>
+        {/* List Artikel Desktop */}
+        <ArticleListTabSection itemList={newsList} />
+      </div>
 
       {/* Info section */}
       <PromoInfoSection />
@@ -35,7 +49,7 @@ const ArticleListingPage = () => {
         isMobileScreen={true}
         items={[{ name: 'Home', path: '/' }, { name: 'Berita dan Tips' }]}
       />
-    </>
+    </React.Fragment>
   );
 };
 

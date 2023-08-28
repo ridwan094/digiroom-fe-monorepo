@@ -4,7 +4,7 @@ const ArticleListFaqSection = ({ faqs }) => {
   return (
     <>
       <section className="my-[30px] lg:my-20">
-        <div className="container">
+        <div className="mx-4 lg:mx-[100px]">
           <h2 className="text-base mb-2 text-reliableBlack font-bold uppercase lg:mb-5 lg:text-2xl">
             FAQ Tips Toyota
           </h2>

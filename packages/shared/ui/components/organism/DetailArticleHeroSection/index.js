@@ -5,13 +5,13 @@ import { ProductPanel } from 'ui/components/atoms';
 const DetailArticleHeroSection = ({ image }) => {
   return (
     <section className="my-4 lg:mt-8">
-      <div className="container mb-2 lg:hidden">
+      <div className="mx-4 mb-2 lg:hidden">
         <Link href="/articles">
           <MdOutlineArrowBack size={24} color="#3D4043" />
         </Link>
       </div>
 
-      <div className="lg:container">
+      <div className="">
         <ProductPanel
           className="px-0"
           src={image}

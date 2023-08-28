@@ -3,7 +3,12 @@ import { Label, TextInput } from 'flowbite-react';
 import Image from 'next/image';
 import { Button } from 'ui';
 
-const Login = ({ onLogin = () => {} }) => {
+const Login = ({ 
+    onChangeUsername = () => {},
+    onChangePassword = () => {},
+    onLogin = () => {},
+  }) => {
+
   return (
     <React.Fragment>
       <form>
@@ -27,6 +32,7 @@ const Login = ({ onLogin = () => {} }) => {
                 id="title"
                 type="text"
                 placeholder="Enter your username"
+                onChange={onChangeUsername}
               />
             </div>
             <div className="mb-7">
@@ -40,6 +46,7 @@ const Login = ({ onLogin = () => {} }) => {
                 id="desc"
                 type="password"
                 placeholder="Enter your password"
+                onChange={onChangePassword}
               />
             </div>
             <div className="flex items-center">
