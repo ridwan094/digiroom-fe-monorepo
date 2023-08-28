@@ -1,15 +1,15 @@
 import { Modal, Button } from 'flowbite-react';
 
-export default function ModalText({
-  isOpen,
-  onClose,
-  modalHeader,
-  modalText,
-  onConfirm,
-  modalTemplate,
-}) {
+export default function ModalText({ isOpen, onClose, modalHeader, modalText, onConfirm }) {
   return (
-    <Modal dismissible show={isOpen} onClose={onClose}>
+    <Modal
+      dismissible
+      show={isOpen}
+      onClose={onClose}
+      className={`transform transition-all ease-in-out ${
+        isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-90' // Adjust the scale value as needed
+      }`}
+    >
       <Modal.Header>{modalHeader}</Modal.Header>
       <Modal.Body>
         <div className="text-center">

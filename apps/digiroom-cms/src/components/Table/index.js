@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, Pagination, Spinner } from 'flowbite-react';
+import { Table, Pagination, Spinner, Toast } from 'flowbite-react';
 import Dropdown from 'ui/components/atoms/Dropdown';
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md';
 
@@ -12,24 +12,25 @@ const CustomTable = ({
   sortKey,
   sortDirection,
   headerData,
+  showToast = true,
+  toastIcons,
+  toastDescription,
+  setShowToast = () => {},
 }) => {
   const {
-    currentPage = 0,
-    totalPages = 0,
-    itemsPerPage = 0,
-    page = 0,
+    currentPage,
+    totalPages,
+    itemsPerPage,
+    page,
     displayedItems = dataSource,
     onPageChange = () => {},
     onDropdownPageChange = () => {},
-    totalItems = 0,
+    totalItems,
     searchBoolean,
     setSearch,
     onClickCheck,
   } = pagination;
 
-  const [showToast, setShowToast] = useState(false);
-  const [toastDescription, setToastDescription] = useState('');
-  const [toastIcons, setToastIcons] = useState('');
   const [searchTable, setSearchTable] = useState();
 
   const searchTableData = async (event) => {
@@ -43,6 +44,26 @@ const CustomTable = ({
 
   return (
     <div className="w-full px-4 py-4">
+      <div
+        className={`fixed inset-x-0 top-10 right-10 z-50 flex justify-end items-left ${
+          showToast
+            ? 'opacity-100 transition-opacity duration-300'
+            : 'opacity-0 transition-opacity duration-300'
+        }`}
+      >
+        {showToast && (
+          <Toast className="bg-white border border-gray-300 p-3 rounded-md shadow-md">
+            <div className="flex items-center justify-center w-10 h-10 bg-black text-white text-2xl">
+              {toastIcons}
+            </div>
+            <div className="ml-3 text-sm font-normal text-gray-800">{toastDescription}</div>
+            <Toast.Toggle
+              onDismiss={() => setShowToast(false)}
+              className="ml-auto text-gray-500 hover:text-gray-700 cursor-pointer"
+            />
+          </Toast>
+        )}
+      </div>
       {headerData.map((headerComponent, index) => (
         <div
           key={index}
@@ -137,15 +158,13 @@ const CustomTable = ({
             of {totalItems} items
           </div>
           <div className="flex justify-center mt-2">
-            {totalItems !== 0 && (
-              <Pagination
-                currentPage={currentPage}
-                onPageChange={(value) => onPageChange(value)}
-                showIcons
-                totalPages={totalPages}
-                className="flex justify-center items-center"
-              />
-            )}
+            <Pagination
+              currentPage={currentPage}
+              onPageChange={(value) => onPageChange(value)}
+              showIcons
+              totalPages={totalPages}
+              className="flex justify-center items-center"
+            />
           </div>
         </div>
       )}
