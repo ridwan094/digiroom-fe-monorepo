@@ -24,7 +24,6 @@ const DashboardPromo = () => {
   const [totalItems, setTotalItems] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [page, setPage] = useState([10, 20, 30]);
-  const [displayedItems, setDisplayedItems] = useState();
   const [itemsPerPage, setItemsPerPage] = useState(page[0]);
   const router = useRouter();
   const [search, setSearch] = useState('');
@@ -146,7 +145,6 @@ const DashboardPromo = () => {
         setOpenModal(undefined);
         break;
     }
-    // setDisplayedItems(updatedListDashboard);
   };
 
   const handleToggleChange = (value) => {
@@ -182,24 +180,6 @@ const DashboardPromo = () => {
       setSortKey(key);
       setSortDirection('asc');
     }
-  };
-
-  const sortData = (data, key, direction) => {
-    const sortedData = [...data];
-    sortedData.sort((a, b) => {
-      const valueA = a[key];
-      const valueB = b[key];
-
-      if (valueA < valueB) {
-        return direction === 'asc' ? -1 : 1;
-      }
-      if (valueA > valueB) {
-        return direction === 'asc' ? 1 : -1;
-      }
-      return 0;
-    });
-
-    return sortedData;
   };
 
   useEffect(() => {
