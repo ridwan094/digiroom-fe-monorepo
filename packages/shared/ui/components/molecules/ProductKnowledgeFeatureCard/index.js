@@ -4,7 +4,7 @@ import Card from '../../atoms/Card';
 
 const ProductKnowledgeFeatureCard = ({ title, itemList }) => {
   return (
-    <div className="container">
+    <div>
       <Text.BodyMediumSemibold className="mb-[18px] lg:text-xl">{title}</Text.BodyMediumSemibold>
       <div className="flex gap-[10px] lg:grid grid-cols-2 overflow-scroll">
         {itemList.map((item) => (

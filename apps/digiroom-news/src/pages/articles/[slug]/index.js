@@ -121,7 +121,7 @@ const ArticleDetailPage = ({ slug, article }) => {
 
       {/* Form inquiry open */}
       {formOpen && (
-        <div className="fixed flex-col z-10 top-0 left-0 flex items-center justify-center w-full h-screen bg-white min-h-screen">
+        <div className="fixed flex-col z-50 top-0 left-0 flex items-center justify-center w-full h-screen bg-white min-h-screen">
           <div className="flex w-full justify-between px-4 py-6 border-b border-b-reliableBlack30">
             <Text.Head6 className="font-bold text-reliableBlack90 uppercase">
               Minta Penawaran
@@ -157,7 +157,7 @@ const ArticleDetailPage = ({ slug, article }) => {
 
       {/* OTP */}
       {otpOpen && (
-        <div className="fixed flex-col z-10 top-0 left-0 flex items-center justify-center w-full h-full bg-white">
+        <div className="fixed flex-col z-50 top-0 left-0 flex items-center justify-center w-full h-full bg-white">
           <div className="flex w-full justify-between p-4 border-b border-b-reliableBlack30">
             <Text.Head6 className="font-bold text-reliableBlack90 uppercase">
               Masukkan Kode OTP

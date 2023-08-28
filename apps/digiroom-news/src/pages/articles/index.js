@@ -23,7 +23,7 @@ const ArticleListingPage = () => {
       <QuickLink />
 
       {/* Breadcrumb for web screen */}
-      <div className="sticky top-[124px] z-30 bg-white border-b-1 border-reliableBlack30">
+      <div className="sticky top-[123.5px] z-30 bg-white border-b-1 border-reliableBlack30">
         <div className="w-full">
           <BreadCrumbs
             isMobileScreen={false}
@@ -31,9 +31,6 @@ const ArticleListingPage = () => {
           />
         </div>
       </div>
-
-      {/* Hero Section */}
-      {/* <ArticleListHeroSection /> */}
 
       {/* List Artikel Desktop */}
       <div className={``}>

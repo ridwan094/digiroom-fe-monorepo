@@ -1,6 +1,85 @@
-import { Tooltip } from 'flowbite-react';
-import { MdOutlineCreate, MdOutlineDelete, MdOutlineFileCopy } from 'react-icons/md';
+import { Tooltip, TextInput, Button } from 'flowbite-react';
+import {
+  MdOutlineCreate,
+  MdOutlineDelete,
+  MdOutlineFileCopy,
+  MdSearch,
+  MdFilterList,
+  MdAdd,
+} from 'react-icons/md';
 import ToggleSwitch from 'ui/components/atoms/Toogle';
+
+export const headerArray = (
+  searchBoolean,
+  searchTable,
+  setSearchTable = () => {},
+  onClickCheck = () => {},
+  searchTableData
+) => {
+  return [
+    {
+      title: 'List Promo',
+      render: (index, item) => (
+        <div className="flex flex-row justify-between items-center">
+          <p className="relative text-lg capitalize font-bold justify-start">{titleTable}</p>
+          <div className="flex flex-row items-center gap-2">
+            {searchBoolean && (
+              <TextInput
+                value={searchTable}
+                sizing="xl"
+                id="disabledInput1"
+                placeholder="Search"
+                type="text"
+                onChange={(e) => {
+                  setSearchTable(e.currentTarget.value);
+                }}
+                onKeyDown={searchTableData}
+              />
+            )}
+            <Button color="light" className="border-none" onClick={() => onClickCheck('search')}>
+              <p className="flex items-center text-xl">
+                <MdSearch />
+              </p>
+            </Button>
+            <Button color="light" className="border-none" onClick={() => onClickCheck('filter')}>
+              <p className="flex items-center text-xl">
+                <MdFilterList />
+              </p>
+            </Button>
+            <Button color="light" onClick={() => onClickCheck('add')}>
+              <p className="flex items-center gap-2 text-lg">
+                <MdAdd /> Add
+              </p>
+            </Button>
+          </div>
+        </div>
+      ),
+    },
+  ];
+};
+
+export const titleTable = 'List Promo';
+
+export const filterData = [
+  {
+    title: 'Category',
+    items: [
+      { column: 'category', key: 'mobilbaru', label: 'Mobil Baru' },
+      { column: 'category', key: 'service', label: 'Service' },
+      { column: 'category', key: 'lainnya', label: 'Lainnya' },
+    ],
+  },
+  {
+    title: 'Status',
+    items: [
+      { column: 'status', key: 'waiting', label: 'Waiting' },
+      { column: 'status', key: 'unpublish', label: 'Unpublished' },
+      { column: 'status', key: 'published', label: 'Published' },
+      { column: 'status', key: 'draft', label: 'Draft' },
+      { column: 'status', key: 'expired', label: 'Expired' },
+    ],
+  },
+];
 
 export const columns = (onToggleChange = () => {}, onClick = () => {}) => {
   return [
@@ -8,21 +87,25 @@ export const columns = (onToggleChange = () => {}, onClick = () => {}) => {
       title: 'Promo Name',
       dataIndex: 'title',
       key: 'promoName',
-    },
-    {
-      title: 'Slug',
-      dataIndex: 'slug',
-      key: 'slug',
-    },
-    {
-      title: 'Date Publised',
-      dataIndex: 'datePublished',
-      key: 'datePublished',
+      sortable: 'asc',
     },
     {
       title: 'Category',
       dataIndex: 'category',
       key: 'category',
+      sortable: 'asc',
+    },
+    {
+      title: 'Start Date',
+      dataIndex: 'startDate',
+      key: 'startDate',
+      sortable: 'asc',
+    },
+    {
+      title: 'End Date',
+      dataIndex: 'endDate',
+      key: 'endDate',
+      sortable: 'asc',
     },
     {
       title: 'Action',
@@ -65,6 +148,15 @@ export const columns = (onToggleChange = () => {}, onClick = () => {}) => {
               ? 'Unpublished'
               : 'Waiting'}
           </div>
+        </div>
+      ),
+    },
+    {
+      title: 'Publish',
+      dataIndex: 'publish',
+      key: 'publish',
+      render: (status, item, i) => (
+        <div className="flex items-center gap-2">
           <ToggleSwitch
             index={i}
             disabled={item.boolean === 'waitings'}

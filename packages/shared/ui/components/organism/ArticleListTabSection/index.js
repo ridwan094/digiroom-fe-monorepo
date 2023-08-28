@@ -70,7 +70,7 @@ const ArticleListTabSection = ({ itemList = [] }) => {
   ];
 
   return (
-    <section className="px-4 md:px-[100px]">
+    <section className="px-4 lg:px-[100px]">
       <div className={`pt-4 pb-6 lg:py-8 ${isScrolled ? 'hidden' : ''}`}>
         <div className="">
           <h1 className="text-base font-bold uppercase text-reliableBlack mb-2 lg:text-2xl">
