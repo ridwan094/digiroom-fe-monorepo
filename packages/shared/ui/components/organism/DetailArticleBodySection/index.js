@@ -3,8 +3,10 @@ import { Button } from 'ui/components/atoms';
 
 const DetailArticleBodySection = ({ article }) => {
   return (
-    <section className="my-[30px] lg:mt-8">
-      <div className="container">
+    <section className="my-[30px] mx-4 lg:mx-0 lg:mt-8">
+      <div
+      // className="container"
+      >
         {/* Header */}
         <div className="flex justify-between items-center mb-5 lg:mb-[30px]">
           <h1 className="text-sm font-semibold text-reliableBlack lg:text-4xl">{article.title}</h1>

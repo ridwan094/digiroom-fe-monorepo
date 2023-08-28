@@ -1,14 +1,14 @@
 import { MdChevronRight } from 'react-icons/md';
 
-const Breadcrumbs = ({ isMobileScreen, items }) => {
+const Breadcrumbs = ({ isMobileScreen, items, breadcrumbsClassName }) => {
   return (
-    <div className={`${isMobileScreen ? 'lg:hidden' : 'hidden lg:block'}`}>
-      <nav className="flex" aria-label="Breadcrumb">
+    <div className={`${breadcrumbsClassName} ${isMobileScreen ? 'lg:hidden' : 'hidden lg:block'}`}>
+      <div className={`flex`} aria-label="Breadcrumb">
         <ul
           className="w-full py-3 lg:border-b lg:border-[#F0EFEF
 ]"
         >
-          <div className="container flex items-center space-x-1 md:space-x-3">
+          <div className="flex items-center space-x-1 md:space-x-3">
             {items.map((item, _i) => {
               return (
                 <li className="truncate" key={_i}>
@@ -37,7 +37,7 @@ const Breadcrumbs = ({ isMobileScreen, items }) => {
             })}
           </div>
         </ul>
-      </nav>
+      </div>
     </div>
   );
 };
@@ -45,6 +45,7 @@ const Breadcrumbs = ({ isMobileScreen, items }) => {
 Breadcrumbs.defaultProps = {
   isMobileScreen: true,
   items: [],
+  breadcrumbsClassName: 'mx-4 lg:mx-[100px]',
 };
 
 export default Breadcrumbs;

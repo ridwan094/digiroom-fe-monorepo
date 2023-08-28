@@ -74,7 +74,7 @@ export const filterData = [
     items: [
       { column: 'status', key: 'waiting', label: 'Waiting' },
       { column: 'status', key: 'unpublish', label: 'Unpublished' },
-      { column: 'status', key: 'publish', label: 'Publish' },
+      { column: 'status', key: 'published', label: 'Published' },
       { column: 'status', key: 'draft', label: 'Draft' },
       { column: 'status', key: 'expired', label: 'Expired' },
     ],

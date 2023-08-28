@@ -37,8 +37,8 @@ const Navbar = () => {
   };
 
   return (
-    <>
-      <div className="bg-white md:border-b border-reliableBlack20 px-8 md:px-4 md:py-3 hidden md:block">
+    <React.Fragment>
+      <nav className="sticky top-0 w-full z-50 bg-white md:border-b border-reliableBlack20 px-8 md:px-[100px] hidden md:block">
         {/* Top Navbar */}
         <div className="flex items-center justify-end">
           <div className="flex">
@@ -60,8 +60,8 @@ const Navbar = () => {
             />
           </div>
         </div>
-      </div>
-      <div className="bg-white md:border-b md:border-reliableBlack70 py-1.5 px-4 md:px-16 md:py-5">
+      </nav>
+      <nav className="sticky top-0 lg:top-10 w-full z-40 bg-white md:border-b md:border-reliableBlack70 py-1.5 px-4 md:px-[100px] md:py-5">
         {/* Top Navbar */}
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
@@ -212,8 +212,8 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-      </div>
-    </>
+      </nav>
+    </React.Fragment>
   );
 };
 

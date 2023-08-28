@@ -194,7 +194,7 @@ const Footer = () => {
                         className="text-white transition hover:opacity-75"
                       >
                         <span className="sr-only">Twitter</span>
-                        <XLogo width="22px" height="22px" />
+                        <XLogo size="22" />
                       </a>
                     </li>
 

@@ -3,7 +3,7 @@ currentDate.setDate(currentDate.getDate() + 1);
 export const itemProduct = [
   {
     title: 'Promo Yaris',
-    slug: 'wow',
+    slug: 'Test Copy',
     startDate: new Date().toDateString(),
     endDate: new Date().toDateString(),
     category: 'Body & Paint',
@@ -21,7 +21,7 @@ export const itemProduct = [
   },
   {
     title: 'Promo HR',
-    slug: 'wow',
+    slug: 'Test Copy',
     startDate: new Date().toDateString(),
     endDate: new Date().toDateString(),
     category: 'Body & Paint',
@@ -30,7 +30,7 @@ export const itemProduct = [
   },
   {
     title: 'Promo Yaris',
-    slug: 'wow',
+    slug: 'Test Copy',
     startDate: new Date().toDateString(),
     endDate: new Date().toDateString(),
     category: 'Body & Paint',
@@ -39,7 +39,7 @@ export const itemProduct = [
   },
   {
     title: 'Promo Yaris',
-    slug: 'wow',
+    slug: 'Test Copy',
     startDate: new Date().toDateString(),
     endDate: new Date().toDateString(),
     category: 'Body & Paint',
@@ -48,7 +48,7 @@ export const itemProduct = [
   },
   {
     title: 'Promo Yaris',
-    slug: 'wow',
+    slug: 'Test Copy',
     startDate: new Date().toDateString(),
     endDate: new Date().toDateString(),
     category: 'Body & Paint',

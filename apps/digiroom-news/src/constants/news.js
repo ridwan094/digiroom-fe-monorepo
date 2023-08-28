@@ -59,10 +59,11 @@ export const MOCK_DATA = {
 export const newsList = [
   {
     id: 1,
-    slug:'mengenal-fitur-anti-merosot-hill-start-assist-yang-ada-di-mobil-toyota',
-    title: 'Mengenal Fitur Anti-Merosot Hill Start Assist yang Ada di Mobil Toyota',
+    slug: 'pahami-hal-mendasar-mengemudi-aman-di-jalan-tol-auto2000-bantu-jaga-kondisi-mobil-anda',
+    title:
+      'Pahami Hal Mendasar Mengemudi Aman di Jalan Tol, Auto2000 Bantu Jaga Kondisi Mobil Anda',
     slug: 'mengenal-fitur-anti-merosot-hill-start',
-    createdDate: 'Jul 25, 2023',
+    createdDate: '20 Juli 2023',
     image: '/images/news/1.webp',
     category: 'Berita',
     content:
@@ -70,10 +71,10 @@ export const newsList = [
   },
   {
     id: 2,
-    slug:'mengenal-5-komponen-penggerak-roda-depan',
+    slug: 'mengenal-5-komponen-penggerak-roda-depan',
     title: 'Mengenal 5 Komponen Penggerak Roda Depan',
     slug: 'mengenal-5-komponen-penggerak-roda-depan',
-    createdDate: 'Jul 25, 2023',
+    createdDate: '20 Juli 2023',
     image: '/images/news/2.webp',
     category: 'Berita',
     content:
@@ -81,10 +82,10 @@ export const newsList = [
   },
   {
     id: 3,
-    slug:'pelajari-apa-itu-sistem-penggerak-roda-depan-dan-keunggulanya',
+    slug: 'pelajari-apa-itu-sistem-penggerak-roda-depan-dan-keunggulanya',
     title: 'Pelajari Apa Itu Sistem Penggerak Roda Depan dan Keunggulannya',
     slug: 'pelajari-apa-itu-sistem-penggerak-roda',
-    createdDate: 'Jul 25, 2023',
+    createdDate: '20 Juli 2023',
     image: '/images/news/3.webp',
     category: 'Ulasan Produk',
     content:
@@ -92,10 +93,10 @@ export const newsList = [
   },
   {
     id: 4,
-    slug:'inilah-5-tips-melindungi-cat-mobil-agar-awet',
+    slug: 'inilah-5-tips-melindungi-cat-mobil-agar-awet',
     title: 'Inilah 5 Tips Melindungi Cat Mobil Agar Awet',
     slug: 'inilah-5-tips-melindungi-cat-mobil',
-    createdDate: 'Jul 25, 2023',
+    createdDate: '20 Juli 2023',
     image: '/images/news/4.webp',
     category: 'Ulasan Produk',
     content:
@@ -103,10 +104,10 @@ export const newsList = [
   },
   {
     id: 5,
-    slug:'mengenal-fitur-anti-merosot-hill-start-assist-yang-ada-di-mobil-toyota',
+    slug: 'mengenal-fitur-anti-merosot-hill-start-assist-yang-ada-di-mobil-toyota',
     title: 'Mengenal Fitur Anti-Merosot Hill Start Assist yang Ada di Mobil Toyota',
     slug: 'mengenal-fitur-anti-merosot-hill-start',
-    createdDate: 'Jul 25, 2023',
+    createdDate: '20 Juli 2023',
     image: '/images/news/5.webp',
     category: 'Berita',
     content:
@@ -114,10 +115,10 @@ export const newsList = [
   },
   {
     id: 6,
-    slug:'inilah-5-tips-melindungi-cat-mobil-agar-awet',
+    slug: 'inilah-5-tips-melindungi-cat-mobil-agar-awet',
     title: 'Inilah 5 Tips Melindungi Cat Mobil Agar Awet',
     slug: 'inilah-5-tips-melindungi-cat-mobil',
-    createdDate: 'Jul 25, 2023',
+    createdDate: '20 Juli 2023',
     image: '/images/news/6.webp',
     category: 'Berita',
     content:
@@ -125,10 +126,10 @@ export const newsList = [
   },
   {
     id: 7,
-    slug:'simak-inilah-cara-perpanjang-sim-beda-kota-2023',
+    slug: 'simak-inilah-cara-perpanjang-sim-beda-kota-2023',
     title: 'Simak, Inilah Cara Perpanjang SIM Beda Kota 2023',
     slug: 'simak-inilah-cara-perpanjang-sim',
-    createdDate: 'Jul 25, 2023',
+    createdDate: '20 Juli 2023',
     image: '/images/news/7.webp',
     category: 'Tips & Trik',
     content:
@@ -136,10 +137,10 @@ export const newsList = [
   },
   {
     id: 8,
-    slug:'7-tips-persiapan-liburan-dengan-anak-menggunakan-mobil-pribadi',
+    slug: '7-tips-persiapan-liburan-dengan-anak-menggunakan-mobil-pribadi',
     title: '7 Tips Persiapan Liburan Dengan Anak Menggunakan Mobil Pribadi',
     slug: '7-tips-persiapan-liburan-dengan-anak',
-    createdDate: 'Jul 25, 2023',
+    createdDate: '20 Juli 2023',
     image: '/images/news/8.webp',
     category: 'Tips & Trik',
     content:
@@ -149,7 +150,7 @@ export const newsList = [
     id: 9,
     title: 'Mengenal Fitur Anti-Merosot Hill Start Assist yang Ada di Mobil Toyota',
     slug: 'mengenal-fitur-anti-merosot-hill-start',
-    createdDate: 'Jul 25, 2023',
+    createdDate: '20 Juli 2023',
     image: '/images/news/5.webp',
     category: 'Event',
     content:
@@ -159,7 +160,7 @@ export const newsList = [
     id: 10,
     title: 'Inilah 5 Tips Melindungi Cat Mobil Agar Awet',
     slug: 'inilah-5-tips-melindungi-cat-mobil',
-    createdDate: 'Jul 25, 2023',
+    createdDate: '20 Juli 2023',
     image: '/images/news/6.webp',
     category: 'Event',
     content:
