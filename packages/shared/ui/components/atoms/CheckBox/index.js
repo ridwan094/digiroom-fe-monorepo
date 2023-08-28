@@ -6,7 +6,7 @@ const Checkbox = ({ label, labelClassname, checked, onChange }) => {
         <div
           className={`w-8 h-8 sm:w-6 sm:h-6 transition-all duration-200 ease-in-out border-2 rounded ${
             checked ? 'bg-supportiveRed border-supportiveRed' : 'bg-white border-reliableBlack20'
-          } hover:bg-reliableBlack310`}
+          } hover:bg-reliableBlack10`}
         >
           {checked && (
             <svg

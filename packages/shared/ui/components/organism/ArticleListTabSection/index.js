@@ -1,8 +1,28 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { TabBar, ArticleList } from 'ui/components/molecules';
 
 const ArticleListTabSection = ({ itemList = [] }) => {
   const [activeTab, setActiveTab] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    // Mengatur listener saat pergerakan scroll
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    // Menambahkan listener saat komponen dimuat
+    window.addEventListener('scroll', handleScroll);
+
+    // Membersihkan listener saat komponen akan unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const handleTabChange = (index) => {
     setActiveTab(index);
@@ -50,9 +70,21 @@ const ArticleListTabSection = ({ itemList = [] }) => {
   ];
 
   return (
-    <section className="">
-      <div className="lg:container">
-        <TabBar tabs={tabsData} onTabChange={handleTabChange} />
+    <section className="px-4 md:px-[100px]">
+      <div className={`pt-4 pb-6 lg:py-8 ${isScrolled ? 'hidden' : ''}`}>
+        <div className="">
+          <h1 className="text-base font-bold uppercase text-reliableBlack mb-2 lg:text-2xl">
+            Berita & Tips
+          </h1>
+          <p className="text-xs font-medium leading-relaxed text-reliableBlack lg:text-base">
+            Dapatkan informasi terkini melalui berita eksklusif dan tips dari Auto2000
+          </p>
+        </div>
+      </div>
+      <div className="sticky top-48 z-20">
+        <div>
+          <TabBar tabs={tabsData} onTabChange={handleTabChange} />
+        </div>
       </div>
     </section>
   );

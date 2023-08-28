@@ -1,9 +1,27 @@
 import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
+import { useEffect, useState } from 'react';
 import { Card, Tag } from 'ui/components/atoms';
 
 const OtherPromo = ({ items, classNameContainer, ...props }) => {
+  const [isMobile, setIsmobile] = useState(false);
   const classNameAssigned = ['relative flex flex-col justify-center gap-4', ...classNameContainer];
+
+  const handleResize = () => {
+    if (window.innerWidth <= 768) {
+      setIsmobile(true);
+    } else {
+      setIsmobile(false);
+    }
+  };
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <div className={classNameAssigned.join(' ')}>
@@ -14,7 +32,7 @@ const OtherPromo = ({ items, classNameContainer, ...props }) => {
           type: 'slide',
           arrows: false,
           pagination: false,
-          perPage: 2,
+          perPage: isMobile ? 2 : 4,
           gap: '8px',
           ...props,
         }}
@@ -23,7 +41,7 @@ const OtherPromo = ({ items, classNameContainer, ...props }) => {
           <SplideTrack>
             {items.map((item, idx) => (
               <SplideSlide key={idx}>
-                <Card className="border-b border-reliableBlack310 lg:border-transparent">
+                <Card className="border-b border-reliableBlack10 lg:border-transparent">
                   <div className="pb-4">
                     <img
                       className="w-full object-cover mb-4"
