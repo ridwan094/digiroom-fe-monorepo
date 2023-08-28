@@ -22,3 +22,4 @@ export { default as DetailArticleAnotherArticlesSection } from './DetailArticleA
 export { default as DetailProductKnowledgeHeroSection } from './DetailProductKnowledgeHeroSection';
 export { default as DetailProductKnowledgeBodySection } from './DetailProductKnowledgeBodySection';
 export { default as ProductKnowledgeRecommendationSection } from './ProductKnowledgeRecommendationSection';
+export { default as ProductKnowledgeBannerSection } from './ProductKnowledgeBannerSection';
