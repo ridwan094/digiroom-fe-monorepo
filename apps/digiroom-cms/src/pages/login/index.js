@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '@/helpers/utils/AuthContext';
 import { useRouter } from 'next/router';
 import Login from '@/components/Login';
@@ -8,10 +8,13 @@ const LoginPage = () => {
   const router = useRouter();
   const { login } = useAuth();
 
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const temporaryUser = { username: 'agustian.isrul', password: 'agustian.isrul' };
+      const temporaryUser = { username, password };
       const response = await logInAuth(temporaryUser);
       if (response.status === 201) {
         const userData = await response.json();
@@ -25,7 +28,11 @@ const LoginPage = () => {
 
   return (
     <React.Fragment>
-      <Login onLogin={handleLogin} />
+      <Login 
+        onChangeUsername={(value) => setUsername(value.target.value)}
+        onChangePassword={(value) => setPassword(value.target.value)}
+        onLogin={handleLogin} 
+      />
     </React.Fragment>
   );
 };
