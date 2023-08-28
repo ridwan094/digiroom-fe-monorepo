@@ -1,30 +1,20 @@
 import React from 'react';
-import { TiSocialTwitterCircular, TiSocialFacebookCircular } from 'react-icons/ti';
-import { TfiYoutube } from 'react-icons/tfi';
-import { SiInstagram } from 'react-icons/si';
+import { digiroom } from '../../../assets/images';
 
 const InfoDigiroom = () => {
   return (
-    <div className="text-reliableBlack">
-      <h6 className="text-xs font-bold mb-2">Auto2000 Digiroom</h6>
-      <p className="text-[10px] mb-2">
-        The largest Toyota dealer in Indonesia serving a network of sales, maintenance, repair and
-        supply of Toyota spare parts throughout Indonesia.
-      </p>
-      <p className="mb-2 text-xs font-medium">Meet us on Social Media</p>
-      <div className="flex text-base gap-1 items-center">
-        <a href="https://www.facebook.com/Auto2000official" target="_blank">
-          <TiSocialFacebookCircular className="text-4xl" />
-        </a>
-        <a href="https://twitter.com/Auto2000ID" target="_blank">
-          <TiSocialTwitterCircular className="text-4xl" />
-        </a>
-        <a href="https://www.instagram.com/auto2000id/" target="_blank">
-          <SiInstagram className="text-2xl w-9" />
-        </a>
-        <a href="https://www.youtube.com/user/auto2000csr" target="_blank">
-          <TfiYoutube className="text-2xl" />
-        </a>
+    <div className="text-reliableBlack bg-[#f4f4f4] py-11">
+      <div className="flex justify-center items-center mx-4 lg:mx-[100px]">
+        <div className="mr-2 lg:mr-5">
+          <img className="w-[450px] lg:w-40" src={digiroom.src} alt="digiroom logo" />
+        </div>
+        <div className="block">
+          <h2 className="text-sm lg:text-xl font-bold mb-1">AUTO2000 DIGIROOM</h2>
+          <p className="text-xs lg:text-xl">
+            Dealer Toyota terbesar di Indonesia yang melayani jaringan jasa penjualan, perawatan,
+            perbaikan dan penyediaan suku cadang Toyota yang terbesar di seluruh Indonesia.
+          </p>
+        </div>
       </div>
     </div>
   );

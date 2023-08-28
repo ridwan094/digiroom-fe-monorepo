@@ -2,9 +2,27 @@ import Link from 'next/link';
 import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import { Card, Tag } from 'ui/components/atoms';
+import { useEffect, useState } from 'react';
 
 const OtherArticles = ({ items, classNameContainer, ...props }) => {
+  const [ismobile, setIsmobile] = useState(false);
   const classNameAssigned = ['relative flex flex-col justify-center gap-4', ...classNameContainer];
+
+  const handleResize = () => {
+    if (window.innerWidth <= 768) {
+      setIsmobile(true);
+    } else {
+      setIsmobile(false);
+    }
+  };
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <div className={classNameAssigned.join(' ')}>
@@ -15,7 +33,7 @@ const OtherArticles = ({ items, classNameContainer, ...props }) => {
           type: 'slide',
           arrows: false,
           pagination: false,
-          perPage: 2,
+          perPage: ismobile ? 2 : 4,
           gap: '8px',
           ...props,
         }}
@@ -24,17 +42,17 @@ const OtherArticles = ({ items, classNameContainer, ...props }) => {
           <SplideTrack>
             {items.map((item, idx) => (
               <SplideSlide key={idx}>
-                <Card className="border-b border-reliableBlack310 lg:border-transparent">
+                <Card className="border-b border-reliableBlack10 lg:border-transparent">
                   {item.tag && (
                     <Tag className="rounded-br lg:hidden" severity="warn">
                       {item.tag}
                     </Tag>
                   )}
                   <div className="flex flex-col items-center gap-4 pb-4 lg:flex-col lg:pt-0 lg:px-0 lg:pb-0">
-                    <div className="h-20 lg:flex-auto lg:flex-auto lg:h-[270px]">
+                    <div className="lg:flex-auto lg:flex-auto">
                       <Link href={`/articles/${item.slug}`}>
                         <img
-                          className="w-full h-full object-cover"
+                          className="w-full object-cover"
                           src={item.image}
                           alt="Auto2000 article and news image"
                         />

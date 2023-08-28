@@ -128,7 +128,7 @@ const Detail = () => {
                 onClose={handleInquiry}
                 colorCloseIcons="bg-black"
                 withcCloseIcon={true}
-                containerFormGroupClass="flex items-center border-b-2 border-reliableBlack310 justify-between p-4 pb-4 text-black"
+                containerFormGroupClass="flex items-center border-b-2 border-reliableBlack10 justify-between p-4 pb-4 text-black"
               />
               <div class="flex-auto overflow-y-auto relative">
                 <InquiryForm

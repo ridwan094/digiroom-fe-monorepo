@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { MdArrowForward, MdClose } from 'react-icons/md';
 import { BtnConfirm, Text } from 'ui/components/atoms';
-import { BreadCrumbs, InquiryForm, OtpForm } from 'ui/components/molecules';
+import { BreadCrumbs, InfoDigiroom, InquiryForm, OtpForm } from 'ui/components/molecules';
 import {
   DetailArticleHeroSection,
   DetailArticleBodySection,
@@ -31,17 +31,21 @@ const ArticleDetailPage = ({ slug, article }) => {
   return (
     <>
       {/* Breadcrumb for web screen */}
-      <BreadCrumbs
-        isMobileScreen={false}
-        items={[
-          { name: 'Home', path: '/' },
-          { name: 'Artikel', path: '/articles' },
-          { name: article.title },
-        ]}
-      />
+      <div className="sticky top-[123.5px] z-30 bg-white border-b-1 border-reliableBlack30 w-full">
+        <div className="mx-auto">
+          <BreadCrumbs
+            isMobileScreen={false}
+            items={[
+              { name: 'Home', path: '/' },
+              { name: 'Artikel', path: '/articles' },
+              { name: article.title },
+            ]}
+          />
+        </div>
+      </div>
 
       {/* Main content */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[2fr_1fr]">
+      <div className="lg:mx-[100px] grid grid-cols-1 gap-6 lg:grid-cols-[2fr_1fr]">
         {/* Col 1 */}
         <div>
           {/* Hero section */}
@@ -49,15 +53,6 @@ const ArticleDetailPage = ({ slug, article }) => {
 
           {/* Body section */}
           <DetailArticleBodySection article={article} />
-
-          {/* Other promo */}
-          <DetailArticleAnotherPromoSection anotherPromo={article.anotherPromo} />
-
-          {/* Other articles */}
-          <DetailArticleAnotherArticlesSection anotherArticles={article.anotherArticles} />
-
-          {/* Social media links */}
-          <SocialMediaLinksSection />
         </div>
 
         {/* Col 2 */}
@@ -66,6 +61,27 @@ const ArticleDetailPage = ({ slug, article }) => {
             <DetailPromoInquiryFormSection />
           </div>
         </div>
+      </div>
+
+      {/* Other promo */}
+      <div className="mx-4 lg:mx-[100px]">
+        <DetailArticleAnotherPromoSection anotherPromo={article.anotherPromo} />
+      </div>
+
+      {/* Other articles */}
+      <div className="mx-4 lg:mx-[100px]">
+        <DetailArticleAnotherArticlesSection anotherArticles={article.anotherArticles} />
+      </div>
+
+      {/* Social media links on top info */}
+      <div className="hidden md:block">
+        <SocialMediaLinksSection />
+      </div>
+
+      {/* info digiroom */}
+      <InfoDigiroom />
+      <div className="block md:hidden">
+        <SocialMediaLinksSection />
       </div>
 
       {/* Breadcrumb for mobile screen */}
@@ -105,7 +121,7 @@ const ArticleDetailPage = ({ slug, article }) => {
 
       {/* Form inquiry open */}
       {formOpen && (
-        <div className="fixed flex-col z-10 top-0 left-0 flex items-center justify-center w-full h-screen bg-white min-h-screen">
+        <div className="fixed flex-col z-50 top-0 left-0 flex items-center justify-center w-full h-screen bg-white min-h-screen">
           <div className="flex w-full justify-between px-4 py-6 border-b border-b-reliableBlack30">
             <Text.Head6 className="font-bold text-reliableBlack90 uppercase">
               Minta Penawaran
@@ -141,7 +157,7 @@ const ArticleDetailPage = ({ slug, article }) => {
 
       {/* OTP */}
       {otpOpen && (
-        <div className="fixed flex-col z-10 top-0 left-0 flex items-center justify-center w-full h-full bg-white">
+        <div className="fixed flex-col z-50 top-0 left-0 flex items-center justify-center w-full h-full bg-white">
           <div className="flex w-full justify-between p-4 border-b border-b-reliableBlack30">
             <Text.Head6 className="font-bold text-reliableBlack90 uppercase">
               Masukkan Kode OTP
