@@ -64,6 +64,13 @@ const InquiryForm = ({
       }));
     }
 
+    if (category === 'branch') {
+      setSubmit((prevState) => ({
+        ...prevState,
+        branch: e,
+      }));
+    }
+
     if (category === 'checkbox') {
       setSubmit((prevState) => ({
         ...prevState,
@@ -80,16 +87,21 @@ const InquiryForm = ({
 
   const checkFormInquiry = useMemo(
     () =>
-      !submit.fullName || !submit.email || !submit.phoneNumber || !submit.province || !submit.city,
+      !submit.fullName ||
+      !submit.email ||
+      !submit.phoneNumber ||
+      !submit.province ||
+      !submit.city ||
+      !submit.branch,
     [submit]
   );
 
   return (
     <form className={containerClassForm} onSubmit={handleSubmit}>
-      <div className="mb-4">
+      <div className="mb-4 lg:mb-5">
         <Input
           type="text"
-          labelClassName="block text-[#666666] text-[13px] font-medium mb-[10px]"
+          labelClassName="block text-[#666666] text-[13px] font-medium mb-[10px] lg:text-reliableBlack70 lg:text-sm lg:mb-2"
           onChange={(e) => handleChange(e, 'fullname')}
           value={submit.fullName}
           label="Nama"
@@ -100,10 +112,10 @@ const InquiryForm = ({
         />
       </div>
 
-      <div className="mb-4">
+      <div className="mb-4 lg:mb-5">
         <Input
           type="email"
-          labelClassName="block text-[#666666] text-[13px] font-medium mb-[10px]"
+          labelClassName="block text-[#666666] text-[13px] font-medium mb-[10px] lg:text-reliableBlack70 lg:text-sm lg:mb-2"
           onChange={(e) => handleChange(e, 'email')}
           value={submit.email}
           label="Email"
@@ -114,10 +126,10 @@ const InquiryForm = ({
         />
       </div>
 
-      <div className="mb-4">
+      <div className="mb-4 lg:mb-5">
         <Input
           type="text"
-          labelClassName="block text-[#666666] text-[13px] font-medium mb-[10px]"
+          labelClassName="block text-[#666666] text-[13px] font-medium mb-[10px] lg:text-reliableBlack70 lg:text-sm lg:mb-2"
           onChange={(e) => handleChange(e, 'number')}
           value={submit.phoneNumber}
           label="Nomor Telepon"
@@ -134,11 +146,11 @@ const InquiryForm = ({
       </div>
 
       {/* DROPDOWN PROVINCE */}
-      <div className={`${containerDropdown ? containerDropdown : ''} mb-4`}>
+      <div className={`${containerDropdown ? containerDropdown : ''} mb-4 lg:mb-5`}>
         <Dropdown
           withInput={true}
           label="Provinsi"
-          labelClassname="block text-[#666666] text-[13px] font-medium mb-[10px]"
+          labelClassname="block text-[#666666] text-[13px] font-medium mb-[10px] lg:text-reliableBlack70 lg:text-sm lg:mb-2"
           options={['Jakarta', 'Jawa Barat', 'Jawa Tengah', 'Jawa Timur', 'Bali']}
           selectedOption={submit.province}
           onSelect={(e) => handleChange(e, 'province')}
@@ -147,11 +159,11 @@ const InquiryForm = ({
       </div>
 
       {/* DROPDOWN CITY */}
-      <div className={`${containerDropdown ? containerDropdown : ''} mb-4`}>
+      <div className={`${containerDropdown ? containerDropdown : ''} mb-4 lg:mb-5`}>
         <Dropdown
           withInput={true}
           label="Kota"
-          labelClassname="block text-[#666666] text-[13px] font-medium mb-[10px]"
+          labelClassname="block text-[#666666] text-[13px] font-medium mb-[10px] lg:text-reliableBlack70 lg:text-sm lg:mb-2"
           options={['Jakarta', 'Bandung', 'Semarang', 'Surakarta', 'Surabaya', 'Jogja']}
           selectedOption={submit.city}
           onSelect={(e) => handleChange(e, 'city')}
@@ -160,11 +172,11 @@ const InquiryForm = ({
       </div>
 
       {/* DROPDOWN BRANCH */}
-      <div className={`${containerDropdown ? containerDropdown : ''} mb-4`}>
+      <div className={`${containerDropdown ? containerDropdown : ''} mb-4 lg:mb-5`}>
         <Dropdown
           withInput={true}
           label="Cabang"
-          labelClassname="block text-[#666666] text-[13px] font-medium mb-[10px]"
+          labelClassname="block text-[#666666] text-[13px] font-medium mb-[10px] lg:text-reliableBlack70 lg:text-sm lg:mb-2"
           options={['Cabang A', 'Cabang B', 'Cabang C']}
           selectedOption={submit.branch}
           onSelect={(e) => handleChange(e, 'branch')}
@@ -187,12 +199,12 @@ const InquiryForm = ({
         <BtnConfirm
           className={`${
             checkFormInquiry ? 'bg-reliableBlack20' : 'bg-supportiveRed'
-          } ${innerButton} w-full bg-reliableBlack text-white py-6 px-8`}
+          } ${innerButton} w-full text-[#FFFEFE] py-6 px-8`}
           size="large"
           iconType="icon"
           disabled={checkFormInquiry}
         >
-          <Text.Head4 className="text-base font-bold uppercase">Submit</Text.Head4>
+          <Text.Head4 className="text-base font-bold uppercase">Saya Tertarik</Text.Head4>
           <FiArrowRight className="lg:hidden" size={20} />
         </BtnConfirm>
       </div>
