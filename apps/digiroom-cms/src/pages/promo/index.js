@@ -129,9 +129,21 @@ const DashboardPromo = () => {
         activeFilters
       );
       if (data !== null) {
-        setListDashboard(data.data);
-        setTotalItems(data.total);
-        setTotalPages(Math.ceil(data.total / itemsPerPage));
+        const promoList = [];
+
+        data.map((item) => {
+          promoList.push({
+            title: item.title,
+            category: 'Mobil',
+            startDate: item.startDate.toString(),
+            endDate: item.endDate.toString(),
+            publish: item.publish
+          })
+        })
+
+        setListDashboard(promoList);
+        // setTotalItems(data.total);
+        // setTotalPages(Math.ceil(data.total / itemsPerPage));
       }
       setIsLoading(false);
     } catch (error) {

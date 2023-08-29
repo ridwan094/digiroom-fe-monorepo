@@ -18,7 +18,7 @@ export const getListDashboardPromo = async (
     filter: JSON.stringify(filter),
   });
 
-  const api = `${apiConfig.local}/list-dashboard-promo?${queryParams.toString()}`;
+  const api = `promo/list?${queryParams.toString()}`;
   try {
     const response = await CMS.get(api);
     if (response !== null) {
