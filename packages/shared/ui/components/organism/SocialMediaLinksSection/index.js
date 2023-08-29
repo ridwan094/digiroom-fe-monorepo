@@ -7,7 +7,7 @@ const SocialMediaLinksSection = () => {
       <div className="flex items-center justify-between gap-12 lg:justify-center">
         <Whatsapp size="22" fill="#231F20" />
         <FacebookIcon size="22" fill="#231F20" />
-        <XIcon width="22" height="22" fill="#231F20" />
+        <XIcon size="22" fill="#231F20" />
         <TiktokIcon size="22" fill="#231F20" />
         <MdLink size="28" fill="#231F20" />
       </div>
