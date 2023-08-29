@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import { TabBar, ArticleList } from 'ui/components/molecules';
+import { Pagination } from '../../atoms';
 
 const ArticleListTabSection = ({ itemList = [] }) => {
   const [activeTab, setActiveTab] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    // Mengatur listener saat pergerakan scroll
     const handleScroll = () => {
       if (window.scrollY > 0) {
         setIsScrolled(true);
@@ -15,10 +16,8 @@ const ArticleListTabSection = ({ itemList = [] }) => {
       }
     };
 
-    // Menambahkan listener saat komponen dimuat
     window.addEventListener('scroll', handleScroll);
 
-    // Membersihkan listener saat komponen akan unmount
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -70,9 +69,9 @@ const ArticleListTabSection = ({ itemList = [] }) => {
   ];
 
   return (
-    <section className="px-4 lg:px-[100px]">
-      <div className={`pt-4 pb-6 lg:py-8 ${isScrolled ? 'hidden' : ''}`}>
-        <div className="">
+    <section className="my-[30px] lg:my-8">
+      <div className="lg:container">
+        <div className={`container lg:p-0 ${isScrolled ? 'hidden' : ''}`}>
           <h1 className="text-base font-bold uppercase text-reliableBlack mb-2 lg:text-2xl">
             Berita & Tips
           </h1>
@@ -80,10 +79,30 @@ const ArticleListTabSection = ({ itemList = [] }) => {
             Dapatkan informasi terkini melalui berita eksklusif dan tips dari Auto2000
           </p>
         </div>
-      </div>
-      <div className="sticky top-48 z-20">
-        <div>
-          <TabBar tabs={tabsData} onTabChange={handleTabChange} />
+        <div className="my-[30px] lg:my-8">
+          <TabBar
+            tabPosition={`${
+              isScrolled ? 'border-b-2 border-reliableBlack10' : ''
+            } sticky top-8 lg:top-[168.5px] z-20 bg-white`}
+            tabs={tabsData}
+            onTabChange={handleTabChange}
+          />
+
+          {/* Pagination */}
+          <div className="flex items-center justify-center mt-6 lg:mt-9 lg:justify-between">
+            <p className="hidden items-center gap-1 text-lg lg:flex">
+              <span>Menampilkan</span>
+              <span className="font-semibold">12</span>
+              <span>dari</span>
+              <span className="font-semibold">60</span>
+            </p>
+
+            <Pagination
+              currentPage={currentPage}
+              totalPages={5}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
+          </div>
         </div>
       </div>
     </section>
