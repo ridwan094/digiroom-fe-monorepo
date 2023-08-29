@@ -8,6 +8,7 @@ import {
   DetailArticleAnotherPromoSection,
   DetailProductKnowledgeBodySection,
   DetailProductKnowledgeHeroSection,
+  ProductKnowledgeRecommendationSection,
 } from 'ui/components/organism';
 
 const ProductKnowledgeDetailPage = ({ slug, product }) => {
@@ -32,6 +33,7 @@ const ProductKnowledgeDetailPage = ({ slug, product }) => {
             title={product.feature.title}
             itemList={product.feature.itemList}
           />
+          <ProductKnowledgeRecommendationSection items={[1, 2, 3, 4]} />
         </div>
 
         <div className="my-4 md:mt-8">
@@ -43,7 +45,9 @@ const ProductKnowledgeDetailPage = ({ slug, product }) => {
         </div>
       </div>
 
-      <DetailArticleAnotherPromoSection anotherPromo={product.anotherPromo} />
+      <div className="container">
+        <DetailArticleAnotherPromoSection anotherPromo={product.anotherPromo} />
+      </div>
 
       <BreadCrumbs
         isMobileScreen={true}
