@@ -46,7 +46,7 @@ const PromoDetailPage = ({ slug, promo }) => {
       </div>
 
       {/* Additional content */}
-      <div className="lg:container">
+      <div className="container">
         {/* Another promo */}
         <DetailPromoAnotherPromoSection anotherPromo={promo.anotherPromo} />
       </div>
