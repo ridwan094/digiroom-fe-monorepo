@@ -20,3 +20,4 @@ export { default as ProductKnowledgeFeatureCard } from './ProductKnowledgeFeatur
 export { default as ProductKnowledgeSpecCard } from './ProductKnowledgeSpecCard';
 export { default as RecommedationCard } from './RecommedationCard';
 export { default as OfferCard } from './OfferCard';
+export { default as CardProductKnowledge } from './CardProductKnowledge';
