@@ -7,7 +7,6 @@ const DetailPromoInquiryFormSection = () => {
   const [inquiryData, setInquiryData] = useState(null);
 
   const handleSubmit = (payload) => {
-    console.log({ payload });
     setInquiryData(payload);
 
     // Open otp form modal

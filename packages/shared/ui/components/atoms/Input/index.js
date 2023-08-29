@@ -26,8 +26,8 @@ const Input = ({
 
   // tailwind styling
   const dafaultStyling = `w-full outline-none ${
-    disabled ? 'bg-reliableBlack10 text-reliableBlack5' : 'bg-[#f8f8f8] text-reliableBlack70'
-  } border-b-2 border-reliableBlack30 focus:border-b-2 lg:bg-[#FFFEFE] lg:border-b lg:border-[#5F5F5F]`;
+    disabled ? 'bg-reliableBlack10 text-reliableBlack5' : 'bg-reliableBlack3 text-reliableBlack70'
+  } border-b-2 border-reliableBlack30 focus:border-b-2 lg:bg-white lg:border-b lg:border-[#5F5F5F]`;
 
   return (
     <div className={containerClassName}>
