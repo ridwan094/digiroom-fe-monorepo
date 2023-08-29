@@ -5,3 +5,4 @@ export { default as footerDekstopImage } from './Auto2000-footer.webp';
 export { default as footerMobileImage } from './footer-mobile.webp';
 export { default as digiroom } from './digiroom.webp';
 export { default as success } from './success.gif';
+export { default as iconSuccessInquiry } from './icon-success-inquiry.webp';
