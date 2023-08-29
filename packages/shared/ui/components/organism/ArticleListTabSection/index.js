@@ -81,7 +81,7 @@ const ArticleListTabSection = ({ itemList = [] }) => {
         </div>
         <div className="my-[30px] lg:my-8">
           <TabBar
-            tabPosition={`${
+            className={`${
               isScrolled ? 'border-b-2 border-reliableBlack10' : ''
             } sticky top-8 lg:top-[168.5px] z-20 bg-white`}
             tabs={tabsData}

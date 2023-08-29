@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const TabsNavigation = ({ tabPosition, tabs, onTabChange }) => {
+const TabsNavigation = ({ className, tabs, onTabChange }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabClick = (index) => {
@@ -11,7 +11,7 @@ const TabsNavigation = ({ tabPosition, tabs, onTabChange }) => {
   return (
     <React.Fragment>
       <ul
-        className={`${tabPosition} flex items-center justify-between w-full overflow-x-auto no-scrollbar lg:justify-start`}
+        className={`${className} flex items-center justify-between w-full overflow-x-auto no-scrollbar lg:justify-start`}
       >
         {tabs.map((tab, index) => (
           <li
