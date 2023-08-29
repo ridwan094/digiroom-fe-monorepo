@@ -8,7 +8,7 @@ const Breadcrumbs = ({ isMobileScreen, items, breadcrumbsClassName }) => {
           className="w-full py-3 lg:border-b lg:border-[#F0EFEF
 ]"
         >
-          <div className="flex items-center space-x-1 md:space-x-3">
+          <div className="container flex items-center space-x-1 md:space-x-3">
             {items.map((item, _i) => {
               return (
                 <li className="truncate" key={_i}>
@@ -45,7 +45,7 @@ const Breadcrumbs = ({ isMobileScreen, items, breadcrumbsClassName }) => {
 Breadcrumbs.defaultProps = {
   isMobileScreen: true,
   items: [],
-  breadcrumbsClassName: 'mx-4 lg:mx-[100px]',
+  breadcrumbsClassName: '',
 };
 
 export default Breadcrumbs;

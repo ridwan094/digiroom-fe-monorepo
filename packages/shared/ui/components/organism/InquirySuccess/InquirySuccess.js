@@ -1,4 +1,3 @@
-import SuccessIcon from 'ui/components/atoms/Icons/SuccessIcon';
 import './InquirySuccess.css';
 import { iconSuccessInquiry } from '../../../assets/images';
 import DetailPromoAnotherPromoSection from '../DetailPromoAnotherPromoSection';
