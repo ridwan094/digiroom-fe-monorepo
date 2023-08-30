@@ -6,3 +6,4 @@ export { default as footerMobileImage } from './footer-mobile.webp';
 export { default as digiroom } from './digiroom.webp';
 export { default as success } from './success.gif';
 export { default as iconSuccessInquiry } from './icon-success-inquiry.webp';
+export { default as whatsapp } from './whatsapp.webp';
