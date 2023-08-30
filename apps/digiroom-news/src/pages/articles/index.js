@@ -7,7 +7,6 @@ import {
   PromoInfoSection,
 } from 'ui/components/organism';
 import { FAQS, newsList } from '../../constants/news';
-import { PromoEventSection } from 'ui/components/organism';
 
 const ArticleListingPage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,7 +36,6 @@ const ArticleListingPage = () => {
       <div className={``}>
         {/* List Artikel Desktop */}
         <ArticleListTabSection itemList={newsList} />
-        <PromoEventSection />
       </div>
 
       {/* Info section */}
