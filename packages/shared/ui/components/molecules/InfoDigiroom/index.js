@@ -3,7 +3,7 @@ import { digiroom } from '../../../assets/images';
 
 const InfoDigiroom = () => {
   return (
-    <div className="text-reliableBlack bg-[#f4f4f4] py-11">
+    <div className="text-reliableBlack bg-[#f4f4f4] py-3 lg:py-11">
       <div className="flex justify-center items-center mx-4 lg:mx-[100px]">
         <div className="mr-2 lg:mr-5">
           <img className="w-[450px] lg:w-40" src={digiroom.src} alt="digiroom logo" />

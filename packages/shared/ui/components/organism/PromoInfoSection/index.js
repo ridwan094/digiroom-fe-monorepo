@@ -1,7 +1,7 @@
 const PromoInfoSection = () => {
   return (
     <section className="my-[30px] lg:my-20">
-      <div className="mx-4 lg:mx-[100px]">
+      <div className="container">
         <h2 className="text-base font-bold text-reliableBlack uppercase mb-4 lg:text-2xl lg:mb-5">
           Informasi Promo Toyota
         </h2>

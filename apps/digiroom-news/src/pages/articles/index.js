@@ -9,15 +9,6 @@ import {
 import { FAQS, newsList } from '../../constants/news';
 
 const ArticleListingPage = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  const handleScroll = () => {
-    if (window.scrollY > 0) {
-      setIsScrolled(true);
-    } else {
-      setIsScrolled(false);
-    }
-  };
   return (
     <React.Fragment>
       <QuickLink />
@@ -33,10 +24,7 @@ const ArticleListingPage = () => {
       </div>
 
       {/* List Artikel Desktop */}
-      <div className={``}>
-        {/* List Artikel Desktop */}
-        <ArticleListTabSection itemList={newsList} />
-      </div>
+      <ArticleListTabSection itemList={newsList} />
 
       {/* Info section */}
       <PromoInfoSection />
