@@ -18,7 +18,6 @@ const InquiryForm = ({
   const [submit, setSubmit] = useState({
     fullName: '',
     phoneNumber: '',
-    email: '',
     province: '',
     city: '',
     branch: '',
@@ -34,16 +33,13 @@ const InquiryForm = ({
       }));
     }
 
-    if (category === 'email') {
-      const newValue = e.target.value;
-      setSubmit((prevState) => ({
-        ...prevState,
-        email: newValue,
-      }));
-    }
-
     if (category === 'number') {
       const newValue = e.target.value;
+
+      if (newValue.startsWith(0)) {
+        return;
+      }
+
       setSubmit((prevState) => ({
         ...prevState,
         phoneNumber: newValue,
@@ -87,12 +83,7 @@ const InquiryForm = ({
 
   const checkFormInquiry = useMemo(
     () =>
-      !submit.fullName ||
-      !submit.email ||
-      !submit.phoneNumber ||
-      !submit.province ||
-      !submit.city ||
-      !submit.branch,
+      !submit.fullName || !submit.phoneNumber || !submit.province || !submit.city || !submit.branch,
     [submit]
   );
 
@@ -114,34 +105,26 @@ const InquiryForm = ({
 
       <div className="mb-4 lg:mb-5">
         <Input
-          type="email"
+          type="text"
           labelClassName="block text-[#666666] text-[13px] font-medium mb-[10px] lg:text-reliableBlack70 lg:text-sm lg:mb-2"
-          onChange={(e) => handleChange(e, 'email')}
-          value={submit.email}
-          label="Email"
-          placeholder="Email address"
+          value={submit.phoneNumber}
+          label="Nomor Telepon"
+          placeholder="xxx-xxx-xxx"
           size="medium"
           inputClassName={inputClassName}
           containerClassName={containerInputClassName}
-        />
-      </div>
-
-      <div className="mb-4 lg:mb-5">
-        <Input
-          type="text"
-          labelClassName="block text-[#666666] text-[13px] font-medium mb-[10px] lg:text-reliableBlack70 lg:text-sm lg:mb-2"
+          icon={
+            <span className="text-base text-reliableBlack font-medium transform -translate-y-[0.65px]">
+              +62
+            </span>
+          }
+          iconPosition="left"
           onChange={(e) => handleChange(e, 'number')}
-          value={submit.phoneNumber}
-          label="Nomor Telepon"
           onKeyPress={(event) => {
             if (!/[0-9]/.test(event.key)) {
               event.preventDefault();
             }
           }}
-          placeholder="+62 -"
-          size="medium"
-          inputClassName={inputClassName}
-          containerClassName={containerInputClassName}
         />
       </div>
 
