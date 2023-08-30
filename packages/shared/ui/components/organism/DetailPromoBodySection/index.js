@@ -1,9 +1,12 @@
 import { useState } from 'react';
-import { MdShare, MdOutlineCalendarMonth } from 'react-icons/md';
-import { Button, Tag, ModalShare, ShareButton } from 'ui/components/atoms';
+import { usePathname } from 'next/navigation';
+import { MdOutlineCalendarMonth } from 'react-icons/md';
+import { Tag, ModalShare, ShareButton } from 'ui/components/atoms';
 
-const DetailPromoBodySection = ({ promo }) => {
+const DetailPromoBodySection = ({ baseUrl, promo }) => {
   const [shareModalVisible, setShareModalVisible] = useState(false);
+
+  const pathname = usePathname();
 
   return (
     <>
@@ -61,7 +64,11 @@ const DetailPromoBodySection = ({ promo }) => {
       </section>
 
       {/* Social media share modal */}
-      <ModalShare visible={shareModalVisible} close={() => setShareModalVisible(false)} />
+      <ModalShare
+        visible={shareModalVisible}
+        link={`${baseUrl}${pathname}`}
+        onClose={() => setShareModalVisible(false)}
+      />
     </>
   );
 };
