@@ -1,4 +1,4 @@
-import { BranchCard } from '../../molecules';
+import { BranchCard, BranchFilter } from '../../molecules';
 
 const BranchListSection = () => {
   return (
@@ -11,6 +11,9 @@ const BranchListSection = () => {
           Selamat datang di Auto2000 Jakarta Pusat. Dapatkan informasi terkait promosi terbaru,
           alamat, jam operasional Auto2000 Jakarta Pusat terbaru disini.
         </p>
+      </div>
+      <div className="mb-9">
+        <BranchFilter />
       </div>
       <div className="md:grid grid-cols-3 gap-6">
         <BranchCard />
