@@ -26,3 +26,4 @@ export { default as ProductKnowledgeRecommendationSection } from './ProductKnowl
 export { default as ProductKnowledgeBannerSection } from './ProductKnowledgeBannerSection';
 export { default as PromoEventSection } from './PromoEventSection';
 export { default as TabBarProductKnowledge } from './TabbarProductKnowledge';
+export { default as BranchListSection } from './BranchListSection';
