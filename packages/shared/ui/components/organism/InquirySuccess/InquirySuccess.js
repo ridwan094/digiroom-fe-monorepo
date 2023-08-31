@@ -1,5 +1,5 @@
 import './InquirySuccess.css';
-import { iconSuccessInquiry } from '../../../assets/images';
+import { success } from '../../../assets/images';
 import DetailPromoAnotherPromoSection from '../DetailPromoAnotherPromoSection';
 
 const InquirySuccess = () => {
@@ -41,7 +41,11 @@ const InquirySuccess = () => {
   };
   return (
     <div className="h-full min-h-screen bg-white lg:p-6 p-3 pt-[20px]">
-      <img src={iconSuccessInquiry.src} className="mx-auto" alt="Auto2000 icon success inquiry" />
+      <img
+        src={success.src}
+        className="mx-auto h-24 lg:h-28 my-8"
+        alt="Auto2000 icon success inquiry"
+      />
 
       <div className="leading-5 text-center lg:leading-9">
         <p className="text-base font-bold text-reliableBlack mb-2 lg:text-lg">

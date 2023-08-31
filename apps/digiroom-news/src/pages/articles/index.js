@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { QuickLink, BreadCrumbs } from 'ui/components/molecules';
 import {
   ArticleListHeroSection,
@@ -9,6 +9,16 @@ import {
 import { FAQS, newsList } from '../../constants/news';
 
 const ArticleListingPage = () => {
+  const [news, setNews] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/news') // Panggil API
+      .then((response) => response.json())
+      .then((data) => setNews(data))
+      .catch((error) => console.error('Error fetching news:', error));
+  }, []);
+  console.log('res : ', news);
+
   return (
     <React.Fragment>
       <QuickLink />

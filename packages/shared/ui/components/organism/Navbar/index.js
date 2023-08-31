@@ -20,7 +20,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [inputValues, setInputValues] = useState('');
   const [location, setLocation] = useState('Jakarta Pusat');
-  const [defaultFlag, setDefaultFlag] = useState(usFlag);
+  const [defaultFlag, setDefaultFlag] = useState(idFlag);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);

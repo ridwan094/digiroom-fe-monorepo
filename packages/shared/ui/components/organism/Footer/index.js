@@ -163,7 +163,7 @@ const Footer = () => {
                   <ul className="flex gap-6 mt-3">
                     <li>
                       <a
-                        href="/"
+                        href="https://www.facebook.com/Auto2000official"
                         rel="noreferrer"
                         target="_blank"
                         className="text-white transition hover:opacity-75"
@@ -188,48 +188,48 @@ const Footer = () => {
 
                     <li>
                       <a
-                        href="/"
+                        href="https://twitter.com/Auto2000ID"
                         rel="noreferrer"
                         target="_blank"
                         className="text-white transition hover:opacity-75"
                       >
-                        <span className="sr-only">Twitter</span>
+                        <span className="sr-only">X</span>
                         <XLogo size="22" />
                       </a>
                     </li>
 
                     <li>
                       <a
-                        href="/"
+                        href="https://www.youtube.com/user/auto2000csr"
                         rel="noreferrer"
                         target="_blank"
                         className="text-white transition hover:opacity-75"
                       >
-                        <span className="sr-only">GitHub</span>
+                        <span className="sr-only">Youtube</span>
                         <FaYoutube size="22px" />
                       </a>
                     </li>
 
                     <li>
                       <a
-                        href="/"
+                        href="https://api.whatsapp.com/send?phone=+6282289802000"
                         rel="noreferrer"
                         target="_blank"
                         className="text-white transition hover:opacity-75"
                       >
-                        <span className="sr-only">Dribbble</span>
+                        <span className="sr-only">Whatsapp</span>
                         <FaWhatsapp size="22px" />
                       </a>
                     </li>
 
                     <li>
                       <a
-                        href="/"
+                        href="https://www.tiktok.com/@auto2000official?is_from_webapp=1&sender_device=pc"
                         rel="noreferrer"
                         target="_blank"
                         className="text-white transition hover:opacity-75"
                       >
-                        <span className="sr-only">Dribbble</span>
+                        <span className="sr-only">Tiktok</span>
                         <FaTiktok size="22px" />
                       </a>
                     </li>
@@ -242,7 +242,12 @@ const Footer = () => {
                     Download Digiroom
                   </span>
                   <div className="flex gap-3.5 md:gap-0 md:flex-col">
-                    <div className="flex w-[140px] h-[51px] bg-black text-white rounded-md border border-white items-center justify-center">
+                    <a
+                      href="https://play.google.com/store/apps/details?id=id.co.astra.ai.dev1"
+                      rel="noreferrer"
+                      target="_blank"
+                      className="flex w-[140px] h-[51px] bg-black text-white rounded-md border border-white items-center justify-center"
+                    >
                       <div className="mr-2">
                         <svg viewBox="30 336.7 120.9 129.2" width="23">
                           <path
@@ -267,9 +272,14 @@ const Footer = () => {
                         <div className="text-[9px]">GET IT ON</div>
                         <div className="text-[16px] font-semibold font-sans -mt-1">Google Play</div>
                       </div>
-                    </div>
+                    </a>
                     {/* Download on the appstore & googleplay */}
-                    <div className="flex md:mt-3 w-[140px] h-[51px] bg-black text-white rounded-lg border border-white items-center justify-center">
+                    <a
+                      href="https://apps.apple.com/id/app/auto2000/id421805050"
+                      rel="noreferrer"
+                      target="_blank"
+                      className="flex md:mt-3 w-[140px] h-[51px] bg-black text-white rounded-lg border border-white items-center justify-center"
+                    >
                       <div className="mr-2">
                         <svg viewBox="0 0 384 512" width="23">
                           <path
@@ -282,7 +292,7 @@ const Footer = () => {
                         <div className="text-[7px] -mb-2">Download on the</div>
                         <div className="text-[16px] font-semibold font-sans">App Store</div>
                       </div>
-                    </div>
+                    </a>
                   </div>
                 </div>
               </div>
