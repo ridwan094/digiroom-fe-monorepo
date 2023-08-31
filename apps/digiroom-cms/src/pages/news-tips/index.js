@@ -2,15 +2,20 @@ import { MdOutlineFileCopy } from 'react-icons/md';
 import React, { useEffect, useState } from 'react';
 import CustomTable from '@/components/Table';
 import { useRouter } from 'next/navigation';
-import { columns, filterData, headerArray, sampleData } from '@/constants/implement-table';
+import {
+  columns,
+  filterDataNewsTips,
+  headerArrayNewsTips,
+  sampleDataNewsTips,
+} from '@/constants/implement-table';
 import ModalText from '../modal-text';
 import ModalFilter from '../modal-filter';
 import {
   deleteListDashboardPromo,
   getIdListData,
-  getListDashboardPromo,
 } from '../../service/promo-dashboard-homepage/promo-dashboard';
 import ModalPreview from '../modal-preview';
+import { getListDashboardNewsTips } from '@/service/news-tips-dashboard/news-tips-dashboard';
 import { LoadingEffect } from '../loading';
 import { Spinner } from 'flowbite-react';
 
@@ -53,7 +58,7 @@ const DashboardPromo = () => {
   const onClickCheck = (value) => {
     switch (value) {
       case 'add':
-        router.push('/promo/add-promo');
+        router.push('/news-tips/add-news-tips');
         break;
       case 'filter':
         setOpenModalFilter('dismissible');
@@ -101,7 +106,7 @@ const DashboardPromo = () => {
           setOpenModalPreview('dismissible');
           setLoadingAction(false);
         } else {
-          setDataPreview(sampleData);
+          setDataPreview(sampleDataNewsTips);
           setOpenModalPreview('dismissible');
           setLoadingAction(false);
         }
@@ -120,7 +125,7 @@ const DashboardPromo = () => {
   const fetchListDarhboard = async () => {
     setIsLoading(true);
     try {
-      const data = await getListDashboardPromo(
+      const data = await getListDashboardNewsTips(
         search,
         sortDirection,
         currentPage,
@@ -128,10 +133,18 @@ const DashboardPromo = () => {
         endIndex,
         activeFilters
       );
+
       if (data !== null) {
-        setListDashboard(data.data);
-        setTotalItems(data.total);
-        setTotalPages(Math.ceil(data.total / itemsPerPage));
+        const newArray = Object.keys(data).map((key) => ({
+          title: data[key].titlePage,
+          id: data[key].id,
+          category: data[key].category.name,
+          startDate: new Date(data[key].startDate).toDateString('id-ID'),
+          endDate: new Date(data[key].endDate).toDateString('id-ID'),
+        }));
+        setListDashboard(newArray);
+        setTotalItems(newArray.length);
+        setTotalPages(Math.ceil(newArray.length / itemsPerPage));
       }
       setIsLoading(false);
     } catch (error) {
@@ -203,7 +216,7 @@ const DashboardPromo = () => {
   };
 
   useEffect(() => {
-    fetchListDarhboard();
+    // fetchListDarhboard();
   }, [currentPage, itemsPerPage, filteredItem, sortKey, sortDirection, totalItems]);
 
   return (
@@ -235,7 +248,7 @@ const DashboardPromo = () => {
           onSort={handleSort}
           sortKey={sortKey}
           sortDirection={sortDirection}
-          headerData={headerArray(
+          headerData={headerArrayNewsTips(
             searchBoolean,
             search,
             (value) => setSearch(value),
@@ -259,7 +272,7 @@ const DashboardPromo = () => {
         <ModalFilter
           isOpen={openModalFilter === 'dismissible'}
           onClose={() => setOpenModalFilter(false)}
-          filterData={filterData}
+          filterData={filterDataNewsTips}
           onClickFilter={handleFilter}
           activeFilters={activeFilters}
         />
