@@ -1,3 +1,5 @@
+import { Icons } from '../../atoms';
+
 const BranchInfoSection = () => {
   return (
     <section className="py-[30px] border-t-4 lg:py-20">
@@ -18,20 +20,7 @@ const BranchInfoSection = () => {
             <p className="text-sm font-semibold text-reliableBlack uppercase  lg:border-b-2 lg:border-supportiveRed lg:text-base">
               Lihat Lebih Banyak
             </p>
-            <span>
-              <svg
-                width="11"
-                height="8"
-                viewBox="0 0 10 7"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M8.825 0.158325L5 3.97499L1.175 0.158325L0 1.33333L5 6.33332L10 1.33333L8.825 0.158325Z"
-                  fill="#4F4C4D"
-                />
-              </svg>
-            </span>
+            <Icons.DropDownArrow size={11} />
           </div>
         </div>
       </div>
