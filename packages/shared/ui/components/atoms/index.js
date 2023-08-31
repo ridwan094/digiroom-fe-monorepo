@@ -49,3 +49,4 @@ export { default as Build } from './Icons/Build';
 export { default as Mail } from './Icons/Mail';
 export { default as PhoneInTalk } from './Icons/PhoneInTalk';
 export { default as DirectionsCar } from './Icons/DirectionsCar';
+export { default as Icons } from './Icons';
