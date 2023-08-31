@@ -12,7 +12,7 @@ const ShareButton = ({ onClick, fillColor }) => {
 
 ShareButton.defaultProps = {
   onClick: () => {},
-  fillColor: 'bg-reliableBlack90',
+  fillColor: 'bg-reliableBlack80',
 };
 
 export default ShareButton;

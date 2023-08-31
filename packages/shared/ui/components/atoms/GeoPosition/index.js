@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
 import GeoLocation from '../Icons/GeoLocation';
 
-const GeoPosition = ({ onChange, value, options }) => {
+const GeoPosition = ({ onChange, value, options, classNameContainer }) => {
+  const className = ['relative', classNameContainer];
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClickLocation = () => {
@@ -15,7 +16,7 @@ const GeoPosition = ({ onChange, value, options }) => {
   };
 
   return (
-    <div className="bg-white relative">
+    <div className={className.join(' ')}>
       <div
         className="flex gap-1 items-center cursor-pointer h-10 justify-center px-2"
         onClick={handleClickLocation}
@@ -55,6 +56,7 @@ const GeoPosition = ({ onChange, value, options }) => {
 };
 
 GeoPosition.defaultProps = {
+  classNameContainer: '',
   value: '',
   onChange: () => {},
   options: [],

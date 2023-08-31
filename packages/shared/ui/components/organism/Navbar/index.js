@@ -47,6 +47,7 @@ const Navbar = () => {
               value={location}
               options={['Jakarta Pusat', 'Bandung', 'Yogyakarta', 'Nanggroe Aceh Darussalam']}
               onChange={handleChangeLocation}
+              classNameContainer="bg-white"
             />
             <BtnLoginSignup />
             <Button variant="bg-transparent" size="small">

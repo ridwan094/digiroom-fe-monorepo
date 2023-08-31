@@ -24,4 +24,6 @@ export { default as DetailProductKnowledgeHeroSection } from './DetailProductKno
 export { default as DetailProductKnowledgeBodySection } from './DetailProductKnowledgeBodySection';
 export { default as ProductKnowledgeRecommendationSection } from './ProductKnowledgeRecommendationSection';
 export { default as ProductKnowledgeBannerSection } from './ProductKnowledgeBannerSection';
+export { default as PromoEventSection } from './PromoEventSection';
 export { default as TabBarProductKnowledge } from './TabbarProductKnowledge';
+export { default as BranchListSection } from './BranchListSection';
