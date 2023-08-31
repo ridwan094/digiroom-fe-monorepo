@@ -13,7 +13,7 @@ const BranchListSection = () => {
         </p>
       </div>
       <div className="mb-9">
-        <BranchFilter />
+        <BranchFilter onClickHandlerViewMap={() => {}} />
       </div>
       <div className="md:grid grid-cols-3 gap-6">
         <BranchCard />
