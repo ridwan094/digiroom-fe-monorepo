@@ -36,9 +36,7 @@ const DetailArticleBodySection = ({ article }) => {
 
   return (
     <section className="my-[30px] mx-4 lg:mx-0 lg:mt-8">
-      <div
-      // className="container"
-      >
+      <div>
         {/* Header */}
         <div className="flex justify-between items-center mb-5 lg:mb-[30px]">
           <h1 className="text-sm font-semibold text-reliableBlack lg:text-4xl">{article.title}</h1>
@@ -81,7 +79,7 @@ const DetailArticleBodySection = ({ article }) => {
       </div>
 
       {/* Share Modal */}
-      {shareOpen && <ModalShare visible={true} close={() => setShareOpen(false)} />}
+      {shareOpen && <ModalShare visible={true} onClose={() => setShareOpen(false)} />}
     </section>
   );
 };

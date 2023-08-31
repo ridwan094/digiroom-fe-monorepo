@@ -1,9 +1,8 @@
-import faqs from '@/constants/faqs';
 import { SubscriptionForm } from '../../molecules';
 import BranchInfoSection from '../BranchInfoSection';
-import { PromoFaqSection } from '..';
+import PromoFaqAccordion from '../PromoFaqSection';
 
-const FormFaqSection = () => {
+const FormFaqSection = ({ faqs }) => {
   return (
     <section>
       {/* Info Section */}
@@ -22,7 +21,7 @@ const FormFaqSection = () => {
 
       {/* FAQ Section */}
       <div className="border-t-4">
-        <PromoFaqSection faqs={faqs} />
+        <PromoFaqAccordion faqs={faqs} />
       </div>
     </section>
   );
