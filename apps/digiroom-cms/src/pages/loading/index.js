@@ -1,6 +1,6 @@
 import { Toast } from 'flowbite-react';
 
-export const loadingEffect = (icons, text, isLoading) => {
+export const LoadingEffect = (icons, text, isLoading) => {
   return (
     <div
       className={`fixed inset-x-0 top-10 right-10 z-50 flex justify-center items-center ${

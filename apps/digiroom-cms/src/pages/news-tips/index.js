@@ -16,7 +16,7 @@ import {
 } from '../../service/promo-dashboard-homepage/promo-dashboard';
 import ModalPreview from '../modal-preview';
 import { getListDashboardNewsTips } from '@/service/news-tips-dashboard/news-tips-dashboard';
-import { loadingEffect } from '../loading';
+import { LoadingEffect } from '../loading';
 import { Spinner } from 'flowbite-react';
 
 const DashboardPromo = () => {
@@ -221,7 +221,7 @@ const DashboardPromo = () => {
 
   return (
     <div className="relative w-full">
-      {loadingAction && loadingEffect(<Spinner />, 'Loading...')}
+      {loadingAction && LoadingEffect(<Spinner />, 'Loading...')}
 
       <div className={`${loadingAction ? 'pointer-events-none' : ''} relative`}>
         <CustomTable

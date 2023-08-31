@@ -31,7 +31,7 @@ export default function LayoutForm() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {};
 
   const CustomInput = React.forwardRef((props, ref) => {
     return (

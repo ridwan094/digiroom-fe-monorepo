@@ -37,11 +37,9 @@ const LayoutForm = ({
               handleSlug,
               trigger: register().trigger,
               handleQuillChange,
-              // ... other props
             })}
           </div>
         ))}
-        {/* ... */}
       </form>
     </div>
   );
