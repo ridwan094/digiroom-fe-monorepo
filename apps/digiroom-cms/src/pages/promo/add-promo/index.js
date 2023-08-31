@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import LayoutForm from '@/components/LayoutForm';
 import { useForm } from 'react-hook-form';
-import generateSlug from '@/helpers/utils/slug';
+import { handleUpload } from '@/service/azure/fileUpload';
 
 import { Controller } from 'react-hook-form';
 import Dropzone from '@/components/LayoutForm/Dropzone';
@@ -14,7 +14,7 @@ const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 import SelectCategory from '@/components/LayoutForm/Select';
 import Select from 'react-select';
-import { data } from 'autoprefixer';
+import { useEffect } from 'react';
 
 const CustomInput = React.forwardRef((props, ref) => {
   return (
@@ -207,12 +207,9 @@ const componentConfig = [
         <ReactQuill
           theme="snow"
           className={`my-3 ${errors?.detailPromosi ? 'border-red-500' : ''}`}
-          value={dataForm.detailPromosi || ''}
+          value={dataForm.detailPromosi}
           onChange={(value) => {
             handleQuillChange(value);
-          }}
-          onBlur={() => {
-            trigger('detailPromosi');
           }}
         />
         {errors?.detailPromosi && (
@@ -383,12 +380,12 @@ const componentConfig = [
   },
   {
     title: '',
-    render: ({ cancel, showPreviewPage }) => (
+    render: ({ cancelPage, showPreviewPage }) => (
       <div className="flex justify-between mt-[48px]">
         <div>
           <button
             type="button"
-            onClick={cancel}
+            onClick={cancelPage}
             className="text-reliableBlack90  py-2 px-4 tracking-wide border border-transparent text-[16px] font-bold "
           >
             CANCEL
@@ -415,9 +412,7 @@ const componentConfig = [
 ];
 
 const AddPromo = () => {
-  const [dataForm, setDataForm] = useState({ title: '' });
-  const [detailPromosi, setDetailPromosi] = useState({ detailContent: '' });
-
+  const [dataForm, setDataForm] = useState({});
   const {
     handleSubmit,
     control,
@@ -426,7 +421,7 @@ const AddPromo = () => {
   } = useForm();
 
   const handleUpload = (file) => {
-    console.log('Uploading file:', file);
+    handleUpload(file);
   };
 
   const handleQuillChange = (value) => {
@@ -438,14 +433,11 @@ const AddPromo = () => {
     });
   };
 
-  const handleDetailPromo = (value) => {};
-
   const showPreviewPage = () => {
     window.open('http://localhost:3004/promo/preview', '_blank');
   };
 
   const onSubmit = (data) => {
-    console.log(data);
     const dataTemporary = {
       heroImageLink:
         'https://astradigitaldigiroomstg.blob.core.windows.net/storage-general-001/image.jpg',
@@ -480,13 +472,13 @@ const AddPromo = () => {
       region: null,
       city: null,
       branch: null,
-      detailContent: data.detailPromosi,
+      detailContent: dataForm.detailPromosi,
     };
-    console.log('data temproart', dataTemporary);
   };
 
   const editor = useRef();
 
+  useEffect(() => {}, dataForm);
   return (
     <LayoutForm
       control={control}
@@ -500,12 +492,12 @@ const AddPromo = () => {
       setDataForm={setDataForm}
       errors={errors}
       handleQuillChange={handleQuillChange}
+      cancelPage={cancelPage}
     />
   );
 };
 
 export default AddPromo;
-
 
 // import React from 'react';
 // import LayoutForm from '@/components/LayoutForm';

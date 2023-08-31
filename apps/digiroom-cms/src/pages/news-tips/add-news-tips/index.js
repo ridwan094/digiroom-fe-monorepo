@@ -415,8 +415,7 @@ const componentConfig = [
 ];
 
 const NewsAddTips = () => {
-  const [dataForm, setDataForm] = useState({ title: '' });
-  const [detailPromosi, setDetailPromosi] = useState({ detailContent: '' });
+  const [dataForm, setDataForm] = useState();
 
   const {
     handleSubmit,
@@ -445,7 +444,6 @@ const NewsAddTips = () => {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
     const dataTemporary = {
       heroImageLink:
         'https://astradigitaldigiroomstg.blob.core.windows.net/storage-general-001/image.jpg',
@@ -482,7 +480,6 @@ const NewsAddTips = () => {
       branch: null,
       detailContent: data.detailPromosi,
     };
-    console.log('data temproart', dataTemporary);
   };
 
   const editor = useRef();
