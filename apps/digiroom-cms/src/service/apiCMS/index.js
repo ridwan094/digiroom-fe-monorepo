@@ -11,6 +11,12 @@ const getBaseUrl = () => {
   }
 };
 
+const redirectToLogin = () => {
+  // Redirect to login page
+  window.location.href = '/'; // Change the URL as needed
+};
+
+
 const CMS = () => {
   let instance = axios.create({
     baseURL: getBaseUrl(),
@@ -36,6 +42,11 @@ const CMS = () => {
       return response.data;
     },
     function (error) {
+      if (error.response && error.response.status === 401) {
+        // Redirect to login page
+        localStorage.removeItem('user');
+        redirectToLogin();
+      }
       //Add something if needed
       return Promise.reject(error);
     }

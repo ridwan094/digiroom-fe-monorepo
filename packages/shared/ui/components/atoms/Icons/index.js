@@ -25,6 +25,7 @@ import SatuIndonesiaIcon from './SatuIndonesiaIcons';
 import ToyotaIcon from './ToyotaIcon';
 import AstraIcon from './AstraIcon';
 import AppleIcon from './AppleIcon';
+import DropDownArrow from './DropDownArrow';
 
 const Icons = {
   CarIcon,
@@ -54,6 +55,7 @@ const Icons = {
   ToyotaIcon,
   AstraIcon,
   AppleIcon,
+  DropDownArrow,
 };
 
 export default Icons;

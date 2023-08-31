@@ -10,9 +10,9 @@ const getLastSegment = (path) => {
 };
 
 const CMSLayout = ({ children }) => {
-  const router = useRouter();
-  const { asPath } = router;
-  const lastSegment = getLastSegment(asPath);
+  const { pathname } = useRouter();
+  const cleanUrl = pathname.replace(/\/\[slug\]/, '');
+  const lastSegment = getLastSegment(cleanUrl);
   const nameLayout = lastSegment !== null ? lastSegment.replace(/-/g, ' ').toUpperCase() : 'Dashboard';
   
   const [sidebarCollapse, setSidebarCollapse] = useState(false);

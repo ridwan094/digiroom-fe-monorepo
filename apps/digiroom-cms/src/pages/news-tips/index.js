@@ -1,17 +1,19 @@
+import { MdOutlineFileCopy } from 'react-icons/md';
 import React, { useEffect, useState } from 'react';
 import CustomTable from '@/components/Table';
 import { useRouter } from 'next/navigation';
-import { columns, filterData, headerArray } from '@/constants/promo';
+import {
+  columns,
+  filterDataNewsTips,
+  headerArrayNewsTips,
+  sampleDataNewsTips,
+} from '@/constants/implement-table';
 import ModalText from '../modal-text';
 import ModalFilter from '../modal-filter';
 import ModalPreview from '../modal-preview';
+import { getListDashboardNewsTips } from '@/service/news-tips-dashboard/news-tips-dashboard';
 import { LoadingEffect } from '../loading';
 import { Spinner } from 'flowbite-react';
-import { typeAction } from '@/constants/type';
-import {
-  getListDashboardPromo,
-  deletePromo,
-} from '../../service/promo';
 
 const DashboardPromo = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -52,7 +54,7 @@ const DashboardPromo = () => {
   const onClickCheck = (value) => {
     switch (value) {
       case 'add':
-        router.push('/promo/add-promo');
+        router.push('/news-tips/add-news-tips');
         break;
       case 'filter':
         setOpenModalFilter('dismissible');
@@ -70,22 +72,29 @@ const DashboardPromo = () => {
     }
   };
 
-  const onClick = async (value, items) => {
-    setCaseItems(value);
-    switch (value) {
-      case typeAction.EDIT:
-        router.push(`/promo/update-promo/${items.slug}`);
+  const onClick = async (items, index, item) => {
+    setCaseItems(items);
+    switch (items) {
+      case 'edit':
+        router.push('/#');
         break;
-      case typeAction.DELETE:
-        const response = await deletePromo(items.id)
-        if(response) {
-          fetchListDarhboard()
-        }
+      case 'delete':
+        setOpenModal('dismissible');
+        setModalText('delete');
+        setModalHeader(`Delete ${listDashboard[index + startIndex].title}`);
+        setTableDelete(listDashboard[index + startIndex]);
         break;
-      case typeAction.COPY:
-        router.push(`/promo/duplicate-promo/${items.slug}`);
+      case 'copy':
+        const textToCopy = listDashboard[index + startIndex].slug;
+        copyToClipboard(textToCopy);
+        setShowToast(!showToast);
+        setToastDescription('Copy to Clipboard');
+        setToastIcons(<MdOutlineFileCopy />);
+        setTimeout(() => {
+          setShowToast(false);
+        }, 2000);
         break;
-      case typeAction.VIEW:
+      case 'view':
         setLoadingAction(true);
         const data = await getIdListData(item.id);
         if (data !== null) {
@@ -93,7 +102,7 @@ const DashboardPromo = () => {
           setOpenModalPreview('dismissible');
           setLoadingAction(false);
         } else {
-          setDataPreview(sampleData);
+          setDataPreview(sampleDataNewsTips);
           setOpenModalPreview('dismissible');
           setLoadingAction(false);
         }
@@ -101,10 +110,18 @@ const DashboardPromo = () => {
     }
   };
 
+  const onDeleteData = async (value) => {
+    const deleteData = await deleteListDashboardPromo(value.id);
+    if (deleteData) {
+      const updatedList = listDashboard.filter((item) => item.id !== value.id);
+      setListDashboard(updatedList);
+    }
+  };
+
   const fetchListDarhboard = async () => {
     setIsLoading(true);
     try {
-      const data = await getListDashboardPromo(
+      const data = await getListDashboardNewsTips(
         search,
         sortDirection,
         currentPage,
@@ -112,24 +129,18 @@ const DashboardPromo = () => {
         endIndex,
         activeFilters
       );
+
       if (data !== null) {
-        const promoList = [];
-
-        data.map((item) => {
-          promoList.push({
-            id: item.id,
-            title: item.titlePage,
-            category: 'Mobil',
-            startDate: item.startDate ? item.startDate.toString() : null,
-            endDate: item.endDate ? item.endDate.toString() : null,
-            slug: item.slug,
-            publish: item.publish
-          })
-        })
-
-        setListDashboard(promoList);
-        // setTotalItems(data.total);
-        // setTotalPages(Math.ceil(data.total / itemsPerPage));
+        const newArray = Object.keys(data).map((key) => ({
+          title: data[key].titlePage,
+          id: data[key].id,
+          category: data[key].category.name,
+          startDate: new Date(data[key].startDate).toDateString('id-ID'),
+          endDate: new Date(data[key].endDate).toDateString('id-ID'),
+        }));
+        setListDashboard(newArray);
+        setTotalItems(newArray.length);
+        setTotalPages(Math.ceil(newArray.length / itemsPerPage));
       }
       setIsLoading(false);
     } catch (error) {
@@ -159,7 +170,7 @@ const DashboardPromo = () => {
         setOpenModal(undefined);
         break;
       default:
-        await deletePromo()
+        await onDeleteData(tableDelete);
         setOpenModal(undefined);
         break;
     }
@@ -182,6 +193,15 @@ const DashboardPromo = () => {
     fetchListDarhboard();
   };
 
+  const copyToClipboard = (text) => {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+  };
+
   const handleSort = (key) => {
     if (sortKey === key) {
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
@@ -192,7 +212,7 @@ const DashboardPromo = () => {
   };
 
   useEffect(() => {
-    fetchListDarhboard();
+    // fetchListDarhboard();
   }, [currentPage, itemsPerPage, filteredItem, sortKey, sortDirection, totalItems]);
 
   return (
@@ -224,7 +244,7 @@ const DashboardPromo = () => {
           onSort={handleSort}
           sortKey={sortKey}
           sortDirection={sortDirection}
-          headerData={headerArray(
+          headerData={headerArrayNewsTips(
             searchBoolean,
             search,
             (value) => setSearch(value),
@@ -248,7 +268,7 @@ const DashboardPromo = () => {
         <ModalFilter
           isOpen={openModalFilter === 'dismissible'}
           onClose={() => setOpenModalFilter(false)}
-          filterData={filterData}
+          filterData={filterDataNewsTips}
           onClickFilter={handleFilter}
           activeFilters={activeFilters}
         />

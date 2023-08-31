@@ -23,3 +23,4 @@ export { default as BranchFilter } from './BranchFilter';
 export { default as OfferCard } from './OfferCard';
 export { default as CardProductKnowledge } from './CardProductKnowledge';
 export { default as BranchCard } from './BranchCard';
+export { default as SubscriptionForm } from './SubscriptionForm';

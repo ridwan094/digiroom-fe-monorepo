@@ -1,7 +1,7 @@
 import CMS from '../apiCMS';
 import apiConfig from '../apiCMS/api-config';
 
-export const getListDashboardPromo = async (
+export const getListDashboardNewsTips = async (
   search,
   sorting,
   page,
@@ -18,14 +18,14 @@ export const getListDashboardPromo = async (
     filter: JSON.stringify(filter),
   });
 
-  const api = `${apiConfig.local}/list-dashboard-promo?${queryParams.toString()}`;
+  const api = `newstips/list`;
   try {
     const response = await CMS.get(api);
     if (response !== null) {
       const data = response;
       return data;
     } else {
-      return response;
+      return null;
     }
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -33,17 +33,11 @@ export const getListDashboardPromo = async (
   }
 };
 
-export const deleteListDashboardPromo = async (id, token) => {
-  const api = `${apiConfig.local}/list-dashboard-promo?id=${id}`;
+export const createNewsTips = async (data) => {
+  const api = `${process.env.NEXT_PUBLIC_BASE_URL}/newstips/create`;
+
   try {
-    const response = await CMS.delete(api);
-    if (response.status === 204) {
-      return true;
-    } else {
-      return false;
-    }
-  } catch (error) {
-    console.error('Error deleting data:', error);
-    return false;
-  }
+    const response = await CMS.post(api, data);
+    console.log('isi response', response);
+  } catch (error) {}
 };
