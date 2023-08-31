@@ -53,7 +53,7 @@ const Modal = ({
         <div
           data-testid="dataTestCardModal"
           className={`${
-            visible ? 'scale-100' : 'scale-0'
+            !visible && 'translate-y-full'
           } duration-300 ease-in-out flex flex-col absolute bg-white ${size ? size : `w-[588px]`} ${
             mobile
               ? `min-h-[100%] h-[100%]`
