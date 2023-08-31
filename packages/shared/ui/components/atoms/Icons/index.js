@@ -21,6 +21,7 @@ import Build from './Build';
 import Mail from './Mail';
 import PhoneInTalk from './PhoneInTalk';
 import DirectionsCar from './DirectionsCar';
+import DropDownArrow from './DropDownArrow';
 
 const Icons = {
   CarIcon,
@@ -46,6 +47,7 @@ const Icons = {
   Mail,
   PhoneInTalk,
   DirectionsCar,
+  DropDownArrow,
 };
 
 export default Icons;
