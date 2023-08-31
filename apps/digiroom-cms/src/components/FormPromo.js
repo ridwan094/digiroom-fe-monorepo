@@ -12,6 +12,7 @@ import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import { getAzurePublicUrl } from '@/constants';
 import { createPromo, updatePromo, getPromoBySlug as getPromoBySlugApi } from '@/service/promo';
+import { typePage } from '@/constants/type';
 import Router from 'next/router';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -100,12 +101,12 @@ export default function FormPromo({ pathSlug, type }) {
     let res = null;
 
     if (pathSlug) {
-      if(type === 'update') {
+      if(type === typePage.UPDATE) {
         const data = {id: dataForm?.id, ...reqBody};
 
         res = await updatePromo(data);
       } 
-      else if(type === 'duplicate') {
+      else if(type === typePage.DUPLICATE) {
         res = await createPromo(reqBody);
       }
     } else {

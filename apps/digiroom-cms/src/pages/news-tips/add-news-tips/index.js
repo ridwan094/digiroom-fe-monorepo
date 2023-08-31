@@ -207,7 +207,7 @@ const componentConfig = [
         <ReactQuill
           theme="snow"
           className={`my-3 ${errors?.detailPromosi ? 'border-red-500' : ''}`}
-          // value={dataForm.detailPromosi || ''}
+          value={dataForm?.detailPromosi || ''}
           onChange={(value) => {
             handleQuillChange(value);
           }}

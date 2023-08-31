@@ -7,6 +7,7 @@ import ModalFilter from '../modal-filter';
 import ModalPreview from '../modal-preview';
 import { LoadingEffect } from '../loading';
 import { Spinner } from 'flowbite-react';
+import { typeAction } from '@/constants/type';
 import {
   getListDashboardPromo,
   deletePromo,
@@ -72,19 +73,19 @@ const DashboardPromo = () => {
   const onClick = async (value, items) => {
     setCaseItems(value);
     switch (value) {
-      case 'edit':
+      case typeAction.EDIT:
         router.push(`/promo/update-promo/${items.slug}`);
         break;
-      case 'delete':
+      case typeAction.DELETE:
         const response = await deletePromo(items.id)
         if(response) {
           fetchListDarhboard()
         }
         break;
-      case 'copy':
+      case typeAction.COPY:
         router.push(`/promo/duplicate-promo/${items.slug}`);
         break;
-      case 'view':
+      case typeAction.VIEW:
         setLoadingAction(true);
         const data = await getIdListData(item.id);
         if (data !== null) {

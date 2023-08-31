@@ -8,6 +8,7 @@ import {
   MdAdd,
 } from 'react-icons/md';
 import ToggleSwitch from 'ui/components/atoms/Toogle';
+import { typeAction } from '../type';
 
 export const headerArray = (
   searchBoolean,
@@ -114,13 +115,13 @@ export const columns = (onToggleChange = () => {}, onClick = () => {}) => {
       render: (text, item, index) => (
         <div className="flex flex-rows hover:cursor-pointer gap-2">
           <Tooltip content="Edit">
-            <MdOutlineCreate className="text-2xl" onClick={() => onClick('edit', item, index)} />
+            <MdOutlineCreate className="text-2xl" onClick={() => onClick(typeAction.EDIT, item, index)} />
           </Tooltip>
           <Tooltip content="Delete">
-            <MdOutlineDelete className="text-2xl" onClick={() => onClick('delete', item, index)} />
+            <MdOutlineDelete className="text-2xl" onClick={() => onClick(typeAction.DELETE, item, index)} />
           </Tooltip>
           <Tooltip content="Copy">
-            <MdOutlineFileCopy className="text-2xl" onClick={() => onClick('copy', item, index)} />
+            <MdOutlineFileCopy className="text-2xl" onClick={() => onClick(typeAction.COPY, item, index)} />
           </Tooltip>
         </div>
       ),
