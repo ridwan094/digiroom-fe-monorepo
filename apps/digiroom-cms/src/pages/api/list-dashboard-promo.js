@@ -5,7 +5,7 @@ export default function handler(req, res) {
   const offsetValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
   let responseSuccess = offsetValues.map((offset, index) => ({
-    id: index + 1,
+    id: index * currentPage + 1,
     title: `Promo ${index + 1}`,
     slug: 'wow',
     startDate: new Date(new Date().getTime() + offset * 24 * 60 * 60 * 1000).toDateString(),
