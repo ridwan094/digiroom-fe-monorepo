@@ -33,8 +33,6 @@ const CustomTable = ({
 
   const [searchTable, setSearchTable] = useState();
 
-  const disabled = true;
-
   const searchTableData = async (event) => {
     if (searchTable !== null && event.key === 'Enter') {
       event.preventDefault();
