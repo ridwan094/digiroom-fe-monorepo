@@ -11,17 +11,16 @@ export async function handleUpload(file) {
 }
 
 async function uploadImage(file) {
-    const contentType = file.type;
-    const fileName = file.name;
+    const { type, name } = file;
 
-    const path = '_=1692846660358&sv=2022-11-02&ss=bqtf&srt=sco&sp=rwdlacuptfxiy&se=2023-08-24T11:10:55Z&sig=SXlgBt9yY2dw89o8%2F7dqGXFvpGDT8eWkznOzCYhMivI%3D'
-    const urlApi = `https://astradigitaldigiroomstg.blob.core.windows.net/storage-general-001/${fileName}?${path}`;
+    const path = 'sp=racwdli&st=2023-08-29T07:30:27Z&se=2026-06-30T15:30:27Z&spr=https&sv=2022-11-02&sr=c&sig=N4eYieESRJHkTZ1PSN2F6W%2Fz7AGJUcLyXOPgBsTehek%3D'
+    const urlApi = `https://astradigitaldigiroomstg.blob.core.windows.net/storage-general-001/${name}?${path}`;
 
     try {
         const response = await fetch(urlApi, {
           method: 'PUT',
           headers: {
-            'Content-Type': contentType,
+            'Content-Type': type,
             'Origin': 'http://localhost:3004',
             'x-ms-blob-type': 'BlockBlob'
           },
