@@ -6,8 +6,6 @@ import {
   PromoBannerSection,
   PromoInfoSection,
   PromoFaqSection,
-  BranchMapSection,
-  BranchListSection,
 } from 'ui/components/organism';
 import faqs from '../constants/faqs';
 
@@ -38,9 +36,6 @@ export default function Home() {
 
         {/* Promo banner section */}
         <PromoBannerSection />
-        {/* Promo banner section */}
-        <BranchMapSection />
-        <BranchListSection />
 
         {/* Tab Bar Promo */}
         <div className="lg:container">
