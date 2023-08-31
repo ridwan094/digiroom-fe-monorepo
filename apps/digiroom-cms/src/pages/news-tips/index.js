@@ -10,10 +10,6 @@ import {
 } from '@/constants/implement-table';
 import ModalText from '../modal-text';
 import ModalFilter from '../modal-filter';
-import {
-  deleteListDashboardPromo,
-  getIdListData,
-} from '../../service/promo-dashboard-homepage/promo-dashboard';
 import ModalPreview from '../modal-preview';
 import { getListDashboardNewsTips } from '@/service/news-tips-dashboard/news-tips-dashboard';
 import { LoadingEffect } from '../loading';

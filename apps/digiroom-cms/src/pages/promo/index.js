@@ -1,18 +1,17 @@
-import { MdOutlineFileCopy } from 'react-icons/md';
 import React, { useEffect, useState } from 'react';
 import CustomTable from '@/components/Table';
 import { useRouter } from 'next/navigation';
-import { columns, filterData, headerArray, sampleData } from '@/constants/implement-table';
+import { columns, filterData, headerArray } from '@/constants/promo';
 import ModalText from '../modal-text';
 import ModalFilter from '../modal-filter';
-import {
-  deleteListDashboardPromo,
-  getIdListData,
-  getListDashboardPromo,
-} from '../../service/promo-dashboard-homepage/promo-dashboard';
 import ModalPreview from '../modal-preview';
 import { LoadingEffect } from '../loading';
 import { Spinner } from 'flowbite-react';
+import { typeAction } from '@/constants/type';
+import {
+  getListDashboardPromo,
+  deletePromo,
+} from '../../service/promo';
 
 const DashboardPromo = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -71,29 +70,22 @@ const DashboardPromo = () => {
     }
   };
 
-  const onClick = async (items, index, item) => {
-    setCaseItems(items);
-    switch (items) {
-      case 'edit':
-        router.push('/#');
+  const onClick = async (value, items) => {
+    setCaseItems(value);
+    switch (value) {
+      case typeAction.EDIT:
+        router.push(`/promo/update-promo/${items.slug}`);
         break;
-      case 'delete':
-        setOpenModal('dismissible');
-        setModalText('delete');
-        setModalHeader(`Delete ${listDashboard[index + startIndex].title}`);
-        setTableDelete(listDashboard[index + startIndex]);
+      case typeAction.DELETE:
+        const response = await deletePromo(items.id)
+        if(response) {
+          fetchListDarhboard()
+        }
         break;
-      case 'copy':
-        const textToCopy = listDashboard[index + startIndex].slug;
-        copyToClipboard(textToCopy);
-        setShowToast(!showToast);
-        setToastDescription('Copy to Clipboard');
-        setToastIcons(<MdOutlineFileCopy />);
-        setTimeout(() => {
-          setShowToast(false);
-        }, 2000);
+      case typeAction.COPY:
+        router.push(`/promo/duplicate-promo/${items.slug}`);
         break;
-      case 'view':
+      case typeAction.VIEW:
         setLoadingAction(true);
         const data = await getIdListData(item.id);
         if (data !== null) {
@@ -109,14 +101,6 @@ const DashboardPromo = () => {
     }
   };
 
-  const onDeleteData = async (value) => {
-    const deleteData = await deleteListDashboardPromo(value.id);
-    if (deleteData) {
-      const updatedList = listDashboard.filter((item) => item.id !== value.id);
-      setListDashboard(updatedList);
-    }
-  };
-
   const fetchListDarhboard = async () => {
     setIsLoading(true);
     try {
@@ -129,9 +113,23 @@ const DashboardPromo = () => {
         activeFilters
       );
       if (data !== null) {
-        setListDashboard(data.data);
-        setTotalItems(data.total);
-        setTotalPages(Math.ceil(data.total / itemsPerPage));
+        const promoList = [];
+
+        data.map((item) => {
+          promoList.push({
+            id: item.id,
+            title: item.titlePage,
+            category: 'Mobil',
+            startDate: item.startDate ? item.startDate.toString() : null,
+            endDate: item.endDate ? item.endDate.toString() : null,
+            slug: item.slug,
+            publish: item.publish
+          })
+        })
+
+        setListDashboard(promoList);
+        // setTotalItems(data.total);
+        // setTotalPages(Math.ceil(data.total / itemsPerPage));
       }
       setIsLoading(false);
     } catch (error) {
@@ -161,7 +159,7 @@ const DashboardPromo = () => {
         setOpenModal(undefined);
         break;
       default:
-        await onDeleteData(tableDelete);
+        await deletePromo()
         setOpenModal(undefined);
         break;
     }
@@ -182,15 +180,6 @@ const DashboardPromo = () => {
     event.preventDefault();
     setActiveFilters(filterData);
     fetchListDarhboard();
-  };
-
-  const copyToClipboard = (text) => {
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-    document.body.appendChild(textArea);
-    textArea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textArea);
   };
 
   const handleSort = (key) => {
