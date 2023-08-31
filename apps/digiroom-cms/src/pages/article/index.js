@@ -210,7 +210,7 @@ const DashboardNewsAndTips = () => {
       <div className="relative overflow-x-auto mt-10">
         <div className="p-5 border-x border-t border-black w-full">
           <div className="flex justify-between items-center">
-            <p className="text-black text-lg text-gray-800 font-bold">List Article</p>
+            <p className="text-reliableBlack90 text-lg  font-bold">List Article</p>
             <div className="flex justify-between items-center space-x-6">
               <MdSearch size="20" onClick={() => {}} className="cursor-pointer" />
 

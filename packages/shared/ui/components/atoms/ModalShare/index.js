@@ -2,9 +2,7 @@ import { useState } from 'react';
 import Modal from '../Modal';
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from 'next-share';
 import { MdContentCopy, MdOutlineCheck } from 'react-icons/md';
-import Whatsapp from '../Icons/Whatsapp';
-import FacebookIcon from '../Icons/FacebookIcon';
-import XLogo from '../Icons/Xlogo';
+import { Icons } from '../../atoms';
 
 export default function ModalShare({ visible, link, onClose }) {
   const [isCopied, setIsCopied] = useState(false);
@@ -29,13 +27,13 @@ export default function ModalShare({ visible, link, onClose }) {
     >
       <div className="flex items-center gap-[26px] justify-center mb-[20px]">
         <WhatsappShareButton url={link} title={title}>
-          <Whatsapp fill="#000" />
+          <Icons.Whatsapp fill="#000" />
         </WhatsappShareButton>
         <FacebookShareButton url={link} quote={title} hashtag={'#toyota'}>
-          <FacebookIcon fill="#000" />
+          <Icons.FacebookIcon fill="#000" />
         </FacebookShareButton>
         <TwitterShareButton url={link} title={title}>
-          <XLogo fill="#000" />
+          <Icons.Xlogo fill="#000" />
         </TwitterShareButton>
       </div>
 
