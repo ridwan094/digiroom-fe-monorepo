@@ -1,13 +1,4 @@
-import {
-  ArrowSplit,
-  Build,
-  Button,
-  DirectionsCar,
-  Garage,
-  GarageHome,
-  Mail,
-  PhoneInTalk,
-} from '../../atoms';
+import { Icons, Button } from '../../atoms';
 import Card from '../../atoms/Card/Card';
 import { whatsapp } from '../../../assets/images';
 
@@ -27,7 +18,7 @@ const BranchCard = () => {
           Jl. Letjen. Suprapto, 63, Jakarta Pusat, 10520
         </p>
         <div className="flex items-center">
-          <ArrowSplit />
+          <Icons.ArrowSplit />
           <a href="#" className="text-xs text-hyperLink">
             Petunjuk Arah <span className="text-reliableBlack">(0,5 Km)</span>
           </a>
@@ -40,19 +31,19 @@ const BranchCard = () => {
         <ul className="flex flex-wrap gap-x-7 gap-y-1 text-xs mb-[10px] md:mb-6">
           <li className="flex gap-2 items-center">
             <div>
-              <Garage />
+              <Icons.Garage />
             </div>
             <p>Showroom</p>
           </li>
           <li className="flex gap-2 items-center">
             <div>
-              <GarageHome />
+              <Icons.GarageHome />
             </div>
             <p>Bengkel</p>
           </li>
           <li className="flex gap-2 items-center">
             <div>
-              <Build />
+              <Icons.Build />
             </div>
             <p>Suku Cadang</p>
           </li>
@@ -61,13 +52,13 @@ const BranchCard = () => {
           <Button variant="bg-reliableBlack3" className="hidden md:block font-semibold flex-1">
             <span className={buttonContentClass}>
               EMAIL
-              <Mail />
+              <Icons.Mail />
             </span>
           </Button>
           <Button variant="bg-reliableBlack3" className="md:hidden font-semibold flex-1">
             <span className={buttonContentClass}>
               CALL
-              <PhoneInTalk />
+              <Icons.PhoneInTalk />
             </span>
           </Button>
           <Button variant="bg-reliableBlack3" className="font-semibold flex-1">
@@ -79,7 +70,7 @@ const BranchCard = () => {
           <Button variant="bg-reliableBlack3" className="font-semibold flex-1">
             <span className={buttonContentClass}>
               TEST DRIVE
-              <DirectionsCar />
+              <Icons.DirectionsCar />
             </span>
           </Button>
         </div>
