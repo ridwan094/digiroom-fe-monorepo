@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 
 export default function Dropzone({
   onChange = () => {},
-  onRemove = () => {}
+  onRemove = () => {},
+  initialValue
 }) {
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -57,6 +58,16 @@ export default function Dropzone({
             <img style={{ width: 30, height: 30, marginRight: 10 }} src={URL.createObjectURL(selectedFile)} alt="Uploaded" />
             <div className="text-xs text-gray-500 dark:text-gray-400 mr-5">
               {selectedFile.name}
+            </div>
+            <button className="text-xs text-gray-500 text-end dark:text-gray-400" onClick={handleRemove}>X</button>
+          </div>
+        )}
+
+        {initialValue && selectedFile === null && (
+          <div className="flex p-2 border-2">
+            <img style={{ width: 30, height: 30, marginRight: 10 }} src={initialValue} alt="Uploaded" />
+            <div className="text-xs text-gray-500 dark:text-gray-400 mr-5">
+              {initialValue.match(/\/([^/]+)$/)[1]}
             </div>
             <button className="text-xs text-gray-500 text-end dark:text-gray-400" onClick={handleRemove}>X</button>
           </div>
