@@ -79,9 +79,11 @@ const CustomTable = ({
               <Table.HeadCell
                 key={index}
                 onClick={() => item.sortable && onSort(item.dataIndex)}
-                className={`${item.sortable ? 'cursor-pointer hover:bg-gray-200' : ''} ${
-                  sortKey === item.dataIndex ? 'bg-gray-200 font-semibold' : 'font-normal'
-                }`}
+                className={`${
+                  item.sortable && totalItems
+                    ? 'cursor-pointer hover:bg-gray-200'
+                    : 'pointer-events-none'
+                } ${sortKey === item.dataIndex ? 'bg-gray-200 font-semibold' : 'font-normal'}`}
               >
                 <div className="flex items-center">
                   {item.title}
@@ -157,15 +159,17 @@ const CustomTable = ({
             />{' '}
             of {totalItems} items
           </div>
-          <div className="flex justify-center mt-2">
-            <Pagination
-              currentPage={currentPage}
-              onPageChange={(value) => onPageChange(value)}
-              showIcons
-              totalPages={totalPages}
-              className="flex justify-center items-center"
-            />
-          </div>
+          {totalPages > 0 && (
+            <div className="flex justify-center mt-2">
+              <Pagination
+                currentPage={1}
+                onPageChange={(value) => onPageChange(value)}
+                showIcons
+                totalPages={totalPages}
+                className="flex justify-center items-center"
+              />
+            </div>
+          )}
         </div>
       )}
     </div>

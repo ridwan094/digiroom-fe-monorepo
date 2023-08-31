@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import LayoutForm from '@/components/LayoutForm';
 import { useForm } from 'react-hook-form';
-import { handleUpload } from '@/service/azure/fileUpload';
+import generateSlug from '@/helpers/utils/slug';
 
 import { Controller } from 'react-hook-form';
 import Dropzone from '@/components/LayoutForm/Dropzone';
@@ -14,7 +14,7 @@ const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 import SelectCategory from '@/components/LayoutForm/Select';
 import Select from 'react-select';
-import { useEffect } from 'react';
+import { data } from 'autoprefixer';
 
 const CustomInput = React.forwardRef((props, ref) => {
   return (
@@ -207,9 +207,12 @@ const componentConfig = [
         <ReactQuill
           theme="snow"
           className={`my-3 ${errors?.detailPromosi ? 'border-red-500' : ''}`}
-          value={dataForm.detailPromosi}
+          value={dataForm.detailPromosi || ''}
           onChange={(value) => {
             handleQuillChange(value);
+          }}
+          onBlur={() => {
+            trigger('detailPromosi');
           }}
         />
         {errors?.detailPromosi && (
@@ -380,12 +383,12 @@ const componentConfig = [
   },
   {
     title: '',
-    render: ({ cancelPage, showPreviewPage }) => (
+    render: ({ cancel, showPreviewPage }) => (
       <div className="flex justify-between mt-[48px]">
         <div>
           <button
             type="button"
-            onClick={cancelPage}
+            onClick={cancel}
             className="text-reliableBlack90  py-2 px-4 tracking-wide border border-transparent text-[16px] font-bold "
           >
             CANCEL
@@ -411,8 +414,9 @@ const componentConfig = [
   },
 ];
 
-const AddPromo = () => {
-  const [dataForm, setDataForm] = useState({});
+const NewsAddTips = () => {
+  const [dataForm, setDataForm] = useState();
+
   const {
     handleSubmit,
     control,
@@ -421,7 +425,7 @@ const AddPromo = () => {
   } = useForm();
 
   const handleUpload = (file) => {
-    handleUpload(file);
+    console.log('Uploading file:', file);
   };
 
   const handleQuillChange = (value) => {
@@ -432,6 +436,8 @@ const AddPromo = () => {
       };
     });
   };
+
+  const handleDetailPromo = (value) => {};
 
   const showPreviewPage = () => {
     window.open('http://localhost:3004/promo/preview', '_blank');
@@ -472,13 +478,12 @@ const AddPromo = () => {
       region: null,
       city: null,
       branch: null,
-      detailContent: dataForm.detailPromosi,
+      detailContent: data.detailPromosi,
     };
   };
 
   const editor = useRef();
 
-  useEffect(() => {}, dataForm);
   return (
     <LayoutForm
       control={control}
@@ -492,46 +497,8 @@ const AddPromo = () => {
       setDataForm={setDataForm}
       errors={errors}
       handleQuillChange={handleQuillChange}
-      cancelPage={cancelPage}
     />
   );
 };
 
-export default AddPromo;
-
-// import React from 'react';
-// import LayoutForm from '@/components/LayoutForm';
-// import LayoutSection from '@/components/LayoutSection';
-// import LayoutPagePromo from '@/components/LayoutSection/LayoutPagePromo';
-
-// export default function PromoCms() {
-//   return (
-//     <div className="pt-5">
-//       <div className="flex w-full">
-//         <LayoutSection
-//           items={[
-//             {
-//               id: 1,
-//               title: 'Layout 1',
-//               content: <LayoutPagePromo/>,
-//               isActive: true,
-//             },
-//             {
-//               id: 2,
-//               title: 'Layout 2',
-//               content: 'Content 2',
-//               isActive: false,
-//             },
-//             {
-//               id: 3,
-//               title: 'Layout 3',
-//               content: 'Content 3',
-//               isActive: false,
-//             },
-//           ]}
-//         />
-//         <LayoutForm />
-//       </div>
-//     </div>
-//   );
-// }
+export default NewsAddTips;
