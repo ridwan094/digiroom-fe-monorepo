@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
               <div>
-                <p className="font-bold text-white">NEW CAR</p>
+                <p className="font-bold text-white">MOBIL BARU</p>
 
                 <ul className="mt-5 text-[#A3A3A3] space-y-4 text-sm">
                   <li>
@@ -41,6 +41,12 @@ const Footer = () => {
 
                   <li>
                     <a href="#" className="transition hover:opacity-75">
+                      HILUX DOUBLE CABIN
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="#" className="transition hover:opacity-75">
                       INNOVA HYBDRID
                     </a>
                   </li>
@@ -54,78 +60,78 @@ const Footer = () => {
               </div>
 
               <div>
-                <p className="font-bold text-white">USED CARS</p>
+                <p className="font-bold text-white">MOBIL BEKAS</p>
 
                 <ul className="mt-5 font-base text-[#A3A3A3] space-y-4 text-sm">
                   <li>
-                    <a href="#" className="transition hover:opacity-75">
-                      AFTER SALES
+                    <a href="#" className="transition font-bold text-white hover:opacity-75">
+                      PURNA JUAL
                     </a>
                   </li>
 
                   <li>
                     <a href="#" className="transition hover:opacity-75">
-                      ACCESSORIES
+                      AKSESORI
                     </a>
                   </li>
 
                   <li>
                     <a href="#" className="transition hover:opacity-75">
-                      SERVICE COUPON
+                      KUPON LAYANAN
                     </a>
                   </li>
 
                   <li>
                     <a href="#" className="transition hover:opacity-75">
-                      WORKSHOP SERVICE
+                      LAYANAN BENGKEL
                     </a>
                   </li>
 
                   <li>
                     <a href="#" className="transition hover:opacity-75">
-                      SERVICE AT HOME
+                      LAYANAN DI RUMAH
                     </a>
                   </li>
 
                   <li>
                     <a href="#" className="transition hover:opacity-75">
-                      BODY & PAINT
+                      BODI & CAT
                     </a>
                   </li>
 
                   <li>
                     <a href="#" className="transition hover:opacity-75">
-                      TRADE-IN
+                      TUKAR TAMBAH
                     </a>
                   </li>
                 </ul>
               </div>
 
               <div>
-                <p className="font-bold text-white">FAQS</p>
+                <p className="font-bold text-white">PENCAPAIAN</p>
 
                 <ul className="mt-5 font-bold space-y-4 text-sm">
                   <li>
                     <a href="#" className="text-white transition hover:opacity-75">
-                      HELPS
+                      FAQ
                     </a>
                   </li>
 
                   <li>
                     <a href="#" className="text-white transition hover:opacity-75">
-                      DEALERS
+                      BANTUAN
                     </a>
                   </li>
 
                   <li>
                     <a href="#" className="text-white transition hover:opacity-75">
-                      CONTACT US
+                      DEALER
                     </a>
                   </li>
 
                   <li>
                     <a href="#" className="text-white transition hover:opacity-75">
-                      TERMS AND CONDITIONS
+                      SYARAT DAN KETENTUAN
                     </a>
                   </li>
                 </ul>
@@ -143,13 +149,13 @@ const Footer = () => {
 
                   <li>
                     <a href="#" className="text-white transition hover:opacity-75">
-                      NEWS
+                      ULASAN PRODUK
                     </a>
                   </li>
 
                   <li>
                     <a href="#" className="text-white transition hover:opacity-75">
-                      ACHEVEMENT
+                      HUBUNGI KAMI
                     </a>
                   </li>
                 </ul>
@@ -301,7 +307,7 @@ const Footer = () => {
           </div>
           <div className="flex flex-col mx-4 md:mx-0 md:flex-row gap-1 md:gap-10 md:items-center">
             <a
-              href="#"
+              href="tel:1500898"
               rel="noreferrer"
               target="_blank"
               className="text-xs text-gray-500 mt-8 mb-1 md:mb-0 md:mt-0"

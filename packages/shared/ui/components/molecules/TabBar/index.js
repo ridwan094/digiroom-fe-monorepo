@@ -10,26 +10,28 @@ const TabsNavigation = ({ className, tabs, onTabChange }) => {
 
   return (
     <React.Fragment>
-      <ul
-        className={`${className} flex items-center justify-between w-full overflow-x-auto no-scrollbar lg:justify-start`}
-      >
-        {tabs.map((tab, index) => (
-          <li
-            className={`p-3 lg:p-4 border-b-4 hover:border-supportiveRed ${
-              activeTab === index ? 'font-bold border-supportiveRed' : 'border-transparent'
-            }`}
-            key={index}
-            role="presentation"
-          >
-            <button
-              className={`text-xs uppercase text-reliableBlack lg:text-base`}
-              onClick={() => handleTabClick(index)}
+      <div className="flex">
+        <ul
+          className={`${className} flex items-center justify-start w-full overflow-x-auto no-scrollbar lg:justify-start`}
+        >
+          {tabs.map((tab, index) => (
+            <li
+              className={`py-3.5 px-4 lg:py-4 lg:px-5 border-b-4 hover:border-supportiveRed ${
+                activeTab === index ? 'font-bold border-supportiveRed' : 'border-transparent'
+              }`}
+              key={index}
+              role="presentation"
             >
-              {tab.title}
-            </button>
-          </li>
-        ))}
-      </ul>
+              <button
+                className={`text-xs uppercase text-reliableBlack whitespace-nowrap lg:text-base`}
+                onClick={() => handleTabClick(index)}
+              >
+                {tab.title}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <div>{tabs[activeTab].content}</div>
     </React.Fragment>
