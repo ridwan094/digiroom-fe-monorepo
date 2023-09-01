@@ -1,34 +1,25 @@
 import { useEffect, useState } from 'react';
-import { MdShare, MdOutlineCalendarMonth } from 'react-icons/md';
-import { Button, ModalShare, ShareButton } from 'ui/components/atoms';
+import { MdOutlineCalendarMonth } from 'react-icons/md';
+import { ModalShare, ShareButton } from 'ui/components/atoms';
+import { useSelector } from 'react-redux';
 
 const DetailArticleBodySection = ({ article }) => {
   const [shareOpen, setShareOpen] = useState(false);
-  const [isMobileScreen, setIsMobileScreen] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobileScreen(window.innerWidth <= 768);
-    };
-
-    // Initial check
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const { screenSize } = useSelector((state) => state.page);
 
   // Trigger share system on mobile
-  const handleShare = () => {
-    if (isMobileScreen && navigator.share) {
-      navigator
-        .share({
+  // Trigger share system on mobile
+  const handleShare = async () => {
+    if (screenSize.mobile && navigator.share) {
+      try {
+        await navigator.share({
           title: article.title,
           text: 'Check out this article!',
           url: window.location.href,
-        })
-        .then(() => console.log('Share successful'))
-        .catch((error) => console.error('Share error:', error));
+        });
+      } catch (error) {
+        console.error('Share error:', error);
+      }
     } else {
       setShareOpen(true);
     }
@@ -40,7 +31,7 @@ const DetailArticleBodySection = ({ article }) => {
         {/* Header */}
         <div className="flex justify-between items-center mb-5 lg:mb-[30px]">
           <h1 className="text-sm font-semibold text-reliableBlack lg:text-4xl">{article.title}</h1>
-          <ShareButton onClick={isMobileScreen ? handleShare : () => setShareOpen(true)} />
+          <ShareButton onClick={screenSize.mobile ? handleShare : () => setShareOpen(true)} />
         </div>
 
         {/* Date */}
