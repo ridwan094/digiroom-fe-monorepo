@@ -21,6 +21,10 @@ import Build from './Build';
 import Mail from './Mail';
 import PhoneInTalk from './PhoneInTalk';
 import DirectionsCar from './DirectionsCar';
+import SatuIndonesiaIcon from './SatuIndonesiaIcons';
+import ToyotaIcon from './ToyotaIcon';
+import AstraIcon from './AstraIcon';
+import AppleIcon from './AppleIcon';
 import DropDownArrow from './DropDownArrow';
 
 const Icons = {
@@ -47,6 +51,10 @@ const Icons = {
   Mail,
   PhoneInTalk,
   DirectionsCar,
+  SatuIndonesiaIcon,
+  ToyotaIcon,
+  AstraIcon,
+  AppleIcon,
   DropDownArrow,
 };
 
