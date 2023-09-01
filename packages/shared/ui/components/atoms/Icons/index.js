@@ -26,6 +26,8 @@ import ToyotaIcon from './ToyotaIcon';
 import AstraIcon from './AstraIcon';
 import AppleIcon from './AppleIcon';
 import DropDownArrow from './DropDownArrow';
+import Grade from './Grade';
+import ArrowForward from './ArrowForward';
 
 const Icons = {
   CarIcon,
@@ -56,6 +58,8 @@ const Icons = {
   AstraIcon,
   AppleIcon,
   DropDownArrow,
+  Grade,
+  ArrowForward,
 };
 
 export default Icons;
