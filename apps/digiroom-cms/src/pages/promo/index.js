@@ -3,14 +3,14 @@ import React, { useEffect, useState } from 'react';
 import CustomTable from '@/components/Table';
 import { useRouter } from 'next/navigation';
 import { columns, filterData, headerArray, sampleData } from '@/constants/implement-table';
-import ModalText from '../modal-text';
-import ModalFilter from '../modal-filter';
+import ModalText from '@/components/modal-text';
+import ModalFilter from '@/components/modal-filter';
 import {
   deleteListDashboardPromo,
   getIdListData,
   getListDashboardPromo,
 } from '../../service/promo-dashboard-homepage/promo-dashboard';
-import ModalPreview from '../modal-preview';
+import ModalPreview from '@/components/modal-preview';
 import { LoadingEffect } from '../loading';
 import { Spinner } from 'flowbite-react';
 

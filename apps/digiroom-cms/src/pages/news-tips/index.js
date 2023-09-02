@@ -2,24 +2,19 @@ import { MdOutlineFileCopy } from 'react-icons/md';
 import React, { useEffect, useState } from 'react';
 import CustomTable from '@/components/Table';
 import { useRouter } from 'next/navigation';
+import { columns, filterDataNewsTips, headerArrayNewsTips } from '@/constants/implement-table';
+import ModalText from '@/components/modal-text';
+import ModalFilter from '@/components/modal-filter';
+import ModalPreview from '@/components/modal-preview';
 import {
-  columns,
-  filterDataNewsTips,
-  headerArrayNewsTips,
-  sampleDataNewsTips,
-} from '@/constants/implement-table';
-import ModalText from '../modal-text';
-import ModalFilter from '../modal-filter';
-import {
-  deleteListDashboardPromo,
+  getListDashboardNewsTips,
   getIdListData,
-} from '../../service/promo-dashboard-homepage/promo-dashboard';
-import ModalPreview from '../modal-preview';
-import { getListDashboardNewsTips } from '@/service/news-tips-dashboard/news-tips-dashboard';
+  deleteDataTable,
+} from '@/service/news-tips-dashboard/news-tips-dashboard';
 import { LoadingEffect } from '../loading';
 import { Spinner } from 'flowbite-react';
 
-const DashboardPromo = () => {
+const DashboardNewsTips = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [showToast, setShowToast] = useState(false);
   const [toastDescription, setToastDescription] = useState('');
@@ -39,16 +34,15 @@ const DashboardPromo = () => {
   const [searchBoolean, setSearchBoolean] = useState(false);
   const [filteredItem, setFilteredItem] = useState(null);
   const [listDashboard, setListDashboard] = useState([]);
-  const [sortKey, setSortKey] = useState(null);
-  const [sortDirection, setSortDirection] = useState('asc');
+  const [sortKey, setSortKey] = useState([]);
+  const [sortDirection, setSortDirection] = useState([]);
+  const [dataDirection, setDataDirection] = useState([]);
   const [tableDelete, setTableDelete] = useState();
   const [activeFilters, setActiveFilters] = useState([]);
   const [openModalPreview, setOpenModalPreview] = useState('');
   const [dataPreview, setDataPreview] = useState([]);
   const [loadingAction, setLoadingAction] = useState(false);
-
-  const startIndex = itemsPerPage * (currentPage - 1);
-  const endIndex = startIndex + itemsPerPage;
+  const [deleteData, setDeleteData] = useState();
 
   const onPageChange = async (page) => {
     setCurrentPage(page);
@@ -80,13 +74,14 @@ const DashboardPromo = () => {
     setCaseItems(items);
     switch (items) {
       case 'edit':
-        router.push('/#');
+        router.push(`/news-tips/add-news-tips`);
         break;
       case 'delete':
         setOpenModal('dismissible');
         setModalText('delete');
         setModalHeader(`Delete ${listDashboard[index + startIndex].title}`);
         setTableDelete(listDashboard[index + startIndex]);
+        setDeleteData(item.id);
         break;
       case 'copy':
         const textToCopy = listDashboard[index + startIndex].slug;
@@ -100,51 +95,39 @@ const DashboardPromo = () => {
         break;
       case 'view':
         setLoadingAction(true);
-        const data = await getIdListData(item.id);
+        const data = await getIdListData(item);
+        console.log('isi data', data);
         if (data !== null) {
           setDataPreview(data);
           setOpenModalPreview('dismissible');
           setLoadingAction(false);
         } else {
-          setDataPreview(sampleDataNewsTips);
+          setDataPreview(null);
           setOpenModalPreview('dismissible');
           setLoadingAction(false);
         }
+        setLoadingAction(false);
         break;
-    }
-  };
-
-  const onDeleteData = async (value) => {
-    const deleteData = await deleteListDashboardPromo(value.id);
-    if (deleteData) {
-      const updatedList = listDashboard.filter((item) => item.id !== value.id);
-      setListDashboard(updatedList);
     }
   };
 
   const fetchListDarhboard = async () => {
     setIsLoading(true);
     try {
-      const data = await getListDashboardNewsTips(
-        search,
-        sortDirection,
-        currentPage,
-        startIndex,
-        endIndex,
-        activeFilters
-      );
+      const payload = {
+        filters: [],
+        sorts: dataDirection,
+        page: currentPage - 1,
+        size: itemsPerPage,
+      };
+      console.log('isi payload', payload);
+      const data = await getListDashboardNewsTips(payload);
+      console.log('isi data', data);
 
       if (data !== null) {
-        const newArray = Object.keys(data).map((key) => ({
-          title: data[key].titlePage,
-          id: data[key].id,
-          category: data[key].category.name,
-          startDate: new Date(data[key].startDate).toDateString('id-ID'),
-          endDate: new Date(data[key].endDate).toDateString('id-ID'),
-        }));
-        setListDashboard(newArray);
-        setTotalItems(newArray.length);
-        setTotalPages(Math.ceil(newArray.length / itemsPerPage));
+        setListDashboard(data.content);
+        setTotalItems(data.totalElements);
+        setTotalPages(Math.ceil(data.totalPages / itemsPerPage));
       }
       setIsLoading(false);
     } catch (error) {
@@ -174,7 +157,8 @@ const DashboardPromo = () => {
         setOpenModal(undefined);
         break;
       default:
-        await onDeleteData(tableDelete);
+        const data = await deleteDataTable(deleteData);
+        console.log('isi data', data);
         setOpenModal(undefined);
         break;
     }
@@ -194,7 +178,7 @@ const DashboardPromo = () => {
   const handleFilter = (filterData) => {
     event.preventDefault();
     setActiveFilters(filterData);
-    fetchListDarhboard();
+    // fetchListDarhboard();
   };
 
   const copyToClipboard = (text) => {
@@ -206,28 +190,61 @@ const DashboardPromo = () => {
     document.body.removeChild(textArea);
   };
 
+  // const handleSort = (key) => {
+  //   console.log('isi key', key);
+  //   console.log('isi sort key', sortKey);
+
+  //   if (sortKey === key) {
+  //     setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+  //   } else {
+  //     setSortKey(key);
+  //     setSortDirection('asc');
+  //   }
+  //   const arrayDirection = [...dataDirection];
+  //   arrayDirection.push({ key: key, direction: sortDirection });
+  //   console.log('isi data', arrayDirection);
+  //   setDataDirection(arrayDirection);
+  // };
+
   const handleSort = (key) => {
-    if (sortKey === key) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+    const keyIndex = sortKey.indexOf(key);
+
+    if (keyIndex !== -1) {
+      const newDirection = sortDirection[keyIndex] === 'asc' ? 'desc' : 'asc';
+      setSortDirection([
+        ...sortDirection.slice(0, keyIndex),
+        newDirection,
+        ...sortDirection.slice(keyIndex + 1),
+      ]);
+      setDataDirection([
+        ...dataDirection.filter((item) => item.key !== key),
+        { key, direction: newDirection },
+      ]);
     } else {
-      setSortKey(key);
-      setSortDirection('asc');
+      setSortKey([...sortKey, key]);
+      setSortDirection([...sortDirection, 'asc']);
+      setDataDirection([...dataDirection, { key, direction: 'asc' }]);
     }
+    console.log(dataDirection);
   };
 
   useEffect(() => {
     // fetchListDarhboard();
-  }, [currentPage, itemsPerPage, filteredItem, sortKey, sortDirection, totalItems]);
+  }, [currentPage, itemsPerPage, filteredItem, totalItems, sortDirection, sortKey]);
 
   return (
     <div className="relative w-full">
       {loadingAction && LoadingEffect(<Spinner />, 'Loading...')}
-
       <div className={`${loadingAction ? 'pointer-events-none' : ''} relative`}>
         <CustomTable
           columns={columns(
+            itemsPerPage,
+            currentPage,
             (value) => handleToggleChange(value),
-            (value, index, item) => onClick(value, index, item)
+            (value, index, item) => onClick(value, index, item),
+            sortKey,
+            sortDirection,
+            handleSort
           )}
           dataSource={listDashboard}
           showToast={showToast}
@@ -257,7 +274,6 @@ const DashboardPromo = () => {
           )}
         />
       </div>
-
       {/* Modal */}
       <div>
         <ModalText
@@ -289,4 +305,4 @@ const DashboardPromo = () => {
   );
 };
 
-export default DashboardPromo;
+export default DashboardNewsTips;

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import LayoutForm from '@/components/LayoutForm';
 import { useForm } from 'react-hook-form';
-import generateSlug from '@/helpers/utils/slug';
+import { handleUpload } from '@/service/azure/fileUpload';
 
 import { Controller } from 'react-hook-form';
 import Dropzone from '@/components/LayoutForm/Dropzone';
@@ -14,7 +14,8 @@ const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 import SelectCategory from '@/components/LayoutForm/Select';
 import Select from 'react-select';
-import { data } from 'autoprefixer';
+import { useEffect } from 'react';
+import { createNewsTips } from '@/service/news-tips-dashboard/news-tips-dashboard';
 
 const CustomInput = React.forwardRef((props, ref) => {
   return (
@@ -207,12 +208,9 @@ const componentConfig = [
         <ReactQuill
           theme="snow"
           className={`my-3 ${errors?.detailPromosi ? 'border-red-500' : ''}`}
-          value={dataForm.detailPromosi || ''}
+          value={dataForm.detailPromosi}
           onChange={(value) => {
             handleQuillChange(value);
-          }}
-          onBlur={() => {
-            trigger('detailPromosi');
           }}
         />
         {errors?.detailPromosi && (
@@ -383,12 +381,12 @@ const componentConfig = [
   },
   {
     title: '',
-    render: ({ cancel, showPreviewPage }) => (
+    render: ({ cancelPage, showPreviewPage }) => (
       <div className="flex justify-between mt-[48px]">
         <div>
           <button
             type="button"
-            onClick={cancel}
+            onClick={cancelPage}
             className="text-reliableBlack90  py-2 px-4 tracking-wide border border-transparent text-[16px] font-bold "
           >
             CANCEL
@@ -414,9 +412,9 @@ const componentConfig = [
   },
 ];
 
-const NewsAddTips = () => {
-  const [dataForm, setDataForm] = useState();
-
+const NewsTips = () => {
+  const [dataForm, setDataForm] = useState({});
+  const [urlImage, setUrlImage] = useState();
   const {
     handleSubmit,
     control,
@@ -424,8 +422,14 @@ const NewsAddTips = () => {
     formState: { errors },
   } = useForm();
 
-  const handleUpload = (file) => {
-    console.log('Uploading file:', file);
+  const handleUploadFile = async (file) => {
+    event.preventDefault();
+    const uploadData = await handleUpload(file);
+    if (uploadData) {
+      setUrlImage(uploadData.url);
+    } else {
+      console.log('Upload failed.');
+    }
   };
 
   const handleQuillChange = (value) => {
@@ -437,16 +441,18 @@ const NewsAddTips = () => {
     });
   };
 
-  const handleDetailPromo = (value) => {};
-
   const showPreviewPage = () => {
     window.open('http://localhost:3004/promo/preview', '_blank');
   };
 
-  const onSubmit = (data) => {
+  const cancelPage = () => {
+    console.log('haloo');
+  };
+
+  const onSubmit = async (data) => {
+    console.log(data);
     const dataTemporary = {
-      heroImageLink:
-        'https://astradigitaldigiroomstg.blob.core.windows.net/storage-general-001/image.jpg',
+      heroImageLink: urlImage,
       titlePage: data.title,
       startDate: data.startDate,
       endDate: data.expiredDate,
@@ -468,28 +474,32 @@ const NewsAddTips = () => {
         priority: 1,
       },
       keyword: 'this for keyword',
-      metaDescription: 'this for metaDescription',
+      metaDescription: data.shortDescription,
       altImage: 'this for altImage',
       ordering: 1,
-      tag: null,
-      metaRobotList: [],
-      cmsStatusType: null,
-      groupType: null,
-      region: null,
-      city: null,
-      branch: null,
-      detailContent: data.detailPromosi,
+      // tag: data.tags,
+      metaRobotList: data.robotsTags,
+      cmsStatusType: 'DRAFT',
+      // region: data.region,
+      // city: data.city,
+      // branch: data.branch,
+      detailContent: dataForm.detailPromosi,
     };
+    console.log('data temporarty', dataTemporary);
+
+    const create = await createNewsTips(dataTemporary);
+    console.log('isi create', create);
   };
 
   const editor = useRef();
 
+  useEffect(() => {}, dataForm);
   return (
     <LayoutForm
       control={control}
       register={register}
       onSubmit={handleSubmit(onSubmit)}
-      handleUpload={handleUpload}
+      handleUpload={handleUploadFile}
       editor={editor}
       showPreviewPage={showPreviewPage}
       componentConfig={componentConfig}
@@ -497,8 +507,9 @@ const NewsAddTips = () => {
       setDataForm={setDataForm}
       errors={errors}
       handleQuillChange={handleQuillChange}
+      cancelPage={cancelPage}
     />
   );
 };
 
-export default NewsAddTips;
+export default NewsTips;

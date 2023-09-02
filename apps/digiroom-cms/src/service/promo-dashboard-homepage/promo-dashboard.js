@@ -21,7 +21,7 @@ export const getListDashboardPromo = async (
   const api = `${apiConfig.local}/list-dashboard-promo?${queryParams.toString()}`;
   try {
     const response = await CMS.get(api);
-    if (response !== null) {
+    if (response === 200) {
       const data = response;
       return data;
     } else {
@@ -33,7 +33,7 @@ export const getListDashboardPromo = async (
   }
 };
 
-export const deleteListDashboardPromo = async (id, token) => {
+export const deleteListDashboardPromo = async (id) => {
   const api = `${apiConfig.local}/list-dashboard-promo?id=${id}`;
   try {
     const response = await CMS.delete(api);
@@ -45,5 +45,20 @@ export const deleteListDashboardPromo = async (id, token) => {
   } catch (error) {
     console.error('Error deleting data:', error);
     return false;
+  }
+};
+
+export const getIdListData = async (id) => {
+  const api = `${process.env.NEXT_PUBLIC_BASE_URL}/promo/list/${id}`;
+  try {
+    const response = await CMS.get(api);
+    if (response === 200) {
+      return response;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error('Error getting data: ', error);
+    return null;
   }
 };

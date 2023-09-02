@@ -15,6 +15,7 @@ import 'react-quill/dist/quill.snow.css';
 import SelectCategory from '@/components/LayoutForm/Select';
 import Select from 'react-select';
 import { useEffect } from 'react';
+import { createNewsTips } from '@/service/news-tips-dashboard/news-tips-dashboard';
 
 const CustomInput = React.forwardRef((props, ref) => {
   return (
@@ -413,6 +414,7 @@ const componentConfig = [
 
 const AddPromo = () => {
   const [dataForm, setDataForm] = useState({});
+  const [urlImage, setUrlImage] = useState();
   const {
     handleSubmit,
     control,
@@ -420,8 +422,14 @@ const AddPromo = () => {
     formState: { errors },
   } = useForm();
 
-  const handleUpload = (file) => {
-    handleUpload(file);
+  const handleUploadFile = async (file) => {
+    event.preventDefault();
+    const uploadData = await handleUpload(file);
+    if (uploadData) {
+      setUrlImage(uploadData.url);
+    } else {
+      console.log('Upload failed.');
+    }
   };
 
   const handleQuillChange = (value) => {
@@ -437,10 +445,14 @@ const AddPromo = () => {
     window.open('http://localhost:3004/promo/preview', '_blank');
   };
 
-  const onSubmit = (data) => {
+  const cancelPage = () => {
+    console.log('haloo');
+  };
+
+  const onSubmit = async (data) => {
+    console.log(data);
     const dataTemporary = {
-      heroImageLink:
-        'https://astradigitaldigiroomstg.blob.core.windows.net/storage-general-001/image.jpg',
+      heroImageLink: urlImage,
       titlePage: data.title,
       startDate: data.startDate,
       endDate: data.expiredDate,
@@ -462,18 +474,21 @@ const AddPromo = () => {
         priority: 1,
       },
       keyword: 'this for keyword',
-      metaDescription: 'this for metaDescription',
+      metaDescription: data.shortDescription,
       altImage: 'this for altImage',
       ordering: 1,
-      tag: null,
-      metaRobotList: [],
-      cmsStatusType: null,
-      groupType: null,
-      region: null,
-      city: null,
-      branch: null,
+      // tag: data.tags,
+      metaRobotList: data.robotsTags,
+      cmsStatusType: 'DRAFT',
+      // region: data.region,
+      // city: data.city,
+      // branch: data.branch,
       detailContent: dataForm.detailPromosi,
     };
+    console.log('data temporarty', dataTemporary);
+
+    const create = await createNewsTips(dataTemporary);
+    console.log('isi create', create);
   };
 
   const editor = useRef();
@@ -484,7 +499,7 @@ const AddPromo = () => {
       control={control}
       register={register}
       onSubmit={handleSubmit(onSubmit)}
-      handleUpload={handleUpload}
+      handleUpload={handleUploadFile}
       editor={editor}
       showPreviewPage={showPreviewPage}
       componentConfig={componentConfig}

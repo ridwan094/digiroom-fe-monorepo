@@ -78,40 +78,19 @@ const CustomTable = ({
             {columns.map((item, index) => (
               <Table.HeadCell
                 key={index}
-                onClick={() => item.sortable && onSort(item.dataIndex)}
-                className={`${
-                  item.sortable && totalItems
-                    ? 'cursor-pointer hover:bg-gray-200'
-                    : 'pointer-events-none'
-                } ${sortKey === item.dataIndex ? 'bg-gray-200 font-semibold' : 'font-normal'}`}
+                onClick={item.onClickSort}
+                // className={`${
+                //   item.isSortable && totalItems ? 'cursor-pointer hover:bg-gray-200' : ''
+                // } ${sortKey === item.key ? 'bg-gray-200 font-semibold' : 'font-normal'}`}
               >
                 <div className="flex items-center">
                   {item.title}
-                  <div className="px-1 flex flex-col text-sm">
-                    {item.sortable && (
-                      <>
-                        {sortKey === item.dataIndex && (
-                          <span className="flex flex-col">
-                            {sortDirection === 'asc' ? (
-                              <MdKeyboardArrowUp />
-                            ) : (
-                              <MdKeyboardArrowDown />
-                            )}
-                          </span>
-                        )}
-                        {sortKey !== item.dataIndex && (
-                          <>
-                            <MdKeyboardArrowUp />
-                            <MdKeyboardArrowDown />
-                          </>
-                        )}
-                      </>
-                    )}
-                  </div>
+                  <div className="px-1 flex flex-col text-sm">{item.sortIndicator}</div>
                 </div>
               </Table.HeadCell>
             ))}
           </Table.Head>
+
           {itemsToRender.length === 0 ? (
             <Table.Body>
               <Table.Row>
