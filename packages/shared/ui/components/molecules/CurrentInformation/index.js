@@ -1,28 +1,11 @@
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import { Card, Tag } from 'ui/components/atoms';
+import { useSelector } from 'react-redux';
 
 const CurrentInformation = ({ items, classNameContainer, ...props }) => {
-  const [isMobile, setIsMobile] = useState(false);
-  const classNameAssigned = ['relative flex flex-col justify-center gap-8', ...classNameContainer];
-
-  const handleResize = () => {
-    if (window.innerWidth <= 768) {
-      setIsMobile(true);
-    } else {
-      setIsMobile(false);
-    }
-  };
-
-  useEffect(() => {
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const classNameAssigned = ['relative flexz flex-col justify-center gap-8', ...classNameContainer];
+  const isMobile = useSelector((state) => state.page.isMobileScreen);
 
   return (
     <div className={classNameAssigned.join(' ')}>
