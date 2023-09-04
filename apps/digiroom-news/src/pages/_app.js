@@ -3,15 +3,19 @@ import { store, wrapper } from '@/store';
 import '@/styles/globals.css';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
-import { setIsMobileScreen, setScreenSize } from '@/store/page/actions';
-import { useSelector } from 'react-redux';
-import screenBreakpoints from 'src/constants/screen-breakpoints';
+import { store, wrapper } from 'ui/store';
+import '@/styles/globals.css';
 import Layout from 'ui/components/templates/Layout';
+import { useSelector } from 'react-redux';
+import { setIsMobileScreen, setScreenSize } from 'ui/store/page/actions';
+import screenBreakpoints from 'ui/constants/screen-breakpoints';
+import { useEffect } from 'react';
 
-const App = ({ Component, pageProps }) => {
+function App({ Component, pageProps }) {
   const { screenSize } = useSelector((state) => state.page);
+  console.log('digiroom-news:' + screenSize);
   useEffect(() => {
-    store.dispatch(setIsMobileScreen(screenSize?.width <= screenBreakpoints.MIN_DESKTOP_SCREEN));
+    store.dispatch(setIsMobileScreen(screenSize?.width < screenBreakpoints.MIN_DESKTOP_SCREEN));
   }, [screenSize?.width]);
 
   useEffect(() => {
@@ -19,7 +23,7 @@ const App = ({ Component, pageProps }) => {
       setScreenSize({
         width: window.innerWidth,
         height: window.innerHeight,
-        mobile: window.innerWidth <= screenBreakpoints.MIN_DESKTOP_SCREEN,
+        mobile: window.innerWidth < screenBreakpoints.MIN_DESKTOP_SCREEN,
       })
     );
 
@@ -28,7 +32,7 @@ const App = ({ Component, pageProps }) => {
         setScreenSize({
           width: event.target.innerWidth,
           height: event.target.innerHeight,
-          mobile: window.innerWidth <= screenBreakpoints.MIN_DESKTOP_SCREEN,
+          mobile: window.innerWidth < screenBreakpoints.MIN_DESKTOP_SCREEN,
         })
       );
     });
@@ -37,7 +41,6 @@ const App = ({ Component, pageProps }) => {
       window.removeEventListener('resize', () => {});
     };
   }, []); //eslint-disable-line react-hooks/exhaustive-deps
-
   return (
     <>
       <Head>
@@ -50,6 +53,6 @@ const App = ({ Component, pageProps }) => {
       </Provider>
     </>
   );
-};
+}
 
 export default wrapper.withRedux(App);
