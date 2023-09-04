@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-import { store, wrapper } from '@/store';
 import '@/styles/globals.css';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
