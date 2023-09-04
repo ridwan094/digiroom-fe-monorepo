@@ -1,11 +1,11 @@
-import { store, wrapper } from '@/store';
+import { store, wrapper } from 'ui/store'
 import '@/styles/globals.css';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
 import { useEffect } from 'react';
-import { setIsMobileScreen, setScreenSize } from '@/store/page/actions';
+import { setIsMobileScreen, setScreenSize } from 'ui/store/page/actions';
 import { useSelector } from 'react-redux';
-import screenBreakpoints from 'src/constants/screen-breakpoints';
+import screenBreakpoints from 'ui/constants/screen-breakpoints';
 
 const App = ({ Component, pageProps }) => {
   const { screenSize } = useSelector((state) => state.page);
