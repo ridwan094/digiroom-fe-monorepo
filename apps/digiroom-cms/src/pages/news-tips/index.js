@@ -2,7 +2,11 @@ import { MdOutlineFileCopy } from 'react-icons/md';
 import React, { useEffect, useState } from 'react';
 import CustomTable from '@/components/Table';
 import { useRouter } from 'next/navigation';
-import { columns, filterDataNewsTips, headerArrayNewsTips } from '@/constants/implement-table';
+import {
+  columnsNewsTips,
+  filterDataNewsTips,
+  headerArrayNewsTips,
+} from '@/constants/implement-table';
 import ModalText from '@/components/modal-text';
 import ModalFilter from '@/components/modal-filter';
 import ModalPreview from '@/components/modal-preview';
@@ -32,12 +36,10 @@ const DashboardNewsTips = () => {
   const router = useRouter();
   const [search, setSearch] = useState('');
   const [searchBoolean, setSearchBoolean] = useState(false);
-  const [filteredItem, setFilteredItem] = useState(null);
   const [listDashboard, setListDashboard] = useState([]);
   const [sortKey, setSortKey] = useState([]);
   const [sortDirection, setSortDirection] = useState([]);
   const [dataDirection, setDataDirection] = useState([]);
-  const [tableDelete, setTableDelete] = useState();
   const [activeFilters, setActiveFilters] = useState([]);
   const [openModalPreview, setOpenModalPreview] = useState('');
   const [dataPreview, setDataPreview] = useState([]);
@@ -46,7 +48,7 @@ const DashboardNewsTips = () => {
 
   const onPageChange = async (page) => {
     setCurrentPage(page);
-    fetchListDarhboard();
+    fetchListDashboard();
   };
 
   const onClickCheck = (value) => {
@@ -66,7 +68,7 @@ const DashboardNewsTips = () => {
   const searchTable = async (value) => {
     if (value.key === 'Enter') {
       setCurrentPage(1);
-      fetchListDarhboard();
+      fetchListDashboard();
     }
   };
 
@@ -96,7 +98,6 @@ const DashboardNewsTips = () => {
       case 'view':
         setLoadingAction(true);
         const data = await getIdListData(item);
-        console.log('isi data', data);
         if (data !== null) {
           setDataPreview(data);
           setOpenModalPreview('dismissible');
@@ -111,7 +112,7 @@ const DashboardNewsTips = () => {
     }
   };
 
-  const fetchListDarhboard = async () => {
+  const fetchListDashboard = async () => {
     setIsLoading(true);
     try {
       const payload = {
@@ -120,10 +121,7 @@ const DashboardNewsTips = () => {
         page: currentPage - 1,
         size: itemsPerPage,
       };
-      console.log('isi payload', payload);
       const data = await getListDashboardNewsTips(payload);
-      console.log('isi data', data);
-
       if (data !== null) {
         setListDashboard(data.content);
         setTotalItems(data.totalElements);
@@ -139,7 +137,7 @@ const DashboardNewsTips = () => {
   const dropdownPageChange = (selectedValue) => {
     setItemsPerPage(selectedValue);
     onPageChange(1);
-    fetchListDarhboard();
+    fetchListDashboard();
   };
 
   const onClickModal = async () => {
@@ -158,7 +156,6 @@ const DashboardNewsTips = () => {
         break;
       default:
         const data = await deleteDataTable(deleteData);
-        console.log('isi data', data);
         setOpenModal(undefined);
         break;
     }
@@ -178,7 +175,7 @@ const DashboardNewsTips = () => {
   const handleFilter = (filterData) => {
     event.preventDefault();
     setActiveFilters(filterData);
-    // fetchListDarhboard();
+    // fetchListDashboard();
   };
 
   const copyToClipboard = (text) => {
@@ -190,54 +187,50 @@ const DashboardNewsTips = () => {
     document.body.removeChild(textArea);
   };
 
-  // const handleSort = (key) => {
-  //   console.log('isi key', key);
-  //   console.log('isi sort key', sortKey);
-
-  //   if (sortKey === key) {
-  //     setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
-  //   } else {
-  //     setSortKey(key);
-  //     setSortDirection('asc');
-  //   }
-  //   const arrayDirection = [...dataDirection];
-  //   arrayDirection.push({ key: key, direction: sortDirection });
-  //   console.log('isi data', arrayDirection);
-  //   setDataDirection(arrayDirection);
-  // };
-
   const handleSort = (key) => {
     const keyIndex = sortKey.indexOf(key);
 
     if (keyIndex !== -1) {
-      const newDirection = sortDirection[keyIndex] === 'asc' ? 'desc' : 'asc';
-      setSortDirection([
-        ...sortDirection.slice(0, keyIndex),
-        newDirection,
-        ...sortDirection.slice(keyIndex + 1),
-      ]);
-      setDataDirection([
-        ...dataDirection.filter((item) => item.key !== key),
-        { key, direction: newDirection },
-      ]);
+      let newDirection;
+
+      if (sortDirection[keyIndex] === 'ASC') {
+        newDirection = 'DESC';
+      } else if (sortDirection[keyIndex] === 'DESC') {
+        newDirection = null;
+      }
+
+      if (newDirection === null) {
+        setSortKey(sortKey.filter((k) => k !== key));
+        setSortDirection(sortDirection.filter((direction, index) => index !== keyIndex));
+        setDataDirection(dataDirection.filter((item) => item.key !== key));
+      } else {
+        setSortDirection(
+          sortDirection.map((direction, index) => (index === keyIndex ? newDirection : direction))
+        );
+        setDataDirection(
+          dataDirection.map((item) =>
+            item.key === key ? { ...item, direction: newDirection } : item
+          )
+        );
+      }
     } else {
       setSortKey([...sortKey, key]);
-      setSortDirection([...sortDirection, 'asc']);
-      setDataDirection([...dataDirection, { key, direction: 'asc' }]);
+      setSortDirection([...sortDirection, 'ASC']);
+      setDataDirection([...dataDirection, { key, direction: 'ASC' }]);
     }
-    console.log(dataDirection);
+    fetchListDashboard();
   };
 
   useEffect(() => {
-    // fetchListDarhboard();
-  }, [currentPage, itemsPerPage, filteredItem, totalItems, sortDirection, sortKey]);
+    fetchListDashboard();
+  }, []);
 
   return (
     <div className="relative w-full">
       {loadingAction && LoadingEffect(<Spinner />, 'Loading...')}
       <div className={`${loadingAction ? 'pointer-events-none' : ''} relative`}>
         <CustomTable
-          columns={columns(
+          columns={columnsNewsTips(
             itemsPerPage,
             currentPage,
             (value) => handleToggleChange(value),
@@ -262,9 +255,6 @@ const DashboardNewsTips = () => {
             searchBoolean: searchBoolean,
           }}
           isLoading={isLoading}
-          onSort={handleSort}
-          sortKey={sortKey}
-          sortDirection={sortDirection}
           headerData={headerArrayNewsTips(
             searchBoolean,
             search,
