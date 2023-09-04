@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { QuickLink, BreadCrumbs } from 'ui/components/molecules';
 import {
   ArticleListHeroSection,
@@ -9,15 +9,16 @@ import {
 import { FAQS, newsList } from '../../constants/news';
 
 const ArticleListingPage = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [news, setNews] = useState([]);
 
-  const handleScroll = () => {
-    if (window.scrollY > 0) {
-      setIsScrolled(true);
-    } else {
-      setIsScrolled(false);
-    }
-  };
+  useEffect(() => {
+    fetch('/api/news') // Panggil API
+      .then((response) => response.json())
+      .then((data) => setNews(data))
+      .catch((error) => console.error('Error fetching news:', error));
+  }, []);
+  console.log('res : ', news);
+
   return (
     <React.Fragment>
       <QuickLink />
@@ -33,10 +34,7 @@ const ArticleListingPage = () => {
       </div>
 
       {/* List Artikel Desktop */}
-      <div className={``}>
-        {/* List Artikel Desktop */}
-        <ArticleListTabSection itemList={newsList} />
-      </div>
+      <ArticleListTabSection itemList={newsList} />
 
       {/* Info section */}
       <PromoInfoSection />

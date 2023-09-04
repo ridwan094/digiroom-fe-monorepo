@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { MdArrowForward, MdClose } from 'react-icons/md';
-import { Layout } from 'ui/components/templates';
-import { BtnConfirm, Text } from 'ui/components/atoms';
-import { BreadCrumbs, InquiryForm, OtpForm } from 'ui/components/molecules';
+import { MdArrowForward } from 'react-icons/md';
+import { BtnConfirm } from 'ui/components/atoms';
+import { BreadCrumbs } from 'ui/components/molecules';
 import {
+  InquiryFormMobileSection,
   DetailPromoAnotherPromoSection,
   DetailPromoBodySection,
   DetailPromoHeroSection,
@@ -14,12 +13,9 @@ import {
 
 const PromoDetailPage = ({ slug, promo }) => {
   const [formOpen, setFormOpen] = useState(false);
-  const [otpOpen, setOtpOpen] = useState(false);
-
-  const router = useRouter();
 
   return (
-    <Layout>
+    <>
       {/* Breadcrumb for web screen */}
       <BreadCrumbs
         isMobileScreen={false}
@@ -31,29 +27,32 @@ const PromoDetailPage = ({ slug, promo }) => {
       />
 
       {/* Main content */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[2fr_1fr]">
-        {/* Col 1 */}
-        <div>
-          {/* Detail Promo Hero Section */}
-          <DetailPromoHeroSection />
+      <div className="lg:container">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[2fr_1fr]">
+          {/* Col 1: Detail Promo */}
+          <div>
+            {/* Detail Promo Hero Section */}
+            <DetailPromoHeroSection image={promo.image} />
 
-          {/* Detail Promo Body Section */}
-          <DetailPromoBodySection promo={promo} />
+            {/* Detail Promo Body Section */}
+            <DetailPromoBodySection promo={promo} baseUrl={process.env.NEXT_PUBLIC_BASE_URL} />
+          </div>
 
-          {/* Another promo */}
-          <DetailPromoAnotherPromoSection anotherPromo={promo.anotherPromo} />
-
-          {/* Social media links */}
-          <SocialMediaLinksSection />
-        </div>
-
-        {/* Col 2 */}
-        <div className="hidden my-4 md:mt-8 md:block">
-          <div className="container">
+          {/* Col 2: Inquiry from section for desktop */}
+          <div className="container hidden md:mt-4 md:block lg:p-0">
             <DetailPromoInquiryFormSection />
           </div>
         </div>
       </div>
+
+      {/* Additional content */}
+      <div className="container">
+        {/* Another promo */}
+        <DetailPromoAnotherPromoSection anotherPromo={promo.anotherPromo} />
+      </div>
+
+      {/* Social media links */}
+      <SocialMediaLinksSection />
 
       {/* Breadcrumb for mobile screen */}
       <BreadCrumbs
@@ -66,11 +65,7 @@ const PromoDetailPage = ({ slug, promo }) => {
       />
 
       {/* CTA Button for mobile screen */}
-      <div
-        className={`${
-          formOpen || otpOpen ? 'hidden' : 'block'
-        } fixed w-full z-50 bottom-16 md:hidden`}
-      >
+      <div className="fixed w-full z-50 bottom-16 md:hidden">
         <BtnConfirm
           block={true}
           className="bg-supportiveRed text-white"
@@ -90,89 +85,11 @@ const PromoDetailPage = ({ slug, promo }) => {
         </BtnConfirm>
       </div>
 
-      {/* Form inquiry open */}
-      {formOpen && (
-        <div className="fixed flex-col z-10 top-0 left-0 flex items-center justify-center w-full h-screen bg-white min-h-screen">
-          <div className="flex w-full justify-between px-4 py-6 border-b border-b-reliableBlack30">
-            <Text.Head6 className="font-bold text-reliableBlack90 uppercase">
-              Minta Penawaran
-            </Text.Head6>
-            <button
-              className="text-black"
-              onClick={() => {
-                setFormOpen(false);
-              }}
-            >
-              <MdClose size={24} />
-            </button>
-          </div>
-          <div className="overflow-y-auto h-full pt-4">
-            <p className="text-sm px-4 text-reliableBlack">
-              Silakan isi data Anda. Data pribadi Anda aman bersama kami. Perwakilan sales kami akan
-              segera menghubungi Anda.
-            </p>
-            <InquiryForm
-              containerClassForm={'w-full h-full'}
-              containerInputClassName={'px-4 my-6'}
-              containerDropdown={'px-4 my-6 text-[#666666] font-semibold'}
-              labelStyle={'text-[#666666]'}
-              inputClassName={''}
-              buttonContainer={'fixed w-full left-0 bottom-0 pt-8'}
-              onSubmit={() => {
-                setOtpOpen(true);
-              }}
-            />
-          </div>
-        </div>
-      )}
-
-      {/* OTP */}
-      {otpOpen && (
-        <div className="fixed flex-col z-10 top-0 left-0 flex items-center justify-center w-full h-full bg-white">
-          <div className="flex w-full justify-between p-4 border-b border-b-reliableBlack30">
-            <Text.Head6 className="font-bold text-reliableBlack90 uppercase">
-              Masukkan Kode OTP
-            </Text.Head6>
-            <button
-              className="text-black"
-              onClick={() => {
-                setOtpOpen(false);
-              }}
-            >
-              <MdClose size={24} />
-            </button>
-          </div>
-          <div className="w-full h-full flex flex-col bg-white">
-            <div className="py-8">
-              <p className="text-sm max-w-[328px] text-justify px-4 text-reliableBlack">
-                Masukkan kode 6-digit yang kami telah kirimkan ke Whatsapp{' '}
-                <span className="font-bold">+62-12345678910</span>
-              </p>
-              <OtpForm
-                containerClassForm={'w-full px-4 mt-14'}
-                containerInputClassName={'w-[50px] h-[50px] w-full'}
-                buttonContainer={'fixed z-50 w-full left-0 bottom-0'}
-                inputClassName={'text-center'}
-                onSubmit={() => router.push('/promo/inquiry/success')}
-              />
-
-              <p className="text-[14px] max-w-[328px] text-justify px-4 mt-14 text-reliableBlack">
-                InquirySuccess Belum dapat kode?{' '}
-                <a href="#">
-                  <span className="font-medium text-blue-500">Kirim ulang</span>
-                </a>
-              </p>
-              <p className="text-sm max-w-[328px] text-justify px-4 mt-6 text-reliableBlack">
-                Salah nomor handphone?{' '}
-                <a href="#">
-                  <span className="font-medium text-blue-500">Ganti nomor</span>
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-    </Layout>
+      {/* Inquiry form mobile section */}
+      <div className="block lg:hidden">
+        <InquiryFormMobileSection formOpen={formOpen} onClose={() => setFormOpen(false)} />
+      </div>
+    </>
   );
 };
 
@@ -193,7 +110,8 @@ export const getServerSideProps = async (context) => {
     rules: '*Paket terlampir adalah untuk OTR DKI Jakarta dan untuk wilayah lain akan berbeda.',
     startDate: '21 Nov 22',
     endDate: '30 Jun 23',
-    image: 'http://localhost:3002/images/promo-car-example.webp',
+    image: 'detailPromoImage2.webp',
+    tag: 'Best Seller',
     anotherPromo: [
       {
         title: 'Cicilan Ringan Toyota Raize',

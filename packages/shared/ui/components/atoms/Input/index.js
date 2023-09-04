@@ -26,8 +26,8 @@ const Input = ({
 
   // tailwind styling
   const dafaultStyling = `w-full outline-none ${
-    disabled ? 'bg-reliableBlack10 text-reliableBlack5' : 'bg-[#f8f8f8] text-reliableBlack70'
-  } border-b-2 border-reliableBlack30 focus:border-b-2`;
+    disabled ? 'bg-reliableBlack10 text-reliableBlack5' : 'bg-reliableBlack3 text-reliableBlack70'
+  } border-b-2 border-reliableBlack30 focus:border-b-2 lg:bg-white lg:border-b lg:border-[#5F5F5F]`;
 
   return (
     <div className={containerClassName}>
@@ -38,9 +38,9 @@ const Input = ({
         {/* -- icon --- */}
         {icon && (
           <div
-            className={`absolute inset-y-0 ${
+            className={`absolute inset-y-0 left-0 top-1/2 transform -translate-y-0.5 flex items-center pl-3 pointer-events-none ${
               iconPosition === 'right' ? 'right-0' : 'left-0'
-            } flex items-center`}
+            }`}
           >
             {icon}
           </div>
@@ -54,7 +54,7 @@ const Input = ({
             value={value}
             disabled={disabled}
             className={`${inputClassName} ${dafaultStyling} ${sizeClassName[size]} ${
-              iconPosition === 'left' ? 'pl-11' : 'pl-4'
+              iconPosition === 'left' ? 'pl-12' : 'pl-4'
             } ${danger && '!border-supportiveRed'} ${error && '!border-shadeRed'} focus:${
               focus || 'border-reliableBlack5'
             }`}

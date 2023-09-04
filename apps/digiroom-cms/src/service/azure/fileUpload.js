@@ -16,26 +16,24 @@ export async function handleUpload(file) {
 }
 
 async function uploadImage(file) {
-  const contentType = file.type;
-  const fileName = file.name;
+    const { type, name } = file;
 
-  const path =
-    'sp=racwdli&st=2023-08-29T07:30:27Z&se=2026-06-30T15:30:27Z&spr=https&sv=2022-11-02&sr=c&sig=N4eYieESRJHkTZ1PSN2F6W%2Fz7AGJUcLyXOPgBsTehek%3D';
-  const urlApi = `https://astradigitaldigiroomstg.blob.core.windows.net/storage-general-001/${fileName}?${path}`;
+    const path = 'sp=racwdli&st=2023-08-29T07:30:27Z&se=2026-06-30T15:30:27Z&spr=https&sv=2022-11-02&sr=c&sig=N4eYieESRJHkTZ1PSN2F6W%2Fz7AGJUcLyXOPgBsTehek%3D'
+    const urlApi = `https://astradigitaldigiroomstg.blob.core.windows.net/storage-general-001/${name}?${path}`;
 
-  try {
-    const response = await fetch(urlApi, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': contentType,
-        Origin: 'http://localhost:3004',
-        'x-ms-blob-type': 'BlockBlob',
-      },
-      body: file,
-    });
-    return response; // Return the response
-  } catch (error) {
-    console.error('Error logging in:', error);
-    throw error;
-  }
+    try {
+        const response = await fetch(urlApi, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': type,
+            'Origin': 'http://localhost:3004',
+            'x-ms-blob-type': 'BlockBlob'
+          },
+          body: file,
+        });
+  
+        return response;
+      } catch (error) {
+        console.error('Error logging in:', error);
+    }
 }

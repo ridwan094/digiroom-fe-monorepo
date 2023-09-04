@@ -12,6 +12,7 @@ import {
   SocialMediaLinksSection,
   DetailPromoInquiryFormSection,
 } from 'ui/components/organism';
+import { motion } from 'framer-motion';
 
 const ArticleDetailPage = ({ slug, article }) => {
   const { searchValue } = useSelector((state) => state.example);
@@ -28,11 +29,15 @@ const ArticleDetailPage = ({ slug, article }) => {
     setModalForm(!modalForm);
   };
 
+  const handleSuccess = () => {
+    router.push('/articles/success');
+  };
+
   return (
     <>
       {/* Breadcrumb for web screen */}
       <div className="sticky top-[123.5px] z-30 bg-white border-b-1 border-reliableBlack30 w-full">
-        <div className="mx-auto">
+        <div className="">
           <BreadCrumbs
             isMobileScreen={false}
             items={[
@@ -45,31 +50,33 @@ const ArticleDetailPage = ({ slug, article }) => {
       </div>
 
       {/* Main content */}
-      <div className="lg:mx-[100px] grid grid-cols-1 gap-6 lg:grid-cols-[2fr_1fr]">
-        {/* Col 1 */}
-        <div>
-          {/* Hero section */}
-          <DetailArticleHeroSection image={article.image} />
+      <div className="lg:container">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[2fr_1fr]">
+          {/* Col 1 */}
+          <div>
+            {/* Hero section */}
+            <DetailArticleHeroSection image={article.image} />
 
-          {/* Body section */}
-          <DetailArticleBodySection article={article} />
-        </div>
+            {/* Body section */}
+            <DetailArticleBodySection article={article} />
+          </div>
 
-        {/* Col 2 */}
-        <div className="hidden my-4 md:mt-8 md:block">
-          <div className="container">
-            <DetailPromoInquiryFormSection />
+          {/* Col 2 */}
+          <div className="hidden my-4 md:mt-8 md:block">
+            <div className="container">
+              <DetailPromoInquiryFormSection />
+            </div>
           </div>
         </div>
       </div>
 
       {/* Other promo */}
-      <div className="mx-4 lg:mx-[100px]">
+      <div className="lg:container">
         <DetailArticleAnotherPromoSection anotherPromo={article.anotherPromo} />
       </div>
 
       {/* Other articles */}
-      <div className="mx-4 lg:mx-[100px]">
+      <div className="lg:container">
         <DetailArticleAnotherArticlesSection anotherArticles={article.anotherArticles} />
       </div>
 
@@ -78,9 +85,9 @@ const ArticleDetailPage = ({ slug, article }) => {
         <SocialMediaLinksSection />
       </div>
 
-      {/* info digiroom */}
+      {/* info digiroom & social media links */}
       <InfoDigiroom />
-      <div className="block md:hidden">
+      <div className="block md:hidden lg:container">
         <SocialMediaLinksSection />
       </div>
 
@@ -121,7 +128,13 @@ const ArticleDetailPage = ({ slug, article }) => {
 
       {/* Form inquiry open */}
       {formOpen && (
-        <div className="fixed flex-col z-50 top-0 left-0 flex items-center justify-center w-full h-screen bg-white min-h-screen">
+        <motion.div
+          className="fixed flex-col z-50 top-0 left-0 flex items-center justify-center w-full h-screen bg-white min-h-screen"
+          initial={{ translateY: '100%', opacity: 0 }}
+          animate={{ translateY: 0, opacity: 1 }}
+          exit={{ translateY: '100%', opacity: 0 }}
+          transition={{ duration: 0.35, ease: 'easeInOut' }}
+        >
           <div className="flex w-full justify-between px-4 py-6 border-b border-b-reliableBlack30">
             <Text.Head6 className="font-bold text-reliableBlack90 uppercase">
               Minta Penawaran
@@ -152,7 +165,7 @@ const ArticleDetailPage = ({ slug, article }) => {
               }}
             />
           </div>
-        </div>
+        </motion.div>
       )}
 
       {/* OTP */}
@@ -173,30 +186,13 @@ const ArticleDetailPage = ({ slug, article }) => {
           </div>
           <div className="w-full h-full flex flex-col bg-white">
             <div className="py-8">
-              <p className="text-sm max-w-[328px] text-justify px-4 text-reliableBlack">
-                Masukkan kode 6-digit yang kami telah kirimkan ke Whatsapp{' '}
-                <span className="font-bold">+62-12345678910</span>
-              </p>
               <OtpForm
                 containerClassForm={'w-full px-4 mt-14'}
                 containerInputClassName={'w-[50px] h-[50px] w-full'}
                 buttonContainer={'fixed z-50 w-full left-0 bottom-0'}
                 inputClassName={'text-center'}
-                onSubmit={() => router.push('/promo/inquiry/success')}
+                onSubmit={handleSuccess}
               />
-
-              <p className="text-[14px] max-w-[328px] text-justify px-4 mt-14 text-reliableBlack">
-                InquirySuccess Belum dapat kode?{' '}
-                <a href="#">
-                  <span className="font-medium text-blue-500">Kirim ulang</span>
-                </a>
-              </p>
-              <p className="text-sm max-w-[328px] text-justify px-4 mt-6 text-reliableBlack">
-                Salah nomor handphone?{' '}
-                <a href="#">
-                  <span className="font-medium text-blue-500">Ganti nomor</span>
-                </a>
-              </p>
             </div>
           </div>
         </div>
@@ -289,6 +285,16 @@ export const getServerSideProps = async (context) => {
         slug: 'inilah-5-tips-melindungi-cat-mobil',
         createdDate: 'Jul 25, 2023',
         image: '/images/news/4.webp',
+        category: 'Ulasan Produk',
+        content:
+          'Survei Kementerian Perhubungan (Kemenhub) menunjukkan, 40 juta orang diperkirakan akan mudik dengan naik kendaraan pribadi, guna merayakan Hari Raya Idul Fitri 1443 Hijriah di kampung halaman. "Berdasarkan survei Kementerian Perhubungan didapatkan hasil bahwa akan ada 23 juta mobil dan 17 juta sepeda motor yang akan digunakan oleh para pemudik," kata Presiden Joko Widodo, dikutip dari Kompas.com, Senin (18/4/2022). Adapun tidak sedikit pemudik dengan mobil pribadi yang mengajak serta keluarganya, termasuk anak-anak, agar bisa berkumpul bersama anggota keluarga lainnya di kampung halaman. Mudik bersama anak dalam durasi berkendara yang panjang bukanlah hal yang mudah. Hal ini karena mereka bisa rewel sewaktu-waktu. Kompas.com membagikan tips untuk mengantisipasi hal-hal yang tak diinginkan saat mudik bersama anak. Simak selengkapnya. Artikel ini telah tayang di Kompas.com dengan judul "6 Tips Mudik Bersama Anak Naik Mobil Pribadi Agar Lancar dan Aman", Penulis : Desi Intan SariEditor : Ni Nyoman Wira WidyantiKompascom+ baca berita tanpa iklan',
+      },
+      {
+        id: 5,
+        title: 'Inilah 5 Tips Melindungi Cat Mobil Agar Awet',
+        slug: 'inilah-5-tips-melindungi-cat-mobil',
+        createdDate: 'Jul 25, 2023',
+        image: '/images/news/5.webp',
         category: 'Ulasan Produk',
         content:
           'Survei Kementerian Perhubungan (Kemenhub) menunjukkan, 40 juta orang diperkirakan akan mudik dengan naik kendaraan pribadi, guna merayakan Hari Raya Idul Fitri 1443 Hijriah di kampung halaman. "Berdasarkan survei Kementerian Perhubungan didapatkan hasil bahwa akan ada 23 juta mobil dan 17 juta sepeda motor yang akan digunakan oleh para pemudik," kata Presiden Joko Widodo, dikutip dari Kompas.com, Senin (18/4/2022). Adapun tidak sedikit pemudik dengan mobil pribadi yang mengajak serta keluarganya, termasuk anak-anak, agar bisa berkumpul bersama anggota keluarga lainnya di kampung halaman. Mudik bersama anak dalam durasi berkendara yang panjang bukanlah hal yang mudah. Hal ini karena mereka bisa rewel sewaktu-waktu. Kompas.com membagikan tips untuk mengantisipasi hal-hal yang tak diinginkan saat mudik bersama anak. Simak selengkapnya. Artikel ini telah tayang di Kompas.com dengan judul "6 Tips Mudik Bersama Anak Naik Mobil Pribadi Agar Lancar dan Aman", Penulis : Desi Intan SariEditor : Ni Nyoman Wira WidyantiKompascom+ baca berita tanpa iklan',

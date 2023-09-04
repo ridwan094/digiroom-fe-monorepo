@@ -1,18 +1,46 @@
+import { useEffect, useState } from 'react';
 import { MdShare, MdOutlineCalendarMonth } from 'react-icons/md';
-import { Button } from 'ui/components/atoms';
+import { Button, ModalShare, ShareButton } from 'ui/components/atoms';
 
 const DetailArticleBodySection = ({ article }) => {
+  const [shareOpen, setShareOpen] = useState(false);
+  const [isMobileScreen, setIsMobileScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileScreen(window.innerWidth <= 768);
+    };
+
+    // Initial check
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Trigger share system on mobile
+  const handleShare = () => {
+    if (isMobileScreen && navigator.share) {
+      navigator
+        .share({
+          title: article.title,
+          text: 'Check out this article!',
+          url: window.location.href,
+        })
+        .then(() => console.log('Share successful'))
+        .catch((error) => console.error('Share error:', error));
+    } else {
+      setShareOpen(true);
+    }
+  };
+
   return (
     <section className="my-[30px] mx-4 lg:mx-0 lg:mt-8">
-      <div
-      // className="container"
-      >
+      <div>
         {/* Header */}
         <div className="flex justify-between items-center mb-5 lg:mb-[30px]">
           <h1 className="text-sm font-semibold text-reliableBlack lg:text-4xl">{article.title}</h1>
-          <Button type="button" variant={'bg-reliableBlack10'}>
-            <MdShare size={24} color="#4F4C4D" />
-          </Button>
+          <ShareButton onClick={isMobileScreen ? handleShare : () => setShareOpen(true)} />
         </div>
 
         {/* Date */}
@@ -49,6 +77,9 @@ const DetailArticleBodySection = ({ article }) => {
           </p>
         </div>
       </div>
+
+      {/* Share Modal */}
+      {shareOpen && <ModalShare visible={true} onClose={() => setShareOpen(false)} />}
     </section>
   );
 };

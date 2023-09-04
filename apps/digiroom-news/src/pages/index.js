@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { BreadCrumbs } from 'ui/components/molecules';
+import { BreadCrumbs, QuickLink } from 'ui/components/molecules';
 import {
   ArticleListHeroSection,
   ArticleListTabSection,
@@ -24,7 +24,7 @@ export default function Home() {
   };
   return (
     <>
-      {/* <QuickLink /> */}
+      <QuickLink />
 
       <div className="hidden lg:block">
         <BreadCrumbs

@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { TabBarPromo, QuickLink, Layout } from 'ui';
 import { BreadCrumbs } from 'ui/components/molecules';
-import { PromoBannerSection, PromoInfoSection, PromoFaqSection } from 'ui/components/organism';
+import {
+  PromoBannerSection,
+  PromoInfoSection,
+  PromoFaqSection,
+} from 'ui/components/organism';
 import faqs from '../constants/faqs';
 
 const options = ['Option 1', 'Option 2', 'Option 3'];

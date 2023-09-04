@@ -1,5 +1,5 @@
 import { Fragment, useEffect } from 'react';
-import Text from '../Text'
+import Text from '../Text';
 import { MdClose } from 'react-icons/md';
 
 const Modal = ({
@@ -47,31 +47,29 @@ const Modal = ({
         } duration-300 ease-in-out fixed w-[100vw] h-[100vh] z-[9999] ${
           mobile
             ? `inset-0 h-[100%]`
-            : `bg-opacity-80 bg-black top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`
+            : `bg-opacity-30 bg-black top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`
         } ${modalClassName}`}
       >
         <div
           data-testid="dataTestCardModal"
           className={`${
-            visible ? 'scale-100' : 'scale-0'
-          } duration-[400ms] ease-in-out flex flex-col absolute bg-white ${
-            size ? size : `w-[588px] h-[488px]`
-          } ${
+            !visible && 'translate-y-full'
+          } duration-300 ease-in-out flex flex-col absolute bg-white ${size ? size : `w-[588px]`} ${
             mobile
               ? `min-h-[100%] h-[100%]`
-              : `max-h-[90vh] md-max-w:max-w-[92vw] rounded-xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 `
+              : `rounded top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 `
           } ${className}`}
           {...props}
         >
           {header && (
             <div
-              className={`flex items-center justify-between md-max-w:p-4 px-8 pt-8 pb-4 ${headerClassName}`}
+              className={`flex items-center justify-between md-max-w:p-4 p-6 border-b border-reliableBlack20 ${headerClassName}`}
             >
               <Text.Head4
                 className={`md-max-w:text-head5 ${headerTitleClassName}`}
                 data-testid={titleTestId}
               >
-                {title}
+                <span className="uppercase">{title}</span>
               </Text.Head4>
               <div
                 onClick={onClose}
@@ -79,13 +77,11 @@ const Modal = ({
                 data-testid={btnCloseTestId}
               >
                 {/* <Icons.Close size={32} fill={colors.black90} /> */}
-                <MdClose size={16} color={"#000"}/>
+                <MdClose size={16} color={'#000'} />
               </div>
             </div>
           )}
-          <div className={`${!mobile && `overflow-auto`} ${bodyClassName}`}>
-            {children}
-          </div>
+          <div className={`${!mobile && `overflow-auto`} ${bodyClassName}`}>{children}</div>
         </div>
       </div>
     </Fragment>

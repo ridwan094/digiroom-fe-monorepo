@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const TabsNavigation = ({ tabs, onTabChange }) => {
+const TabsNavigation = ({ className, tabs, onTabChange }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabClick = (index) => {
@@ -9,14 +9,20 @@ const TabsNavigation = ({ tabs, onTabChange }) => {
   };
 
   return (
-    <>
-      <ul className="flex items-center justify-between w-full overflow-x-auto no-scrollbar lg:justify-start lg:pb-6">
+    <React.Fragment>
+      <ul
+        className={`${className} flex items-center justify-between w-full overflow-x-auto no-scrollbar lg:justify-start`}
+      >
         {tabs.map((tab, index) => (
-          <li key={index} role="presentation">
+          <li
+            className={`p-3 lg:p-4 border-b-4 hover:border-supportiveRed ${
+              activeTab === index ? 'font-bold border-supportiveRed' : 'border-transparent'
+            }`}
+            key={index}
+            role="presentation"
+          >
             <button
-              className={`text-xs uppercase text-reliableBlack px-4 pb-2 border-b-4 hover:border-supportiveRed lg:text-base ${
-                activeTab === index ? 'font-bold border-supportiveRed' : 'border-transparent'
-              }`}
+              className={`text-xs uppercase text-reliableBlack lg:text-base`}
               onClick={() => handleTabClick(index)}
             >
               {tab.title}
@@ -26,7 +32,7 @@ const TabsNavigation = ({ tabs, onTabChange }) => {
       </ul>
 
       <div>{tabs[activeTab].content}</div>
-    </>
+    </React.Fragment>
   );
 };
 

@@ -13,6 +13,7 @@ const Dropdown = ({
   selectedOption,
   placeholder,
   size,
+  additionalClassname,
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -38,7 +39,7 @@ const Dropdown = ({
             <input
               type="text"
               value={selectedOption}
-              className="w-full px-4 py-2 border-b-2 border-reliableBlack30 text-black cursor-pointer"
+              className={`w-full outline-none px-4 py-2 bg-[#f8f8f8] border-b-2 border-reliableBlack30 text-black cursor-pointer focus:border-b-2 lg:bg-[#FFFEFE] lg:border-b lg:border-[#5F5F5F] ${additionalClassname}`}
               onClick={toggleDropdown}
               placeholder={placeholder}
               readOnly
@@ -108,6 +109,7 @@ const Dropdown = ({
 Dropdown.defaultProps = {
   withInput: false,
   size: 'w-full',
+  additionalClassname: '',
 };
 
 export default Dropdown;

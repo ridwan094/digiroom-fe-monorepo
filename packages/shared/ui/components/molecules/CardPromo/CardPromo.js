@@ -14,10 +14,12 @@ const CardPromo = ({ title, slug, coverImg, startDate, endDate, tag, classNames 
             )}
           </div>
 
-          <div className="p-[10px]">
+          <div className="pt-2 px-3 pb-5">
             <img className="w-full object-cover mb-4" src={coverImg} alt="Auto2000 promo image" />
-            <p className="text-xs font-medium text-reliableBlack mb-6 lg:text-lg">{title}</p>
-            <p className="text-xs font-regular text-reliableBlack70 lg:text-base">
+            <p className="text-xs font-medium text-reliableBlack mb-6 lg:text-lg lg:font-semibold lg:mb-3">
+              {title}
+            </p>
+            <p className="text-xs font-normal text-reliableBlack70 lg:text-sm">
               <span>{startDate}</span>
               <span> - </span>
               <span>{endDate}</span>
