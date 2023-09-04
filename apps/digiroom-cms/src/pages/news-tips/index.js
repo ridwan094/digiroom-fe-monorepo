@@ -175,7 +175,7 @@ const DashboardNewsTips = () => {
   const handleFilter = (filterData) => {
     event.preventDefault();
     setActiveFilters(filterData);
-    // fetchListDashboard();
+    fetchListDashboard();
   };
 
   const copyToClipboard = (text) => {

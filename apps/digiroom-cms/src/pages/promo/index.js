@@ -4,19 +4,11 @@ import { useRouter } from 'next/navigation';
 import { columns, filterData, headerArray, sampleData } from '@/constants/implement-table';
 import ModalText from '@/components/modal-text';
 import ModalFilter from '@/components/modal-filter';
-import {
-  deleteListDashboardPromo,
-  getIdListData,
-  getListDashboardPromo,
-} from '../../service/promo-dashboard-homepage/promo-dashboard';
 import ModalPreview from '@/components/modal-preview';
 import { LoadingEffect } from '../loading';
 import { Spinner } from 'flowbite-react';
 import { typeAction } from '@/constants/type';
-import {
-  getListDashboardPromo,
-  deletePromo,
-} from '../../service/promo';
+import { getListDashboardPromo, deletePromo } from '../../service/promo';
 
 const DashboardPromo = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -82,9 +74,9 @@ const DashboardPromo = () => {
         router.push(`/promo/update-promo/${items.slug}`);
         break;
       case typeAction.DELETE:
-        const response = await deletePromo(items.id)
-        if(response) {
-          fetchListDarhboard()
+        const response = await deletePromo(items.id);
+        if (response) {
+          fetchListDarhboard();
         }
         break;
       case typeAction.COPY:
@@ -128,9 +120,9 @@ const DashboardPromo = () => {
             startDate: item.startDate ? item.startDate.toString() : null,
             endDate: item.endDate ? item.endDate.toString() : null,
             slug: item.slug,
-            publish: item.publish
-          })
-        })
+            publish: item.publish,
+          });
+        });
 
         setListDashboard(promoList);
         // setTotalItems(data.total);
@@ -164,7 +156,7 @@ const DashboardPromo = () => {
         setOpenModal(undefined);
         break;
       default:
-        await deletePromo()
+        await deletePromo();
         setOpenModal(undefined);
         break;
     }

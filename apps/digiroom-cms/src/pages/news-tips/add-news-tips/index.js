@@ -45,9 +45,7 @@ const NewsTips = () => {
     window.open('http://localhost:3004/promo/preview', '_blank');
   };
 
-  const draftPage = (data) => {
-    console.log('haloo', data);
-  };
+  const draftPage = (data) => {};
 
   const cancelPage = () => {
     router.back();
@@ -83,7 +81,7 @@ const NewsTips = () => {
       metaDescription: data.metaDescription,
       altImage: data.altImage,
       ordering: 1,
-      // metaRobotList: data.robotTags,
+      metaRobotList: data.robotTags,
       cmsStatusType: 'DRAFT',
       detailContent: dataForm.detailPromosi,
     };
