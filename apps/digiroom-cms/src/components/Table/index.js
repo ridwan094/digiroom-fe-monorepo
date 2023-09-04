@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import { Table, Pagination, Spinner, Toast } from 'flowbite-react';
 import Dropdown from 'ui/components/atoms/Dropdown';
-import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md';
 
 const CustomTable = ({
   dataSource,
   columns,
   pagination,
   isLoading,
-  onSort,
-  sortKey,
-  sortDirection,
   headerData,
   showToast = true,
   toastIcons,
@@ -26,9 +22,7 @@ const CustomTable = ({
     onPageChange = () => {},
     onDropdownPageChange = () => {},
     totalItems,
-    searchBoolean,
     setSearch,
-    onClickCheck,
   } = pagination;
 
   const [searchTable, setSearchTable] = useState();
@@ -76,42 +70,15 @@ const CustomTable = ({
         <Table className="min-w-full">
           <Table.Head>
             {columns.map((item, index) => (
-              <Table.HeadCell
-                key={index}
-                onClick={() => item.sortable && onSort(item.dataIndex)}
-                className={`${
-                  item.sortable && totalItems
-                    ? 'cursor-pointer hover:bg-gray-200'
-                    : 'pointer-events-none'
-                } ${sortKey === item.dataIndex ? 'bg-gray-200 font-semibold' : 'font-normal'}`}
-              >
+              <Table.HeadCell key={index} onClick={item.onClickSort}>
                 <div className="flex items-center">
                   {item.title}
-                  <div className="px-1 flex flex-col text-sm">
-                    {item.sortable && (
-                      <>
-                        {sortKey === item.dataIndex && (
-                          <span className="flex flex-col">
-                            {sortDirection === 'asc' ? (
-                              <MdKeyboardArrowUp />
-                            ) : (
-                              <MdKeyboardArrowDown />
-                            )}
-                          </span>
-                        )}
-                        {sortKey !== item.dataIndex && (
-                          <>
-                            <MdKeyboardArrowUp />
-                            <MdKeyboardArrowDown />
-                          </>
-                        )}
-                      </>
-                    )}
-                  </div>
+                  <div className="px-1 flex flex-col text-sm">{item.sortIndicator}</div>
                 </div>
               </Table.HeadCell>
             ))}
           </Table.Head>
+
           {itemsToRender.length === 0 ? (
             <Table.Body>
               <Table.Row>
@@ -162,7 +129,7 @@ const CustomTable = ({
           {totalPages > 0 && (
             <div className="flex justify-center mt-2">
               <Pagination
-                currentPage={1}
+                currentPage={currentPage}
                 onPageChange={(value) => onPageChange(value)}
                 showIcons
                 totalPages={totalPages}

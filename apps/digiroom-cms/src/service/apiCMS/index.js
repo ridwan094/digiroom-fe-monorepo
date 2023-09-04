@@ -25,16 +25,16 @@ const CMS = () => {
     },
   });
 
-  instance.interceptors.request.use(function (config) {
-    const user = JSON.parse(localStorage.getItem('user'));
+CMS.interceptors.request.use(function (config) {
+  const user = JSON.parse(localStorage.getItem('user'));
 
-    if (user.access_token) {
-      config.headers.Authorization = `Bearer ${user.access_token}`;
-    }
-    // Add checking Version APP
-    config.headers['X-App-Version'] = packageJson.version;
-    return config;
-  });
+  if (user.access_token) {
+    config.headers.Authorization = `Bearer ${user.access_token}`;
+  }
+  // Add checking Version APP
+  config.headers['X-App-Version'] = packageJson.version;
+  return config;
+});
 
   instance.interceptors.response.use(
     function (response) {
@@ -52,7 +52,4 @@ const CMS = () => {
     }
   );
 
-  return instance;
-};
-
-export default CMS();
+export default CMS;

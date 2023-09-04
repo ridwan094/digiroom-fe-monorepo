@@ -1,13 +1,18 @@
 export async function handleUpload(file) {
-    await uploadImage(file).then((resp) => {
-        if (resp.status === 201) {
-            alert("Succses upload file!");
-            return true;
-          } else {
-            alert('Upload failed with status: ' + resp.status);
-            return false;
-          }
-    });
+  try {
+    const response = await uploadImage(file);
+    if (response.status === 201) {
+      alert('Success upload file!');
+      const url = response; // Extract URL from the response
+      return url;
+    } else {
+      alert('Upload failed with status: ' + response.status);
+      return null;
+    }
+  } catch (error) {
+    console.error('Error uploading image:', error);
+    return null;
+  }
 }
 
 async function uploadImage(file) {

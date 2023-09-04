@@ -7,8 +7,11 @@ import {
   MdFilterList,
   MdAdd,
   MdRemoveRedEye,
+  MdKeyboardArrowUp,
+  MdKeyboardArrowDown,
 } from 'react-icons/md';
 import ToggleSwitch from 'ui/components/atoms/Toogle';
+import Image from 'next/image';
 import { Input } from 'ui';
 //Promo
 export const headerArray = (
@@ -60,7 +63,7 @@ export const headerArray = (
   ];
 };
 
-export const titleTable = 'List Promo';
+export const titleTable = '';
 
 export const filterData = [
   {
@@ -83,37 +86,67 @@ export const filterData = [
   },
 ];
 
-export const columns = (onToggleChange = () => {}, onClick = () => {}) => {
+export const columns = (
+  itemsPerPage,
+  currentPage,
+  onToggleChange = () => {},
+  onClick = () => {},
+  sortKey,
+  sortDirection,
+  onSort
+) => {
   return [
     {
       title: 'No',
-      dataIndex: 'id',
+      dataIndex: '',
       key: 'id',
-      sortable: 'asc',
+      render: (empty, items, index) => {
+        const rowNumber = (currentPage - 1) * itemsPerPage + index + 1;
+        return <span>{rowNumber}</span>;
+      },
     },
     {
-      title: 'Promo Name',
-      dataIndex: 'title',
-      key: 'promoName',
-      sortable: 'asc',
+      title: 'Promo Page',
+      dataIndex: 'titlePage',
+      key: 'titlePage',
+      sortable: 'ASC',
+      isSortable: true,
     },
     {
       title: 'Category',
       dataIndex: 'category',
       key: 'category',
       sortable: 'asc',
+      isSortable: true,
+      render: (category) => category.name,
     },
     {
       title: 'Start Date',
       dataIndex: 'startDate',
       key: 'startDate',
       sortable: 'asc',
+      render: (startDate) => {
+        const formattedDate = new Date(startDate).toLocaleDateString('id-ID', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric',
+        });
+        return formattedDate;
+      },
     },
     {
       title: 'End Date',
       dataIndex: 'endDate',
       key: 'endDate',
       sortable: 'asc',
+      render: (startDate) => {
+        const formattedDate = new Date(startDate).toLocaleDateString('id-ID', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric',
+        });
+        return formattedDate;
+      },
     },
     {
       title: 'Status',
@@ -175,13 +208,13 @@ export const columns = (onToggleChange = () => {}, onClick = () => {}) => {
             <MdRemoveRedEye className="text-2xl" onClick={() => onClick('view', index, item)} />
           </Tooltip>
           <Tooltip content="Edit">
-            <MdOutlineCreate className="text-2xl" onClick={() => onClick('edit', index)} />
+            <MdOutlineCreate className="text-2xl" onClick={() => onClick('edit', index, item)} />
           </Tooltip>
           <Tooltip content="Delete">
-            <MdOutlineDelete className="text-2xl" onClick={() => onClick('delete', index)} />
+            <MdOutlineDelete className="text-2xl" onClick={() => onClick('delete', index, item)} />
           </Tooltip>
           <Tooltip content="Copy">
-            <MdOutlineFileCopy className="text-2xl" onClick={() => onClick('copy', index)} />
+            <MdOutlineFileCopy className="text-2xl" onClick={() => onClick('copy', index, item)} />
           </Tooltip>
         </div>
       ),
@@ -211,7 +244,7 @@ export const headerArrayNewsTips = (
 ) => {
   return [
     {
-      title: 'List Promo',
+      title: 'News & Tips',
       render: (index, item) => (
         <div className="flex flex-row justify-between items-center">
           <p className="relative text-lg capitalize font-bold justify-start">{titleTable}</p>
@@ -251,31 +284,69 @@ export const headerArrayNewsTips = (
   ];
 };
 
-export const columnsNewsTips = (onToggleChange = () => {}, onClick = () => {}) => {
+export const columnsNewsTips = (
+  itemsPerPage,
+  currentPage,
+  onToggleChange = () => {},
+  onClick = () => {},
+  sortKey,
+  sortDirection,
+  onSort
+) => {
   return [
     {
       title: 'No',
-      dataIndex: 'id',
+      dataIndex: '',
       key: 'id',
-      sortable: 'asc',
+      render: (empty, items, index) => {
+        const rowNumber = (currentPage - 1) * itemsPerPage + index + 1;
+        return <span>{rowNumber}</span>;
+      },
     },
     {
-      title: 'News & Tips Name',
-      dataIndex: 'title',
-      key: 'promoName',
-      sortable: 'asc',
+      title: 'News & Tips Page',
+      dataIndex: 'titlePage',
+      key: 'titlePage',
+      sortable: 'ASC',
+      isSortable: true,
     },
     {
       title: 'Category',
       dataIndex: 'category',
       key: 'category',
-      sortable: 'asc',
+      sortable: 'ASC',
+      isSortable: true,
+      render: (category) => category.name,
     },
     {
       title: 'Start Date',
       dataIndex: 'startDate',
       key: 'startDate',
-      sortable: 'asc',
+      sortable: 'ASC',
+      isSortable: true,
+      render: (startDate) => {
+        const formattedDate = new Date(startDate).toLocaleDateString('id-ID', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric',
+        });
+        return formattedDate;
+      },
+    },
+    {
+      title: 'End Date',
+      dataIndex: 'endDate',
+      key: 'endDate',
+      sortable: 'ASC',
+      isSortable: true,
+      render: (startDate) => {
+        const formattedDate = new Date(startDate).toLocaleDateString('id-ID', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric',
+        });
+        return formattedDate;
+      },
     },
     {
       title: 'Status',
@@ -337,23 +408,44 @@ export const columnsNewsTips = (onToggleChange = () => {}, onClick = () => {}) =
             <MdRemoveRedEye className="text-2xl" onClick={() => onClick('view', index, item)} />
           </Tooltip>
           <Tooltip content="Edit">
-            <MdOutlineCreate className="text-2xl" onClick={() => onClick('edit', index)} />
+            <MdOutlineCreate className="text-2xl" onClick={() => onClick('edit', index, item)} />
           </Tooltip>
           <Tooltip content="Delete">
-            <MdOutlineDelete className="text-2xl" onClick={() => onClick('delete', index)} />
+            <MdOutlineDelete className="text-2xl" onClick={() => onClick('delete', index, item)} />
           </Tooltip>
           <Tooltip content="Copy">
-            <MdOutlineFileCopy className="text-2xl" onClick={() => onClick('copy', index)} />
+            <MdOutlineFileCopy className="text-2xl" onClick={() => onClick('copy', index, item)} />
           </Tooltip>
         </div>
       ),
     },
-  ];
+  ].map((column) => ({
+    ...column,
+    onClickSort: column.isSortable ? () => onSort(column.key) : undefined,
+    sortIndicator: column.isSortable ? (
+      <span>
+        {sortKey.includes(column.key) ? (
+          <span className="">
+            {sortDirection[sortKey.indexOf(column.key)] === 'ASC' ? (
+              <MdKeyboardArrowUp />
+            ) : (
+              <MdKeyboardArrowDown />
+            )}
+          </span>
+        ) : (
+          <span>
+            <MdKeyboardArrowUp />
+            <MdKeyboardArrowDown />
+          </span>
+        )}
+      </span>
+    ) : undefined,
+  }));
 };
 
 export const sampleDataNewsTips = [
   {
-    img: 'localhost:3004/images/Auto2000.webp',
+    img: '',
     title: 'Promo 1',
     startDate: '2023-08-25',
     endDate: '2023-08-28',
