@@ -36,73 +36,54 @@ instance.interceptors.request.use(function (config) {
 
 instance.interceptors.response.use(
   function (response) {
-    // Add something if needed
+    //Add something if needed
     return response.data;
   },
-  function (error) {
+  async function (error) {
+    // Error response for access token expired
     if (error.response && error.response.status === 401) {
-      // Redirect to login page
-      localStorage.removeItem('user');
-      redirectToLogin();
+      const storedAccessToken = JSON.parse(localStorage.getItem('user'))['access_token'];
+
+      if (!storedAccessToken) {
+        // Redirect to login page
+        localStorage.removeItem('user');
+        redirectToLogin();
+        return Promise.reject(error);
+      } else {
+        // Regenerate access token w/ refresh token
+        const baseUrl = getBaseUrl();
+        const storedRefreshToken = JSON.parse(localStorage.getItem('user'))['refresh_token'];
+
+        try {
+          const res = await axios.post(
+            `${baseUrl}/refreshtoken`,
+            {
+              refreshToken: storedRefreshToken,
+            },
+            {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            }
+          );
+
+          if (res.status === 201) {
+            // Set new token
+            localStorage.setItem('user', JSON.stringify(res.data));
+            return instance(error.config);
+          }
+        } catch (err) {
+          // Redirect to login page
+          localStorage.removeItem('user');
+          redirectToLogin();
+          return Promise.reject(err);
+        }
+      }
     }
-    // Add something if needed
+
+    //Add something if needed
     return Promise.reject(error);
   }
 );
 
-  instance.interceptors.response.use(
-    function (response) {
-      //Add something if needed
-      return response.data;
-    },
-    async function (error) {
-      // Error response for access token expired
-      if (error.response && error.response.status === 401) {
-        const storedAccessToken = JSON.parse(localStorage.getItem('user'))['access_token'];
-
-        if (!storedAccessToken) {
-          // Redirect to login page
-          localStorage.removeItem('user');
-          redirectToLogin();
-          return Promise.reject(error);
-        } else {
-          // Regenerate access token w/ refresh token
-          const baseUrl = getBaseUrl();
-          const storedRefreshToken = JSON.parse(localStorage.getItem('user'))['refresh_token'];
-
-          try {
-            const res = await axios.post(
-              `${baseUrl}/refreshtoken`,
-              {
-                refreshToken: storedRefreshToken,
-              },
-              {
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-              }
-            );
-
-            if (res.status === 201) {
-              // Set new token
-              localStorage.setItem('user', JSON.stringify(res.data));
-              return instance(error.config);
-            }
-          } catch (err) {
-            // Redirect to login page
-            localStorage.removeItem('user');
-            redirectToLogin();
-            return Promise.reject(err);
-          }
-        }
-      }
-
-      //Add something if needed
-      return Promise.reject(error);
-    }
-  );
-
-  return instance;
-};
-
-export default CMS();
+export default instance;
