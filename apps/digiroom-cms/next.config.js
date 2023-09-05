@@ -1,8 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['ui']
-}
+  transpilePackages: ['ui'],
+  images: {
+    domains: ['astradigitaldigiroomstg.blob.core.windows.net'],
+  },
+};
 
-
-module.exports = nextConfig
+module.exports = nextConfig;

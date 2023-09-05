@@ -1,8 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Checkbox, Label, Button } from 'flowbite-react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function ModalFilter({ isOpen, onClose, filterData, onClickFilter, activeFilters }) {
   const [checkboxStates, setCheckboxStates] = useState([]);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+
+  const handleStartDateChange = (date) => {
+    setStartDate(date);
+  };
+
+  const handleEndDateChange = (date) => {
+    setEndDate(date);
+  };
 
   const calculateIndex = (sectionIndex, itemIndex) => {
     let cumulativeIndex = 0;
@@ -51,7 +63,7 @@ export default function ModalFilter({ isOpen, onClose, filterData, onClickFilter
 
   return (
     <div>
-      <Modal dismissible show={isOpen} onClose={onClose} size="lg">
+      <Modal dismissible show={isOpen} onClose={onClose} size="xl">
         <Modal.Header>Filter</Modal.Header>
         <Modal.Body>
           <div className="flex flex-col gap-2">
@@ -61,13 +73,41 @@ export default function ModalFilter({ isOpen, onClose, filterData, onClickFilter
                 <div className="flex flex-row gap-4 mt-2 mb-2 ">
                   {filterSection.items.map((filterItem, itemIndex) => (
                     <div className="flex flex-row items-center gap-1" key={filterItem.key}>
-                      <Checkbox
-                        class="border-black bg-gray-200 checked:bg-black checked:focus:ring-black focus:ring-black"
-                        id={filterItem.key}
-                        checked={checkboxStates[calculateIndex(sectionIndex, itemIndex)]}
-                        onChange={() => handleCheckboxChange(filterItem, sectionIndex, itemIndex)}
-                      />
-                      <Label>{filterItem.label}</Label>
+                      {filterItem.key === 'dateRange' ? (
+                        <div className="flex flex-row justify-between items-center gap-1">
+                          <DatePicker
+                            selected={startDate}
+                            onChange={handleStartDateChange}
+                            selectsStart
+                            startDate={startDate}
+                            endDate={endDate}
+                            dateFormat="dd/MM/yyyy"
+                            placeholderText="Start Date"
+                          />
+                          <span className="mx-2 text-gray-500">to</span>
+                          <DatePicker
+                            selected={endDate}
+                            onChange={handleEndDateChange}
+                            selectsEnd
+                            startDate={startDate}
+                            endDate={endDate}
+                            dateFormat="dd/MM/yyyy"
+                            placeholderText="End Date"
+                          />
+                        </div>
+                      ) : (
+                        <>
+                          <Checkbox
+                            className="border-black bg-gray-200 checked:bg-black checked:focus:ring-black focus:ring-black"
+                            id={filterItem.key}
+                            checked={checkboxStates[calculateIndex(sectionIndex, itemIndex)]}
+                            onChange={() =>
+                              handleCheckboxChange(filterItem, sectionIndex, itemIndex)
+                            }
+                          />
+                          <Label>{filterItem.label}</Label>
+                        </>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -75,7 +115,7 @@ export default function ModalFilter({ isOpen, onClose, filterData, onClickFilter
             ))}
             <div className="flex justify-center mt-2">
               <Button
-                class="flex justify-center bg-black text-white uppercase w-full"
+                className="flex justify-center bg-black text-white uppercase w-full"
                 onClick={handleFilter}
               >
                 Apply
