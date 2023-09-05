@@ -11,7 +11,6 @@ import { useEffect } from 'react';
 
 function App({ Component, pageProps }) {
   const { screenSize } = useSelector((state) => state.page);
-  console.log('digiroom-news:' + screenSize);
   useEffect(() => {
     store.dispatch(setIsMobileScreen(screenSize?.width < screenBreakpoints.MIN_DESKTOP_SCREEN));
   }, [screenSize?.width]);
