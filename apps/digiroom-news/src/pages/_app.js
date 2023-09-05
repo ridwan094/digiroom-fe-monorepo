@@ -1,6 +1,7 @@
+import '@/styles/globals.css';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
-import { store, wrapper } from 'ui/store'
+import { store, wrapper } from 'ui/store';
 import '@/styles/globals.css';
 import Layout from 'ui/components/templates/Layout';
 import { useSelector } from 'react-redux';
@@ -10,7 +11,7 @@ import { useEffect } from 'react';
 
 function App({ Component, pageProps }) {
   const { screenSize } = useSelector((state) => state.page);
-  console.log('digiroom-news:'+ screenSize)
+  console.log('digiroom-news:' + screenSize);
   useEffect(() => {
     store.dispatch(setIsMobileScreen(screenSize?.width < screenBreakpoints.MIN_DESKTOP_SCREEN));
   }, [screenSize?.width]);

@@ -63,28 +63,28 @@ const Navbar = () => {
         <div className="container">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <div className="flex items-center justify-between md:gap-8">
+            <div className="flex items-center justify-between md:gap-4">
               <div>
                 <Icons.NavLogo />
               </div>
-              <div className="flex hidden md:flex">
-                <a className="text-reliableBlack py-2 px-5 hover:text-reliableBlack70" href="#">
-                  New Cars
+              <div className="flex hidden md:flex uppercase whitespace-nowrap text-sm  md:gap-4">
+                <a className="text-reliableBlack py-2 hover:text-reliableBlack70" href="#">
+                  mobil baru
                 </a>
-                <a className="text-reliableBlack py-2 px-5 hover:text-reliableBlack70" href="#">
+                <a className="text-reliableBlack py-2 hover:text-reliableBlack70" href="#">
                   Test Drive
                 </a>
-                <a className="text-reliableBlack py-2 px-5 hover:text-reliableBlack70" href="#">
-                  Used Cars
+                <a className="text-reliableBlack py-2 hover:text-reliableBlack70" href="#">
+                  mobil bekas
                 </a>
-                <a className="text-reliableBlack py-2 px-5 hover:text-reliableBlack70" href="#">
-                  After Sales
+                <a className="text-reliableBlack py-2 hover:text-reliableBlack70" href="#">
+                  purna jual
                 </a>
-                <a className="text-reliableBlack py-2 px-5 hover:text-reliableBlack70" href="#">
+                <a className="text-reliableBlack py-2 hover:text-reliableBlack70" href="#">
                   Promo
                 </a>
-                <a className="text-reliableBlack py-2 px-5 hover:text-reliableBlack70" href="#">
-                  Toyota Dealer
+                <a className="text-reliableBlack py-2 hover:text-reliableBlack70" href="#">
+                  dealer toyota
                 </a>
               </div>
               {/* Icons */}
@@ -127,7 +127,7 @@ const Navbar = () => {
             />
           </div>
         </div>
-        <div className="z-10 fixed bottom-0 left-0 bg-gray-700 px-5 md:hidden w-full">
+        <div className="z-10 fixed bottom-0 left-0 bg-[#333333] px-5 md:hidden w-full">
           <div className="flex items-center justify-between">
             {/* Mobile Menu Toggle */}
             <a
@@ -172,27 +172,27 @@ const Navbar = () => {
 
           {/* Mobile Menu Items */}
           <div
-            className={`absolute bottom-16 left-0 px-4 bg-gray-500 w-full ${
+            className={`absolute bottom-16 left-0 bg-[#333333] w-full ${
               isMobileMenuOpen ? 'block' : 'hidden'
             }`}
           >
-            <div className={`flex flex-col `}>
-              <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
+            <div className={`flex flex-col py-2`}>
+              <a className="text-white py-3 px-4 hover:bg-gray-600" href="#">
                 New Cars
               </a>
-              <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
+              <a className="text-white py-3 px-4 hover:bg-gray-600" href="#">
                 Test Drive
               </a>
-              <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
+              <a className="text-white py-3 px-4 hover:bg-gray-600" href="#">
                 Used Cars
               </a>
-              <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
+              <a className="text-white py-3 px-4 hover:bg-gray-600" href="#">
                 After Sales
               </a>
-              <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
+              <a className="text-white py-3 px-4 hover:bg-gray-600" href="#">
                 Promo
               </a>
-              <a className="text-white py-2 px-4 hover:bg-gray-600" href="#">
+              <a className="text-white py-3 px-4 hover:bg-gray-600" href="#">
                 Toyota Dealer
               </a>
             </div>
