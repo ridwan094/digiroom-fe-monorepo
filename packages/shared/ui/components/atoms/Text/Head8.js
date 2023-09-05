@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import textAdditionalClassName from '../../../helpers/utils/textAdditionalClassName';
+import textAdditionalClassName from '../../../helpers/utils/TextAdditionalClassName';
 
 const Head8 = ({
   children,

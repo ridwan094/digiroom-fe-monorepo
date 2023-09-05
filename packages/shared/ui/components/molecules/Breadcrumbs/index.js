@@ -1,6 +1,6 @@
 import { MdChevronRight } from 'react-icons/md';
 
-const Breadcrumbs = ({ isMobileScreen, items, breadcrumbsClassName }) => {
+const BreadCrumbs = ({ isMobileScreen, items, breadcrumbsClassName }) => {
   return (
     <div className={`${breadcrumbsClassName} ${isMobileScreen ? 'lg:hidden' : 'hidden lg:block'}`}>
       <div className={`flex`} aria-label="Breadcrumb">
@@ -48,4 +48,4 @@ Breadcrumbs.defaultProps = {
   breadcrumbsClassName: '',
 };
 
-export default Breadcrumbs;
+export default BreadCrumbs;
