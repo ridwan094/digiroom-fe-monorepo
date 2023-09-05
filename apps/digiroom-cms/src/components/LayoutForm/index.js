@@ -13,6 +13,7 @@ const LayoutForm = ({
   setDataForm,
   errors,
   handleQuillChange,
+  cancelPage
 }) => {
   const handleSlug = (txt) => {
     setDataForm({ ...dataForm, slug: generateSlug(txt) });
@@ -37,6 +38,8 @@ const LayoutForm = ({
               handleSlug,
               trigger: register().trigger,
               handleQuillChange,
+              showPreviewPage,
+              cancelPage
             })}
           </div>
         ))}

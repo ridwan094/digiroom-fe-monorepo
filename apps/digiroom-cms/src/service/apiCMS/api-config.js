@@ -1,5 +1,5 @@
 const apiConfig = {
-  local: 'http://localhost:3004/api',
+  local: process.env.NEXT_PUBLIC_BASE_URL,
   development: process.env.NEXT_PUBLIC_BASE_URL,
 };
 

@@ -7,9 +7,12 @@ import {
   MdFilterList,
   MdAdd,
   MdRemoveRedEye,
+  MdKeyboardArrowUp,
+  MdKeyboardArrowDown,
 } from 'react-icons/md';
 import ToggleSwitch from 'ui/components/atoms/Toogle';
-import { Input } from 'ui';
+import Image from 'next/image';
+
 //Promo
 export const headerArray = (
   searchBoolean,
@@ -60,7 +63,7 @@ export const headerArray = (
   ];
 };
 
-export const titleTable = 'List Promo';
+export const titleTable = '';
 
 export const filterData = [
   {
@@ -83,37 +86,67 @@ export const filterData = [
   },
 ];
 
-export const columns = (onToggleChange = () => {}, onClick = () => {}) => {
+export const columns = (
+  itemsPerPage,
+  currentPage,
+  onToggleChange = () => {},
+  onClick = () => {},
+  sortKey,
+  sortDirection,
+  onSort
+) => {
   return [
     {
       title: 'No',
-      dataIndex: 'id',
+      dataIndex: '',
       key: 'id',
-      sortable: 'asc',
+      render: (empty, items, index) => {
+        const rowNumber = (currentPage - 1) * itemsPerPage + index + 1;
+        return <span>{rowNumber}</span>;
+      },
     },
     {
-      title: 'Promo Name',
-      dataIndex: 'title',
-      key: 'promoName',
-      sortable: 'asc',
+      title: 'Promo Page',
+      dataIndex: 'titlePage',
+      key: 'titlePage',
+      sortable: 'ASC',
+      isSortable: true,
     },
     {
       title: 'Category',
       dataIndex: 'category',
       key: 'category',
       sortable: 'asc',
+      isSortable: true,
+      render: (category) => category.name,
     },
     {
       title: 'Start Date',
       dataIndex: 'startDate',
       key: 'startDate',
       sortable: 'asc',
+      render: (startDate) => {
+        const formattedDate = new Date(startDate).toLocaleDateString('id-ID', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric',
+        });
+        return formattedDate;
+      },
     },
     {
       title: 'End Date',
       dataIndex: 'endDate',
       key: 'endDate',
       sortable: 'asc',
+      render: (startDate) => {
+        const formattedDate = new Date(startDate).toLocaleDateString('id-ID', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric',
+        });
+        return formattedDate;
+      },
     },
     {
       title: 'Status',
@@ -175,13 +208,13 @@ export const columns = (onToggleChange = () => {}, onClick = () => {}) => {
             <MdRemoveRedEye className="text-2xl" onClick={() => onClick('view', index, item)} />
           </Tooltip>
           <Tooltip content="Edit">
-            <MdOutlineCreate className="text-2xl" onClick={() => onClick('edit', index)} />
+            <MdOutlineCreate className="text-2xl" onClick={() => onClick('edit', index, item)} />
           </Tooltip>
           <Tooltip content="Delete">
-            <MdOutlineDelete className="text-2xl" onClick={() => onClick('delete', index)} />
+            <MdOutlineDelete className="text-2xl" onClick={() => onClick('delete', index, item)} />
           </Tooltip>
           <Tooltip content="Copy">
-            <MdOutlineFileCopy className="text-2xl" onClick={() => onClick('copy', index)} />
+            <MdOutlineFileCopy className="text-2xl" onClick={() => onClick('copy', index, item)} />
           </Tooltip>
         </div>
       ),
@@ -211,7 +244,7 @@ export const headerArrayNewsTips = (
 ) => {
   return [
     {
-      title: 'List Promo',
+      title: 'News & Tips',
       render: (index, item) => (
         <div className="flex flex-row justify-between items-center">
           <p className="relative text-lg capitalize font-bold justify-start">{titleTable}</p>
@@ -251,31 +284,81 @@ export const headerArrayNewsTips = (
   ];
 };
 
-export const columnsNewsTips = (onToggleChange = () => {}, onClick = () => {}) => {
+export const columnsNewsTips = (
+  itemsPerPage,
+  currentPage,
+  onToggleChange = () => {},
+  onClick = () => {},
+  sortKey,
+  sortDirection,
+  onSort
+) => {
   return [
     {
       title: 'No',
-      dataIndex: 'id',
+      dataIndex: '',
       key: 'id',
-      sortable: 'asc',
+      render: (empty, items, index) => {
+        const rowNumber = (currentPage - 1) * itemsPerPage + index + 1;
+        return <span>{rowNumber}</span>;
+      },
     },
     {
-      title: 'News & Tips Name',
-      dataIndex: 'title',
-      key: 'promoName',
-      sortable: 'asc',
+      title: 'News & Tips Page',
+      dataIndex: 'titlePage',
+      key: 'titlePage',
+      sortable: 'ASC',
+      isSortable: true,
+      render: (titlePage, item) => (
+        <div className="flex flex-row items-center gap-5">
+          <div>
+            <a href={item.slug}>
+              <Image src={item.heroImageLink} alt={titlePage} width={75} height={75} />
+            </a>
+          </div>
+          <div>
+            <p>{titlePage}</p>
+          </div>
+        </div>
+      ),
     },
     {
       title: 'Category',
       dataIndex: 'category',
       key: 'category',
-      sortable: 'asc',
+      sortable: 'ASC',
+      isSortable: true,
+      render: (category) => category.name,
     },
     {
       title: 'Start Date',
       dataIndex: 'startDate',
       key: 'startDate',
-      sortable: 'asc',
+      sortable: 'ASC',
+      isSortable: true,
+      render: (startDate) => {
+        const formattedDate = new Date(startDate).toLocaleDateString('id-ID', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric',
+        });
+        return formattedDate;
+      },
+    },
+    {
+      title: 'End Date',
+      dataIndex: 'endDate',
+      key: 'endDate',
+      sortable: 'ASC',
+      isSortable: true,
+      render: (startDate) => {
+        const formattedDate = new Date(startDate).toLocaleDateString('id-ID', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric',
+        });
+        return formattedDate;
+      },
     },
     {
       title: 'Status',
@@ -337,23 +420,44 @@ export const columnsNewsTips = (onToggleChange = () => {}, onClick = () => {}) =
             <MdRemoveRedEye className="text-2xl" onClick={() => onClick('view', index, item)} />
           </Tooltip>
           <Tooltip content="Edit">
-            <MdOutlineCreate className="text-2xl" onClick={() => onClick('edit', index)} />
+            <MdOutlineCreate className="text-2xl" onClick={() => onClick('edit', index, item)} />
           </Tooltip>
           <Tooltip content="Delete">
-            <MdOutlineDelete className="text-2xl" onClick={() => onClick('delete', index)} />
+            <MdOutlineDelete className="text-2xl" onClick={() => onClick('delete', index, item)} />
           </Tooltip>
           <Tooltip content="Copy">
-            <MdOutlineFileCopy className="text-2xl" onClick={() => onClick('copy', index)} />
+            <MdOutlineFileCopy className="text-2xl" onClick={() => onClick('copy', index, item)} />
           </Tooltip>
         </div>
       ),
     },
-  ];
+  ].map((column) => ({
+    ...column,
+    onClickSort: column.isSortable ? () => onSort(column.key) : undefined,
+    sortIndicator: column.isSortable ? (
+      <span>
+        {sortKey.includes(column.key) ? (
+          <span className="">
+            {sortDirection[sortKey.indexOf(column.key)] === 'ASC' ? (
+              <MdKeyboardArrowUp />
+            ) : (
+              <MdKeyboardArrowDown />
+            )}
+          </span>
+        ) : (
+          <span>
+            <MdKeyboardArrowUp />
+            <MdKeyboardArrowDown />
+          </span>
+        )}
+      </span>
+    ) : undefined,
+  }));
 };
 
 export const sampleDataNewsTips = [
   {
-    img: 'localhost:3004/images/Auto2000.webp',
+    img: '',
     title: 'Promo 1',
     startDate: '2023-08-25',
     endDate: '2023-08-28',
@@ -388,41 +492,8 @@ export const filterDataNewsTips = [
     items: [
       {
         column: 'daterange',
-        key: 'startDate',
-        label: 'Start Date',
-        render: (onChange) => {
-          <div date-rangepicker class="flex items-center">
-            <div class="relative">
-              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg
-                  class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                </svg>
-              </div>
-              <TextInput></TextInput>
-            </div>
-            <span class="mx-4 text-gray-500">to</span>
-            <div class="relative">
-              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg
-                  class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                </svg>
-              </div>
-              <TextInput></TextInput>
-            </div>
-          </div>;
-        },
+        key: 'dateRange',
+        label: 'Date Range',
       },
     ],
   },
