@@ -1,0 +1,30 @@
+name: $(Build.BuildNumber)
+
+trigger:
+  branches:
+    include:
+      - devops
+      - feat/*
+  paths:
+    exclude:
+      - 'apps/boilerplate/*'
+      - 'apps/digiroom/*'
+      - 'apps/digiroom-cms/*'
+      - 'apps/digiroom-new-car-purchase/*'
+      - 'apps/digiroom-news/*'
+      - 'apps/digiroom-product-knowledge/*'
+      - 'apps/digiroom-promo/*'
+
+pool:
+  name: astradigital-agentpool
+  vmImage: ubuntu-22.04
+
+jobs:
+- job: BuildAndPush
+  steps:
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'astradigital-docker-connection'
+      repository: 'boilerplate'
+      command: 'buildAndPush'
+      Dockerfile: '**/boilerplate.Dockerfile'

@@ -1,0 +1,36 @@
+name: $(Build.BuildNumber)
+
+trigger:
+  branches:
+    include:
+      - devops
+      - feat/*
+  paths:
+    exclude:
+      - 'apps/boilerplate/*'
+      - 'apps/digiroom/*'
+      - 'apps/digiroom-cms/*'
+      - 'apps/digiroom-new-car-purchase/*'
+      - 'apps/digiroom-news/*'
+      - 'apps/digiroom-product-knowledge/*'
+      - 'apps/digiroom-promo/*'
+
+pool:
+  name: astradigital-agentpool
+  vmImage: ubuntu-22.04
+
+jobs:
+- job: BuildAndPush
+  steps:
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: 'docker buildx build --platform linux/arm64 -t astradigital.azurecr.io/digiroom:$(Build.BuildId) -f digiroom.Dockerfile . --push'
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: 'kubectl set image deployment/digiroom digiroom=astradigital.azurecr.io/digiroom:$(ImageTag) -n digiroom'
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: 'kubectl rollout status deployment/digiroom -n digiroom'
