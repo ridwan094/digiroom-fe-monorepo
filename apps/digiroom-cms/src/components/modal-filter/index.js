@@ -113,9 +113,9 @@ export default function ModalFilter({ isOpen, onClose, filterData, onClickFilter
                 </div>
               </div>
             ))}
-            <div className="flex justify-center mt-2">
+            <div>
               <Button
-                className="flex justify-center bg-black text-white uppercase w-full"
+                className="flex justify-center mt-2 bg-black text-white uppercase w-full"
                 onClick={handleFilter}
               >
                 Apply
