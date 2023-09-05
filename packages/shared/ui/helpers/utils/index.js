@@ -1,1 +1,1 @@
-export { default as textAdditionalClassName } from './TextAdditionalClassName';
+export { default as textAdditionalClassName } from './textAdditionalClassName';
