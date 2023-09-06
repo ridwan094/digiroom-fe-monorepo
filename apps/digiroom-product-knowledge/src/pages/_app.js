@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { setIsMobileScreen, setScreenSize } from 'ui/store/page/actions';
 import { useSelector } from 'react-redux';
 import screenBreakpoints from 'ui/constants/screen-breakpoints';
+import Layout from 'ui/components/templates/Layout';
 
 function App({ Component, pageProps }) {
   const { screenSize } = useSelector((state) => state.page);
@@ -42,7 +43,9 @@ function App({ Component, pageProps }) {
         <title>Next.Js: Atomic design boilerplate</title>
       </Head>
       <Provider store={store}>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </Provider>
     </>
   );

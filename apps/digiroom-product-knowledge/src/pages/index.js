@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { TabBarPromo, QuickLink, Layout } from 'ui';
-import { BreadCrumbs } from 'ui/components/molecules';
+import { BreadCrumbs, QuickLink } from 'ui/components/molecules';
 import {
   PromoBannerSection,
   PromoInfoSection,
   PromoFaqSection,
+  TabBarPromo,
 } from 'ui/components/organism';
 import faqs from '../constants/faqs';
 
@@ -26,33 +26,31 @@ export default function Home() {
   };
 
   return (
-    <>
-      <Layout>
-        <QuickLink />
+    <React.Fragment>
+      <QuickLink />
 
-        <div className="hidden lg:block">
-          <BreadCrumbs items={[{ name: 'Home', path: '/' }, { name: 'Promo' }]} />
-        </div>
+      <div className="hidden lg:block">
+        <BreadCrumbs items={[{ name: 'Home', path: '/' }, { name: 'Promo' }]} />
+      </div>
 
-        {/* Promo banner section */}
-        <PromoBannerSection />
+      {/* Promo banner section */}
+      <PromoBannerSection />
 
-        {/* Tab Bar Promo */}
-        <div className="lg:container">
-          <TabBarPromo />
-        </div>
+      {/* Tab Bar Promo */}
+      <div className="lg:container">
+        <TabBarPromo />
+      </div>
 
-        {/* Promo info section */}
-        <PromoInfoSection />
+      {/* Promo info section */}
+      <PromoInfoSection />
 
-        {/* Promo FAQ section */}
-        <PromoFaqSection faqs={faqs} />
+      {/* Promo FAQ section */}
+      <PromoFaqSection faqs={faqs} />
 
-        {/* Breadcrumb for mobile screen */}
-        <div className="lg:hidden">
-          <BreadCrumbs items={[{ name: 'Home', path: '/' }, { name: 'Promo' }]} />
-        </div>
-      </Layout>
-    </>
+      {/* Breadcrumb for mobile screen */}
+      <div className="lg:hidden">
+        <BreadCrumbs items={[{ name: 'Home', path: '/' }, { name: 'Promo' }]} />
+      </div>
+    </React.Fragment>
   );
 }
