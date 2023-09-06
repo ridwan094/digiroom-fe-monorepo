@@ -2,10 +2,10 @@ import { Button } from '../../atoms';
 import { MdArrowForward } from 'react-icons/md';
 import { CurrentInformation, OtherArticles } from '../../molecules';
 
-const CurrentInformationSection = ({ currentInfo }) => {
+const CurrentInformationSection = ({ data }) => {
   return (
     <section className="py-6 border-t-4 lg:py-10">
-      <div className="container lg:p-0">
+      <div className="px-4 container ">
         <div className="flex justify-between lg:items-center">
           <div className="flex flex-col gap-2">
             <h2 className="text-base font-bold uppercase text-reliableBlack lg:text-2xl">
@@ -23,7 +23,7 @@ const CurrentInformationSection = ({ currentInfo }) => {
           Berikut adalah events Auto2000 yang ada di{' '}
           <span className="font-bold">Auto2000 Jakarta Pusat</span>
         </p>
-        <CurrentInformation items={currentInfo} />
+        <CurrentInformation items={data} />
       </div>
     </section>
   );
