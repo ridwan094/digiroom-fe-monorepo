@@ -45,35 +45,33 @@ export const getPromoBySlug = async (slug) => {
     console.error('Error fetching data:', error);
     return null;
   }
-}
+};
 
 export const createPromo = async (body) => {
   try {
-    await CMS.post('promo/create', body)
-
-    return true;
-  } catch(error) {
-    console.error('Error fetching data:', error);
-  }
-
-}
-
-export const updatePromo = async (body) => {
-  try {
-    await CMS.put(`promo/edit`, body)
+    await CMS.post('promo/create', body);
 
     return true;
   } catch (error) {
-    console.log(error)
+    console.error('Error fetching data:', error);
   }
-}
+};
 
+export const updatePromo = async (body) => {
+  try {
+    await CMS.put(`promo/edit`, body);
+
+    return true;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const deletePromo = async (id) => {
   const api = `promo/delete/${id}`;
   try {
     await CMS.delete(api);
-    
+
     return true;
   } catch (error) {
     console.error('Error deleting data:', error);
