@@ -56,7 +56,7 @@ const menu = [
   },
   {
     name: 'Product Knowladge',
-    path: '/product-knowladge',
+    path: '/product-knowledge',
     icon: MdDirectionsCar,
   },
   {
