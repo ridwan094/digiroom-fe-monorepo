@@ -1,4 +1,4 @@
-import { Layout } from 'ui/components/templates';
+import React from 'react';
 import {
   BreadCrumbs,
   ProductKnowledgeFeatureCard,
@@ -13,7 +13,7 @@ import {
 
 const ProductKnowledgeDetailPage = ({ slug, product }) => {
   return (
-    <Layout>
+    <React.Fragment>
       <BreadCrumbs
         isMobileScreen={false}
         items={[
@@ -57,7 +57,7 @@ const ProductKnowledgeDetailPage = ({ slug, product }) => {
           { name: product.title },
         ]}
       />
-    </Layout>
+    </React.Fragment>
   );
 };
 

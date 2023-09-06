@@ -42,7 +42,7 @@ const BreadCrumbs = ({ isMobileScreen, items, breadcrumbsClassName }) => {
   );
 };
 
-Breadcrumbs.defaultProps = {
+BreadCrumbs.defaultProps = {
   isMobileScreen: true,
   items: [],
   breadcrumbsClassName: '',

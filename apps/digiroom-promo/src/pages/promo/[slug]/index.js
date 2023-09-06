@@ -35,7 +35,7 @@ const PromoDetailPage = ({ slug, promo }) => {
             <DetailPromoHeroSection image={promo.image} />
 
             {/* Detail Promo Body Section */}
-            <DetailPromoBodySection promo={promo} baseUrl={process.env.NEXT_PUBLIC_BASE_URL} />
+            <DetailPromoBodySection promo={promo} />
           </div>
 
           {/* Col 2: Inquiry from section for desktop */}

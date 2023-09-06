@@ -1,18 +1,17 @@
 import faqs from '@/constants/faqs';
 import React from 'react';
+import { BreadCrumbs, QuickLink } from 'ui/components/molecules';
+S;
 import {
-  BreadCrumbs,
-  Layout,
   ProductKnowledgeBannerSection,
   PromoFaqSection,
   PromoInfoSection,
-  QuickLink,
   TabBarProductKnowledge,
-} from 'ui';
+} from 'ui/components/organism';
 
 const ProductKnowledgePage = () => {
   return (
-    <Layout>
+    <React.Fragment>
       <div className="lg:px-24">
         <QuickLink />
 
@@ -40,7 +39,7 @@ const ProductKnowledgePage = () => {
           items={[{ name: 'Home', path: '/' }, { name: 'Product Knowledge' }]}
         />
       </div>
-    </Layout>
+    </React.Fragment>
   );
 };
 export default ProductKnowledgePage;

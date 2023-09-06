@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { BranchFilter, BranchCard } from '../../molecules';
 import { MdClose } from 'react-icons/md';
-import { ArrowSplit, Text } from '../../atoms';
+import { Icons, Text } from '../../atoms';
 
 const BranchMapSection = () => {
   const [handlerViewMap, setHandlerViewMap] = useState(false);
@@ -91,7 +91,7 @@ const BranchMapSection = () => {
               <a href="#" className="text-xs text-reliableBlack90">
                 PETUNJUK ARAH
               </a>
-              <ArrowSplit fill="#CE181E" />
+              <Icons.ArrowSplit fill="#CE181E" />
             </button>
           </div>
         </div>
