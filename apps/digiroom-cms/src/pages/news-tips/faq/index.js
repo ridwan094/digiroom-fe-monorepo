@@ -146,6 +146,12 @@ const FaqPage = () => {
     }
   };
 
+  const hideToast = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    setShowToast(false);
+    window.location.reload();
+  };
+
   // fetch faq news and tips list
   const fetchFaqList = async () => {
     setIsLoading(true);
@@ -207,73 +213,56 @@ const FaqPage = () => {
     };
 
     try {
-      const res = await createFaqNewsTips(reqBody);
-      if (res === true) {
-        setCreateFaq(undefined);
-        setShowToast(!false);
-        setToastDescription('Successfully added FAQ');
-        setTimeout(() => {
-          setShowToast(false);
-          window.location.reload();
-        }, 2000);
-      } else {
-        setCreateFaq(undefined);
-        setShowToast(!false);
-        setToastDescription('Failed to add FAQ');
-        setTimeout(() => {
-          setShowToast(false);
-          window.location.reload();
-        }, 2000);
-      }
+      await createFaqNewsTips(reqBody);
+      setCreateFaq(undefined);
+      setShowToast(!false);
+      setToastDescription('Successfully added FAQ');
+      await hideToast();
     } catch (error) {
       console.error('Error post data:', error);
+      setCreateFaq(undefined);
+      setShowToast(!false);
+      setToastDescription('Failed to add FAQ');
+      await hideToast();
     }
   };
 
   // update faq news and tips
-  const handleUpdate = async () => {
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const payload = {
+      id: editData.id,
+      sequence: editData.sequence,
+      question: editData.title,
+      answer: editData.description,
+    };
+
     try {
       if (editData) {
-        const payload = {
-          id: editData.id,
-          sequence: editData.sequence,
-          question: editData.title,
-          answer: editData.description,
-        };
-
         const updatedData = await updateFaqNewsTips(payload);
+        const updatedFaqData = [...faqData];
+        updatedFaqData[caseItems.index] = updatedData;
+        setFaqData(updatedFaqData);
+        setDisplayedItems(updatedFaqData.slice(0, itemsPerPage));
 
-        if (updatedData) {
-          const updatedFaqData = [...faqData];
-          updatedFaqData[caseItems.index] = updatedData;
-          setFaqData(updatedFaqData);
-          setDisplayedItems(updatedFaqData.slice(0, itemsPerPage));
+        setShowToast(true);
+        setToastDescription('Successfully edited FAQ');
 
-          setEditFaq(null);
-          setEditData(null);
+        setEditFaq(null);
+        setEditData(null);
 
-          setShowToast(!false);
-          setToastDescription('Successfully edited FAQ');
-          setTimeout(() => {
-            setShowToast(false);
-            window.location.reload();
-          }, 2000);
-        } else {
-          console.error('Failed to update data.');
-
-          setEditFaq(null);
-          setEditData(null);
-
-          setShowToast(!false);
-          setToastDescription('Failed to edited FAQ');
-          setTimeout(() => {
-            setShowToast(false);
-            window.location.reload();
-          }, 2000);
-        }
+        await hideToast();
       }
     } catch (error) {
       console.error('Error when updating data:', error);
+
+      setShowToast(true);
+      setToastDescription('Failed to edit FAQ');
+
+      setEditFaq(null);
+      setEditData(null);
+
+      await hideToast();
     }
   };
 
@@ -291,27 +280,17 @@ const FaqPage = () => {
   // delete faq news and tips
   const handleDelete = async () => {
     try {
-      const response = await deleteFaqNewsTips(faqId);
-
-      if (response) {
-        setOpenModal(undefined);
-        setShowToast(!false);
-        setToastDescription('Successfully delete FAQ');
-        setTimeout(() => {
-          setShowToast(false);
-          window.location.reload();
-        }, 2000);
-      } else {
-        setOpenModal(undefined);
-        setShowToast(!false);
-        setToastDescription('Failed to delete FAQ');
-        setTimeout(() => {
-          setShowToast(false);
-          window.location.reload();
-        }, 2000);
-      }
+      await deleteFaqNewsTips(faqId);
+      setOpenModal(undefined);
+      setShowToast(!false);
+      setToastDescription('Successfully delete FAQ');
+      await hideToast();
     } catch (error) {
       console.error('Error to delete data:', error);
+      setOpenModal(undefined);
+      setShowToast(!false);
+      setToastDescription('Failed to delete FAQ');
+      await hideToast();
     }
   };
 
