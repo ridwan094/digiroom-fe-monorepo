@@ -1,4 +1,5 @@
-name: $(Build.BuildNumber)
+variables:
+  ImageTag: '$(Build.BuildId)'
 
 trigger:
   branches:
