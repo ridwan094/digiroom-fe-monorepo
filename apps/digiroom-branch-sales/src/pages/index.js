@@ -1,3 +1,4 @@
+import { EVENT_SECTION } from '@/constants/dummy';
 import faqs from '@/constants/faqs';
 import {
   QuickLink,
@@ -20,8 +21,8 @@ export default function Home() {
         </div>
 
         <BranchListSection />
-        <PromoEventSection />
-        <CurrentInformationSection />
+        <PromoEventSection data={EVENT_SECTION} />
+        <CurrentInformationSection data={EVENT_SECTION} />
         <FormFaqSection faqs={faqs} />
         <ReviewSection />
 
