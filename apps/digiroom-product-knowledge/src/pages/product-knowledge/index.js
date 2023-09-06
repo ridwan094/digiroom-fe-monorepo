@@ -1,7 +1,6 @@
 import faqs from '@/constants/faqs';
 import React from 'react';
 import { BreadCrumbs, QuickLink } from 'ui/components/molecules';
-S;
 import {
   ProductKnowledgeBannerSection,
   PromoFaqSection,
