@@ -41,7 +41,7 @@ const CurrentInformation = ({ items, classNameContainer, ...props }) => {
                   <div className="pt-2 px-3 pb-5">
                     <img
                       className="w-full object-cover mb-4"
-                      src={item.image}
+                      src={item.coverImg}
                       alt="Auto2000 promo image"
                     />
                     <p className="text-xs font-medium text-reliableBlack mb-6 h-12 line-clamp-3 lg:text-lg lg:font-semibold lg:mb-3 lg:h-fit">
