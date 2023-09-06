@@ -147,7 +147,7 @@ const FaqPage = () => {
   };
 
   const hideToast = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     setShowToast(false);
     window.location.reload();
   };
@@ -215,13 +215,13 @@ const FaqPage = () => {
     try {
       await createFaqNewsTips(reqBody);
       setCreateFaq(undefined);
-      setShowToast(!false);
+      setShowToast(true);
       setToastDescription('Successfully added FAQ');
       await hideToast();
     } catch (error) {
       console.error('Error post data:', error);
       setCreateFaq(undefined);
-      setShowToast(!false);
+      setShowToast(true);
       setToastDescription('Failed to add FAQ');
       await hideToast();
     }
@@ -282,13 +282,13 @@ const FaqPage = () => {
     try {
       await deleteFaqNewsTips(faqId);
       setOpenModal(undefined);
-      setShowToast(!false);
+      setShowToast(true);
       setToastDescription('Successfully delete FAQ');
       await hideToast();
     } catch (error) {
       console.error('Error to delete data:', error);
       setOpenModal(undefined);
-      setShowToast(!false);
+      setShowToast(true);
       setToastDescription('Failed to delete FAQ');
       await hideToast();
     }
