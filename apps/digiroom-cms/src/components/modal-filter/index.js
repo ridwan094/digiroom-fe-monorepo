@@ -39,6 +39,7 @@ export default function ModalFilter({ isOpen, onClose, filterData, onClickFilter
           column: filterItem.column,
           key: filterItem.key,
           label: filterItem.label,
+          id: filterItem.id,
         });
       }
       return filters;
@@ -62,7 +63,7 @@ export default function ModalFilter({ isOpen, onClose, filterData, onClickFilter
   };
 
   return (
-    <div>
+    <div className="flex justify-center items-center">
       <Modal dismissible show={isOpen} onClose={onClose} size="xl">
         <Modal.Header>Filter</Modal.Header>
         <Modal.Body>
@@ -70,7 +71,7 @@ export default function ModalFilter({ isOpen, onClose, filterData, onClickFilter
             {filterData.map((filterSection, sectionIndex) => (
               <div key={filterSection.title}>
                 <div>{filterSection.title}</div>
-                <div className="flex flex-row gap-4 mt-2 mb-2 ">
+                <div className="flex flex-row gap-2 mt-2 mb-2 ">
                   {filterSection.items.map((filterItem, itemIndex) => (
                     <div className="flex flex-row items-center gap-1" key={filterItem.key}>
                       {filterItem.key === 'dateRange' ? (

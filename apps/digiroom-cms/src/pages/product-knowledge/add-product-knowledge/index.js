@@ -2,14 +2,14 @@ import React, { useRef, useState } from 'react';
 import LayoutForm from '@/components/LayoutForm';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
-import { createNewsTips } from '@/service/news-tips-dashboard/news-tips-dashboard';
-import { componentConfigNewsTips } from '@/constants/add-news-page';
+import { createProductKnowledge } from '@/service/product-knowledge';
+import { componentConfigProductKnowledge } from '@/constants/add-product-knowledge';
 import { handleUpload } from '@/service/azure/fileUpload';
 import { useRouter } from 'next/router';
 import { Spinner, Toast } from 'flowbite-react';
 import ModalText from '@/components/modal-text';
 
-const NewsTips = () => {
+const ProductKnowledge = () => {
   const [dataForm, setDataForm] = useState({});
   const [urlImage, setUrlImage] = useState();
   const [loading, setLoading] = useState(false);
@@ -85,7 +85,7 @@ const NewsTips = () => {
       cmsStatusType: 'DRAFT',
       detailContent: dataForm.detailPromosi,
     };
-    const create = await createNewsTips(dataTemporary);
+    const create = await createProductKnowledge(dataTemporary);
     if (create === 'Success') {
       setLoading(false);
     } else {
@@ -110,7 +110,7 @@ const NewsTips = () => {
         handleUpload={handleUploadFile}
         editor={editor}
         showPreviewPage={showPreviewPage}
-        componentConfig={componentConfigNewsTips}
+        componentConfig={componentConfigProductKnowledge}
         dataForm={dataForm}
         setDataForm={setDataForm}
         errors={errors}
@@ -122,4 +122,4 @@ const NewsTips = () => {
   );
 };
 
-export default NewsTips;
+export default ProductKnowledge;

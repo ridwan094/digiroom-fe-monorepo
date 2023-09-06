@@ -2,21 +2,23 @@ import { MdOutlineFileCopy } from 'react-icons/md';
 import React, { useEffect, useState } from 'react';
 import CustomTable from '@/components/Table';
 import { useRouter } from 'next/navigation';
-import { columnsNewsTips, headerArrayNewsTips } from '@/constants/implement-table';
+import {
+  columnsProductKnowledge,
+  filterProductKnowledge,
+  headerArrayProductKnowledge,
+} from '@/constants/implement-table';
 import ModalText from '@/components/modal-text';
 import ModalFilter from '@/components/modal-filter';
 import ModalPreview from '@/components/modal-preview';
 import {
-  getListDashboardNewsTips,
+  getListDashboardProductKnowledge,
   getIdListData,
   deleteDataTable,
-  getCategory,
-  getStatus,
-} from '@/service/news-tips';
+} from '@/service/product-knowledge';
 import { LoadingEffect } from '../loading';
 import { Spinner } from 'flowbite-react';
 
-const DashboardNewsTips = () => {
+const DashboardProductKnowledge = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [showToast, setShowToast] = useState(false);
   const [toastDescription, setToastDescription] = useState('');
@@ -43,17 +45,16 @@ const DashboardNewsTips = () => {
   const [dataPreview, setDataPreview] = useState([]);
   const [loadingAction, setLoadingAction] = useState(false);
   const [deleteData, setDeleteData] = useState();
-  const [dataFilter, setDataFilter] = useState([]);
-  const [filterModal, setFilterModal] = useState([]);
 
   const onPageChange = async (page) => {
     setCurrentPage(page);
+    fetchListDashboard();
   };
 
   const onClickCheck = (value) => {
     switch (value) {
       case 'add':
-        router.push('/news-tips/add-news-tips');
+        router.push('/product-knowledge/add-product-knowledge');
         break;
       case 'filter':
         setOpenModalFilter('dismissible');
@@ -67,6 +68,7 @@ const DashboardNewsTips = () => {
   const searchTable = async (value) => {
     if (value.key === 'Enter') {
       setCurrentPage(1);
+      fetchListDashboard();
     }
   };
 
@@ -74,10 +76,7 @@ const DashboardNewsTips = () => {
     setCaseItems(items);
     switch (items) {
       case 'edit':
-        router.push({
-          pathname: '/news-tips/edit-news-tips',
-          query: { id: JSON.stringify(item.slug) },
-        });
+        router.push(`/product-knowledge/${item.slug}`);
         break;
       case 'delete':
         setOpenModal('dismissible');
@@ -87,76 +86,99 @@ const DashboardNewsTips = () => {
         setDeleteData(item.id);
         break;
       case 'copy':
-        router.push(`/news-tips/duplicate-news-tips`);
+        const textToCopy = listDashboard[index + startIndex].slug;
+        copyToClipboard(textToCopy);
+        setShowToast(!showToast);
+        setToastDescription('Copy to Clipboard');
+        setToastIcons(<MdOutlineFileCopy />);
+        setTimeout(() => {
+          setShowToast(false);
+        }, 2000);
+        break;
+      case 'view':
+        setLoadingAction(true);
+        const data = await getIdListData(item);
+        if (data !== null) {
+          setDataPreview(data);
+          setOpenModalPreview('dismissible');
+          setLoadingAction(false);
+        } else {
+          setDataPreview(null);
+          setOpenModalPreview('dismissible');
+          setLoadingAction(false);
+        }
+        setLoadingAction(false);
         break;
     }
   };
 
   const fetchListDashboard = async () => {
-    setIsLoading(true);
-    try {
-      const payload = {
-        filters: filterModal,
-        sorts: dataDirection,
-        page: currentPage - 1,
-        size: itemsPerPage,
-      };
-      const data = await getListDashboardNewsTips(payload);
-      if (data !== null) {
-        setListDashboard(data.content);
-        setTotalItems(data.totalElements);
-        setTotalPages(Math.ceil(data.totalElements / itemsPerPage));
-      }
-      setIsLoading(false);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      setIsLoading(false);
-    }
-  };
+    // setIsLoading(true);
+    // try {
+    //   const payload = {
+    //     filters: [],
+    //     sorts: dataDirection,
+    //     page: currentPage - 1,
+    //     size: itemsPerPage,
+    //   };
+    //   const data = await getListDashboardNewsTips(payload);
+    //   if (data !== null) {
+    //     setListDashboard(data.content);
+    //     setTotalItems(data.totalElements);
+    //     setTotalPages(Math.ceil(data.totalPages / itemsPerPage));
+    //   }
+    //   setIsLoading(false);
+    // } catch (error) {
+    //   console.error('Error fetching data:', error);
+    //   setIsLoading(false);
+    // }
+    const dataTemporary = [
+      {
+        id: 2,
+        heroImageLink:
+          'https://astradigitaldigiroomstg.blob.core.windows.net/storage-general-001/image.jpg',
+        titlePage: 'Title Promo',
+        startDate: '2023-08-27T17:00:00',
+        endDate: '2023-08-27T17:00:00',
+        publishedDate: null,
+        titleHeader: 'title promo header',
+        slug: 'title-slug-test-newsandtips-1',
+        category: {
+          id: 2,
+          categoryType: 'NEWS_AND_TIPS',
+          name: 'NEWS AND TIPS',
+          description: null,
+        },
+        contentCategory: {
+          id: 4,
+          contentCategoryType: 'BERITA_TIPS',
+          name: 'Berita And Tips',
+          description: null,
+          categoryId: 2,
+          priority: 1,
+        },
+        keyword: 'this for keyword',
+        metaDescription: 'this for metaDescription',
+        altImage: 'this for altImage',
+        ordering: 1,
+        tag: null,
+        metaRobotList: [],
+        cmsStatusType: null,
+        groupType: null,
+        region: null,
+        city: null,
+        branch: null,
+        detailContent: null,
+      },
+    ];
 
-  const getListCategoryStatus = async () => {
-    try {
-      const categoryData = await getCategory();
-      const categoryItems = categoryData.map((item) => ({
-        column: 'category',
-        key: item.name.toLowerCase().replace(/ /g, ''),
-        label: item.name,
-        id: item.id,
-      }));
-      const statusData = await getStatus();
-      const statusItems = statusData.map((item) => ({
-        column: 'status',
-        key: item.toLowerCase(),
-        label: item.charAt(0) + item.slice(1).toLowerCase(),
-      }));
-      const dateRangeItem = {
-        column: 'daterange',
-        key: 'dateRange',
-        label: 'Date Range',
-      };
-      const filterDataNewsTips = [
-        {
-          title: 'Category',
-          items: categoryItems,
-        },
-        {
-          title: 'Status',
-          items: statusItems,
-        },
-        {
-          title: 'Date Range',
-          items: [dateRangeItem],
-        },
-      ];
-      setDataFilter(filterDataNewsTips);
-    } catch (error) {
-      console.log('Error Getting Data');
-    }
+    setListDashboard(dataTemporary);
   };
 
   const dropdownPageChange = (selectedValue) => {
     setItemsPerPage(selectedValue);
     onPageChange(1);
+    fetchListDashboard();
   };
 
   const onClickModal = async () => {
@@ -191,42 +213,10 @@ const DashboardNewsTips = () => {
     });
   };
 
-  const handleFilter = async (filterData) => {
+  const handleFilter = (filterData) => {
     event.preventDefault();
-    const categoryIds = [];
-    const statusKeys = [];
-    const filters = [];
-
-    if ((await filterData.length) > 0) {
-      filterData.forEach((filter) => {
-        if (filter.column === 'category' && filter.id) {
-          categoryIds.push(filter.id);
-        } else if (filter.column === 'status' && filter.key) {
-          statusKeys.push(filter.key.toUpperCase());
-        }
-      });
-
-      if (categoryIds.length > 0) {
-        filters.push({
-          key: 'contentCategory.id',
-          operator: 'IN',
-          fieldType: 'INTEGER',
-          values: categoryIds,
-        });
-      }
-
-      if (statusKeys.length > 0) {
-        filters.push({
-          key: 'cmsStatusType',
-          operator: 'IN',
-          fieldType: 'STATUSTYPEENUM',
-          value: null,
-          valueTo: null,
-          values: statusKeys,
-        });
-      }
-      setFilterModal(filters);
-    }
+    setActiveFilters(filterData);
+    fetchListDashboard();
   };
 
   const copyToClipboard = (text) => {
@@ -269,14 +259,11 @@ const DashboardNewsTips = () => {
       setSortDirection([...sortDirection, 'ASC']);
       setDataDirection([...dataDirection, { key, direction: 'ASC' }]);
     }
+    fetchListDashboard();
   };
 
   useEffect(() => {
     fetchListDashboard();
-  }, [currentPage, itemsPerPage, sortKey, sortDirection, filterModal]);
-
-  useEffect(() => {
-    getListCategoryStatus();
   }, []);
 
   return (
@@ -284,7 +271,7 @@ const DashboardNewsTips = () => {
       {loadingAction && LoadingEffect(<Spinner />, 'Loading...')}
       <div className={`${loadingAction ? 'pointer-events-none' : ''} relative`}>
         <CustomTable
-          columns={columnsNewsTips(
+          columns={columnsProductKnowledge(
             itemsPerPage,
             currentPage,
             (value) => handleToggleChange(value),
@@ -309,7 +296,7 @@ const DashboardNewsTips = () => {
             searchBoolean: searchBoolean,
           }}
           isLoading={isLoading}
-          headerData={headerArrayNewsTips(
+          headerData={headerArrayProductKnowledge(
             searchBoolean,
             search,
             (value) => setSearch(value),
@@ -332,7 +319,7 @@ const DashboardNewsTips = () => {
         <ModalFilter
           isOpen={openModalFilter === 'dismissible'}
           onClose={() => setOpenModalFilter(false)}
-          filterData={dataFilter}
+          filterData={filterProductKnowledge}
           onClickFilter={handleFilter}
           activeFilters={activeFilters}
         />
@@ -349,4 +336,4 @@ const DashboardNewsTips = () => {
   );
 };
 
-export default DashboardNewsTips;
+export default DashboardProductKnowledge;
