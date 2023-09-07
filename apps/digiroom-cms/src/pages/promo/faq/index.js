@@ -393,34 +393,34 @@ const FaqPage = () => {
                   <div className="flex items-center gap-2">
                     <div
                       className={`p-1.5 w-full h-full border border-gray-200 ${
-                        typeStatus.ACTIVE
+                        item.boolean === typeStatus.ACTIVE
                           ? 'bg-blue-400'
-                          : typeStatus.INACTIVE
+                          : item.boolean === typeStatus.INACTIVE
                           ? 'bg-red-400'
-                          : typeStatus.WAITING
+                          : item.boolean === typeStatus.WAITING
                           ? 'bg-yellow-500'
                           : 'bg-gray-200'
                       } rounded-full text-white capitalized text-md flex justify-center items-center font-Montserrat`}
                     >
-                      {typeStatus.ACTIVE ? (
+                      {item.boolean === typeStatus.ACTIVE ? (
                         <FaEye size={18} />
-                      ) : typeStatus.INACTIVE ? (
+                      ) : item.boolean === typeStatus.INACTIVE ? (
                         <FaEyeSlash size={18} />
                       ) : (
-                        typeStatus.WAITING
+                        item.boolean === typeStatus.WAITING
                       )}
                     </div>
                     <ToggleSwitch
                       index={index}
-                      disabled={typeStatus.WAITING}
-                      value={typeStatus.ACTIVE}
+                      disabled={item.boolean === typeStatus.WAITING}
+                      value={item.boolean === typeStatus.ACTIVE}
                       onToggleChange={handleToggleChange}
                       classNameLabel={`w-11 h-6 bg-gray-200 rounded-full peer  
                     peer-checked:after:border-white after:content-[''] 
                     after:absolute after:top-[2px] after:left-[2px] 
                     after:bg-gray-600 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 
                     after:transition-all ${
-                      typeStatus.ACTIVE
+                      item.boolean === typeStatus.ACTIVE
                         ? 'peer-checked:bg-gray-800 peer-checked:after:translate-x-full'
                         : 'peer-checked:after:translate-x-0'
                     } `}
