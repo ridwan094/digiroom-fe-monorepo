@@ -7,7 +7,7 @@ import {
   MdOutlineMap,
 } from 'react-icons/md';
 
-const BranchFilter = ({ onClickHandlerViewMap }) => {
+const BranchFilter = ({ onClickHandlerViewMap, isMapView }) => {
   const [location, setLocation] = useState('Jakarta Pusat');
 
   const handleChangeLocation = (e) => {
@@ -33,7 +33,9 @@ const BranchFilter = ({ onClickHandlerViewMap }) => {
           <MdOutlinePlaylistAddCheck size={24} color="black" />
         </div>
         <div className="flex gap-2 cursor-pointer" onClick={() => onClickHandlerViewMap()}>
-          <Text.Headline4 className="lg:text-base">MAP VIEW</Text.Headline4>
+          <Text.Headline4 className="lg:text-base">
+            {!isMapView ? 'MAP VIEW' : 'LIST VIEW'}
+          </Text.Headline4>
           <MdOutlineMap size={24} color="black" />
         </div>
       </div>
@@ -49,7 +51,7 @@ const BranchFilter = ({ onClickHandlerViewMap }) => {
           <MdOutlinePlaylistAddCheck size={24} color="black" />
         </div>
         <div className="flex gap-2 cursor-pointer" onClick={() => onClickHandlerViewMap()}>
-          <Text.Headline4 className="lg:text-base">MAP VIEW</Text.Headline4>
+          <Text.Headline4 className="lg:text-base">MAP</Text.Headline4>
           <MdOutlineMap size={24} color="black" />
         </div>
       </div>
