@@ -4,12 +4,12 @@ variables:
 trigger:
   branches:
     include:
-      - devops
-      - feat/*
+      - development
   paths:
+    include:
+      - 'apps/digiroom/*'
     exclude:
       - 'apps/boilerplate/*'
-      - 'apps/digiroom/*'
       - 'apps/digiroom-cms/*'
       - 'apps/digiroom-new-car-purchase/*'
       - 'apps/digiroom-news/*'
