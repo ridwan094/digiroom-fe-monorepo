@@ -4,9 +4,10 @@ variables:
 trigger:
   branches:
     include:
-      - devops
-      - feat/*
+      - development
   paths:
+    include:
+      - 'apps/digiroom-promo/*'
     exclude:
       - 'apps/boilerplate/*'
       - 'apps/digiroom/*'
@@ -14,7 +15,6 @@ trigger:
       - 'apps/digiroom-new-car-purchase/*'
       - 'apps/digiroom-news/*'
       - 'apps/digiroom-product-knowledge/*'
-      - 'apps/digiroom-promo/*'
 
 pool:
   name: astradigital-agentpool
