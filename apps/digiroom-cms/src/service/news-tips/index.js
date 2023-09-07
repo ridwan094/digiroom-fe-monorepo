@@ -106,3 +106,19 @@ export const getSlug = async (payload) => {
     return null;
   }
 };
+
+export const editNewsTips = async (payload) => {
+  const api = `${process.env.NEXT_PUBLIC_BASE_URL}/newstips/edit`;
+  try {
+    const response = await CMS.put(api, payload);
+    console.log('isi response', response);
+    if (response !== null) {
+      return response;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error('Error getting data: ', error);
+    return null;
+  }
+};

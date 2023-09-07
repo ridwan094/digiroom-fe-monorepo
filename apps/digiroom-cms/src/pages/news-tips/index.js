@@ -87,7 +87,10 @@ const DashboardNewsTips = () => {
         setDeleteData(item.id);
         break;
       case 'copy':
-        router.push(`/news-tips/duplicate-news-tips`);
+        router.push({
+          pathname: '/news-tips/duplicate-news-tips',
+          query: { id: JSON.stringify(item.slug) },
+        });
         break;
     }
   };
@@ -227,15 +230,6 @@ const DashboardNewsTips = () => {
       }
       setFilterModal(filters);
     }
-  };
-
-  const copyToClipboard = (text) => {
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-    document.body.appendChild(textArea);
-    textArea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textArea);
   };
 
   const handleSort = (key) => {
