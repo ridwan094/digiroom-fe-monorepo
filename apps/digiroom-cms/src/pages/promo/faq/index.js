@@ -22,6 +22,7 @@ import {
   updateFaqPromo,
   deleteFaqPromo,
 } from '@/service/faq/promo';
+import { typeStatus } from '@/constants/type';
 
 const FaqPage = () => {
   const [title, settitle] = useState(['title', 'description', 'action', 'visibility']);
@@ -170,7 +171,7 @@ const FaqPage = () => {
             description: item.answer,
             slug: 'Copy to Clipboard',
             status: 'hidden',
-            boolean: 'inactive',
+            boolean: 'active',
           });
         });
 
@@ -392,34 +393,34 @@ const FaqPage = () => {
                   <div className="flex items-center gap-2">
                     <div
                       className={`p-1.5 w-full h-full border border-gray-200 ${
-                        item.boolean === 'active'
+                        typeStatus.ACTIVE
                           ? 'bg-blue-400'
-                          : item.boolean === 'inactive'
+                          : typeStatus.INACTIVE
                           ? 'bg-red-400'
-                          : item.boolean === 'waitings'
+                          : typeStatus.WAITING
                           ? 'bg-yellow-500'
                           : 'bg-gray-200'
                       } rounded-full text-white capitalized text-md flex justify-center items-center font-Montserrat`}
                     >
-                      {item.boolean === 'active' ? (
+                      {typeStatus.ACTIVE ? (
                         <FaEye size={18} />
-                      ) : item.boolean === 'inactive' ? (
+                      ) : typeStatus.INACTIVE ? (
                         <FaEyeSlash size={18} />
                       ) : (
-                        'Waiting'
+                        typeStatus.WAITING
                       )}
                     </div>
                     <ToggleSwitch
                       index={index}
-                      disabled={item.boolean === 'waitings'}
-                      value={item.boolean === 'active'}
+                      disabled={typeStatus.WAITING}
+                      value={typeStatus.ACTIVE}
                       onToggleChange={handleToggleChange}
                       classNameLabel={`w-11 h-6 bg-gray-200 rounded-full peer  
                     peer-checked:after:border-white after:content-[''] 
                     after:absolute after:top-[2px] after:left-[2px] 
                     after:bg-gray-600 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 
                     after:transition-all ${
-                      item.boolean === 'active'
+                      typeStatus.ACTIVE
                         ? 'peer-checked:bg-gray-800 peer-checked:after:translate-x-full'
                         : 'peer-checked:after:translate-x-0'
                     } `}
@@ -527,12 +528,7 @@ const FaqPage = () => {
                 />
               </div>
               <div className="flex justify-center items-center mt-6 gap-4">
-                <Button
-                  className="w-1/2 rounded"
-                  color="failure"
-                  type="submit"
-                  // onClick={() => (window.location.href = '/promo/faq')}
-                >
+                <Button className="w-1/2 rounded" color="failure" type="submit">
                   Submit
                 </Button>
                 <Button
@@ -590,9 +586,6 @@ const FaqPage = () => {
                 />
               </div>
               <div className="flex justify-center items-center mt-6 gap-4">
-                {/* <Button className="w-1/2 rounded" color="success" onClick={() => handleEdit()}>
-                  Save Changes
-                </Button> */}
                 <Button className="w-1/2 rounded" color="success" type="submit">
                   Save Changes
                 </Button>
