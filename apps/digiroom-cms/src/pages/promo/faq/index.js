@@ -1,5 +1,5 @@
 import { MdAdd, MdOutlineFileCopy, MdOutlineCreate, MdOutlineDelete } from 'react-icons/md';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Table,
   Pagination,
@@ -16,64 +16,28 @@ import ToggleSwitch from 'ui/components/atoms/Toogle';
 import Dropdown from 'ui/components/atoms/Dropdown';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
+import {
+  createFaqPromo,
+  getListFaqPromo,
+  updateFaqPromo,
+  deleteFaqPromo,
+} from '@/service/faq/promo';
+import { typeStatus } from '@/constants/type';
 
 const FaqPage = () => {
   const [title, settitle] = useState(['title', 'description', 'action', 'visibility']);
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + 1);
-  const dummyFaq = [
-    {
-      title: 'This is FAQ 1',
-      slug: 'percobaan copy',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, ullam! Libero in necessitatibus ad fugit?',
-      status: 'hidden',
-      boolean: 'inactive',
-    },
-    {
-      title: 'This is FAQ 2',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, ullam! Libero in necessitatibus ad fugit?',
-      status: 'hidden',
-      boolean: 'inactive',
-    },
-    {
-      title: 'This is FAQ 3',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, ullam! Libero in necessitatibus ad fugit?',
-      status: 'hidden',
-      boolean: 'inactive',
-    },
-    {
-      title: 'This is FAQ 4',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, ullam! Libero in necessitatibus ad fugit?',
-      status: 'showed',
-      boolean: 'active',
-    },
-    {
-      title: 'This is FAQ 5',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, ullam! Libero in necessitatibus ad fugit?',
-      status: 'hidden',
-      boolean: 'inactive',
-    },
-    {
-      title: 'This is FAQ 6',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, ullam! Libero in necessitatibus ad fugit?',
-      status: 'hidden',
-      boolean: 'inactive',
-    },
-    {
-      title: 'This is FAQ 7',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, ullam! Libero in necessitatibus ad fugit?',
-      status: 'showed',
-      boolean: 'active',
-    },
-  ];
 
+  const [faqData, setFaqData] = useState([]);
+  const [sequence, setSequence] = useState(0);
+  const [formFaq, setFormFaq] = useState({
+    id: null,
+    categoryId: 1,
+    sequence: sequence + 1,
+    faqtitle: '',
+    desc: '',
+  });
   const [currentPage, setCurrentPage] = useState(1);
   const [showToast, setShowToast] = useState(false);
   const [toastDescription, setToastDescription] = useState('');
@@ -87,20 +51,29 @@ const FaqPage = () => {
   const [caseItems, setCaseItems] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [totalItems, setTotalItems] = useState(dummyFaq.length);
+  const [totalItems, setTotalItems] = useState(faqData.length);
   const [totalPages, setTotalPages] = useState(Math.ceil(totalItems / itemsPerPage));
   const [displayedItems, setDisplayedItems] = useState(
-    dummyFaq.slice(currentPage - 1, itemsPerPage)
+    faqData.slice(currentPage - 1, itemsPerPage)
   );
+  const [faqId, setFaqId] = useState();
   const [page, setPage] = useState([5, 10, 15]);
   const router = useRouter();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormFaq({
+      ...formFaq,
+      [name]: value,
+    });
+  };
 
   const onPageChange = (page) => {
     setIsLoading(true);
     setTimeout(() => {
       const startIndex = (page - 1) * itemsPerPage;
       const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
-      const displayedItems = dummyFaq.slice(startIndex, endIndex);
+      const displayedItems = faqData.slice(startIndex, endIndex);
       setCurrentPage(page);
       setDisplayedItems(displayedItems);
       setIsLoading(false);
@@ -119,15 +92,17 @@ const FaqPage = () => {
         break;
       case 'edit':
         setEditFaq('dismissible');
-        setEditData(dummyFaq[index]); // Set data yang akan diedit
+        setEditData(faqData[index]);
+        setFaqId(faqData[index].id);
         break;
       case 'delete':
         setOpenModal('dismissible');
         setModalText('delete');
         setModalHeader(`Delete ${displayedItems[index].title}`);
+        setFaqId(displayedItems[index].id);
         break;
       case 'copy':
-        const textToCopy = dummyFaq[index].slug;
+        const textToCopy = faqData[index].slug;
         copyToClipboard(textToCopy);
         setShowToast(!showToast);
         setToastDescription('Copy to Clipboard');
@@ -146,7 +121,7 @@ const FaqPage = () => {
   };
 
   const onClickModal = () => {
-    var updateDummyFaq = [...dummyFaq];
+    var updateFaqData = [...faqData];
     switch (caseItems.newValue) {
       case 'add':
         router.push('/promo/faq');
@@ -155,16 +130,16 @@ const FaqPage = () => {
         setOpenModal(undefined);
         break;
       case false:
-        updateDummyFaq[caseItems.index].boolean = caseItems ? 'inactive' : 'active';
-        setDisplayedItems(dummyFaq.slice(0, itemsPerPage));
+        updateFaqData[caseItems.index].boolean = caseItems ? 'inactive' : 'active';
+        setDisplayedItems(faqData.slice(0, itemsPerPage));
         setOpenModal(undefined);
-        updateDummyFaq = null;
+        updateFaqData = null;
         break;
       case true:
-        updateDummyFaq[caseItems.index].boolean = caseItems ? 'active' : 'inactive';
-        setDisplayedItems(dummyFaq.slice(0, itemsPerPage));
+        updateFaqData[caseItems.index].boolean = caseItems ? 'active' : 'inactive';
+        setDisplayedItems(faqData.slice(0, itemsPerPage));
         setOpenModal(undefined);
-        updateDummyFaq = null;
+        updateFaqData = null;
         break;
       default:
         setOpenModal(undefined);
@@ -172,11 +147,149 @@ const FaqPage = () => {
     }
   };
 
+  const hideToast = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setShowToast(false);
+    window.location.reload();
+  };
+
+  // fetch faq promo list
+  const fetchFaqList = async () => {
+    setIsLoading(true);
+    try {
+      const data = await getListFaqPromo();
+
+      if (data !== null) {
+        const faqList = [];
+
+        data.map((item) => {
+          faqList.push({
+            id: item.id,
+            categoryId: item.categoryId,
+            sequence: item.sequence,
+            title: item.question,
+            description: item.answer,
+            slug: 'Copy to Clipboard',
+            status: 'hidden',
+            boolean: 'active',
+          });
+        });
+
+        setFaqData(faqList);
+        setTotalItems(faqList.length);
+        setTotalPages(Math.ceil(faqList.length / itemsPerPage));
+
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = Math.min(startIndex + itemsPerPage, faqList.length);
+        const displayedItems = faqList.slice(startIndex, endIndex);
+        setDisplayedItems(displayedItems);
+      }
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchFaqList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const sequenceIndex = faqData.map((index, item) => {
+      return index;
+    });
+
+    setSequence(sequenceIndex);
+  }, [faqData]);
+
+  // create faq promo
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const reqBody = {
+      categoryId: formFaq.categoryId,
+      sequence: formFaq.sequence,
+      question: formFaq.faqtitle,
+      answer: formFaq.desc,
+    };
+
+    try {
+      await createFaqPromo(reqBody);
+      setCreateFaq(undefined);
+      setShowToast(true);
+      setToastDescription('Successfully added FAQ');
+      await hideToast();
+    } catch (error) {
+      console.error('Error when creating data:', error);
+      setCreateFaq(undefined);
+      setShowToast(true);
+      setToastDescription('Failed to add FAQ');
+      await hideToast();
+    }
+  };
+
+  // update faq promo
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const payload = {
+      id: editData.id,
+      sequence: editData.sequence,
+      question: editData.title,
+      answer: editData.description,
+    };
+
+    try {
+      if (editData) {
+        const updatedData = await updateFaqPromo(payload);
+        const updatedFaqData = [...faqData];
+        updatedFaqData[caseItems.index] = updatedData;
+        setFaqData(updatedFaqData);
+        setDisplayedItems(updatedFaqData.slice(0, itemsPerPage));
+
+        setShowToast(true);
+        setToastDescription('Successfully edited FAQ');
+
+        setEditFaq(null);
+        setEditData(null);
+
+        await hideToast();
+      }
+    } catch (error) {
+      console.error('Error when updating data:', error);
+
+      setShowToast(true);
+      setToastDescription('Failed to edit FAQ');
+
+      setEditFaq(null);
+      setEditData(null);
+
+      await hideToast();
+    }
+  };
+
+  // delete faq promo
+  const handleDelete = async () => {
+    try {
+      await deleteFaqPromo(faqId);
+      setOpenModal(undefined);
+      setShowToast(true);
+      setToastDescription('Successfully delete FAQ');
+      await hideToast();
+    } catch (error) {
+      console.error('Error when removing data:', error);
+      setOpenModal(undefined);
+      setShowToast(true);
+      setToastDescription('Failed to delete FAQ');
+      await hideToast();
+    }
+  };
+
   const handleEdit = () => {
     // Update the dummyFaq data with the edited data
-    const updatedDummyFaq = [...dummyFaq];
-    updatedDummyFaq[caseItems.index] = editData;
-    setDisplayedItems(updatedDummyFaq.slice(0, itemsPerPage));
+    const updateFaqData = [...faqData];
+    updateFaqData[caseItems.index] = editData;
+    setDisplayedItems(updateFaqData.slice(0, itemsPerPage));
 
     // Close the edit modal
     setEditFaq(null);
@@ -229,7 +342,7 @@ const FaqPage = () => {
         )}
       </div>
       <div className={`flex items-center justify-between ${isLoading ? 'opacity-50' : ''}`}>
-        <p className="px-2 py-4 relative text-lg uppercase font-bold">promo</p>
+        <p className="px-2 py-4 relative text-lg uppercase font-bold">Promo</p>
         <Button
           className="p-0 border border-sky-300"
           color="light"
@@ -250,10 +363,10 @@ const FaqPage = () => {
             ))}
           </Table.Head>
           <Table.Body class="divide-y">
-            {displayedItems.map((dummyFaq, index) => (
+            {displayedItems.map((item, index) => (
               <Table.Row key={index} className={isLoading ? 'animate-pulse' : ''}>
-                <Table.Cell className="max-w-lg">{dummyFaq.title}</Table.Cell>
-                <Table.Cell>{dummyFaq.description}</Table.Cell>
+                <Table.Cell className="max-w-lg">{item.title}</Table.Cell>
+                <Table.Cell>{item.description}</Table.Cell>
                 <Table.Cell>
                   <div className="flex flex-rows hover:cursor-pointer gap-2">
                     <Tooltip content="Edit">
@@ -280,34 +393,34 @@ const FaqPage = () => {
                   <div className="flex items-center gap-2">
                     <div
                       className={`p-1.5 w-full h-full border border-gray-200 ${
-                        dummyFaq.boolean === 'active'
+                        item.boolean === typeStatus.ACTIVE
                           ? 'bg-blue-400'
-                          : dummyFaq.boolean === 'inactive'
+                          : item.boolean === typeStatus.INACTIVE
                           ? 'bg-red-400'
-                          : dummyFaq.boolean === 'waitings'
+                          : item.boolean === typeStatus.WAITING
                           ? 'bg-yellow-500'
                           : 'bg-gray-200'
                       } rounded-full text-white capitalized text-md flex justify-center items-center font-Montserrat`}
                     >
-                      {dummyFaq.boolean === 'active' ? (
+                      {item.boolean === typeStatus.ACTIVE ? (
                         <FaEye size={18} />
-                      ) : dummyFaq.boolean === 'inactive' ? (
+                      ) : item.boolean === typeStatus.INACTIVE ? (
                         <FaEyeSlash size={18} />
                       ) : (
-                        'Waiting'
+                        item.boolean === typeStatus.WAITING
                       )}
                     </div>
                     <ToggleSwitch
                       index={index}
-                      disabled={dummyFaq.boolean === 'waitings'}
-                      value={dummyFaq.boolean === 'active'}
+                      disabled={item.boolean === typeStatus.WAITING}
+                      value={item.boolean === typeStatus.ACTIVE}
                       onToggleChange={handleToggleChange}
                       classNameLabel={`w-11 h-6 bg-gray-200 rounded-full peer  
                     peer-checked:after:border-white after:content-[''] 
                     after:absolute after:top-[2px] after:left-[2px] 
                     after:bg-gray-600 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 
                     after:transition-all ${
-                      dummyFaq.boolean === 'active'
+                      item.boolean === typeStatus.ACTIVE
                         ? 'peer-checked:bg-gray-800 peer-checked:after:translate-x-full'
                         : 'peer-checked:after:translate-x-0'
                     } `}
@@ -360,7 +473,7 @@ const FaqPage = () => {
                 Are you sure you want to {modalText} this data?
               </h3>
               <div className="flex justify-center gap-4">
-                <Button color="failure" onClick={() => onClickModal()}>
+                <Button color="failure" onClick={() => handleDelete()}>
                   Yes, I&apos;m sure
                 </Button>
                 <Button color="gray" onClick={() => setOpenModal(undefined)}>
@@ -383,46 +496,50 @@ const FaqPage = () => {
             <h2 className="text-3xl font-bold">Create FAQ</h2>
           </Modal.Header>
           <Modal.Body>
-            <div className="flex flex-col gap-4">
-              <div className="block -mb-3">
-                <Label htmlFor="faqtitle" className="font-semibold text-reliableBlack60">
-                  FAQ Title
-                </Label>
+            <form onSubmit={onSubmit}>
+              <div className="flex flex-col gap-4">
+                <div className="block -mb-3">
+                  <Label htmlFor="faqtitle" className="font-semibold text-reliableBlack60">
+                    FAQ Title
+                  </Label>
+                </div>
+                <TextInput
+                  class="bg-reliableBlack5 w-full p-2 rounded-none border-b-2 border-reliableBlack30 focus:border focus:ring-1 focus:ring-reliableBlack30 focus:border-reliableBlack30"
+                  id="faqtitle"
+                  name="faqtitle"
+                  value={formFaq.faqtitle}
+                  onChange={handleChange}
+                  type="text"
+                />
+                <div className="block -mb-3">
+                  <Label htmlFor="desc" className="font-semibold text-reliableBlack60">
+                    FAQ Description
+                  </Label>
+                </div>
+                <Textarea
+                  className="bg-reliableBlack5 p-2 rounded-none border-b-2 border-reliableBlack30 focus:border focus:ring-1 focus:ring-reliableBlack30 focus:border-reliableBlack30"
+                  id="desc"
+                  name="desc"
+                  value={formFaq.desc}
+                  onChange={handleChange}
+                  sizing="lg"
+                  type="textarea"
+                  rows={5}
+                />
               </div>
-              <TextInput
-                class="bg-reliableBlack5 w-full p-2 rounded-none border-b-2 border-reliableBlack30 focus:border focus:ring-1 focus:ring-reliableBlack30 focus:border-reliableBlack30"
-                id="faqtitle"
-                type="text"
-              />
-              <div className="block -mb-3">
-                <Label htmlFor="desc" className="font-semibold text-reliableBlack60">
-                  FAQ Description
-                </Label>
+              <div className="flex justify-center items-center mt-6 gap-4">
+                <Button className="w-1/2 rounded" color="failure" type="submit">
+                  Submit
+                </Button>
+                <Button
+                  className="w-1/2 rounded"
+                  color="gray"
+                  onClick={() => setCreateFaq(undefined)}
+                >
+                  Cancel
+                </Button>
               </div>
-              <Textarea
-                className="bg-reliableBlack5 p-2 rounded-none border-b-2 border-reliableBlack30 focus:border focus:ring-1 focus:ring-reliableBlack30 focus:border-reliableBlack30"
-                id="desc"
-                sizing="lg"
-                type="textarea"
-                rows={5}
-              />
-            </div>
-            <div className="flex justify-center items-center mt-6 gap-4">
-              <Button
-                className="w-1/2 rounded"
-                color="failure"
-                onClick={() => (window.location.href = '/promo/faq')}
-              >
-                Submit
-              </Button>
-              <Button
-                className="w-1/2 rounded"
-                color="gray"
-                onClick={() => setCreateFaq(undefined)}
-              >
-                Cancel
-              </Button>
-            </div>
+            </form>
           </Modal.Body>
         </Modal>
 
@@ -438,51 +555,53 @@ const FaqPage = () => {
           <Modal.Header>
             <h2 className="text-3xl font-bold">Edit FAQ</h2>
           </Modal.Header>
-          <Modal.Body>
-            <div className="flex flex-col gap-4">
-              <div className="block -mb-3">
-                <Label htmlFor="faqtitle" className="font-semibold text-reliableBlack60">
-                  FAQ Title
-                </Label>
+          <form onSubmit={handleUpdate}>
+            <Modal.Body>
+              <div className="flex flex-col gap-4">
+                <div className="block -mb-3">
+                  <Label htmlFor="faqtitle" className="font-semibold text-reliableBlack60">
+                    FAQ Title
+                  </Label>
+                </div>
+                <TextInput
+                  class="bg-reliableBlack5 w-full p-2 rounded-none border-b-2 border-reliableBlack30 focus:border focus:ring-1 focus:ring-reliableBlack30 focus:border-reliableBlack30"
+                  id="faqtitle"
+                  type="text"
+                  value={editData ? editData.title : ''} // Set default value from editData
+                  onChange={(e) => handleEditInputChange('title', e.target.value)} // Add onChange handler
+                />
+                <div className="block -mb-3">
+                  <Label htmlFor="desc" className="font-semibold text-reliableBlack60">
+                    FAQ Description
+                  </Label>
+                </div>
+                <Textarea
+                  className="bg-reliableBlack5 p-2 rounded-none border-b-2 border-reliableBlack30 focus:border focus:ring-1 focus:ring-reliableBlack30 focus:border-reliableBlack30"
+                  id="desc"
+                  sizing="lg"
+                  type="textarea"
+                  rows={5}
+                  value={editData ? editData.description : ''} // Set default value from editData
+                  onChange={(e) => handleEditInputChange('description', e.target.value)} // Add onChange handler
+                />
               </div>
-              <TextInput
-                class="bg-reliableBlack5 w-full p-2 rounded-none border-b-2 border-reliableBlack30 focus:border focus:ring-1 focus:ring-reliableBlack30 focus:border-reliableBlack30"
-                id="faqtitle"
-                type="text"
-                value={editData ? editData.title : ''} // Set default value from editData
-                onChange={(e) => handleEditInputChange('title', e.target.value)} // Add onChange handler
-              />
-              <div className="block -mb-3">
-                <Label htmlFor="desc" className="font-semibold text-reliableBlack60">
-                  FAQ Description
-                </Label>
+              <div className="flex justify-center items-center mt-6 gap-4">
+                <Button className="w-1/2 rounded" color="success" type="submit">
+                  Save Changes
+                </Button>
+                <Button
+                  className="w-1/2 rounded"
+                  color="gray"
+                  onClick={() => {
+                    setEditFaq(null);
+                    setEditData(null);
+                  }}
+                >
+                  Cancel
+                </Button>
               </div>
-              <Textarea
-                className="bg-reliableBlack5 p-2 rounded-none border-b-2 border-reliableBlack30 focus:border focus:ring-1 focus:ring-reliableBlack30 focus:border-reliableBlack30"
-                id="desc"
-                sizing="lg"
-                type="textarea"
-                rows={5}
-                value={editData ? editData.description : ''} // Set default value from editData
-                onChange={(e) => handleEditInputChange('description', e.target.value)} // Add onChange handler
-              />
-            </div>
-            <div className="flex justify-center items-center mt-6 gap-4">
-              <Button className="w-1/2 rounded" color="success" onClick={() => handleEdit()}>
-                Save Changes
-              </Button>
-              <Button
-                className="w-1/2 rounded"
-                color="gray"
-                onClick={() => {
-                  setEditFaq(null);
-                  setEditData(null);
-                }}
-              >
-                Cancel
-              </Button>
-            </div>
-          </Modal.Body>
+            </Modal.Body>
+          </form>
         </Modal>
       </div>
     </div>
