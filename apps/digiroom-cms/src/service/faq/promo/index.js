@@ -1,17 +1,17 @@
 import CMS from '@/service/apiCMS';
 
-export const createFaqNewsTips = async (body) => {
+export const createFaqPromo = async (body) => {
   try {
-    await CMS.post('faq/newstips/create', body);
+    await CMS.post('faq/promo/create', body);
     return true;
   } catch (error) {
     console.error('Error when creating data:', error);
   }
 };
 
-export const getListFaqNewsTips = async () => {
+export const getListFaqPromo = async () => {
   try {
-    const response = await CMS.get('faq/newstips/list');
+    const response = await CMS.get('faq/promo/list');
 
     if (response !== null) {
       const data = response;
@@ -21,22 +21,21 @@ export const getListFaqNewsTips = async () => {
     }
   } catch (error) {
     console.error('Error fetching data:', error);
-    return null;
   }
 };
 
-export const updateFaqNewsTips = async (body) => {
+export const updateFaqPromo = async (body) => {
   try {
-    await CMS.put('faq/newstips/edit', body);
+    await CMS.put('faq/promo/edit', body);
     return true;
   } catch (error) {
     console.error('Error when updating data:', error);
   }
 };
 
-export const deleteFaqNewsTips = async (id) => {
+export const deleteFaqPromo = async (id) => {
   try {
-    await CMS.delete(`faq/newstips/delete/${id}`);
+    await CMS.delete(`faq/promo/delete/${id}`);
     return true;
   } catch (error) {
     console.error('Error when removing data:', error);

@@ -164,10 +164,11 @@ const FaqPage = () => {
         data.map((item) => {
           faqList.push({
             id: item.id,
-            title: item.question,
-            description: item.answer,
             categoryId: item.categoryId,
             sequence: item.sequence,
+            title: item.question,
+            description: item.answer,
+            slug: 'Copy to Clipboard',
             status: 'hidden',
             boolean: 'inactive',
           });
@@ -219,7 +220,7 @@ const FaqPage = () => {
       setToastDescription('Successfully added FAQ');
       await hideToast();
     } catch (error) {
-      console.error('Error post data:', error);
+      console.error('Error when creating data:', error);
       setCreateFaq(undefined);
       setShowToast(true);
       setToastDescription('Failed to add FAQ');
@@ -286,7 +287,7 @@ const FaqPage = () => {
       setToastDescription('Successfully delete FAQ');
       await hideToast();
     } catch (error) {
-      console.error('Error to delete data:', error);
+      console.error('Error when removing data:', error);
       setOpenModal(undefined);
       setShowToast(true);
       setToastDescription('Failed to delete FAQ');
@@ -340,7 +341,7 @@ const FaqPage = () => {
         )}
       </div>
       <div className={`flex items-center justify-between ${isLoading ? 'opacity-50' : ''}`}>
-        <p className="px-2 py-4 relative text-lg uppercase font-bold">promo</p>
+        <p className="px-2 py-4 relative text-lg uppercase font-bold">News and Tips</p>
         <Button
           className="p-0 border border-sky-300"
           color="light"
