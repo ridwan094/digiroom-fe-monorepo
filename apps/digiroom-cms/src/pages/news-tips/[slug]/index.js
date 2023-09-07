@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import LayoutForm from '@/components/LayoutForm';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
-import { createNewsTips } from '@/service/news-tips';
+import { createNewsTips, editNewsTips } from '@/service/news-tips';
 import { componentConfigNewsTips } from '@/constants/add-news-page';
 import { handleUpload } from '@/service/azure/fileUpload';
 import { useRouter } from 'next/router';
@@ -10,10 +10,12 @@ import { Spinner, Toast } from 'flowbite-react';
 import ModalText from '@/components/modal-text';
 import CustomBreadCumb from '@/components/Breadcrumb';
 import { getCategory, getSlug } from '@/service/news-tips';
+import { MdDoneOutline, MdClear } from 'react-icons/md';
 
 const NewsTipsDetail = () => {
-  window.history.replaceState(null, '', '/news-tips/edit-news-tips');
-  const [dataForm, setDataForm] = useState({});
+  const initialValues = {};
+  // const [dataForm, setDataForm] = useState({});
+  const [formValues, setFormValues] = useState({});
   const [urlImage, setUrlImage] = useState();
   const [statusType, setStatusType] = useState();
   const [loading, setLoading] = useState(false);
@@ -23,13 +25,21 @@ const NewsTipsDetail = () => {
   const slugId = router.query.id ? JSON.parse(router.query.id) : null;
   const [categories, setCategories] = useState([]);
   const [dataSlug, setDataSlug] = useState();
+  const [showToast, setShowToast] = useState(false);
+  const [iconToast, setIconToast] = useState(<MdClear />);
+  const [textToast, setTextToast] = useState();
+  window.history.replaceState(null, '', `/news-tips/${router.query.slug}`);
+
   const {
     handleSubmit,
     control,
     register,
     reset,
+    setValue,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: initialValues,
+  });
 
   const handleUploadFile = async (file) => {
     event.preventDefault();
@@ -50,7 +60,6 @@ const NewsTipsDetail = () => {
 
   const getSlugId = async () => {
     const slugData = await getSlug(slugId);
-    console.log('isi slug data', slugData);
     if (slugData !== null) {
       setDataSlug(slugData);
     }
@@ -79,16 +88,16 @@ const NewsTipsDetail = () => {
   };
 
   const onSubmit = async (data) => {
-    const categoriesSelect = data.category ? JSON.parse(data.category) : [];
-    setLoading(true);
+    const categoriesSelect = data.category ? JSON.parse(data.category) : dataSlug.category;
+    // setLoading(true);
 
     const dataTemporary = {
-      id: slug.includes('edit') ? null : data.id,
+      id: slug.includes('add') || slug.includes('duplicate') ? null : data.id,
       heroImageLink:
         'https://astradigitaldigiroomstg.blob.core.windows.net/storage-general-001/image.jpg',
       titlePage: data.title,
       startDate: data.startDate,
-      endDate: data.expiredDate,
+      endDate: data.endDate,
       publishedDate: data.publishedDate,
       titleHeader: data.titleHeader,
       slug: data.slug,
@@ -103,15 +112,27 @@ const NewsTipsDetail = () => {
         description: null,
       },
       cmsStatusType: statusType === 'DRAFT' ? 'DRAFT' : 'PUBLISH',
-      detailContent: dataForm.detailContent,
+      detailContent: dataForm.detailContent ? dataForm.detailContent : 'test',
     };
     console.log('isi tempore', dataTemporary);
-    setStatusType(null);
-    // const create = await createNewsTips(dataTemporary);
-    // if (create === 'Success') {
+    // setStatusType(null);
+    let create = null;
+    if (slug.includes('edit')) {
+      create = await editNewsTips(dataTemporary);
+    } else {
+      console.log('sini');
+      create = await createNewsTips(dataTemporary);
+    }
+    // if (create !== null) {
     //   setLoading(false);
+    //   setShowToast(true);
+    //   setIconToast(<MdDoneOutline />);
+    //   setTextToast('Create News Tips Success');
     // } else {
     //   setLoading(false);
+    //   setShowToast(true);
+    //   setIconToast(<MdClear />);
+    //   setTextToast('Create News Tips Error');
     // }
   };
 
@@ -123,12 +144,12 @@ const NewsTipsDetail = () => {
   }, []);
 
   useEffect(() => {
-    if (slug.includes('edit') && dataSlug) {
+    if ((slug.includes('edit') || slug.includes('duplicate')) && dataSlug) {
       const startDate = dataSlug.startDate ? new Date(dataSlug.startDate) : '';
       const endDate = dataSlug.endDate ? new Date(dataSlug.endDate) : '';
       const publishedDate = dataSlug.publishedDate ? new Date(dataSlug.publishedDate) : null;
 
-      reset({
+      const updatedFormValues = {
         id: dataSlug.id || '',
         title: dataSlug.titlePage || '',
         startDate: startDate || '',
@@ -140,11 +161,22 @@ const NewsTipsDetail = () => {
         altImage: dataSlug.altImage || '',
         keyWord: dataSlug.keyword || '',
         contentCategory: dataSlug.category || '',
-        // ... Add other fields and their data here
+        // add other data fields here
+      };
+
+      // Use setValue to populate formValues
+      Object.keys(updatedFormValues).forEach((key) => {
+        setValue(key, updatedFormValues[key]);
       });
-      // setDataForm((dataForm.detailPromosi = dataSlug.detailContent));
     }
-  }, [slug, dataSlug]);
+  }, [slug, dataSlug, setValue]);
+
+  const componentConfig = componentConfigNewsTips({
+    control,
+    handleUpload: handleUploadFile,
+    register,
+    handleSlug,
+  });
 
   return (
     <div>
@@ -152,6 +184,29 @@ const NewsTipsDetail = () => {
         <div className="fixed inset-0 flex justify-center items-center bg-white bg-opacity-80 z-50">
           <Spinner aria-label="Loading" size="lg" />
         </div>
+      )}
+      {showToast && (
+        <Toast
+          className="bg-white border border-gray-300 p-3 rounded-md shadow-md"
+          style={{ position: 'fixed', right: '20px', transform: 'translateY(-50%)', zIndex: 1000 }}
+        >
+          <div
+            className={`flex rounded-3xl items-center justify-center w-10 h-10 text-white text-2xl ${
+              textToast.includes('Success')
+                ? 'bg-green-600'
+                : textToast.includes('Error')
+                ? 'bg-red-600'
+                : 'bg-black'
+            }`}
+          >
+            {iconToast}
+          </div>
+          <div className="ml-3 text-sm font-normal capitalize text-gray-800">{textToast}</div>
+          <Toast.Toggle
+            onDismiss={() => setShowToast(false)}
+            className="ml-auto text-gray-500 hover:text-gray-700 cursor-pointer"
+          />
+        </Toast>
       )}
 
       <LayoutForm
@@ -161,9 +216,7 @@ const NewsTipsDetail = () => {
         handleUpload={handleUploadFile}
         editor={editor}
         showPreviewPage={showPreviewPage}
-        componentConfig={componentConfigNewsTips(categories, dataSlug)}
-        dataForm={dataForm}
-        setDataForm={setDataForm}
+        componentConfig={componentConfig}
         errors={errors}
         handleQuillChange={handleQuillChange}
         cancelPage={cancelPage}
