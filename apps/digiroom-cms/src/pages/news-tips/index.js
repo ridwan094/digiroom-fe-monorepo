@@ -1,4 +1,4 @@
-import { MdOutlineFileCopy } from 'react-icons/md';
+import { MdClear, MdDoneOutline } from 'react-icons/md';
 import React, { useEffect, useState } from 'react';
 import CustomTable from '@/components/Table';
 import { useRouter } from 'next/navigation';
@@ -15,7 +15,7 @@ import {
   editNewsTips,
 } from '@/service/news-tips';
 import { LoadingEffect } from '../loading';
-import { Spinner } from 'flowbite-react';
+import { Spinner, Toast } from 'flowbite-react';
 
 const DashboardNewsTips = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -186,7 +186,17 @@ const DashboardNewsTips = () => {
 
         break;
       default:
-        const data = await deleteDataTable(deleteData);
+        const data = await deleteDataTable(deleteData.id);
+        if (data.status.includes('Success')) {
+          setShowToast(true);
+          setToastIcons(<MdDoneOutline />);
+          setToastDescription('Delete News Tips Success');
+          fetchListDashboard();
+        } else {
+          setShowToast(true);
+          setToastIcons(<MdClear />);
+          setToastDescription('Delete News Tips Error');
+        }
         setOpenModal(undefined);
         break;
     }
@@ -341,6 +351,7 @@ const DashboardNewsTips = () => {
             (value) => onClickCheck(value),
             searchTable
           )}
+          setShowToast={setShowToast}
         />
       </div>
       {/* Modal */}

@@ -8,10 +8,12 @@ const CustomTable = ({
   pagination,
   isLoading,
   headerData,
-  showToast = true,
+  showToast,
   toastIcons,
   toastDescription,
-  setShowToast = () => {},
+  setShowToast = () => {
+    !showToast;
+  },
 }) => {
   const {
     currentPage,
@@ -46,11 +48,29 @@ const CustomTable = ({
         }`}
       >
         {showToast && (
-          <Toast className="bg-white border border-gray-300 p-3 rounded-md shadow-md">
-            <div className="flex items-center justify-center w-10 h-10 bg-black text-white text-2xl">
+          <Toast
+            className="bg-white border border-gray-300 p-3 rounded-md shadow-md"
+            style={{
+              position: 'fixed',
+              right: '2s0px',
+              transform: 'translateY(60%)',
+              zIndex: 1000,
+            }}
+          >
+            <div
+              className={`flex rounded-3xl items-center justify-center w-10 h-10 text-white text-2xl ${
+                toastDescription.includes('Success')
+                  ? 'bg-green-600'
+                  : toastDescription.includes('Error')
+                  ? 'bg-red-600'
+                  : 'bg-black'
+              }`}
+            >
               {toastIcons}
             </div>
-            <div className="ml-3 text-sm font-normal text-gray-800">{toastDescription}</div>
+            <div className="ml-3 text-sm font-normal capitalize text-gray-800">
+              {toastDescription}
+            </div>
             <Toast.Toggle
               onDismiss={() => setShowToast(false)}
               className="ml-auto text-gray-500 hover:text-gray-700 cursor-pointer"
