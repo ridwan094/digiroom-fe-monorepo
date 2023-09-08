@@ -7,7 +7,6 @@ import { componentConfigNewsTips } from '@/constants/add-news-page';
 import { handleUpload } from '@/service/azure/fileUpload';
 import { useRouter } from 'next/router';
 import { Spinner, Toast } from 'flowbite-react';
-import ModalText from '@/components/modal-text';
 import { getCategory, getSlug } from '@/service/news-tips';
 import { MdDoneOutline, MdClear } from 'react-icons/md';
 
@@ -26,6 +25,7 @@ const NewsTipsDetail = () => {
   const [showToast, setShowToast] = useState(false);
   const [iconToast, setIconToast] = useState(<MdClear />);
   const [textToast, setTextToast] = useState();
+  const [previewImageSlug, setPreviewImageSlug] = useState(null);
   window.history.replaceState(null, '', `/news-tips/${router.query.slug}`);
 
   const {
@@ -58,10 +58,10 @@ const NewsTipsDetail = () => {
 
   const getSlugId = async () => {
     const getData = await getSlug(slugId);
-    // console.log('isi ', getData);
-    // if (getData !== null) {
-    setDataSlug(getData);
-    // }
+    if (getData !== null) {
+      setDataSlug(getData);
+      setPreviewImageSlug(getData.heroImageLink.split('?')[0]);
+    }
   };
 
   const handleQuillChange = (value) => {
@@ -89,24 +89,16 @@ const NewsTipsDetail = () => {
   const onSubmit = async (data) => {
     const categoriesSelect = data.category ? JSON.parse(data.category) : dataSlug.category;
     setLoading(true);
-
     const dataTemporary = {
       id: slug.includes('add') || slug.includes('duplicate') ? null : data.id,
-      heroImageLink:
-        'https://astradigitaldigiroomstg.blob.core.windows.net/storage-general-001/image.jpg',
+      heroImageLink: urlImage,
       titlePage: data.title,
       startDate: data.startDate,
       endDate: data.endDate,
       publishedDate: data.publishedDate,
       titleHeader: data.titleHeader,
       slug: data.slug,
-      contentCategory: {
-        id: 4,
-        name: 'MOBIL BARU',
-        description: null,
-        categoryId: 1,
-        priority: 1,
-      },
+      contentCategory: categoriesSelect,
       keyword: data.keyword,
       metaDescription: data.metaDescription,
       altImage: data.altImage,
@@ -119,7 +111,6 @@ const NewsTipsDetail = () => {
       cmsStatusType: statusType === 'DRAFT' ? 'DRAFT' : 'PUBLISH',
       detailContent: data.detailContent,
     };
-    console.log('isi tempore', dataTemporary);
     setStatusType(null);
     let create = null;
     if (slug.includes('edit')) {
@@ -132,6 +123,7 @@ const NewsTipsDetail = () => {
       setShowToast(true);
       setIconToast(<MdDoneOutline />);
       setTextToast('Create News Tips Success');
+      router.push('/news-tips');
     } else {
       setLoading(false);
       setShowToast(true);
@@ -150,7 +142,10 @@ const NewsTipsDetail = () => {
   }, []);
 
   useEffect(() => {
-    if (slug.includes('edit') || (slug.includes('duplicate') && dataSlug !== null)) {
+    if (
+      slug !== undefined &&
+      (slug.includes('edit') || (slug.includes('duplicate') && dataSlug !== null))
+    ) {
       if (dataSlug !== null) {
         const startDate = dataSlug.startDate ? new Date(dataSlug.startDate) : '';
         const endDate = dataSlug.endDate ? new Date(dataSlug.endDate) : '';
@@ -220,6 +215,8 @@ const NewsTipsDetail = () => {
         handleQuillChange={handleQuillChange}
         cancelPage={cancelPage}
         draftPage={draftPage}
+        previewImage={previewImageSlug}
+        dropdownData={{ value: 'noindex', label: 'Noindex' }}
       />
     </div>
   );

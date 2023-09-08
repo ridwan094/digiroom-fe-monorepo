@@ -2,7 +2,7 @@ import { MdClear, MdDoneOutline } from 'react-icons/md';
 import React, { useEffect, useState } from 'react';
 import CustomTable from '@/components/Table';
 import { useRouter } from 'next/navigation';
-import { columnsNewsTips, headerArrayNewsTips } from '@/constants/implement-table';
+import { columnsNewsTips, headerArrayNewsTips } from '@/constants/news-tips';
 import ModalText from '@/components/modal-text';
 import ModalFilter from '@/components/modal-filter';
 import ModalPreview from '@/components/modal-preview';
@@ -101,7 +101,7 @@ const DashboardNewsTips = () => {
     try {
       const payload = {
         filters: filterModal,
-        sorts: dataDirection,
+        sorts: dataDirection.length > 0 ? dataDirection : [{ key: 'id', direction: 'DESC' }],
         page: currentPage - 1,
         size: itemsPerPage,
       };

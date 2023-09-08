@@ -6,7 +6,7 @@ import {
   columnsProductKnowledge,
   filterProductKnowledge,
   headerArrayProductKnowledge,
-} from '@/constants/implement-table';
+} from '@/constants/product-knowledge';
 import ModalText from '@/components/modal-text';
 import ModalFilter from '@/components/modal-filter';
 import ModalPreview from '@/components/modal-preview';

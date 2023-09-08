@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CustomTable from '@/components/Table';
 import { useRouter } from 'next/navigation';
-import { columns, filterData, headerArray, sampleData } from '@/constants/implement-table';
+import { columns, filterData, headerArray, sampleData } from '@/constants/promo';
 import ModalText from '@/components/modal-text';
 import ModalFilter from '@/components/modal-filter';
 import ModalPreview from '@/components/modal-preview';
