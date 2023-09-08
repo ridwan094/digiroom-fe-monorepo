@@ -12,6 +12,7 @@ import {
   deleteDataTable,
   getCategory,
   getStatus,
+  editNewsTips,
 } from '@/service/news-tips';
 import { LoadingEffect } from '../loading';
 import { Spinner } from 'flowbite-react';
@@ -45,6 +46,7 @@ const DashboardNewsTips = () => {
   const [deleteData, setDeleteData] = useState();
   const [dataFilter, setDataFilter] = useState([]);
   const [filterModal, setFilterModal] = useState([]);
+  const [changeData, setChangeData] = useState([]);
 
   const onPageChange = async (page) => {
     setCurrentPage(page);
@@ -82,9 +84,8 @@ const DashboardNewsTips = () => {
       case 'delete':
         setOpenModal('dismissible');
         setModalText('delete');
-        setModalHeader(`Delete ${listDashboard[index + startIndex].title}`);
-        setTableDelete(listDashboard[index + startIndex]);
-        setDeleteData(item.id);
+        setModalHeader(item.titlePage);
+        setDeleteData(item);
         break;
       case 'copy':
         router.push({
@@ -163,18 +164,26 @@ const DashboardNewsTips = () => {
   };
 
   const onClickModal = async () => {
-    const updatedListDashboard = [...listDashboard];
     switch (caseItems.newValue) {
       case false:
-        updatedListDashboard[caseItems.index + startIndex].boolean =
-          caseItems.newValue === false ? 'inactive' : 'active';
+        caseItems.index.cmsStatusType = 'DRAFT';
+        const edit = await editNewsTips(caseItems.index);
+        if (edit.status.includes('Success')) {
+        } else {
+          caseItems.index.cmsStatusType = 'PUBLISH';
+        }
         setOpenModal(undefined);
+
         break;
       case true:
-        updatedListDashboard[caseItems.index + startIndex].boolean = caseItems.newValue
-          ? 'active'
-          : 'inactive';
+        caseItems.index.cmsStatusType = 'PUBLISH';
+        const update = await editNewsTips(caseItems.index);
+        if (update.status.includes('Success')) {
+        } else {
+          caseItems.index.cmsStatusType = 'DRAFT';
+        }
         setOpenModal(undefined);
+
         break;
       default:
         const data = await deleteDataTable(deleteData);
@@ -183,24 +192,24 @@ const DashboardNewsTips = () => {
     }
   };
 
-  const handleToggleChange = (value) => {
-    const { test, indexTest } = value;
+  const handleToggleChange = (index) => {
+    const { value, data } = index;
     setOpenModal('dismissible');
-    setModalText(!test ? 'unpublished' : 'published');
-    setModalHeader(listDashboard[indexTest + itemsPerPage * (currentPage - 1)].title);
+    setModalText(!value ? 'unpublished' : 'published');
+    setModalHeader(data.titlePage);
     setCaseItems({
-      newValue: test,
-      index: indexTest,
+      newValue: value,
+      index: data,
     });
   };
 
-  const handleFilter = async (filterData) => {
+  const handleFilter = async (filterData, startDate, endDate) => {
     event.preventDefault();
     const categoryIds = [];
     const statusKeys = [];
     const filters = [];
 
-    if ((await filterData.length) > 0) {
+    if (filterData.length > 0) {
       filterData.forEach((filter) => {
         if (filter.column === 'category' && filter.id) {
           categoryIds.push(filter.id);
@@ -228,8 +237,30 @@ const DashboardNewsTips = () => {
           values: statusKeys,
         });
       }
-      setFilterModal(filters);
+
+      if (startDate !== null) {
+        filters.push({
+          key: 'startDate',
+          operator: 'GREATEROREQUAL',
+          fieldType: 'DATE',
+          value: startDate.toISOString(),
+          valueTo: null,
+          values: null,
+        });
+      }
+
+      if (endDate !== null) {
+        filters.push({
+          key: 'endDate',
+          operator: 'LESSOREQUAL',
+          fieldType: 'DATE',
+          value: endDate.toISOString(),
+          valueTo: null,
+          values: null,
+        });
+      }
     }
+    setFilterModal(filters);
   };
 
   const handleSort = (key) => {

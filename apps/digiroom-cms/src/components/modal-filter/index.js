@@ -3,7 +3,7 @@ import { Modal, Checkbox, Label, Button } from 'flowbite-react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default function ModalFilter({ isOpen, onClose, filterData, onClickFilter, activeFilters }) {
+export default function ModalFilter({ isOpen, onClose, filterData, onClickFilter }) {
   const [checkboxStates, setCheckboxStates] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -45,7 +45,7 @@ export default function ModalFilter({ isOpen, onClose, filterData, onClickFilter
       return filters;
     }, []);
 
-    onClickFilter(selectedFilters);
+    onClickFilter(selectedFilters, startDate, endDate);
     onClose();
   };
 
