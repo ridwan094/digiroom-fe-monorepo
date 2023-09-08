@@ -19,10 +19,10 @@ const NewsTipsDetail = () => {
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState();
   const router = useRouter();
-  const { slug } = router.query ? router.query : { slug: null };
+  const { slug } = router.query;
   const slugId = router.query.id ? JSON.parse(router.query.id) : null;
   const [categories, setCategories] = useState([]);
-  const [dataSlug, setDataSlug] = useState();
+  const [dataSlug, setDataSlug] = useState(null);
   const [showToast, setShowToast] = useState(false);
   const [iconToast, setIconToast] = useState(<MdClear />);
   const [textToast, setTextToast] = useState();
@@ -57,10 +57,11 @@ const NewsTipsDetail = () => {
   };
 
   const getSlugId = async () => {
-    const slugData = await getSlug(slugId);
-    if (slugData !== null) {
-      setDataSlug(slugData);
-    }
+    const getData = await getSlug(slugId);
+    // console.log('isi ', getData);
+    // if (getData !== null) {
+    setDataSlug(getData);
+    // }
   };
 
   const handleQuillChange = (value) => {
@@ -99,7 +100,13 @@ const NewsTipsDetail = () => {
       publishedDate: data.publishedDate,
       titleHeader: data.titleHeader,
       slug: data.slug,
-      contentCategory: categoriesSelect,
+      contentCategory: {
+        id: 4,
+        name: 'MOBIL BARU',
+        description: null,
+        categoryId: 1,
+        priority: 1,
+      },
       keyword: data.keyword,
       metaDescription: data.metaDescription,
       altImage: data.altImage,
@@ -137,37 +144,38 @@ const NewsTipsDetail = () => {
 
   useEffect(() => {
     getCategories();
-    console.log('slug', slug);
     if (slug !== undefined && (slug.includes('edit') || slug.includes('duplicate'))) {
       getSlugId();
     }
   }, []);
 
   useEffect(() => {
-    if (slug !== undefined && (slug.includes('edit') || slug.includes('duplicate'))) {
-      const startDate = dataSlug.startDate ? new Date(dataSlug.startDate) : '';
-      const endDate = dataSlug.endDate ? new Date(dataSlug.endDate) : '';
-      const publishedDate = dataSlug.publishedDate ? new Date(dataSlug.publishedDate) : null;
-      const updatedFormValues = {
-        id: dataSlug.id || '',
-        title: dataSlug.titlePage || '',
-        startDate: startDate || '',
-        endDate: endDate || '',
-        publishedDate: publishedDate || '',
-        titleHeader: dataSlug.titleHeader || '',
-        slug: dataSlug.slug || '',
-        metaDescription: dataSlug.metaDescription || '',
-        altImage: dataSlug.altImage || '',
-        keyword: dataSlug.keyword || '',
-        contentCategory: dataSlug.contentCategory || '',
-        detailContent: dataSlug.detailContent || '',
-        // add other data fields here if needed later
-      };
-      Object.keys(updatedFormValues).forEach((key) => {
-        setValue(key, updatedFormValues[key]);
-      });
+    if (slug.includes('edit') || (slug.includes('duplicate') && dataSlug !== null)) {
+      if (dataSlug !== null) {
+        const startDate = dataSlug.startDate ? new Date(dataSlug.startDate) : '';
+        const endDate = dataSlug.endDate ? new Date(dataSlug.endDate) : '';
+        const publishedDate = dataSlug.publishedDate ? new Date(dataSlug.publishedDate) : null;
+        const updatedFormValues = {
+          id: dataSlug.id || '',
+          title: dataSlug.titlePage || '',
+          startDate: startDate || '',
+          endDate: endDate || '',
+          publishedDate: publishedDate || '',
+          titleHeader: dataSlug.titleHeader || '',
+          slug: dataSlug.slug || '',
+          metaDescription: dataSlug.metaDescription || '',
+          altImage: dataSlug.altImage || '',
+          keyword: dataSlug.keyword || '',
+          contentCategory: dataSlug.contentCategory || '',
+          detailContent: dataSlug.detailContent || '',
+          // add other data fields here if needed later
+        };
+        Object.keys(updatedFormValues).forEach((key) => {
+          setValue(key, updatedFormValues[key]);
+        });
+      }
     }
-  }, [slug, dataSlug, setValue]);
+  }, [dataSlug, setValue]);
 
   return (
     <div>
