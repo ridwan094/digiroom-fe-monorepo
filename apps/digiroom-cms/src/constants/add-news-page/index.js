@@ -66,12 +66,12 @@ const CustomInput = React.forwardRef((props, ref) => {
   );
 });
 
-export function componentConfigNewsTips(categories, slug) {
+export function componentConfigNewsTips(categories) {
   const test = { categoryType: 'newstips', description: null, id: 2, name: 'NEWS AND TIPS' };
   return [
     {
       title: 'Upload',
-      render: ({ control, handleUpload, dataForm }) => (
+      render: ({ control, handleUpload }) => (
         <Controller
           key="file"
           control={control}
@@ -89,17 +89,24 @@ export function componentConfigNewsTips(categories, slug) {
     },
     {
       title: 'Title Page',
-      render: ({ register, dataForm, setDataForm, errors }) => (
-        <TextInput
-          labelClassName="font-[500] text-[14px] leading-[17px] text-reliableBlack70"
-          inputClassName="mb-3 border-b border-gray100 placeholder-gray80 text-[16px] py-[12px] px-[14px] mt-[8px]  text-[#777777] font-[400]"
-          placeholder="Insert title page"
-          error={errors?.title && errors?.title?.message}
-          type="text"
-          register={register('title', {
-            onChange: (e) => setDataForm({ ...dataForm, title: e.target.value }),
-          })}
-          value={dataForm?.title}
+      render: ({ register, control, errors }) => (
+        <Controller
+          name="title"
+          control={control}
+          rules={{ required: 'Title is required' }}
+          render={({ field }) => (
+            <TextInput
+              labelClassName="font-[500] text-[14px] leading-[17px] text-reliableBlack70"
+              inputClassName="mb-3 border-b border-gray100 placeholder-gray80 text-[16px] py-[12px] px-[14px] mt-[8px]  text-[#777777] font-[400]"
+              placeholder="Insert title page"
+              error={errors?.title && errors?.title?.message}
+              type="text"
+              value={field.value}
+              onChange={(e) => {
+                field.onChange(e);
+              }}
+            />
+          )}
         />
       ),
     },
@@ -199,113 +206,153 @@ export function componentConfigNewsTips(categories, slug) {
     },
     {
       title: 'Detail News & Tips',
-      render: ({ handleQuillChange, dataForm, errors, trigger }) => (
+      render: ({ handleQuillChange, control, errors }) => (
         <div>
-          <ReactQuill
-            theme="snow"
-            className={`my-3 ${errors?.detailPromosi ? 'border-red-500' : ''}`}
-            value={dataForm.detailPromosi}
-            onChange={(value) => {
-              handleQuillChange(value);
-            }}
+          <Controller
+            name="detailContent"
+            control={control}
+            render={({ field }) => (
+              <div>
+                <ReactQuill
+                  theme="snow"
+                  className={`my-3 ${errors?.detailContent ? 'border-red-500' : ''}`}
+                  value={field.value}
+                  onChange={field.onChange}
+                />
+                {errors?.detailContent && (
+                  <p className="text-red-500 text-sm mt-1">{errors.detailContent.message}</p>
+                )}
+              </div>
+            )}
           />
-          {errors?.detailPromosi && (
-            <p className="text-red-500 text-sm mt-1">{errors.detailPromosi.message}</p>
-          )}
         </div>
       ),
     },
+
     {
       title: 'Title Header',
-      render: ({ register, errors, setDataForm, dataForm }) => (
-        <TextInput
-          labelClassName="font-[500] text-[14px] leading-[17px] text-reliableBlack70"
-          inputClassName="mb-3 border-b border-gray100 placeholder-gray80 text-[16px] py-[12px] px-[14px] mt-[8px]  text-[#777777] font-[400]"
-          placeholder="Insert title header"
-          error={errors?.titleHeader && errors?.titleHeader?.message}
-          type="text"
-          register={register('titleHeader', {
-            onChange: (e) => setDataForm({ ...dataForm, titleHeader: e.target.value }),
-          })}
-          value={dataForm?.titleHeader}
+      render: ({ register, control, errors }) => (
+        <Controller
+          name="titleHeader"
+          control={control}
+          render={({ field }) => (
+            <TextInput
+              labelClassName="font-[500] text-[14px] leading-[17px] text-reliableBlack70"
+              inputClassName="mb-3 border-b border-gray100 placeholder-gray80 text-[16px] py-[12px] px-[14px] mt-[8px]  text-[#777777] font-[400]"
+              placeholder="Insert title header page"
+              error={errors?.titleHeader && errors?.titleHeader?.message}
+              type="text"
+              value={field.value}
+              onChange={(e) => {
+                field.onChange(e);
+              }}
+            />
+          )}
         />
       ),
     },
     {
       title: 'Slug & Category',
-      render: ({ register, errors, dataForm, control, handleSlug }) => (
-        <div className="flex justify-between mb-3">
-          <TextInput
-            label="Slug"
-            containerClassName="w-[48%]"
-            labelClassName="font-[500] text-[14px] leading-[17px] text-reliableBlack70"
-            inputClassName="mb-3 border-b border-gray100 placeholder-gray80 text-[16px] py-[12px] px-[14px] mt-[8px]  text-[#777777] font-[400]"
-            placeholder="Please Insert Here"
-            error={errors?.title && errors?.title?.message}
-            type="text"
-            register={register('slug', {
-              onChange: (e) => handleSlug(e.target.value),
-            })}
-            value={dataForm?.slug}
-          />
-
-          <SelectCategory
-            register={register}
+      render: ({ register, errors, control, handleSlug }) => (
+        <div className="flex flex-row justify-between mb-3">
+          <Controller
+            name="slug"
             control={control}
-            items={categories.map((category) => ({
-              label: category.name,
-              value: category,
-            }))}
-            defaultValue={test}
+            render={({ field }) => (
+              <TextInput
+                label="Slug"
+                containerClassName="w-[48%]"
+                labelClassName="font-[500] text-[14px] leading-[17px] text-reliableBlack70"
+                inputClassName="mb-3 border-b border-gray100 placeholder-gray80 text-[16px] py-[12px] px-[14px] mt-[8px]  text-[#777777] font-[400]"
+                placeholder="Insert Slug"
+                error={errors?.slug && errors?.slug?.message}
+                type="text"
+                value={field.value}
+                onChange={(e) => {
+                  field.onChange(e);
+                }}
+              />
+            )}
+          />
+          <Controller
+            name="category"
+            control={control}
+            render={({ field }) => (
+              <SelectCategory
+                control={control}
+                items={categories.map((category) => ({
+                  label: category.name,
+                  value: category,
+                }))}
+              />
+            )}
           />
         </div>
       ),
     },
     {
       title: 'Meta Description',
-      render: ({ register, errors, setDataForm, dataForm }) => (
-        <TextInput
-          labelClassName="font-[500] text-[14px] leading-[17px] text-reliableBlack70"
-          inputClassName="mb-3 border-b border-gray100 placeholder-gray80 text-[16px] py-[12px] px-[14px] mt-[8px]  text-[#777777] font-[400]"
-          placeholder="Insert meta description"
-          error={errors?.shortDescription && errors?.shortDescription?.message}
-          type="text"
-          register={register('metaDescription', {
-            onChange: (e) => setDataForm({ ...dataForm, metaDescription: e.target.value }),
-          })}
-          value={dataForm?.metaDescription}
+      render: ({ register, errors, control }) => (
+        <Controller
+          name="metaDescription"
+          control={control}
+          render={({ field }) => (
+            <TextInput
+              labelClassName="font-[500] text-[14px] leading-[17px] text-reliableBlack70"
+              inputClassName="mb-3 border-b border-gray100 placeholder-gray80 text-[16px] py-[12px] px-[14px] mt-[8px]  text-[#777777] font-[400]"
+              placeholder="Insert meta description"
+              error={errors?.metaDescription && errors?.metaDescription?.message}
+              type="text"
+              value={field.value}
+              onChange={(e) => {
+                field.onChange(e);
+              }}
+            />
+          )}
         />
       ),
     },
     {
       title: 'ALT Image',
-      render: ({ register, errors, setDataForm, dataForm }) => (
-        <TextInput
-          labelClassName="font-[500] text-[14px] leading-[17px] text-reliableBlack70"
-          inputClassName="mb-3 border-b border-gray100 placeholder-gray80 text-[16px] py-[12px] px-[14px] mt-[8px]  text-[#777777] font-[400]"
-          placeholder="Insert alt image"
-          error={errors?.altImage && errors?.altImage?.message}
-          type="text"
-          register={register('altImage', {
-            onChange: (e) => setDataForm({ ...dataForm, altImage: e.target.value }),
-          })}
-          value={dataForm?.altImage}
+      render: ({ register, errors, control }) => (
+        <Controller
+          name="altImage"
+          control={control}
+          render={({ field }) => (
+            <TextInput
+              labelClassName="font-[500] text-[14px] leading-[17px] text-reliableBlack70"
+              inputClassName="mb-3 border-b border-gray100 placeholder-gray80 text-[16px] py-[12px] px-[14px] mt-[8px]  text-[#777777] font-[400]"
+              placeholder="Insert alt image"
+              error={errors?.altImage && errors?.altImage?.message}
+              type="text"
+              value={field.value}
+              onChange={(e) => {
+                field.onChange(e);
+              }}
+            />
+          )}
         />
       ),
     },
     {
       title: 'Keyword',
-      render: ({ register, errors, setDataForm, dataForm }) => (
-        <TextInput
-          labelClassName="font-[500] text-[14px] leading-[17px] text-reliableBlack70"
-          inputClassName="mb-3 border-b border-gray100 placeholder-gray80 text-[16px] py-[12px] px-[14px] mt-[8px]  text-[#777777] font-[400]"
-          placeholder="Insert keyword"
-          error={errors?.keyWord && errors?.keyWord?.message}
-          type="text"
-          register={register('keyWord', {
-            onChange: (e) => setDataForm({ ...dataForm, keyWord: e.target.value }),
-          })}
-          value={dataForm?.keyword}
+      render: ({ register, errors, control }) => (
+        <Controller
+          name="keyword"
+          control={control}
+          render={({ field }) => (
+            <TextInput
+              labelClassName="font-[500] text-[14px] leading-[17px] text-reliableBlack70"
+              inputClassName="mb-3 border-b border-gray100 placeholder-gray80 text-[16px] py-[12px] px-[14px] mt-[8px]  text-[#777777] font-[400]"
+              placeholder="Insert keyword"
+              error={errors?.keyword && errors?.keyword?.message}
+              type="text"
+              value={field.value}
+              onChange={(e) => {
+                field.onChange(e);
+              }}
+            />
+          )}
         />
       ),
     },

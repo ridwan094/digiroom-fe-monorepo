@@ -8,20 +8,18 @@ import { handleUpload } from '@/service/azure/fileUpload';
 import { useRouter } from 'next/router';
 import { Spinner, Toast } from 'flowbite-react';
 import ModalText from '@/components/modal-text';
-import CustomBreadCumb from '@/components/Breadcrumb';
 import { getCategory, getSlug } from '@/service/news-tips';
 import { MdDoneOutline, MdClear } from 'react-icons/md';
 
 const NewsTipsDetail = () => {
   const initialValues = {};
-  // const [dataForm, setDataForm] = useState({});
   const [formValues, setFormValues] = useState({});
   const [urlImage, setUrlImage] = useState();
   const [statusType, setStatusType] = useState();
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState();
   const router = useRouter();
-  const { slug } = router.query;
+  const { slug } = router.query ? router.query : { slug: null };
   const slugId = router.query.id ? JSON.parse(router.query.id) : null;
   const [categories, setCategories] = useState([]);
   const [dataSlug, setDataSlug] = useState();
@@ -89,7 +87,7 @@ const NewsTipsDetail = () => {
 
   const onSubmit = async (data) => {
     const categoriesSelect = data.category ? JSON.parse(data.category) : dataSlug.category;
-    // setLoading(true);
+    setLoading(true);
 
     const dataTemporary = {
       id: slug.includes('add') || slug.includes('duplicate') ? null : data.id,
@@ -112,43 +110,44 @@ const NewsTipsDetail = () => {
         description: null,
       },
       cmsStatusType: statusType === 'DRAFT' ? 'DRAFT' : 'PUBLISH',
-      detailContent: dataForm.detailContent ? dataForm.detailContent : 'test',
+      detailContent: data.detailContent,
     };
     console.log('isi tempore', dataTemporary);
-    // setStatusType(null);
+    setStatusType(null);
     let create = null;
     if (slug.includes('edit')) {
       create = await editNewsTips(dataTemporary);
     } else {
-      console.log('sini');
       create = await createNewsTips(dataTemporary);
     }
-    // if (create !== null) {
-    //   setLoading(false);
-    //   setShowToast(true);
-    //   setIconToast(<MdDoneOutline />);
-    //   setTextToast('Create News Tips Success');
-    // } else {
-    //   setLoading(false);
-    //   setShowToast(true);
-    //   setIconToast(<MdClear />);
-    //   setTextToast('Create News Tips Error');
-    // }
+    if (create !== null) {
+      setLoading(false);
+      setShowToast(true);
+      setIconToast(<MdDoneOutline />);
+      setTextToast('Create News Tips Success');
+    } else {
+      setLoading(false);
+      setShowToast(true);
+      setIconToast(<MdClear />);
+      setTextToast('Create News Tips Error');
+    }
   };
 
   const editor = useRef();
 
   useEffect(() => {
     getCategories();
-    getSlugId();
+    console.log('slug', slug);
+    if (slug !== undefined && (slug.includes('edit') || slug.includes('duplicate'))) {
+      getSlugId();
+    }
   }, []);
 
   useEffect(() => {
-    if ((slug.includes('edit') || slug.includes('duplicate')) && dataSlug) {
+    if (slug !== undefined && (slug.includes('edit') || slug.includes('duplicate'))) {
       const startDate = dataSlug.startDate ? new Date(dataSlug.startDate) : '';
       const endDate = dataSlug.endDate ? new Date(dataSlug.endDate) : '';
       const publishedDate = dataSlug.publishedDate ? new Date(dataSlug.publishedDate) : null;
-
       const updatedFormValues = {
         id: dataSlug.id || '',
         title: dataSlug.titlePage || '',
@@ -159,24 +158,16 @@ const NewsTipsDetail = () => {
         slug: dataSlug.slug || '',
         metaDescription: dataSlug.metaDescription || '',
         altImage: dataSlug.altImage || '',
-        keyWord: dataSlug.keyword || '',
-        contentCategory: dataSlug.category || '',
-        // add other data fields here
+        keyword: dataSlug.keyword || '',
+        contentCategory: dataSlug.contentCategory || '',
+        detailContent: dataSlug.detailContent || '',
+        // add other data fields here if needed later
       };
-
-      // Use setValue to populate formValues
       Object.keys(updatedFormValues).forEach((key) => {
         setValue(key, updatedFormValues[key]);
       });
     }
   }, [slug, dataSlug, setValue]);
-
-  const componentConfig = componentConfigNewsTips({
-    control,
-    handleUpload: handleUploadFile,
-    register,
-    handleSlug,
-  });
 
   return (
     <div>
@@ -216,7 +207,7 @@ const NewsTipsDetail = () => {
         handleUpload={handleUploadFile}
         editor={editor}
         showPreviewPage={showPreviewPage}
-        componentConfig={componentConfig}
+        componentConfig={componentConfigNewsTips(categories, dataSlug)}
         errors={errors}
         handleQuillChange={handleQuillChange}
         cancelPage={cancelPage}

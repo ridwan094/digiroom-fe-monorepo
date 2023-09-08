@@ -362,47 +362,41 @@ export const columnsNewsTips = (
     },
     {
       title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-      render: (status, item, i) => (
+      dataIndex: 'cmsStatusType',
+      key: 'status', //change this status, use cmsStatusType from api dont forget to change it
+      render: (cmsStatusType) => (
         <div className="flex items-center gap-2">
           <div
-            className={`p-2 w-full h-full border border-gray-200 ${
-              item.boolean === 'active'
+            className={`p-2 w-full h-full border border-gray-200 bg-gray-200 ${
+              cmsStatusType === 'PUBLISH'
                 ? 'bg-gray-200'
-                : item.boolean === 'inactive'
+                : cmsStatusType === 'DRAFT'
                 ? 'bg-gray-300'
-                : item.boolean === 'waitings'
-                ? 'bg-gray-500'
-                : 'bg-gray-200'
-            } rounded-full text-black capitalized text-md flex justify-center items-center font-Montserrat`}
+                : 'bg-gray-500'
+            } rounded-full text-black capitalize text-md  flex justify-center items-center font-Montserrat`}
           >
-            {item.boolean === 'active'
-              ? 'Published'
-              : item.boolean === 'inactive'
-              ? 'Unpublished'
-              : 'Waiting'}
+            {cmsStatusType ? cmsStatusType : 'WAITING'}
           </div>
         </div>
       ),
     },
     {
       title: 'Publish',
-      dataIndex: 'publish',
-      key: 'publish',
-      render: (status, item, i) => (
+      dataIndex: 'cmsStatusType',
+      key: 'publishStatus',
+      render: (cmsStatusType, item, i) => (
         <div className="flex items-center gap-2">
           <ToggleSwitch
-            index={i}
-            disabled={item.boolean === 'waitings'}
-            value={item.boolean === 'active'}
+            index={item}
+            disabled={cmsStatusType === null}
+            value={cmsStatusType === 'PUBLISH'}
             onToggleChange={onToggleChange}
             classNameLabel={`w-11 h-6 bg-gray-200 rounded-full peer  
               peer-checked:after:border-white after:content-[''] 
               after:absolute after:top-[2px] after:left-[2px] 
               after:bg-gray-600 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 
               after:transition-all ${
-                item.boolean === 'active'
+                cmsStatusType === 'PUBLISH'
                   ? 'peer-checked:bg-gray-800 peer-checked:after:translate-x-full'
                   : 'peer-checked:after:translate-x-0'
               } `}
