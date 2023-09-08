@@ -51,7 +51,7 @@ export const deleteDataTable = async (id) => {
   const api = `${process.env.NEXT_PUBLIC_BASE_URL}/newstips/delete/${id}`;
   try {
     const response = await CMS.delete(api);
-    if (response === 'Success') {
+    if (response.status.includes('Success')) {
       return response;
     } else {
       return null;
