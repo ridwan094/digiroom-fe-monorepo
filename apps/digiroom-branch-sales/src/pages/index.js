@@ -1,35 +1,12 @@
-import { EVENT_SECTION } from '@/constants/dummy';
-import faqs from '@/constants/faqs';
-import {
-  QuickLink,
-  Layout,
-  BranchListSection,
-  ReviewSection,
-  CurrentInformationSection,
-  FormFaqSection,
-  PromoEventSection,
-} from 'ui';
-import { BreadCrumbs } from 'ui/components/molecules';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function Home() {
-  return (
-    <>
-      <Layout>
-        <QuickLink />
-        <div className="hidden lg:block">
-          <BreadCrumbs items={[{ name: 'Home', path: '/' }, { name: 'Promo' }]} />
-        </div>
+  const { push } = useRouter();
 
-        <BranchListSection />
-        <PromoEventSection data={EVENT_SECTION} />
-        <CurrentInformationSection data={EVENT_SECTION} />
-        <FormFaqSection faqs={faqs} />
-        <ReviewSection />
+  useEffect(() => {
+    push('/dealer-toyota');
+  }, []);
 
-        <div className="lg:hidden">
-          <BreadCrumbs items={[{ name: 'Home', path: '/' }, { name: 'Promo' }]} />
-        </div>
-      </Layout>
-    </>
-  );
+  return <></>;
 }
