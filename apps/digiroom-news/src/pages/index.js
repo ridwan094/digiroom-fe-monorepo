@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { BreadCrumbs, QuickLink } from 'ui/components/molecules';
 import {
-  ArticleListHeroSection,
+  // ArticleListHeroSection,
   ArticleListTabSection,
   ArticleListFaqSection,
   PromoInfoSection,
@@ -34,12 +34,10 @@ export default function Home() {
       </div>
 
       {/* Promo banner section */}
-      <ArticleListHeroSection />
+      {/* <ArticleListHeroSection /> */}
 
       {/* Tab Bar Promo */}
-      <div className="lg:container">
-        <ArticleListTabSection itemList={newsList} />
-      </div>
+      <ArticleListTabSection itemList={newsList} />
 
       {/* Promo info section */}
       <PromoInfoSection />

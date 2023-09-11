@@ -17,7 +17,15 @@ const CardNews = ({ slug, title, image, date, tag, content, lastArticle, Additio
         )}
         <div className="flex items-center gap-4 pt-2 px-4 pb-4">
           <div className="flex lg:h-[100px] max-w-[160px]">
-            <Link href={`/articles/${slug}`}>
+            <Link
+              href={{
+                pathname: `/berita-dan-tips/${slug}`,
+                query: {
+                  slugCode: slug,
+                },
+              }}
+              as={`/berita-dan-tips/${slug}`}
+            >
               <img
                 className="min-w-[160px] h-full object-cover"
                 src={image}
@@ -26,7 +34,15 @@ const CardNews = ({ slug, title, image, date, tag, content, lastArticle, Additio
             </Link>
           </div>
           <div>
-            <Link href={`/articles/${slug}`}>
+            <Link
+              href={{
+                pathname: `/berita-dan-tips/${slug}`,
+                query: {
+                  slugCode: slug,
+                },
+              }}
+              as={`/berita-dan-tips/${slug}`}
+            >
               <p className="text-sm font-semibold text-reliableBlack mb-1 line-clamp-2 lg:text-base lg:font-bold">
                 {title}
               </p>

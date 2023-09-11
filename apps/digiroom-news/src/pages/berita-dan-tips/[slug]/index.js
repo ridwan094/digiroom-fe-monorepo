@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 import { MdArrowForward, MdClose } from 'react-icons/md';
 import { BtnConfirm, Text } from 'ui/components/atoms';
 import { BreadCrumbs, InfoDigiroom, InquiryForm, OtpForm } from 'ui/components/molecules';
@@ -14,10 +15,13 @@ import {
 } from 'ui/components/organism';
 import { motion } from 'framer-motion';
 
+import { getNewsDetail } from '@/service/article';
+
 const ArticleDetailPage = ({ slug, article }) => {
   const { searchValue } = useSelector((state) => state.example);
   const [formOpen, setFormOpen] = useState(false);
   const [otpOpen, setOtpOpen] = useState(false);
+  const [loading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
@@ -31,6 +35,26 @@ const ArticleDetailPage = ({ slug, article }) => {
 
   const handleSuccess = () => {
     router.push('/articles/success');
+  };
+
+  // Fetching detail
+  useEffect(() => {
+    if (router?.query?.slugCode) {
+      handlerFetchDetail(router?.query?.slugCode);
+    }
+  }, [router]);
+
+  const handlerFetchDetail = async (slugCode) => {
+    setIsLoading(true);
+    try {
+      const data = await getNewsDetail({ slugCode: slugCode });
+      console.log('data getNewsDetail =>', data);
+
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setIsLoading(false);
+    }
   };
 
   return (

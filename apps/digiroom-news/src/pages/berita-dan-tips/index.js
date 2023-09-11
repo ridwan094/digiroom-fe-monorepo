@@ -8,16 +8,28 @@ import {
 } from 'ui/components/organism';
 import { FAQS, newsList } from '../../constants/news';
 
+import { getListNews } from '@/service/article';
+
 const ArticleListingPage = () => {
   const [news, setNews] = useState([]);
+  const [loading, setIsLoading] = useState(false);
+
+  const fetchListnews = async () => {
+    setIsLoading(true);
+    try {
+      const data = await getListNews({ category: '', page: 0, size: 15 });
+      console.log('data getListNews =>', data);
+
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    fetch('/api/news') // Panggil API
-      .then((response) => response.json())
-      .then((data) => setNews(data))
-      .catch((error) => console.error('Error fetching news:', error));
+    fetchListnews();
   }, []);
-  console.log('res : ', news);
 
   return (
     <React.Fragment>

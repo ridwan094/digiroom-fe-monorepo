@@ -14,7 +14,15 @@ const ArticleList = ({ articles, usingTag }) => {
                 key={index}
                 className="bg-reliableBlack3 border-b-[0.5px] border-reliableBlack10 md:col-span-2 lg:col-span-3"
               >
-                <Link href={`/articles/${article.slug}`}>
+                <Link
+                  href={{
+                    pathname: `/berita-dan-tips/${article.slug}`,
+                    query: {
+                      slugCode: article.slug,
+                    },
+                  }}
+                  as={`/berita-dan-tips/${article.slug}`}
+                >
                   <img
                     className="w-full object-cover"
                     src={article.image}
@@ -31,7 +39,15 @@ const ArticleList = ({ articles, usingTag }) => {
                 )}
 
                 <div className="pt-2 px-4 pb-4 lg:pt-8 lg:px-6 lg:pb-6">
-                  <Link href={`/articles/${article.slug}`}>
+                  <Link
+                    href={{
+                      pathname: `/berita-dan-tips/${article.slug}`,
+                      query: {
+                        slugCode: article.slug,
+                      },
+                    }}
+                    as={`/berita-dan-tips/${article.slug}`}
+                  >
                     <p className="text-sm font-semibold text-reliableBlack mb-1 lg:text-xl lg:font-bold">
                       {article.title}
                     </p>
