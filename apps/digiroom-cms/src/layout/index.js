@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import CMSSidebar from '@/components/CMSSidebar';
 import Breadcrumb from '@/components/Breadcrumb';
 import CMSHeader from '@/components/CMSHeader';
@@ -12,9 +12,10 @@ const getLastSegment = (path) => {
 const CMSLayout = ({ children }) => {
   const { pathname, query } = useRouter();
   const cleanUrl = pathname.replace(/\/\[slug\]/, '');
-  const lastSegment = getLastSegment(cleanUrl);
 
-  const [nameLayout, setNameLayout] = useState('Dashboard');
+  const lastSegment = useMemo(() => getLastSegment(cleanUrl), [pathname]);
+
+const [nameLayout, setNameLayout] = useState('Dashboard');
 
   useEffect(() => {
     if (query.slug) {

@@ -6,7 +6,7 @@ import {
   columnsProductKnowledge,
   filterProductKnowledge,
   headerArrayProductKnowledge,
-} from '@/constants/product-knowledge';
+} from '@/helpers/utils/product-knowledge-page/ProductKnowledgePageList';
 import ModalText from '@/components/modal-text';
 import ModalFilter from '@/components/modal-filter';
 import ModalPreview from '@/components/modal-preview';

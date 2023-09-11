@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Breadcrumb } from 'flowbite-react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -16,8 +16,10 @@ export default function CustomBreadcrumb() {
     }
   }, [query.slug]);
 
-  const cleanUrl = pathname.replace(/\/\[slug\]/, '');
-  const paths = cleanUrl.split('/').filter((crumb) => crumb !== '');
+  const paths = useMemo(() => {
+    const cleanUrl = pathname.replace(/\/\[slug\]/, '');
+    return cleanUrl.split('/').filter((crumb) => crumb !== '');
+  }, [pathname]);
 
   return (
     <Breadcrumb aria-label="Default breadcrumb example" className="flex justify-end">

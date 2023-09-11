@@ -2,54 +2,58 @@ import { MdClear, MdDoneOutline } from 'react-icons/md';
 import React, { useEffect, useState } from 'react';
 import CustomTable from '@/components/Table';
 import { useRouter } from 'next/navigation';
-import { columnsNewsTips, headerArrayNewsTips } from '@/constants/news-tips';
+import {
+  columnsNewsTips,
+  headerArrayNewsTips,
+} from '@/helpers/utils/news-tips-page/NewsTipsPageList';
 import ModalText from '@/components/modal-text';
 import ModalFilter from '@/components/modal-filter';
 import ModalPreview from '@/components/modal-preview';
 import {
   getListDashboardNewsTips,
-  getIdListData,
   deleteDataTable,
   getCategory,
   getStatus,
   editNewsTips,
 } from '@/service/news-tips';
 import { LoadingEffect } from '../loading';
-import { Spinner, Toast } from 'flowbite-react';
+import { Spinner } from 'flowbite-react';
 
 const DashboardNewsTips = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [showToast, setShowToast] = useState(false);
-  const [toastDescription, setToastDescription] = useState('');
-  const [toastIcons, setToastIcons] = useState(null);
-  const [openModal, setOpenModal] = useState(null);
-  const [openModalFilter, setOpenModalFilter] = useState(null);
-  const [modalText, setModalText] = useState('');
-  const [modalHeader, setModalHeader] = useState('');
-  const [caseItems, setCaseItems] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [totalItems, setTotalItems] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-  const [page, setPage] = useState([10, 20, 30]);
-  const [itemsPerPage, setItemsPerPage] = useState(page[0]);
   const router = useRouter();
-  const [search, setSearch] = useState('');
-  const [searchBoolean, setSearchBoolean] = useState(false);
-  const [listDashboard, setListDashboard] = useState([]);
-  const [sortKey, setSortKey] = useState([]);
-  const [sortDirection, setSortDirection] = useState([]);
-  const [dataDirection, setDataDirection] = useState([]);
-  const [activeFilters, setActiveFilters] = useState([]);
-  const [openModalPreview, setOpenModalPreview] = useState('');
-  const [dataPreview, setDataPreview] = useState([]);
-  const [loadingAction, setLoadingAction] = useState(false);
-  const [deleteData, setDeleteData] = useState();
-  const [dataFilter, setDataFilter] = useState([]);
-  const [filterModal, setFilterModal] = useState([]);
-  const [changeData, setChangeData] = useState([]);
+  const [state, setState] = useState({
+    currentPage: 1,
+    showToast: false,
+    toastDescription: '',
+    toastIcons: null,
+    openModal: null,
+    openModalFilter: null,
+    modalText: '',
+    modalHeader: '',
+    caseItems: null,
+    isLoading: false,
+    totalItems: 0,
+    totalPages: 0,
+    page: [10, 20, 30],
+    itemsPerPage: 10, // Default items per page
+    search: '',
+    searchBoolean: false,
+    listDashboard: [],
+    sortKey: [],
+    sortDirection: [],
+    dataDirection: [],
+    activeFilters: [],
+    openModalPreview: '',
+    dataPreview: [],
+    loadingAction: false,
+    deleteData: null,
+    dataFilter: [],
+    filterModal: [],
+    changeData: [],
+  });
 
   const onPageChange = async (page) => {
-    setCurrentPage(page);
+    setState((prevState) => ({ ...prevState, currentPage: page }));
   };
 
   const onClickCheck = (value) => {
@@ -58,22 +62,23 @@ const DashboardNewsTips = () => {
         router.push('/news-tips/add-news-tips');
         break;
       case 'filter':
-        setOpenModalFilter('dismissible');
+        setState((prevState) => ({ ...prevState, openModalFilter: 'dismissible' }));
         break;
       case 'search':
-        setSearchBoolean(!searchBoolean);
+        setState((prevState) => ({ ...prevState, searchBoolean: !prevState.searchBoolean }));
         break;
     }
   };
 
   const searchTable = async (value) => {
     if (value.key === 'Enter') {
-      setCurrentPage(1);
+      setState((prevState) => ({ ...prevState, currentPage: 1 }));
     }
   };
 
   const onClick = async (items, index, item) => {
-    setCaseItems(items);
+    setState((prevState) => ({ ...prevState, caseItems: items }));
+
     switch (items) {
       case 'edit':
         router.push({
@@ -82,10 +87,13 @@ const DashboardNewsTips = () => {
         });
         break;
       case 'delete':
-        setOpenModal('dismissible');
-        setModalText('delete');
-        setModalHeader(item.titlePage);
-        setDeleteData(item);
+        setState((prevState) => ({
+          ...prevState,
+          openModal: 'dismissible',
+          modalText: 'delete',
+          modalHeader: item.titlePage,
+          deleteData: item,
+        }));
         break;
       case 'copy':
         router.push({
@@ -97,24 +105,31 @@ const DashboardNewsTips = () => {
   };
 
   const fetchListDashboard = async () => {
-    setIsLoading(true);
+    setState((prevState) => ({ ...prevState, isLoading: true }));
+
     try {
       const payload = {
-        filters: filterModal,
-        sorts: dataDirection.length > 0 ? dataDirection : [{ key: 'id', direction: 'DESC' }],
-        page: currentPage - 1,
-        size: itemsPerPage,
+        filters: state.filterModal,
+        sorts:
+          state.dataDirection.length > 0 ? state.dataDirection : [{ key: 'id', direction: 'DESC' }],
+        page: state.currentPage - 1,
+        size: state.itemsPerPage,
       };
       const data = await getListDashboardNewsTips(payload);
+
       if (data !== null) {
-        setListDashboard(data.content);
-        setTotalItems(data.totalElements);
-        setTotalPages(Math.ceil(data.totalElements / itemsPerPage));
+        setState((prevState) => ({
+          ...prevState,
+          listDashboard: data.content,
+          totalItems: data.totalElements,
+          totalPages: Math.ceil(data.totalElements / state.itemsPerPage),
+        }));
       }
-      setIsLoading(false);
+
+      setState((prevState) => ({ ...prevState, isLoading: false }));
     } catch (error) {
       console.error('Error fetching data:', error);
-      setIsLoading(false);
+      setState((prevState) => ({ ...prevState, isLoading: false }));
     }
   };
 
@@ -152,65 +167,77 @@ const DashboardNewsTips = () => {
           items: [dateRangeItem],
         },
       ];
-      setDataFilter(filterDataNewsTips);
+      setState((prevState) => ({ ...prevState, dataFilter: filterDataNewsTips }));
     } catch (error) {
       console.log('Error Getting Data');
     }
   };
 
   const dropdownPageChange = (selectedValue) => {
-    setItemsPerPage(selectedValue);
-    onPageChange(1);
+    setState((prevState) => ({
+      ...prevState,
+      itemsPerPage: selectedValue,
+      currentPage: 1,
+    }));
   };
 
   const onClickModal = async () => {
-    switch (caseItems.newValue) {
+    switch (state.caseItems.newValue) {
       case false:
-        caseItems.index.cmsStatusType = 'DRAFT';
-        const edit = await editNewsTips(caseItems.index);
+        state.caseItems.index.cmsStatusType = 'DRAFT';
+        const edit = await editNewsTips(state.caseItems.index);
         if (edit.status.includes('Success')) {
         } else {
-          caseItems.index.cmsStatusType = 'PUBLISH';
+          state.caseItems.index.cmsStatusType = 'PUBLISH';
         }
-        setOpenModal(undefined);
+        setState((prevState) => ({ ...prevState, openModal: undefined }));
 
         break;
       case true:
-        caseItems.index.cmsStatusType = 'PUBLISH';
-        const update = await editNewsTips(caseItems.index);
+        state.caseItems.index.cmsStatusType = 'PUBLISH';
+        const update = await editNewsTips(state.caseItems.index);
         if (update.status.includes('Success')) {
         } else {
-          caseItems.index.cmsStatusType = 'DRAFT';
+          state.caseItems.index.cmsStatusType = 'DRAFT';
         }
-        setOpenModal(undefined);
+        setState((prevState) => ({ ...prevState, openModal: undefined }));
 
         break;
       default:
-        const data = await deleteDataTable(deleteData.id);
+        const data = await deleteDataTable(state.deleteData.id);
         if (data.status.includes('Success')) {
-          setShowToast(true);
-          setToastIcons(<MdDoneOutline />);
-          setToastDescription('Delete News Tips Success');
+          setState((prevState) => ({
+            ...prevState,
+            showToast: true,
+            toastIcons: <MdDoneOutline />,
+            toastDescription: 'Delete News Tips Success',
+          }));
           fetchListDashboard();
         } else {
-          setShowToast(true);
-          setToastIcons(<MdClear />);
-          setToastDescription('Delete News Tips Error');
+          setState((prevState) => ({
+            ...prevState,
+            showToast: true,
+            toastIcons: <MdClear />,
+            toastDescription: 'Delete News Tips Error',
+          }));
         }
-        setOpenModal(undefined);
+        setState((prevState) => ({ ...prevState, openModal: undefined }));
         break;
     }
   };
 
   const handleToggleChange = (index) => {
     const { value, data } = index;
-    setOpenModal('dismissible');
-    setModalText(!value ? 'unpublished' : 'published');
-    setModalHeader(data.titlePage);
-    setCaseItems({
-      newValue: value,
-      index: data,
-    });
+    setState((prevState) => ({
+      ...prevState,
+      openModal: 'dismissible',
+      modalText: !value ? 'unpublished' : 'published',
+      modalHeader: data.titlePage,
+      caseItems: {
+        newValue: value,
+        index: data,
+      },
+    }));
   };
 
   const handleFilter = async (filterData, startDate, endDate) => {
@@ -270,45 +297,58 @@ const DashboardNewsTips = () => {
         });
       }
     }
-    setFilterModal(filters);
+    setState((prevState) => ({ ...prevState, filterModal: filters }));
   };
 
   const handleSort = (key) => {
-    const keyIndex = sortKey.indexOf(key);
+    const keyIndex = state.sortKey.indexOf(key);
 
     if (keyIndex !== -1) {
       let newDirection;
 
-      if (sortDirection[keyIndex] === 'ASC') {
+      if (state.sortDirection[keyIndex] === 'ASC') {
         newDirection = 'DESC';
-      } else if (sortDirection[keyIndex] === 'DESC') {
+      } else if (state.sortDirection[keyIndex] === 'DESC') {
         newDirection = null;
       }
 
       if (newDirection === null) {
-        setSortKey(sortKey.filter((k) => k !== key));
-        setSortDirection(sortDirection.filter((direction, index) => index !== keyIndex));
-        setDataDirection(dataDirection.filter((item) => item.key !== key));
+        setState((prevState) => ({
+          ...prevState,
+          sortKey: prevState.sortKey.filter((k) => k !== key),
+          sortDirection: prevState.sortDirection.filter((direction, index) => index !== keyIndex),
+          dataDirection: prevState.dataDirection.filter((item) => item.key !== key),
+        }));
       } else {
-        setSortDirection(
-          sortDirection.map((direction, index) => (index === keyIndex ? newDirection : direction))
-        );
-        setDataDirection(
-          dataDirection.map((item) =>
+        setState((prevState) => ({
+          ...prevState,
+          sortDirection: prevState.sortDirection.map((direction, index) =>
+            index === keyIndex ? newDirection : direction
+          ),
+          dataDirection: prevState.dataDirection.map((item) =>
             item.key === key ? { ...item, direction: newDirection } : item
-          )
-        );
+          ),
+        }));
       }
     } else {
-      setSortKey([...sortKey, key]);
-      setSortDirection([...sortDirection, 'ASC']);
-      setDataDirection([...dataDirection, { key, direction: 'ASC' }]);
+      setState((prevState) => ({
+        ...prevState,
+        sortKey: [...prevState.sortKey, key],
+        sortDirection: [...prevState.sortDirection, 'ASC'],
+        dataDirection: [...prevState.dataDirection, { key, direction: 'ASC' }],
+      }));
     }
   };
 
   useEffect(() => {
     fetchListDashboard();
-  }, [currentPage, itemsPerPage, sortKey, sortDirection, filterModal]);
+  }, [
+    state.currentPage,
+    state.itemsPerPage,
+    state.sortKey,
+    state.sortDirection,
+    state.filterModal,
+  ]);
 
   useEffect(() => {
     getListCategoryStatus();
@@ -316,69 +356,69 @@ const DashboardNewsTips = () => {
 
   return (
     <div className="relative w-full">
-      {loadingAction && LoadingEffect(<Spinner />, 'Loading...')}
-      <div className={`${loadingAction ? 'pointer-events-none' : ''} relative`}>
+      {state.loadingAction && LoadingEffect(<Spinner />, 'Loading...')}
+      <div className={`${state.loadingAction ? 'pointer-events-none' : ''} relative`}>
         <CustomTable
           columns={columnsNewsTips(
-            itemsPerPage,
-            currentPage,
+            state.itemsPerPage,
+            state.currentPage,
             (value) => handleToggleChange(value),
             (value, index, item) => onClick(value, index, item),
-            sortKey,
-            sortDirection,
+            state.sortKey,
+            state.sortDirection,
             handleSort
           )}
-          dataSource={listDashboard}
-          showToast={showToast}
-          toastIcons={toastIcons}
-          toastDescription={toastDescription}
+          dataSource={state.listDashboard}
+          showToast={state.showToast}
+          toastIcons={state.toastIcons}
+          toastDescription={state.toastDescription}
           pagination={{
-            currentPage,
-            totalPages,
-            itemsPerPage,
-            page,
-            totalItems,
+            currentPage: state.currentPage,
+            totalPages: state.totalPages,
+            itemsPerPage: state.itemsPerPage,
+            page: state.page,
+            totalItems: state.totalItems,
             onPageChange: (page) => onPageChange(page),
             onDropdownPageChange: (value) => dropdownPageChange(value),
             onClickCheck: onClickCheck,
-            searchBoolean: searchBoolean,
+            searchBoolean: state.searchBoolean,
           }}
-          isLoading={isLoading}
+          isLoading={state.isLoading}
           headerData={headerArrayNewsTips(
-            searchBoolean,
-            search,
-            (value) => setSearch(value),
+            state.searchBoolean,
+            state.search,
+            (value) => setState((prevState) => ({ ...prevState, search: value })),
             (value) => onClickCheck(value),
             searchTable
           )}
-          setShowToast={setShowToast}
+          setShowToast={(show) => setState((prevState) => ({ ...prevState, showToast: show }))}
         />
       </div>
       {/* Modal */}
       <div>
         <ModalText
-          isOpen={openModal === 'dismissible'}
-          onClose={() => setOpenModal(false)}
-          modalHeader={modalHeader}
-          modalText={modalText}
+          isOpen={state.openModal === 'dismissible'}
+          onClose={() => setState((prevState) => ({ ...prevState, openModal: false }))}
+          modalHeader={state.modalHeader}
+          modalText={state.modalText}
           onConfirm={onClickModal}
         />
       </div>
       <div>
         <ModalFilter
-          isOpen={openModalFilter === 'dismissible'}
-          onClose={() => setOpenModalFilter(false)}
-          filterData={dataFilter}
+          isOpen={state.openModalFilter === 'dismissible'}
+          onClose={() => setState((prevState) => ({ ...prevState, openModalFilter: false }))}
+          filterData={state.dataFilter}
           onClickFilter={handleFilter}
-          activeFilters={activeFilters}
+          activeFilters={state.activeFilters}
         />
       </div>
       <div>
         <ModalPreview
-          isOpen={openModalPreview === 'dismissible'}
-          onClose={() => setOpenModalPreview(false)}
+          isOpen={state.openModalPreview === 'dismissible'}
+          onClose={() => setState((prevState) => ({ ...prevState, openModalPreview: false }))}
           onConfirm={onClickModal}
-          dataPreview={dataPreview}
+          dataPreview={state.dataPreview}
         ></ModalPreview>
       </div>
     </div>

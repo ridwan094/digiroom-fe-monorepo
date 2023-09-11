@@ -2,20 +2,12 @@ import React from 'react';
 import { Controller } from 'react-hook-form';
 import Dropzone from '@/components/LayoutForm/Dropzone';
 import { TextInput } from 'ui';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { MdCalendarToday } from 'react-icons/md';
 import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 import SelectCategory from '@/components/LayoutForm/Select';
 import Select from 'react-select';
-
-export const optionsPage = [
-  { value: 'product_detail_page', label: 'Product Detail Page' },
-  { value: 'cek_promo_menarik', label: 'Cek Promo Menarik' },
-  { value: 'stand_banner_homepage', label: 'Stand Banner Homepage' },
-];
+import CustomDatePicker from '@/components/DatePicker';
 
 export const robotsTags = [
   { value: 'index', label: 'Index' },
@@ -25,46 +17,6 @@ export const robotsTags = [
   { value: 'noimageindex', label: 'Noimageindex' },
   { value: 'nocache', label: 'Nocache' },
 ];
-
-export const regions = [
-  { value: 'dki', label: 'DKI Jakarta' },
-  { value: 'jabar', label: 'Jawa Barat' },
-  { value: 'jateng', label: 'Jawa Tengah' },
-  { value: 'jatim', label: 'Jawa Timur' },
-];
-
-export const city = [
-  { value: 'jaksel', label: 'Jakarata Selatan' },
-  { value: 'depok', label: 'Depok' },
-  { value: 'jaktim', label: 'Jaktim' },
-  { value: 'bandung', label: 'Bandung' },
-];
-
-export const branch = [
-  { value: 'dki', label: 'DKI Jakarta' },
-  { value: 'jabar', label: 'Jawa Barat' },
-  { value: 'jateng', label: 'Jawa Tengah' },
-  { value: 'jatim', label: 'Jawa Timur' },
-];
-
-export const tags = [
-  { value: 'hotdeals', label: 'Hot Deals' },
-  { value: 'trending', label: 'Trending' },
-];
-
-const CustomInput = React.forwardRef((props, ref) => {
-  return (
-    <div className="border-b-2 border-[#bdbcbc] bg-[#f8f8f8] p-3 mt-3">
-      <label onClick={props.onClick} ref={ref} className="placeholder-gray80">
-        {props.value || props.placeholder}
-      </label>
-      <MdCalendarToday
-        onClick={props.onClick}
-        style={{ position: 'absolute', top: '28px', right: '16px' }}
-      />
-    </div>
-  );
-});
 
 export const componentConfigProductKnowledge = [
   {
@@ -107,22 +59,14 @@ export const componentConfigProductKnowledge = [
             name="publishedDate"
             render={({ field }) => (
               <div className="w-full">
-                <DatePicker
-                  id="input-custom"
-                  className="w-full my-3  border-b-2 border-gray100 placeholder-gray80 text-[16px] py-[12px] !px-3 mt-[8px]  text-reliableBlack90 font-[400]"
-                  showIcon
+                <CustomDatePicker
+                  id="input-custom-start"
+                  customClass="w-full my-3 border-b-2 border-gray100 placeholder-gray80 text-[16px] py-[12px] !px-3 mt-[8px] text-reliableBlack90 font-[400]"
+                  showIcon={true}
                   placeholderText="DD/MM/YYYY --:--:--"
                   onChange={(date) => field.onChange(date)}
                   selected={field.value}
                   showTimeInput
-                  customInput={<CustomInput />}
-                  dateFormat="dd/MM/yyyy hh:mm:ss"
-                  customStyles={{
-                    dateIcon: {
-                      width: '40px',
-                      height: '40px',
-                    },
-                  }}
                 />
               </div>
             )}

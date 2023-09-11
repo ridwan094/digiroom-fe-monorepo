@@ -32,21 +32,6 @@ export const createNewsTips = async (data) => {
   }
 };
 
-export const getIdListData = async (payload) => {
-  const api = `${process.env.NEXT_PUBLIC_BASE_URL}/newstips/edit`;
-  try {
-    const response = await CMS.put(api, payload);
-    if (response.status === 'Success') {
-      return response.status;
-    } else {
-      return null;
-    }
-  } catch (error) {
-    console.error('Error getting data: ', error);
-    return null;
-  }
-};
-
 export const deleteDataTable = async (id) => {
   const api = `${process.env.NEXT_PUBLIC_BASE_URL}/newstips/delete/${id}`;
   try {
@@ -111,7 +96,6 @@ export const editNewsTips = async (payload) => {
   const api = `${process.env.NEXT_PUBLIC_BASE_URL}/newstips/edit`;
   try {
     const response = await CMS.put(api, payload);
-    console.log('isi response', response);
     if (response !== null) {
       return response;
     } else {

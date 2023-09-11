@@ -28,7 +28,6 @@ export default function SelectCategory({ register, control, items, block = false
               <option
                 value={JSON.stringify({
                   ...data.value,
-                  // contentCategoryType: data.value.name,
                 })}
                 key={_i}
               >

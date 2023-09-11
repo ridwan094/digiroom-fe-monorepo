@@ -3,7 +3,7 @@ import LayoutForm from '@/components/LayoutForm';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import { createNewsTips, editNewsTips } from '@/service/news-tips';
-import { componentConfigNewsTips } from '@/constants/add-news-page';
+import { componentConfigNewsTips } from '@/helpers/utils/news-tips-page/AddNewsPage';
 import { handleUpload } from '@/service/azure/fileUpload';
 import { useRouter } from 'next/router';
 import { Spinner, Toast } from 'flowbite-react';

@@ -224,15 +224,3 @@ export const columnsNewsTips = (
     ) : undefined,
   }));
 };
-
-export const sampleDataNewsTips = [
-  {
-    img: '',
-    title: 'Promo 1',
-    startDate: '2023-08-25',
-    endDate: '2023-08-28',
-    publishDate: '2023-08-23',
-    category: 'Body & Paint',
-    detail: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ...',
-  },
-];
