@@ -12,23 +12,19 @@ import {
 import { BreadCrumbs } from 'ui/components/molecules';
 
 export default function Home() {
+  const breadcrumbsItems = [{ name: 'Home', path: '/' }, { name: 'Dealer Jakarta Pusat' }];
+
   return (
     <>
       <Layout>
         <QuickLink />
-        <div className="hidden lg:block">
-          <BreadCrumbs items={[{ name: 'Home', path: '/' }, { name: 'Promo' }]} />
-        </div>
-
+        <BreadCrumbs isMobileScreen={false} items={breadcrumbsItems} />
         <BranchListSection />
         <PromoEventSection data={EVENT_SECTION} />
         <CurrentInformationSection data={EVENT_SECTION} />
         <FormFaqSection faqs={faqs} />
         <ReviewSection />
-
-        <div className="lg:hidden">
-          <BreadCrumbs items={[{ name: 'Home', path: '/' }, { name: 'Promo' }]} />
-        </div>
+        <BreadCrumbs items={breadcrumbsItems} />
       </Layout>
     </>
   );
