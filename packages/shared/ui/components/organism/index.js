@@ -32,3 +32,4 @@ export { default as FormFaqSection } from './FormFaqSection';
 export { default as BranchInfoSection } from './BranchInfoSection';
 export { default as ReviewSection } from './ReviewSection';
 export { default as CurrentInformationSection } from './CurrentInformationSection';
+export { default as BranchServiceSection } from './BranchServiceSection';
