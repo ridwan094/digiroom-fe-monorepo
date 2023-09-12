@@ -63,7 +63,7 @@ const ArticleDetailPage = ({ slug, article }) => {
             isMobileScreen={false}
             items={[
               { name: 'Home', path: '/' },
-              { name: 'Artikel', path: '/articles' },
+              { name: 'Berita dan Tips', path: '/berita-dan-tips' },
               { name: article.title },
             ]}
           />
@@ -117,7 +117,7 @@ const ArticleDetailPage = ({ slug, article }) => {
         isMobileScreen={true}
         items={[
           { name: 'Home', path: '/' },
-          { name: 'Artikel', path: '/articles' },
+          { name: 'Berita dan Tips', path: '/berita-dan-tips' },
           { name: article.title },
         ]}
       />
