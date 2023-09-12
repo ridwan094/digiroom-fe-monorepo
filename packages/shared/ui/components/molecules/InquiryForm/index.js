@@ -1,9 +1,11 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { BtnConfirm, Dropdown } from '../../atoms';
 import { Input } from '../../atoms';
 import Text from '../../atoms/Text';
 import { FiArrowRight } from 'react-icons/fi';
 import Checkbox from '../../atoms/CheckBox';
+import { getListProvince } from '@/service/province';
+import { getListCity } from '@/service/city';
 
 const InquiryForm = ({
   containerClassForm,
@@ -86,6 +88,30 @@ const InquiryForm = ({
       !submit.fullName || !submit.phoneNumber || !submit.province || !submit.city || !submit.branch,
     [submit]
   );
+
+  // Handler Provice get API
+  const fetchListProvince = async () => {
+    try {
+      const data = await getListProvince();
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const fetchListCity = async () => {
+    try {
+      const data = await getListCity({ isoCode: submit.province });
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchListProvince();
+    if (submit.province) {
+      fetchListCity();
+    }
+  }, [submit]);
 
   return (
     <form className={containerClassForm} onSubmit={handleSubmit}>
