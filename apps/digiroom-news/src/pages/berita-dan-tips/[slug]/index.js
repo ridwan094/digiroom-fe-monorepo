@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 import { MdArrowForward, MdClose } from 'react-icons/md';
 import { BtnConfirm, Text } from 'ui/components/atoms';
 import { BreadCrumbs, InfoDigiroom, InquiryForm, OtpForm } from 'ui/components/molecules';
@@ -13,11 +13,19 @@ import {
   DetailPromoInquiryFormSection,
 } from 'ui/components/organism';
 import { motion } from 'framer-motion';
+import { getNewsDetail } from '@/service/article';
 
 const ArticleDetailPage = ({ slug, article }) => {
   const { searchValue } = useSelector((state) => state.example);
   const [formOpen, setFormOpen] = useState(false);
   const [otpOpen, setOtpOpen] = useState(false);
+  const [loading, setIsLoading] = useState(false);
+
+  const breadCrumbsPath = [
+    { name: 'Home', path: '/' },
+    { name: 'Berita dan Tips', path: '/berita-dan-tips' },
+    { name: article.title },
+  ];
 
   const router = useRouter();
 
@@ -33,19 +41,30 @@ const ArticleDetailPage = ({ slug, article }) => {
     router.push('/articles/success');
   };
 
+  // Fetching detail
+  useEffect(() => {
+    if (router?.query?.slugCode) {
+      handlerFetchDetail(router?.query?.slugCode);
+    }
+  }, [router]);
+
+  const handlerFetchDetail = async (slugCode) => {
+    setIsLoading(true);
+    try {
+      const data = await getNewsDetail({ slugCode: slugCode });
+
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
       {/* Breadcrumb for web screen */}
       <div className="sticky top-[123.5px] z-30 bg-white border-b-1 border-reliableBlack30 w-full">
         <div className="">
-          <BreadCrumbs
-            isMobileScreen={false}
-            items={[
-              { name: 'Home', path: '/' },
-              { name: 'Artikel', path: '/articles' },
-              { name: article.title },
-            ]}
-          />
+          <BreadCrumbs isMobileScreen={false} items={breadCrumbsPath} />
         </div>
       </div>
 
@@ -96,7 +115,7 @@ const ArticleDetailPage = ({ slug, article }) => {
         isMobileScreen={true}
         items={[
           { name: 'Home', path: '/' },
-          { name: 'Artikel', path: '/articles' },
+          { name: 'Berita dan Tips', path: '/berita-dan-tips' },
           { name: article.title },
         ]}
       />

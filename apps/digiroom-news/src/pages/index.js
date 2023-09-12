@@ -1,56 +1,63 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { BreadCrumbs, QuickLink } from 'ui/components/molecules';
+import React, { useEffect, useState } from 'react';
+import { QuickLink, BreadCrumbs } from 'ui/components/molecules';
 import {
-  ArticleListHeroSection,
   ArticleListTabSection,
   ArticleListFaqSection,
   PromoInfoSection,
 } from 'ui/components/organism';
 import { FAQS, newsList } from '@/constants/news';
 
-export default function Home() {
-  const [selectedOption, setSelectedOption] = useState('');
-  const [inputValues, setInputValues] = useState('');
+import { getListNews } from '@/service/article';
 
-  const handleOptionSelect = (option) => {
-    setSelectedOption(option);
-  };
-  const { searchValue } = useSelector((state) => state.example);
+const Home = () => {
+  const [news, setNews] = useState([]);
+  const [loading, setIsLoading] = useState(false);
 
-  const handleChange = (e) => {
-    const newValue = e.target.value;
-    setInputValues(newValue);
+  const fetchListnews = async () => {
+    setIsLoading(true);
+    try {
+      const data = await getListNews({ category: '', page: 0, size: 15 });
+
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
   };
+
+  useEffect(() => {
+    fetchListnews();
+  }, []);
+
   return (
-    <>
+    <React.Fragment>
       <QuickLink />
 
-      <div className="hidden lg:block">
-        <BreadCrumbs
-          isMobileScreen={false}
-          items={[{ name: 'Home', path: '/' }, { name: 'Berita dan Tips' }]}
-        />
+      {/* Breadcrumb for web screen */}
+      <div className="sticky top-[123.5px] z-30 bg-white border-b-1 border-reliableBlack30">
+        <div className="w-full">
+          <BreadCrumbs
+            isMobileScreen={false}
+            items={[{ name: 'Home', path: '/' }, { name: 'Berita dan Tips' }]}
+          />
+        </div>
       </div>
 
-      {/* Promo banner section */}
-      <ArticleListHeroSection />
+      {/* List Artikel Desktop */}
+      <ArticleListTabSection itemList={newsList} />
 
-      {/* Tab Bar Promo */}
-      <div className="lg:container">
-        <ArticleListTabSection itemList={newsList} />
-      </div>
-
-      {/* Promo info section */}
+      {/* Info section */}
       <PromoInfoSection />
 
-      {/* Promo FAQ section */}
+      {/* FAQ section */}
       <ArticleListFaqSection faqs={FAQS} />
 
       {/* Breadcrumb for mobile screen */}
-      <div className="lg:hidden">
-        <BreadCrumbs items={[{ name: 'Home', path: '/' }, { name: 'Promo' }]} />
-      </div>
-    </>
+      <BreadCrumbs
+        isMobileScreen={true}
+        items={[{ name: 'Home', path: '/' }, { name: 'Berita dan Tips' }]}
+      />
+    </React.Fragment>
   );
-}
+};
+
+export default Home;

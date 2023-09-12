@@ -18,7 +18,7 @@ const ToggleSwitch = ({
 
   const handleToggle = () => {
     const newValue = !isChecked;
-    onToggleChange({ test: newValue, indexTest: index });
+    onToggleChange({ value: newValue, data: index });
   };
 
   const labelClassName = `${classNameLabel} ${disabled ? 'hover:cursor-not-allowed' : ''} `;

@@ -26,3 +26,4 @@ export { default as BranchCard } from './BranchCard';
 export { default as SubscriptionForm } from './SubscriptionForm';
 export { default as CurrentInformation } from './CurrentInformation';
 export { default as BranchServiceCard } from './BranchServiceCard';
+export { default as LoginForm } from './LoginForm';

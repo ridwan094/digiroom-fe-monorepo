@@ -10,9 +10,9 @@ const TabsNavigation = ({ className, tabs, onTabChange }) => {
 
   return (
     <React.Fragment>
-      <div className="flex">
+      <div className={`${className} `}>
         <ul
-          className={`${className} flex items-center justify-start w-full overflow-x-auto no-scrollbar lg:justify-start`}
+          className={`flex items-center justify-start w-full overflow-x-auto no-scrollbar lg:justify-start`}
         >
           {tabs.map((tab, index) => (
             <li

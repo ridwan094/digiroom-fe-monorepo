@@ -2,42 +2,32 @@ import React, { useRef, useState } from 'react';
 import LayoutForm from '@/components/LayoutForm';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
-import { createNewsTips, editNewsTips } from '@/service/news-tips';
+import { createNewsTips } from '@/service/news-tips';
 import { componentConfigNewsTips } from '@/helpers/utils/news-tips-page/AddNewsPage';
 import { handleUpload } from '@/service/azure/fileUpload';
 import { useRouter } from 'next/router';
 import { Spinner, Toast } from 'flowbite-react';
-import { getCategory, getSlug } from '@/service/news-tips';
+import { getCategory } from '@/service/news-tips';
 import { MdDoneOutline, MdClear } from 'react-icons/md';
 
-const NewsTipsDetail = () => {
-  const initialValues = {};
-  const [formValues, setFormValues] = useState({});
+const NewsTips = () => {
+  const [dataForm, setDataForm] = useState({});
   const [urlImage, setUrlImage] = useState();
-  const [statusType, setStatusType] = useState();
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState();
   const router = useRouter();
-  const { slug } = router.query;
-  const slugId = router.query.id ? JSON.parse(router.query.id) : null;
   const [categories, setCategories] = useState([]);
-  const [dataSlug, setDataSlug] = useState(null);
+  const [statusType, setStatusType] = useState();
+  const [buttonClicked, setButtonClicked] = useState();
   const [showToast, setShowToast] = useState(false);
   const [iconToast, setIconToast] = useState(<MdClear />);
   const [textToast, setTextToast] = useState();
-  const [previewImageSlug, setPreviewImageSlug] = useState(null);
-  window.history.replaceState(null, '', `/news-tips/${router.query.slug}`);
-
   const {
     handleSubmit,
     control,
     register,
-    reset,
-    setValue,
     formState: { errors },
-  } = useForm({
-    defaultValues: initialValues,
-  });
+  } = useForm();
 
   const handleUploadFile = async (file) => {
     event.preventDefault();
@@ -49,26 +39,11 @@ const NewsTipsDetail = () => {
     }
   };
 
-  const getCategories = async () => {
-    const categoriesData = await getCategory();
-    if (categoriesData !== null) {
-      setCategories(categoriesData);
-    }
-  };
-
-  const getSlugId = async () => {
-    const getData = await getSlug(slugId);
-    if (getData !== null) {
-      setDataSlug(getData);
-      setPreviewImageSlug(getData.heroImageLink.split('?')[0]);
-    }
-  };
-
   const handleQuillChange = (value) => {
     setDataForm((prev) => {
       return {
         ...prev,
-        detailContent: value,
+        detailPromosi: value,
       };
     });
   };
@@ -86,20 +61,28 @@ const NewsTipsDetail = () => {
     router.back();
   };
 
+  const getCategories = async () => {
+    const categoriesData = await getCategory();
+    if (categoriesData !== null) {
+      setCategories(categoriesData);
+    }
+  };
+
   const onSubmit = async (data) => {
-    const categoriesSelect = data.category ? JSON.parse(data.category) : dataSlug.category;
+    const categoriesSelect = data.category ? JSON.parse(data.category) : [];
     setLoading(true);
     const dataTemporary = {
-      id: slug.includes('add') || slug.includes('duplicate') ? null : data.id,
-      heroImageLink: urlImage,
+      id: null,
+      heroImageLink:
+        'https://astradigitaldigiroomstg.blob.core.windows.net/storage-general-001/image.jpg',
       titlePage: data.title,
       startDate: data.startDate,
-      endDate: data.endDate,
+      endDate: data.expiredDate,
       publishedDate: data.publishedDate,
       titleHeader: data.titleHeader,
       slug: data.slug,
       contentCategory: categoriesSelect,
-      keyword: data.keyword,
+      keyword: data.keyWord,
       metaDescription: data.metaDescription,
       altImage: data.altImage,
       priority: 1,
@@ -109,21 +92,15 @@ const NewsTipsDetail = () => {
         description: null,
       },
       cmsStatusType: statusType === 'DRAFT' ? 'DRAFT' : 'PUBLISH',
-      detailContent: data.detailContent,
+      detailContent: dataForm.detailPromosi,
     };
     setStatusType(null);
-    let create = null;
-    if (slug.includes('edit')) {
-      create = await editNewsTips(dataTemporary);
-    } else {
-      create = await createNewsTips(dataTemporary);
-    }
+    const create = await createNewsTips(dataTemporary);
     if (create !== null) {
       setLoading(false);
       setShowToast(true);
       setIconToast(<MdDoneOutline />);
       setTextToast('Create News Tips Success');
-      router.push('/news-tips');
     } else {
       setLoading(false);
       setShowToast(true);
@@ -136,42 +113,7 @@ const NewsTipsDetail = () => {
 
   useEffect(() => {
     getCategories();
-    if (slug !== undefined && (slug.includes('edit') || slug.includes('duplicate'))) {
-      getSlugId();
-    }
-  }, []);
-
-  useEffect(() => {
-    if (
-      slug !== undefined &&
-      (slug.includes('edit') || (slug.includes('duplicate') && dataSlug !== null))
-    ) {
-      if (dataSlug !== null) {
-        const startDate = dataSlug.startDate ? new Date(dataSlug.startDate) : '';
-        const endDate = dataSlug.endDate ? new Date(dataSlug.endDate) : '';
-        const publishedDate = dataSlug.publishedDate ? new Date(dataSlug.publishedDate) : null;
-        const updatedFormValues = {
-          id: dataSlug.id || '',
-          title: dataSlug.titlePage || '',
-          startDate: startDate || '',
-          endDate: endDate || '',
-          publishedDate: publishedDate || '',
-          titleHeader: dataSlug.titleHeader || '',
-          slug: dataSlug.slug || '',
-          metaDescription: dataSlug.metaDescription || '',
-          altImage: dataSlug.altImage || '',
-          keyword: dataSlug.keyword || '',
-          contentCategory: dataSlug.contentCategory || '',
-          detailContent: dataSlug.detailContent || '',
-          // add other data fields here if needed later
-        };
-        Object.keys(updatedFormValues).forEach((key) => {
-          setValue(key, updatedFormValues[key]);
-        });
-      }
-    }
-  }, [dataSlug, setValue]);
-
+  }, dataForm);
   return (
     <div>
       {loading && (
@@ -210,16 +152,16 @@ const NewsTipsDetail = () => {
         handleUpload={handleUploadFile}
         editor={editor}
         showPreviewPage={showPreviewPage}
-        componentConfig={componentConfigNewsTips(categories, dataSlug)}
+        componentConfig={componentConfigNewsTips(categories)}
+        dataForm={dataForm}
+        setDataForm={setDataForm}
         errors={errors}
         handleQuillChange={handleQuillChange}
         cancelPage={cancelPage}
         draftPage={draftPage}
-        previewImage={previewImageSlug}
-        dropdownData={{ value: 'noindex', label: 'Noindex' }}
       />
     </div>
   );
 };
 
-export default NewsTipsDetail;
+export default NewsTips;

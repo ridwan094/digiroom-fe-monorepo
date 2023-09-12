@@ -1,5 +1,4 @@
 import React from 'react';
-import generateSlug from '@/helpers/utils/slug';
 
 const LayoutForm = ({
   control,
@@ -13,11 +12,12 @@ const LayoutForm = ({
   setDataForm,
   errors,
   handleQuillChange,
-  cancelPage
+  cancelPage,
+  draftPage,
+  previewImage,
+  handleSlug,
+  dropdownData,
 }) => {
-  const handleSlug = (txt) => {
-    setDataForm({ ...dataForm, slug: generateSlug(txt) });
-  };
   return (
     <div className="bg-white p-3 w-full">
       <form onSubmit={onSubmit}>
@@ -39,7 +39,10 @@ const LayoutForm = ({
               trigger: register().trigger,
               handleQuillChange,
               showPreviewPage,
-              cancelPage
+              cancelPage,
+              draftPage,
+              previewImage,
+              dropdownData,
             })}
           </div>
         ))}

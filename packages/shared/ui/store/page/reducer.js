@@ -6,6 +6,7 @@ const INITIAL_STATE = {
     width: 0,
     height: 0,
   },
+  isLogin: false,
 };
 
 const exportedObject = (state = INITIAL_STATE, action) => {
@@ -14,6 +15,8 @@ const exportedObject = (state = INITIAL_STATE, action) => {
       return { ...state, screenSize: action.payload };
     case constants.SET_IS_MOBILE_SCREEN:
       return { ...state, isMobileScreen: action.payload };
+    case constants.SET_IS_LOGIN:
+      return { ...state, isLogin: action.payload };
     default:
       return state;
   }
