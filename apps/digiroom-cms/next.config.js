@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ['ui'],
   images: {
-    domains: ['astradigitaldigiroomstg.blob.core.windows.net'],
+    domains: ['astradigitaldigiroomstg.blob.core.windows.net', 'tsoimageprod.azureedge.net'],
   },
 };
 

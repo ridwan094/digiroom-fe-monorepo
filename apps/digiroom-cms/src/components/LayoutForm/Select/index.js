@@ -25,7 +25,12 @@ export default function SelectCategory({ register, control, items, block = false
           >
             <option value="">Please Insert Here</option>
             {items.map((data, _i) => (
-              <option value={[`${data.value}`, `${data.label}`]} key={_i}>
+              <option
+                value={JSON.stringify({
+                  ...data.value,
+                })}
+                key={_i}
+              >
                 {data.label}
               </option>
             ))}

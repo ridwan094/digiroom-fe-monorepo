@@ -3,7 +3,7 @@ import { Modal, Checkbox, Label, Button } from 'flowbite-react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default function ModalFilter({ isOpen, onClose, filterData, onClickFilter, activeFilters }) {
+export default function ModalFilter({ isOpen, onClose, filterData, onClickFilter }) {
   const [checkboxStates, setCheckboxStates] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -39,12 +39,13 @@ export default function ModalFilter({ isOpen, onClose, filterData, onClickFilter
           column: filterItem.column,
           key: filterItem.key,
           label: filterItem.label,
+          id: filterItem.id,
         });
       }
       return filters;
     }, []);
 
-    onClickFilter(selectedFilters);
+    onClickFilter(selectedFilters, startDate, endDate);
     onClose();
   };
 
@@ -62,7 +63,7 @@ export default function ModalFilter({ isOpen, onClose, filterData, onClickFilter
   };
 
   return (
-    <div>
+    <div className="flex justify-center items-center">
       <Modal dismissible show={isOpen} onClose={onClose} size="xl">
         <Modal.Header>Filter</Modal.Header>
         <Modal.Body>
@@ -70,7 +71,7 @@ export default function ModalFilter({ isOpen, onClose, filterData, onClickFilter
             {filterData.map((filterSection, sectionIndex) => (
               <div key={filterSection.title}>
                 <div>{filterSection.title}</div>
-                <div className="flex flex-row gap-4 mt-2 mb-2 ">
+                <div className="flex flex-row gap-2 mt-2 mb-2 ">
                   {filterSection.items.map((filterItem, itemIndex) => (
                     <div className="flex flex-row items-center gap-1" key={filterItem.key}>
                       {filterItem.key === 'dateRange' ? (

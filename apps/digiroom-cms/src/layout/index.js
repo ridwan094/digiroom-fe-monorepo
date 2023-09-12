@@ -1,20 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import CMSSidebar from '@/components/CMSSidebar';
 import Breadcrumb from '@/components/Breadcrumb';
 import CMSHeader from '@/components/CMSHeader';
 import { useRouter } from 'next/router';
 
 const getLastSegment = (path) => {
-  const segments = path.split('/').filter(segment => segment !== '');
+  const segments = path.split('/').filter((segment) => segment !== '');
   return segments[segments.length - 1] || null;
 };
 
 const CMSLayout = ({ children }) => {
-  const { pathname } = useRouter();
+  const { pathname, query } = useRouter();
   const cleanUrl = pathname.replace(/\/\[slug\]/, '');
-  const lastSegment = getLastSegment(cleanUrl);
-  const nameLayout = lastSegment !== null ? lastSegment.replace(/-/g, ' ').toUpperCase() : 'Dashboard';
-  
+
+  const lastSegment = useMemo(() => getLastSegment(cleanUrl), [pathname]);
+
+const [nameLayout, setNameLayout] = useState('Dashboard');
+
+  useEffect(() => {
+    if (query.slug) {
+      setNameLayout(query.slug.toString().replace(/-/g, ' ').toUpperCase());
+    } else if (lastSegment !== null) {
+      setNameLayout(lastSegment.replace(/-/g, ' ').toUpperCase());
+    }
+  }, [query.slug, lastSegment]);
+
   const [sidebarCollapse, setSidebarCollapse] = useState(false);
 
   return (
@@ -35,8 +45,8 @@ const CMSLayout = ({ children }) => {
           }}
         >
           <div className="container relative" style={{ padding: '120px 32px 16px' }}>
-            <div className='flex justify-between'>
-              <p className='text-2xl font-bold'>{nameLayout}</p>
+            <div className="flex justify-between">
+              <p className="text-2xl font-bold">{nameLayout}</p>
 
               <Breadcrumb />
             </div>

@@ -1,8 +1,8 @@
 import CMS from '../apiCMS';
 import apiConfig from '../apiCMS/api-config';
 
-export const getListDashboardNewsTips = async (payload) => {
-  const api = `${process.env.NEXT_PUBLIC_BASE_URL}/newstips/pagelist`;
+export const getListDashboardProductKnowledge = async (payload) => {
+  const api = `${process.env.NEXT_PUBLIC_BASE_URL}/productknowledge/pagelist`;
   try {
     const response = await CMS.post(api, payload);
     if (response !== null) {
@@ -17,8 +17,8 @@ export const getListDashboardNewsTips = async (payload) => {
   }
 };
 
-export const createNewsTips = async (data) => {
-  const api = `${process.env.NEXT_PUBLIC_BASE_URL}/newstips/create`;
+export const createProductKnowledge = async (data) => {
+  const api = `${process.env.NEXT_PUBLIC_BASE_URL}/productknowledge/create`;
 
   try {
     const response = await CMS.post(api, data);
@@ -27,7 +27,7 @@ export const createNewsTips = async (data) => {
 };
 
 export const getIdListData = async (payload) => {
-  const api = `${process.env.NEXT_PUBLIC_BASE_URL}/newstips/edit`;
+  const api = `${process.env.NEXT_PUBLIC_BASE_URL}/productknowledge/edit`;
   try {
     const response = await CMS.put(api, payload);
     if (response.status === 'Success') {
@@ -42,7 +42,7 @@ export const getIdListData = async (payload) => {
 };
 
 export const deleteDataTable = async (id) => {
-  const api = `${process.env.NEXT_PUBLIC_BASE_URL}/newstips/delete/${id}`;
+  const api = `${process.env.NEXT_PUBLIC_BASE_URL}/productknowledge/delete/${id}`;
   try {
     const response = await CMS.delete(api);
     if (response === 'Success') {

@@ -1,16 +1,24 @@
+import { MdOutlineFileCopy } from 'react-icons/md';
 import React, { useEffect, useState } from 'react';
 import CustomTable from '@/components/Table';
 import { useRouter } from 'next/navigation';
-import { columns, filterData, headerArray, sampleData } from '@/constants/promo';
+import {
+  columnsProductKnowledge,
+  filterProductKnowledge,
+  headerArrayProductKnowledge,
+} from '@/helpers/utils/product-knowledge-page/ProductKnowledgePageList';
 import ModalText from '@/components/modal-text';
 import ModalFilter from '@/components/modal-filter';
 import ModalPreview from '@/components/modal-preview';
+import {
+  getListDashboardProductKnowledge,
+  getIdListData,
+  deleteDataTable,
+} from '@/service/product-knowledge';
 import { LoadingEffect } from '../loading';
 import { Spinner } from 'flowbite-react';
-import { typeAction } from '@/constants/type';
-import { getListDashboardPromo, deletePromo } from '../../service/promo';
 
-const DashboardPromo = () => {
+const DashboardProductKnowledge = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [showToast, setShowToast] = useState(false);
   const [toastDescription, setToastDescription] = useState('');
@@ -28,28 +36,25 @@ const DashboardPromo = () => {
   const router = useRouter();
   const [search, setSearch] = useState('');
   const [searchBoolean, setSearchBoolean] = useState(false);
-  const [filteredItem, setFilteredItem] = useState(null);
   const [listDashboard, setListDashboard] = useState([]);
-  const [sortKey, setSortKey] = useState(null);
-  const [sortDirection, setSortDirection] = useState('asc');
-  const [tableDelete, setTableDelete] = useState();
+  const [sortKey, setSortKey] = useState([]);
+  const [sortDirection, setSortDirection] = useState([]);
+  const [dataDirection, setDataDirection] = useState([]);
   const [activeFilters, setActiveFilters] = useState([]);
   const [openModalPreview, setOpenModalPreview] = useState('');
   const [dataPreview, setDataPreview] = useState([]);
   const [loadingAction, setLoadingAction] = useState(false);
-
-  const startIndex = itemsPerPage * (currentPage - 1);
-  const endIndex = startIndex + itemsPerPage;
+  const [deleteData, setDeleteData] = useState();
 
   const onPageChange = async (page) => {
     setCurrentPage(page);
-    fetchListDarhboard();
+    fetchListDashboard();
   };
 
   const onClickCheck = (value) => {
     switch (value) {
       case 'add':
-        router.push('/promo/add-promo');
+        router.push('/product-knowledge/add-product-knowledge');
         break;
       case 'filter':
         setOpenModalFilter('dismissible');
@@ -63,82 +68,117 @@ const DashboardPromo = () => {
   const searchTable = async (value) => {
     if (value.key === 'Enter') {
       setCurrentPage(1);
-      fetchListDarhboard();
+      fetchListDashboard();
     }
   };
 
-  const onClick = async (value, items) => {
-    setCaseItems(value);
-    switch (value) {
-      case typeAction.EDIT:
-        router.push(`/promo/update-promo/${items.slug}`);
+  const onClick = async (items, index, item) => {
+    setCaseItems(items);
+    switch (items) {
+      case 'edit':
+        router.push(`/product-knowledge/${item.slug}`);
         break;
-      case typeAction.DELETE:
-        const response = await deletePromo(items.id);
-        if (response) {
-          fetchListDarhboard();
-        }
+      case 'delete':
+        setOpenModal('dismissible');
+        setModalText('delete');
+        setModalHeader(`Delete ${listDashboard[index + startIndex].title}`);
+        setTableDelete(listDashboard[index + startIndex]);
+        setDeleteData(item.id);
         break;
-      case typeAction.COPY:
-        router.push(`/promo/duplicate-promo/${items.slug}`);
+      case 'copy':
+        const textToCopy = listDashboard[index + startIndex].slug;
+        copyToClipboard(textToCopy);
+        setShowToast(!showToast);
+        setToastDescription('Copy to Clipboard');
+        setToastIcons(<MdOutlineFileCopy />);
+        setTimeout(() => {
+          setShowToast(false);
+        }, 2000);
         break;
-      case typeAction.VIEW:
+      case 'view':
         setLoadingAction(true);
-        const data = await getIdListData(item.id);
+        const data = await getIdListData(item);
         if (data !== null) {
           setDataPreview(data);
           setOpenModalPreview('dismissible');
           setLoadingAction(false);
         } else {
-          setDataPreview(sampleData);
+          setDataPreview(null);
           setOpenModalPreview('dismissible');
           setLoadingAction(false);
         }
+        setLoadingAction(false);
         break;
     }
   };
 
-  const fetchListDarhboard = async () => {
-    setIsLoading(true);
-    try {
-      const data = await getListDashboardPromo(
-        search,
-        sortDirection,
-        currentPage,
-        startIndex,
-        endIndex,
-        activeFilters
-      );
-      if (data !== null) {
-        const promoList = [];
+  const fetchListDashboard = async () => {
+    // setIsLoading(true);
+    // try {
+    //   const payload = {
+    //     filters: [],
+    //     sorts: dataDirection,
+    //     page: currentPage - 1,
+    //     size: itemsPerPage,
+    //   };
+    //   const data = await getListDashboardNewsTips(payload);
+    //   if (data !== null) {
+    //     setListDashboard(data.content);
+    //     setTotalItems(data.totalElements);
+    //     setTotalPages(Math.ceil(data.totalPages / itemsPerPage));
+    //   }
+    //   setIsLoading(false);
+    // } catch (error) {
+    //   console.error('Error fetching data:', error);
+    //   setIsLoading(false);
+    // }
+    const dataTemporary = [
+      {
+        id: 2,
+        heroImageLink:
+          'https://astradigitaldigiroomstg.blob.core.windows.net/storage-general-001/image.jpg',
+        titlePage: 'Title Promo',
+        startDate: '2023-08-27T17:00:00',
+        endDate: '2023-08-27T17:00:00',
+        publishedDate: null,
+        titleHeader: 'title promo header',
+        slug: 'title-slug-test-newsandtips-1',
+        category: {
+          id: 2,
+          categoryType: 'NEWS_AND_TIPS',
+          name: 'NEWS AND TIPS',
+          description: null,
+        },
+        contentCategory: {
+          id: 4,
+          contentCategoryType: 'BERITA_TIPS',
+          name: 'Berita And Tips',
+          description: null,
+          categoryId: 2,
+          priority: 1,
+        },
+        keyword: 'this for keyword',
+        metaDescription: 'this for metaDescription',
+        altImage: 'this for altImage',
+        ordering: 1,
+        tag: null,
+        metaRobotList: [],
+        cmsStatusType: null,
+        groupType: null,
+        region: null,
+        city: null,
+        branch: null,
+        detailContent: null,
+      },
+    ];
 
-        data.map((item) => {
-          promoList.push({
-            id: item.id,
-            title: item.titlePage,
-            category: 'Mobil',
-            startDate: item.startDate ? item.startDate.toString() : null,
-            endDate: item.endDate ? item.endDate.toString() : null,
-            slug: item.slug,
-            publish: item.publish,
-          });
-        });
-
-        setListDashboard(promoList);
-        // setTotalItems(data.total);
-        // setTotalPages(Math.ceil(data.total / itemsPerPage));
-      }
-      setIsLoading(false);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      setIsLoading(false);
-    }
+    setListDashboard(dataTemporary);
   };
 
   const dropdownPageChange = (selectedValue) => {
     setItemsPerPage(selectedValue);
     onPageChange(1);
-    fetchListDarhboard();
+    fetchListDashboard();
   };
 
   const onClickModal = async () => {
@@ -156,7 +196,7 @@ const DashboardPromo = () => {
         setOpenModal(undefined);
         break;
       default:
-        await deletePromo();
+        const data = await deleteDataTable(deleteData);
         setOpenModal(undefined);
         break;
     }
@@ -176,31 +216,69 @@ const DashboardPromo = () => {
   const handleFilter = (filterData) => {
     event.preventDefault();
     setActiveFilters(filterData);
-    fetchListDarhboard();
+    fetchListDashboard();
+  };
+
+  const copyToClipboard = (text) => {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
   };
 
   const handleSort = (key) => {
-    if (sortKey === key) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+    const keyIndex = sortKey.indexOf(key);
+
+    if (keyIndex !== -1) {
+      let newDirection;
+
+      if (sortDirection[keyIndex] === 'ASC') {
+        newDirection = 'DESC';
+      } else if (sortDirection[keyIndex] === 'DESC') {
+        newDirection = null;
+      }
+
+      if (newDirection === null) {
+        setSortKey(sortKey.filter((k) => k !== key));
+        setSortDirection(sortDirection.filter((direction, index) => index !== keyIndex));
+        setDataDirection(dataDirection.filter((item) => item.key !== key));
+      } else {
+        setSortDirection(
+          sortDirection.map((direction, index) => (index === keyIndex ? newDirection : direction))
+        );
+        setDataDirection(
+          dataDirection.map((item) =>
+            item.key === key ? { ...item, direction: newDirection } : item
+          )
+        );
+      }
     } else {
-      setSortKey(key);
-      setSortDirection('asc');
+      setSortKey([...sortKey, key]);
+      setSortDirection([...sortDirection, 'ASC']);
+      setDataDirection([...dataDirection, { key, direction: 'ASC' }]);
     }
+    fetchListDashboard();
   };
 
   useEffect(() => {
-    fetchListDarhboard();
-  }, [currentPage, itemsPerPage, filteredItem, sortKey, sortDirection, totalItems]);
+    fetchListDashboard();
+  }, []);
 
   return (
     <div className="relative w-full">
       {loadingAction && LoadingEffect(<Spinner />, 'Loading...')}
-
       <div className={`${loadingAction ? 'pointer-events-none' : ''} relative`}>
         <CustomTable
-          columns={columns(
+          columns={columnsProductKnowledge(
+            itemsPerPage,
+            currentPage,
             (value) => handleToggleChange(value),
-            (value, index, item) => onClick(value, index, item)
+            (value, index, item) => onClick(value, index, item),
+            sortKey,
+            sortDirection,
+            handleSort
           )}
           dataSource={listDashboard}
           showToast={showToast}
@@ -218,10 +296,7 @@ const DashboardPromo = () => {
             searchBoolean: searchBoolean,
           }}
           isLoading={isLoading}
-          onSort={handleSort}
-          sortKey={sortKey}
-          sortDirection={sortDirection}
-          headerData={headerArray(
+          headerData={headerArrayProductKnowledge(
             searchBoolean,
             search,
             (value) => setSearch(value),
@@ -230,7 +305,6 @@ const DashboardPromo = () => {
           )}
         />
       </div>
-
       {/* Modal */}
       <div>
         <ModalText
@@ -245,7 +319,7 @@ const DashboardPromo = () => {
         <ModalFilter
           isOpen={openModalFilter === 'dismissible'}
           onClose={() => setOpenModalFilter(false)}
-          filterData={filterData}
+          filterData={filterProductKnowledge}
           onClickFilter={handleFilter}
           activeFilters={activeFilters}
         />
@@ -262,4 +336,4 @@ const DashboardPromo = () => {
   );
 };
 
-export default DashboardPromo;
+export default DashboardProductKnowledge;
