@@ -13,8 +13,8 @@ import {
   DetailPromoInquiryFormSection,
 } from 'ui/components/organism';
 import { motion } from 'framer-motion';
-
 import { getNewsDetail } from '@/service/article';
+import breadCrumbsPath from '@/helpers/utils/breadCrumbPath';
 
 const Detail = ({ slug, article }) => {
   const { searchValue } = useSelector((state) => state.example);
@@ -59,14 +59,7 @@ const Detail = ({ slug, article }) => {
       {/* Breadcrumb for web screen */}
       <div className="sticky top-[123.5px] z-30 bg-white border-b-1 border-reliableBlack30 w-full">
         <div className="">
-          <BreadCrumbs
-            isMobileScreen={false}
-            items={[
-              { name: 'Home', path: '/' },
-              { name: 'Berita dan Tips', path: '/berita-dan-tips' },
-              { name: article.title },
-            ]}
-          />
+          <BreadCrumbs isMobileScreen={false} items={breadCrumbsPath(article.title)} />
         </div>
       </div>
 
