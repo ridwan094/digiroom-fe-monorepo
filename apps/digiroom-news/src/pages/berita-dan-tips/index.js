@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { QuickLink, BreadCrumbs } from 'ui/components/molecules';
 import {
-  ArticleListHeroSection,
   ArticleListTabSection,
   ArticleListFaqSection,
   PromoInfoSection,
@@ -18,11 +17,9 @@ const ArticleListingPage = () => {
     setIsLoading(true);
     try {
       const data = await getListNews({ category: '', page: 0, size: 15 });
-      console.log('data getListNews =>', data);
 
       setIsLoading(false);
     } catch (error) {
-      console.error('Error fetching data:', error);
       setIsLoading(false);
     }
   };

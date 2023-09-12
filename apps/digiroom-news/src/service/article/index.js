@@ -16,7 +16,6 @@ export const getListNews = async ({ category = '', page = 0, size = 15 }) => {
 };
 
 export const getNewsDetail = async ({ slugCode }) => {
-  console.log('slugCode =>', slugCode);
   try {
     const response = await DIGIROOM.get(`/content/v1/news?slug/${slugCode}`);
     if (response !== null) {

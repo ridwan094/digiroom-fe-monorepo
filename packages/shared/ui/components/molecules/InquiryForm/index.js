@@ -4,7 +4,6 @@ import { Input } from '../../atoms';
 import Text from '../../atoms/Text';
 import { FiArrowRight } from 'react-icons/fi';
 import Checkbox from '../../atoms/CheckBox';
-// Fetch service
 import { getListProvince } from '@/service/province';
 import { getListCity } from '@/service/city';
 
@@ -92,26 +91,18 @@ const InquiryForm = ({
 
   // Handler Provice get API
   const fetchListProvince = async () => {
-    // setIsLoading(true);
     try {
       const data = await getListProvince();
-      console.log('data fetch list province =>', data);
-      // setIsLoading(false);
     } catch (error) {
       console.error('Error fetching data:', error);
-      // setIsLoading(false);
     }
   };
 
   const fetchListCity = async () => {
-    // setIsLoading(true);
     try {
       const data = await getListCity({ isoCode: submit.province });
-      console.log('data fetch list City =>', data);
-      // setIsLoading(false);
     } catch (error) {
       console.error('Error fetching data:', error);
-      // setIsLoading(false);
     }
   };
 

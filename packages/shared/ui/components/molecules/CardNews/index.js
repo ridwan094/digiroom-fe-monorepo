@@ -3,6 +3,15 @@ import Link from 'next/link';
 import { Card, Tag } from '../../atoms';
 
 const CardNews = ({ slug, title, image, date, tag, content, lastArticle, AdditionalClassName }) => {
+  const hrefLink = {
+    pathname: `/berita-dan-tips/${slug}`,
+    query: {
+      slugCode: slug,
+    },
+  };
+
+  const asLink = `/berita-dan-tips/${slug}`;
+
   return (
     <React.Fragment>
       <Card
@@ -17,15 +26,7 @@ const CardNews = ({ slug, title, image, date, tag, content, lastArticle, Additio
         )}
         <div className="flex items-center gap-4 pt-2 px-4 pb-4">
           <div className="flex lg:h-[100px] max-w-[160px]">
-            <Link
-              href={{
-                pathname: `/berita-dan-tips/${slug}`,
-                query: {
-                  slugCode: slug,
-                },
-              }}
-              as={`/berita-dan-tips/${slug}`}
-            >
+            <Link href={hrefLink} as={asLink}>
               <img
                 className="min-w-[160px] h-full object-cover"
                 src={image}
@@ -34,15 +35,7 @@ const CardNews = ({ slug, title, image, date, tag, content, lastArticle, Additio
             </Link>
           </div>
           <div>
-            <Link
-              href={{
-                pathname: `/berita-dan-tips/${slug}`,
-                query: {
-                  slugCode: slug,
-                },
-              }}
-              as={`/berita-dan-tips/${slug}`}
-            >
+            <Link href={hrefLink} as={asLink}>
               <p className="text-sm font-semibold text-reliableBlack mb-1 line-clamp-2 lg:text-base lg:font-bold">
                 {title}
               </p>

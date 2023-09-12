@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-// import { useRouter } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { MdArrowForward, MdClose } from 'react-icons/md';
 import { BtnConfirm, Text } from 'ui/components/atoms';
@@ -48,11 +47,9 @@ const ArticleDetailPage = ({ slug, article }) => {
     setIsLoading(true);
     try {
       const data = await getNewsDetail({ slugCode: slugCode });
-      console.log('data getNewsDetail =>', data);
 
       setIsLoading(false);
     } catch (error) {
-      console.error('Error fetching data:', error);
       setIsLoading(false);
     }
   };

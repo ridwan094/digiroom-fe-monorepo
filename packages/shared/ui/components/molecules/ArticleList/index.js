@@ -8,21 +8,22 @@ const ArticleList = ({ articles, usingTag }) => {
     <React.Fragment>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-8">
         {articles.map((article, index) => {
+          const hrefLink = {
+            pathname: `/berita-dan-tips/${article.slug}`,
+            query: {
+              slugCode: article.slug,
+            },
+          };
+
+          const asLink = `/berita-dan-tips/${article.slug}`;
+
           if (index === 0) {
             return (
               <Card
                 key={index}
                 className="bg-reliableBlack3 border-b-[0.5px] border-reliableBlack10 md:col-span-2 lg:col-span-3"
               >
-                <Link
-                  href={{
-                    pathname: `/berita-dan-tips/${article.slug}`,
-                    query: {
-                      slugCode: article.slug,
-                    },
-                  }}
-                  as={`/berita-dan-tips/${article.slug}`}
-                >
+                <Link href={hrefLink} as={asLink}>
                   <img
                     className="w-full object-cover"
                     src={article.image}
@@ -39,15 +40,7 @@ const ArticleList = ({ articles, usingTag }) => {
                 )}
 
                 <div className="pt-2 px-4 pb-4 lg:pt-8 lg:px-6 lg:pb-6">
-                  <Link
-                    href={{
-                      pathname: `/berita-dan-tips/${article.slug}`,
-                      query: {
-                        slugCode: article.slug,
-                      },
-                    }}
-                    as={`/berita-dan-tips/${article.slug}`}
-                  >
+                  <Link href={hrefLink} as={asLink}>
                     <p className="text-sm font-semibold text-reliableBlack mb-1 lg:text-xl lg:font-bold">
                       {article.title}
                     </p>
