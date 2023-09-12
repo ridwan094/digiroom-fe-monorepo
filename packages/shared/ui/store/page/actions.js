@@ -7,3 +7,7 @@ export function setScreenSize(value) {
 export function setIsMobileScreen(value) {
   return { type: constants.SET_IS_MOBILE_SCREEN, payload: value };
 }
+
+export function setIsLogin(value) {
+  return { type: constants.SET_IS_LOGIN, payload: value };
+}

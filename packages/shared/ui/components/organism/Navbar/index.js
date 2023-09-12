@@ -11,12 +11,41 @@ import {
 } from '../../atoms';
 import { MdOutlineCall, MdOutlineShoppingCart, MdPersonOutline, MdSearch } from 'react-icons/md';
 import { idFlag, usFlag } from '../../../assets/images';
+import { LoginForm } from '../../molecules';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [inputValues, setInputValues] = useState('');
   const [location, setLocation] = useState('Jakarta Pusat');
   const [defaultFlag, setDefaultFlag] = useState(idFlag);
+  const [openModal, setOpenModal] = useState(false);
+  const [inquiryData, setInquiryData] = useState(null);
+  const [name, setName] = useState('');
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    const storedName = localStorage.getItem('nama');
+    const storedIsLogin = localStorage.getItem('isLogin');
+
+    if (storedName && storedIsLogin === 'true') {
+      setName(storedName);
+      setIsLogin(true);
+    }
+  }, []);
+
+  const handleSubmit = (payload) => {
+    setInquiryData(payload);
+
+    // Open otp form modal(will use this later)
+    // setOpenModal(true);
+    console.log(payload.phoneNumber);
+    window.location.href = '/articles';
+  };
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -24,7 +53,7 @@ const Navbar = () => {
 
   const handleChange = (e) => {
     const newValue = e.target.value;
-    setInputValues(newValue); // Update nilai input menggunakan state
+    setInputValues(newValue);
     console.log(inputValues);
   };
 
@@ -45,7 +74,19 @@ const Navbar = () => {
               onChange={handleChangeLocation}
               classNameContainer="bg-white"
             />
-            <BtnLoginSignup />
+            {isLogin === true ? (
+              <div className="flex justify-center items-center w-24 group hover:bg-reliableBlack3 text-xs font-semibold leading-relaxed text-reliableBlack">
+                <span className="group-hover:hidden">{name}</span>
+                <button
+                  className="hidden text-supportiveRed group-hover:block"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <BtnLoginSignup onClick={() => setOpenModal(true)} />
+            )}
             <Button variant="bg-transparent" size="small">
               <MdOutlineShoppingCart className="w-5 h-5 text-reliableBlack" />
             </Button>
@@ -58,6 +99,13 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
+      {openModal && (
+        <LoginForm
+          onSubmit={handleSubmit}
+          visible={openModal}
+          onClose={() => setOpenModal(false)}
+        />
+      )}
       <nav className="sticky top-0 lg:top-10 w-full z-40 bg-white md:border-b md:border-reliableBlack70 py-1.5 md:py-5">
         {/* Top Navbar */}
         <div className="container">
@@ -67,26 +115,19 @@ const Navbar = () => {
               <div>
                 <Icons.NavLogo />
               </div>
-              <div className="flex hidden md:flex uppercase whitespace-nowrap text-sm  md:gap-4">
-                <a className="text-reliableBlack py-2 hover:text-reliableBlack70" href="#">
-                  mobil baru
-                </a>
-                <a className="text-reliableBlack py-2 hover:text-reliableBlack70" href="#">
-                  Test Drive
-                </a>
-                <a className="text-reliableBlack py-2 hover:text-reliableBlack70" href="#">
-                  mobil bekas
-                </a>
-                <a className="text-reliableBlack py-2 hover:text-reliableBlack70" href="#">
-                  purna jual
-                </a>
-                <a className="text-reliableBlack py-2 hover:text-reliableBlack70" href="#">
-                  Promo
-                </a>
-                <a className="text-reliableBlack py-2 hover:text-reliableBlack70" href="#">
-                  dealer toyota
-                </a>
-              </div>
+              {menu.map((item) => (
+                <div
+                  key={item.id}
+                  className="flex hidden md:flex uppercase whitespace-nowrap text-sm  md:gap-4"
+                >
+                  <a
+                    className="text-reliableBlack py-2 hover:text-reliableBlack70"
+                    href={item.path}
+                  >
+                    {item.name}
+                  </a>
+                </div>
+              ))}
               {/* Icons */}
               <div className="absolute flex right-2 md:hidden">
                 <a
@@ -172,30 +213,17 @@ const Navbar = () => {
 
           {/* Mobile Menu Items */}
           <div
-            className={`absolute bottom-16 left-0 bg-[#333333] w-full ${
+            className={`absolute bottom-16 left-0 bg-[#333333] w-full  ${
               isMobileMenuOpen ? 'block' : 'hidden'
             }`}
           >
-            <div className={`flex flex-col py-2`}>
-              <a className="text-white py-3 px-4 hover:bg-gray-600" href="#">
-                New Cars
-              </a>
-              <a className="text-white py-3 px-4 hover:bg-gray-600" href="#">
-                Test Drive
-              </a>
-              <a className="text-white py-3 px-4 hover:bg-gray-600" href="#">
-                Used Cars
-              </a>
-              <a className="text-white py-3 px-4 hover:bg-gray-600" href="#">
-                After Sales
-              </a>
-              <a className="text-white py-3 px-4 hover:bg-gray-600" href="#">
-                Promo
-              </a>
-              <a className="text-white py-3 px-4 hover:bg-gray-600" href="#">
-                Toyota Dealer
-              </a>
-            </div>
+            {menu.map((item) => (
+              <div key={item.id} className={`flex flex-col py-2`}>
+                <a className="text-white py-3 px-4 hover:bg-gray-600" href={item.path}>
+                  {item.name}
+                </a>
+              </div>
+            ))}
           </div>
         </div>
       </nav>
@@ -204,3 +232,12 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+const menu = [
+  { id: 1, name: 'Mobil Baru', path: '#' },
+  { id: 2, name: 'Test Drive', path: '#' },
+  { id: 3, name: 'Mobil Bekas', path: '#' },
+  { id: 4, name: 'Purna Jual', path: '#' },
+  { id: 5, name: 'Promo', path: '#' },
+  { id: 6, name: 'Dealer Toyota', path: '#' },
+];
