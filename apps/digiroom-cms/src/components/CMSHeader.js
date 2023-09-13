@@ -1,6 +1,7 @@
 import { Dropdown, Avatar } from 'flowbite-react';
 import { useAuth } from '@/helpers/utils/AuthContext';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 const CMSHeader = ({ sidebarCollapse }) => {
   const router = useRouter();
@@ -18,7 +19,7 @@ const CMSHeader = ({ sidebarCollapse }) => {
       }`}
     >
       <div>
-        <img className="h-8" src="/images/logo-beyond.webp" alt="Auto2000 logo brand image" />
+        <Image className="h-8" src="/images/logo-beyond.webp" alt="Auto2000 logo brand image" />
       </div>
 
       <div>
