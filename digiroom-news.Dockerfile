@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.5.2
 # based on: https://github.com/vercel/turbo/blob/main/examples/with-docker/apps/api/Dockerfile
 
-FROM node:18.16-alpine as base
+FROM node:18.20.0-alpine as base
 
 # adding apk deps to avoid node-gyp related errors and some other stuff. adds turborepo globally
 RUN apk add -f --update --no-cache --virtual .gyp nano bash libc6-compat python3 make g++ \
